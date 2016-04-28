@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <item name="m_left_text" type="id"/>
+    <item name="m_nav_button" type="id"/>
+    <item name="m_right_button" type="id"/>
+    <item name="m_right_text" type="id"/>
+    <item name="m_logo" type="id"/>
+
+
+</resources>

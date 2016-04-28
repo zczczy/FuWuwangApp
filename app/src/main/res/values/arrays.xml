@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="tabTitle">
+        <item>@string/home</item>
+        <item>@string/category</item>
+        <item>@string/service</item>
+        <item>@string/news</item>
+        <item>@string/mine</item>
+
+    </string-array>
+
+
+    <string-array name="tabTag">
+        <item>home</item>
+        <item>category</item>
+        <item>service</item>
+        <item>news</item>
+        <item>mine</item>
+    </string-array>
+
+
+
+    <integer-array name="google_colors">
+        <item>@color/red</item>
+        <item>@color/gray</item>
+        <item>@color/blue</item>
+    </integer-array>
+
+
+</resources>

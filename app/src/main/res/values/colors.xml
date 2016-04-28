@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="main_tab_color">#f5f5f5</color>
+
+    <color name="white">#ffffff</color>
+    <color name="line_color">#e1e1e1</color>
+
+    <color name="home_search">#5cffffff</color>
+    <color name="home_search_scrolled">#f5eae7e7</color>
+    <color name="home_search_text_scrolled">#a4a3a3</color>
+    <color name="home_rmb">#dd2727</color>
+    <color name="home_special">#ea5404</color>
+
+
+    <!-- common  -->
+    <color name="background_color">#f5f5f5</color>
+    <color name="home_background">#f0f0f0</color>
+    <color name="white_color">#ffffff</color>
+    <color name="major_color">#f6ab00</color>
+    <color name="major_text_color">#525252</color>
+    <color name="sub_text_color">#888888</color>
+    <color name="sub_color">#878787</color>
+    <color name="price_color">#ff6633</color>
+    <color name="buy_button">#ff9900</color>
+    <color name="search">#e59f00</color>
+    <color name="start_search">#e59300</color>
+    <color name="end_search">#e59320</color>
+    <color name="pop_item">#eaeaea</color>
+    <color name="ban">#14000000</color>
+    <color name="order_ban">#78303030</color>
+    <color name="test">#000000</color>
+    <color name="gray">#aaaaaa</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#3366CC</color>
+
+    <color name="light_gray">#d6d6d6</color>
+    <color name="login_gray">#bebbb4</color>
+    <color name="line_layout">#e6e6e6</color>
+    <color name="layout_gray">#d6d4d5</color>
+
+
+    <!--act-->
+    <color name="light_yellow">#fffbf2</color>
+    <color name="font_gray">#757575</color>
+    <color name="layout_border">#cccccc</color>
+
+
+</resources>

@@ -1,0 +1,294 @@
+package com.zczczy.leo.fuwuwangapp.activities;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TabHost;
+import android.widget.TabWidget;
+import android.widget.TextView;
+
+import com.liulishuo.magicprogresswidget.MagicProgressCircle;
+import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.fragments.CategoryFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.HomeFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.MineFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.NewsFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.ServiceFragment_;
+import com.zczczy.leo.fuwuwangapp.model.Announcement;
+import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
+import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost;
+import com.zczczy.leo.fuwuwangapp.viewgroup.MyHomedialog;
+import com.zczczy.leo.fuwuwangapp.views.AnimTextView;
+
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.DrawableRes;
+import org.androidannotations.annotations.res.StringArrayRes;
+import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Date;
+
+/**
+ * Created by Leo on 2016/4/27.
+ */
+@EActivity(R.layout.activity_main)
+public class MainActivity extends BaseActivity{
+
+    @ViewById
+    FragmentTabHost tabHost;
+
+    @StringArrayRes
+    String[] tabTag, tabTitle;
+
+    @ViewById(android.R.id.tabs)
+    TabWidget tabWidget;
+
+    @RestService
+    MyRestClient myRestClient;
+
+    @Pref
+    MyPrefs_ pre;
+
+    //导航
+    Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class,NewsFragment_.class, MineFragment_.class };
+
+    @DrawableRes
+    Drawable home_selector, news_selector, mine_selector,category_selector,service_selector;
+
+    Drawable[] drawables = new Drawable[5];
+
+    @StringRes
+    String progress_de;
+
+    BaseModelJson<UpdateApp> appInfo;
+
+    long firstTime = 0;
+
+    View view;
+
+    AlertDialog.Builder adb;
+
+    AlertDialog ad;
+
+    String downloadName;
+
+    MagicProgressCircle p_downloadApk;
+
+    AnimTextView p_text;
+
+    /* 下载保存路径 */
+    String mSavePath;
+
+    File apkFile;
+
+    MyHomedialog homedialog;
+
+    @AfterInject
+    void afterInject() {
+        drawables[0] = home_selector;
+        drawables[1] = category_selector;
+        drawables[2] = service_selector;
+        drawables[3] = news_selector;
+        drawables[4] = mine_selector;
+    }
+
+    @AfterViews
+    void afterView() {
+        initTab();
+        getUpdateApp();
+    }
+
+    protected void initTab() {
+        tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+        for (int i = 0; i < tabTag.length; i++) {
+            Bundle bundle = new Bundle();
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(tabTag[i]);
+            tabSpec.setIndicator(buildIndicator(i));
+            tabHost.addTab(tabSpec, classTab[i], bundle);
+        }
+        tabHost.setCurrentTab(0);
+    }
+
+    protected View buildIndicator(int position) {
+        View view = layoutInflater.inflate(R.layout.tab_indicator, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.icon_tab);
+        TextView textView = (TextView) view.findViewById(R.id.text_indicator);
+        imageView.setImageDrawable(drawables[position]);
+        textView.setText(tabTitle[position]);
+        return view;
+    }
+
+    @Background
+    void getUpdateApp() {
+        BaseModelJson<UpdateApp> bmj = myRestClient.AppUpdCheck(1);
+        GetUpdate(bmj);
+    }
+
+    @UiThread
+    void GetUpdate(BaseModelJson<UpdateApp> bmj) {
+        if (bmj == null) {
+//            AndroidTool.showToast(this, no_net);
+        } else if (bmj.Successful) {
+            appInfo = bmj;
+            int versionCode = 0;
+            try {
+                // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
+                versionCode = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (bmj.Data.getVersioncode() > versionCode) {
+                //升级
+                updateNotice();
+            } else {
+                getannouncement();
+            }
+        } else {
+            AndroidTool.showToast(this, bmj.Error);
+        }
+    }
+
+    void updateNotice() {
+        AlertDialog.Builder adbr = new AlertDialog.Builder(this);
+        adbr.setTitle("提示").setMessage("有新版本，请更新").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                view = layoutInflater.inflate(R.layout.new_update_dialog, null);
+                p_downloadApk = (MagicProgressCircle) view.findViewById(R.id.p_downloadApk);
+                p_text = (AnimTextView) view.findViewById(R.id.p_text);
+                adb = new AlertDialog.Builder(MainActivity.this);
+                ad = adb.setView(view).create();
+                ad.setCancelable(false);
+                downloadApk();
+                ad.show();
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setCancelable(false).create().show();
+    }
+
+    @Background
+    void downloadApk() {
+
+        try {
+            // 判断SD卡是否存在，并且是否具有读写权限
+            if (Environment.getExternalStorageState().equals(
+                    Environment.MEDIA_MOUNTED)) {
+                // 获得存储卡的路径
+                String sdpath = Environment.getExternalStorageDirectory() + "/";
+                mSavePath = sdpath + "download_cache";
+                URL url = new URL(appInfo.Data.versionurl);
+                // 创建连接
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.connect();
+                // 获取文件大小
+                int length = conn.getContentLength();
+                // 创建输入流
+                InputStream is = conn.getInputStream();
+                File file = new File(mSavePath);
+                // 判断文件目录是否存在
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                downloadName = AndroidTool.getYYYYMMDDHHMMSS(new Date()) + "fuwuwang.apk";
+                apkFile = new File(mSavePath, downloadName);
+                FileOutputStream fos = new FileOutputStream(apkFile);
+                int count = 0;
+                // 缓存
+                byte buf[] = new byte[1024];
+                // 写入到文件中
+                do {
+                    int numread = is.read(buf);
+                    count += numread;
+                    // 计算进度条位置
+                    updateDownloadProgress(((float) count) / length);
+                    if (numread <= 0) {
+                        // 下载完成
+                        pre.clear();
+                        installApk();
+                        break;
+                    }
+                    // 写入文件
+                    fos.write(buf, 0, numread);
+                } while (true);// 点击取消就停止下载.
+                fos.close();
+                is.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @UiThread
+    void updateDownloadProgress(float progress) {
+        p_downloadApk.setPercent(progress);
+        p_text.setText(String.format(progress_de, (int) (progress * 100)));
+    }
+
+    //安装apk文件
+    private void installApk() {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);     //浏览网页的Action(动作)
+        String type = "application/vnd.android.package-archive";
+        intent.setDataAndType(Uri.fromFile(apkFile), type);  //设置数据类型
+        startActivity(intent);
+    }
+
+    // 通告
+    @Background
+    void getannouncement() {
+//          myRestClient.setRestErrorHandler(myErrorHandler);
+        BaseModelJson<Announcement> bmj = myRestClient.GetAppConfig(1);
+        if (bmj != null && bmj.Successful) {
+            Getannouncement(bmj.Data.getAppConfigId(), bmj.Data.getAppConfigTitle(), bmj.Data.getAppConfigContent(), bmj.Data.getIsCloseBtn(), bmj.Data.getIsShow());
+        }
+    }
+
+    @UiThread
+    void Getannouncement(int AppConfigId, String AppConfigTitle, String AppConfigContent, String IsCloseBtn, String IsShow) {
+        if("1".equals(IsShow)){
+            homedialog= new MyHomedialog(this,AppConfigTitle,AppConfigContent,IsCloseBtn,null);
+            homedialog.show();
+            homedialog.setCancelable(false);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime > 2000) {
+            AndroidTool.showToast(this, "再按一次退出程序");
+            firstTime = secondTime;
+        } else {
+            finish();
+        }
+    }
+}

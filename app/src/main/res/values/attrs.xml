@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MyTitleBar">
+        <attr name="mTitle" format="reference|string" />
+        <attr name="mTitleSize" format="dimension|reference" />
+        <attr name="mTitleTextColor" format="reference|color" />
+
+        <attr name="mLeftText" format="reference|string" />
+        <attr name="mLeftTextSize" format="dimension|reference" />
+        <attr name="mLeftTextColor" format="reference|color" />
+        <attr name="mLeftTextRightDrawable" format="reference" />
+        <attr name="mLeftTextLeftDrawable" format="reference" />
+        <attr name="mLeftTextDrawablePadding" format="dimension" />
+        <attr name="mLeftTextMarginLeft" format="dimension|reference" />
+
+        <attr name="mRightText" format="reference|string" />
+        <attr name="mRightTextSize" format="dimension|reference" />
+        <attr name="mRightTextColor" format="reference|color" />
+        <attr name="mRightButtonIcon" format="reference" />
+        <attr name="mRightTextMarginRight" format="dimension|reference" />
+        <attr name="mRightTextRightDrawable" format="reference" />
+        <attr name="mRightTextLeftDrawable" format="reference" />
+        <attr name="mRightTextDrawablePadding" format="dimension" />
+
+        <attr name="mNavButtonIcon" format="reference" />
+
+        <attr name="mLogoIcon" format="reference" />
+        <!--<attr name="mCircleLogo" format="boolean"/>-->
+
+        <attr name="mSearchViewDrawableLeft" format="reference" />
+        <attr name="mSearchViewDrawableRight" format="reference" />
+        <attr name="mSearchHintText" format="reference" />
+        <attr name="mSearchHintTextColor" format="reference|color" />
+
+
+        <attr name="mCustomView" format="reference" />
+
+        <!--<attr name="border_width" format="dimension|reference" />-->
+        <!--<attr name="border_color" format="reference|color" />-->
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension|reference" />
+        <attr name="border_color" format="color|reference" />
+        <attr name="border_overlay" format="boolean" />
+    </declare-styleable>
+
+    <color name="default_ev_border_color">#CCCCCC</color>
+    <dimen name="default_ev_border_width">5dp</dimen>
+    <dimen name="default_ev_border_radius">3dp</dimen>
+    <color name="default_ev_password_color">#CCCCCC</color>
+    <dimen name="default_ev_password_width">10dp</dimen>
+    <dimen name="default_ev_password_radius">3dp</dimen>
+    <integer name="default_ev_password_length">6</integer>
+
+    <dimen name="custom_ev_border_width">10dp</dimen>
+    <dimen name="custom_ev_border_radius">10dp</dimen>
+    <dimen name="custom_ev_password_width">10dp</dimen>
+
+
+    <attr name="centered" format="boolean" />
+    <attr name="selectedColor" format="color" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="unselectedColor" format="color" />
+
+</resources>
