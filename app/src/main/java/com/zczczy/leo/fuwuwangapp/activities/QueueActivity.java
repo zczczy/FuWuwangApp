@@ -34,7 +34,7 @@ public class QueueActivity  extends BaseActivity{
     @Click
     void btn_ptzq(){
         if(isNetworkAvailable(this)){
-//            PaperCouponQueueWxActivity_.intent(this).start();
+            PaperCouponQueueWxActivity_.intent(this).start();
         }
         else{
             Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
@@ -45,7 +45,7 @@ public class QueueActivity  extends BaseActivity{
     @Click
     void btn_ewmzq(){
         if(isNetworkAvailable(this)){
-//            QrCodeActivity_.intent(this).start();
+            QrCodeActivity_.intent(this).start();
         }
         else{
             Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
@@ -56,7 +56,7 @@ public class QueueActivity  extends BaseActivity{
     @Click
     void btn_ypdck(){
 //        Toast.makeText(this,"开发中",Toast.LENGTH_SHORT).show();
-//        QueueSeeActivity_.intent(this).start();
+        QueueSeeActivity_.intent(this).start();
     }
 
 }

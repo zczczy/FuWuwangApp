@@ -51,5 +51,6 @@
     <color name="font_gray">#757575</color>
     <color name="layout_border">#cccccc</color>
 
+    <color name="colorPrimaryDarkTrans">#CCf57257</color>
 
 </resources>

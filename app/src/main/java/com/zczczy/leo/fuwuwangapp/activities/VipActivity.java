@@ -36,9 +36,9 @@ public class VipActivity extends BaseActivity {
 
     @ViewById
     MyTitleBar myTitleBar;
-//
-//    @StringRes
-//    String txt_me, txt_register, no_net, my_lottery_record;
+
+    @StringRes
+    String   my_lottery_record;
 
     @RestService
     MyRestClient myRestClient;
@@ -119,5 +119,10 @@ public class VipActivity extends BaseActivity {
         }
     }
 
+    //电子币抽奖记录
+    @Click
+    void ll_quan_record(){
+        LotteryInfoRecordActivity_.intent(this).title(my_lottery_record).method(0).start();
+    }
 
 }
