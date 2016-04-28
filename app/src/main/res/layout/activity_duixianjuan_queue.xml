@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/major_color"
+        android:minHeight="50dp"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="@string/txt_queue" />
+
+    <!--电子券-->
+    <Button
+        android:id="@+id/btn_dianziquan"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:text="@string/txt_dzq"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <!--普通纸券-->
+    <Button
+        android:id="@+id/btn_ptzq"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:text="@string/txt_ptzq"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <!--二维码纸券-->
+    <Button
+        android:id="@+id/btn_ewmzq"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:text="@string/txt_ewmzq"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <!--已排队查看-->
+    <Button
+        android:id="@+id/btn_ypdck"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:text="@string/txt_ypdck"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+</LinearLayout>

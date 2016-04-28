@@ -32,9 +32,10 @@ import java.util.Map;
 /**
  * Created by Leo on 2016/3/2.
  * http://124.254.56.58:8007/
+ * http://192.168.0.198:8002/
  * http://appapia.86fuwuwang.com/
  */
-@Rest(rootUrl = "http://192.168.0.198:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://124.254.56.58:8007/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 

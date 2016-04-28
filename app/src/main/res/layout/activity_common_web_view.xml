@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.CommonWebViewActivity">
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/major_color"
+        android:minHeight="50dp"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="" />
+
+    <WebView
+        android:id="@+id/web_common"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

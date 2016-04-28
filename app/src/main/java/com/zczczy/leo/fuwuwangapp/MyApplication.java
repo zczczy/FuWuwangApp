@@ -13,6 +13,14 @@ import org.androidannotations.annotations.EApplication;
 @EApplication
 public class MyApplication extends Application {
 
+    public static final String URL = "http://124.254.56.58:8007/";
+
+    public static final String LOTTERYDIST = "LotteryDist";
+
+    public static final String DETAILPAGE = "DetailPage/";
+
+    public static final Integer PAGECOUNT = 10;
+
     @AfterInject
     void afterInject(){
         CrashReport.initCrashReport(getApplicationContext(), "900019033", false);

@@ -61,7 +61,7 @@ import java.util.List;
 //http://124.254.56.58:8007/
 //http://appapia.86fuwuwang.com/
 
-@Rest(rootUrl = "http://appapia.86fuwuwang.com/", requestFactory = MyRequestFactory.class, interceptors = { MyInterceptor.class },
+@Rest(rootUrl = "http://124.254.56.58:8007/", requestFactory = MyRequestFactory.class, interceptors = { MyInterceptor.class },
         converters = {StringHttpMessageConverter.class,	MappingJackson2HttpMessageConverter.class,FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class })
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 

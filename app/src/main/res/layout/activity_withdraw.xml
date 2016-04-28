@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/major_color"
+        android:minHeight="50dp"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="@string/txt_withdraw_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/common_shadow_selector"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txt_withdraw_money" />
+
+        <EditText
+            android:id="@+id/edt_withdraw_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:inputType="numberDecimal"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/common_shadow_selector"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txt_common" />
+
+        <EditText
+            android:id="@+id/edt_common"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:inputType="text"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/common_shadow_selector"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="手机号码：" />
+
+        <EditText
+            android:id="@+id/edit_mobile"
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:inputType="text"
+            android:maxLength="50"
+            android:singleLine="true" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/common_shadow_selector"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="验证码：" />
+
+        <EditText
+            android:id="@+id/edit_code"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:inputType="text"
+            android:maxLength="50"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/text_send"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@drawable/mail_button_selector"
+            android:gravity="center"
+            android:text="@string/send_message"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="@string/txt_withdraw_tip"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/btn_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_selector"
+        android:text="@string/txt_btn_withdraw"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+</LinearLayout>

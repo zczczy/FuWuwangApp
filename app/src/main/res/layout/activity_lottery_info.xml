@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/home_background"
+    android:orientation="vertical">
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/major_color"
+        android:minHeight="50dp"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mTitle="@string/my_lottery_record" />
+
+    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
+        android:id="@+id/ultimate_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/home_background"
+        app:recyclerviewEmptyView="@layout/lottery_empty_view">
+    </com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview>
+</LinearLayout>

@@ -37,7 +37,9 @@
     <color name="gray">#aaaaaa</color>
     <color name="red">#FF0000</color>
     <color name="blue">#3366CC</color>
+    <color name="light_yellow">#fffbf2</color>
 
+    <color name="black">#333333</color>
     <color name="light_gray">#d6d6d6</color>
     <color name="login_gray">#bebbb4</color>
     <color name="line_layout">#e6e6e6</color>
@@ -45,7 +47,7 @@
 
 
     <!--act-->
-    <color name="light_yellow">#fffbf2</color>
+    <color name="yellow">#ffd800</color>
     <color name="font_gray">#757575</color>
     <color name="layout_border">#cccccc</color>
 

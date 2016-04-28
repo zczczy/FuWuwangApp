@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/luck_bg"
+    tools:context=".activities.WheelActivity">
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.RotateView
+        android:id="@+id/rotate_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/id_start_btn"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_centerInParent="true"
+        android:foreground="?android:attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/txt_times"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rotate_view"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/left_times" />
+
+    <TextView
+        android:id="@+id/txt_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_times"
+        android:gravity="left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/tips" />
+
+    <TextView
+        android:id="@+id/txt_lottery_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_tips"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="16sp" />
+</RelativeLayout>
