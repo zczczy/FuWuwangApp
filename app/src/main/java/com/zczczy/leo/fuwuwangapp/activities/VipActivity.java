@@ -1,5 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +14,7 @@ import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.ImageUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -19,11 +23,14 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.io.File;
 
 /**
  * Created by Leo on 2016/4/28.
@@ -38,7 +45,7 @@ public class VipActivity extends BaseActivity {
     MyTitleBar myTitleBar;
 
     @StringRes
-    String   my_lottery_record;
+    String my_lottery_record;
 
     @RestService
     MyRestClient myRestClient;
@@ -52,6 +59,13 @@ public class VipActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    //身份证扫描注册相关
+    String fileName;
+
+    public int CAMERA_ACTIVITY = 1;
+
+    public int IMAGE_CROP = 3;
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -60,7 +74,7 @@ public class VipActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-//        fileName = AndroidTool.BaseFilePath() + System.currentTimeMillis() + ".jpg";
+        fileName = AndroidTool.BaseFilePath() + System.currentTimeMillis() + ".jpg";
         AndroidTool.showLoadDialog(this);
         getBind();
     }
@@ -95,7 +109,7 @@ public class VipActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             WealthActivity_.intent(this).start();
         } else {
-
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -121,8 +135,103 @@ public class VipActivity extends BaseActivity {
 
     //电子币抽奖记录
     @Click
-    void ll_quan_record(){
+    void ll_quan_record() {
         LotteryInfoRecordActivity_.intent(this).title(my_lottery_record).method(0).start();
     }
+
+    //兑现卷管理
+    @Click
+    void ll_manager() {
+        if (isNetworkAvailable(this)) {
+            CouponManageActivity_.intent(this).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    //推荐
+    @Click
+    void ll_suggest() {
+        if (isNetworkAvailable(this)) {
+            SuggestActivity_.intent(this).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+
+    }
+
+    //身份证扫描注册
+    @Click
+    void ll_scan() {
+        if (isNetworkAvailable(this)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File f1 = new File(fileName);
+            Uri u1 = Uri.fromFile(f1);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, u1);
+            startActivityForResult(intent, CAMERA_ACTIVITY);
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    @OnActivityResult(ImageUtil.CAMERA_ACTIVITY)
+    void onCameraResult(int resultCode, Intent data) {
+        if (resultCode != 0) {
+            Intent intent = new Intent("com.android.camera.action.CROP");
+            intent.setDataAndType(AndroidTool.getUri(fileName), "image/*");
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, AndroidTool.getUri(fileName));
+            intent.putExtra("crop", "true");
+            intent.putExtra("noFaceDetection", true);
+            intent.putExtra("scale", true);
+            intent.putExtra("return-data", false);
+            startActivityForResult(intent, IMAGE_CROP);
+        }
+    }
+
+    @OnActivityResult(ImageUtil.IMAGE_CROP)
+    void onCodeResult(int resultCode, Intent data) {
+        ImageUtil.resetPhotp(fileName);
+        FasterRegisterActivity_.intent(this).fileName(fileName).start();
+    }
+
+    //游戏中心
+    @Click
+    void ll_game_club() {
+        if (isNetworkAvailable(this)) {
+            WebViewActivity_.intent(this).header("游戏中心").url("http://appapia.86fuwuwang.com/" + "DetailPage/GameDisp?kbn=2").start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    @Click
+    void ll_safe() {
+        if (isNetworkAvailable(this)) {
+            SafeMessengerActivity_.intent(this).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    //我的联盟会员
+    @Click
+    void ll_mymember() {
+        if (isNetworkAvailable(this)) {
+            UnionMemberActivity_.intent(this).userId(0).username("我").start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    // 意见反馈
+    @Click
+    void ll_feedback() {
+        if (isNetworkAvailable(this)) {
+            FeedBackActivity_.intent(this).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
 
 }

@@ -7,14 +7,10 @@
                     <solid android:color="@color/layout_border" />
                 </shape>
             </item>
-            <item
-                android:bottom="1dp"
-                android:right="1dp">
+            <item >
                 <shape>
                     <solid android:color="#ffffff" />
-                    <padding
-                        android:bottom="1dp"
-                        android:right="1dp" />
+                    <padding />
                 </shape>
             </item>
         </layer-list>
@@ -27,13 +23,10 @@
                     <solid android:color="@color/layout_border" />
                 </shape>
             </item>
-            <item
-                android:bottom="1dp"
-                android:right="1dp">
+            <item >
                 <shape>
                     <solid android:color="#fbe970" />
-                    <padding
-                        />
+                   <!-- <padding android:right="1dp" />-->
                 </shape>
             </item>
         </layer-list>

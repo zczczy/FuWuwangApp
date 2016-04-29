@@ -48,6 +48,7 @@
     <string name="txt_activity_info">活动详情</string>
 
 
+
     <!-- me  -->
     <string name="txt_wealth">财富</string>
     <string name="txt_register">注册</string>
@@ -184,15 +185,31 @@
 
     <!--快速注册-->
     <string name="txt_fast_regist">快速注册</string>
+    <!--login-->
+    <string name="login_username">用户名：</string>
+    <string name="login_password">密&#160;&#160;&#160;&#160;码：</string>
+    <string name="sign_in">登录</string>
+    <string name="sign_up">注册</string>
+
 
     <!--扫描二维码提示信息-->
     <string name="camera_tip">小提示：如果扫描不到，请将手机离远试一试</string>
 
 
+    <!-- suggest -->
+    <string name="txt_suggest_username">用户名：</string>
+    <string name="txt_suggest_pass">密码：</string>
+    <string name="txt_confirm_pass">确认密码：</string>
+    <string name="txt_id_card">身份证号：</string>
+    <string name="txt_region">国家/地区：</string>
+    <string name="txt_is_show"> 显示密码</string>
+    <string name="txt_service_man">服务专员：</string>
 
 
-
-
+    <!-- safe -->
+    <string name="txt_subscribe">订阅</string>
+    <string name="txt_continue_subscribe">继续订阅</string>
+    <string name="txt_cancel"> 取消订阅</string>
 
 
     <!-- cooperation_merchant  -->

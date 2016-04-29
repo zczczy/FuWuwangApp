@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
-import com.zczczy.leo.fuwuwangapp.items.QueueSeeItemView_;
+import com.zczczy.leo.fuwuwangapp.items.CouponManageInfoItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.YpdRecord;
+import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
+import com.zczczy.leo.fuwuwangapp.model.PagerResult;
+import com.zczczy.leo.fuwuwangapp.model.QueueCompanyDetail;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
@@ -25,10 +27,10 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.List;
 
 /**
- * Created by Leo on 2016/4/28.
+ * Created by Leo on 2016/4/29.
  */
 @EBean
-public class QueueSeeAdapter extends BaseRecyclerViewAdapter<YpdRecord> {
+public class CouponManageInfoAdapter extends BaseRecyclerViewAdapter<QueueCompanyDetail> {
 
     @StringRes
     String no_net;
@@ -39,44 +41,36 @@ public class QueueSeeAdapter extends BaseRecyclerViewAdapter<YpdRecord> {
     @RestService
     MyRestClient myRestClient;
 
-
     @Pref
     MyPrefs_ pre;
 
     boolean isRefresh = false;
-
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
+
     @Override
     @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
+        this.isRefresh = isRefresh;
         String token = pre.token().get();
         myRestClient.setHeader("Token", token);
-        BaseModelJson<List<YpdRecord>> bmj;
-        if (!"0".equals(objects[0].toString())) {
-            if(getItems().size()>0){
-                bmj = myRestClient.GetCurrYpdInfo(getItems().get(0).getDateVal(), objects[0].toString());
-            }else {
-                bmj = myRestClient.GetCurrYpdInfo("", objects[0].toString());
-            }
-        } else {
-            bmj = myRestClient.GetCurrYpdInfo("", objects[0].toString());
-        }
+        BaseModelJson<List<QueueCompanyDetail>> bmj = myRestClient.GetCompanyQueueDetail(objects[0].toString());
         afterGetData(bmj);
     }
 
-
     @UiThread
-    void afterGetData(BaseModelJson<List<YpdRecord>> bmj) {
+    void afterGetData(BaseModelJson<List<QueueCompanyDetail>> bmj) {
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
-            clear();
+            if (isRefresh) {
+                clear();
+            }
             if (bmj.Data.size() > 0) {
                 insertAll(bmj.Data, getItems().size());
             }
@@ -92,7 +86,7 @@ public class QueueSeeAdapter extends BaseRecyclerViewAdapter<YpdRecord> {
 
     @Override
     protected View onCreateItemView(ViewGroup parent) {
-        return QueueSeeItemView_.build(parent.getContext());
+        return CouponManageInfoItemView_.build(parent.getContext());
     }
 
     @Override

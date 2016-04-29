@@ -12,7 +12,8 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 public interface MyPrefs {
 
     //XiYBzzSUfvh4+zr/wGJrdlb/dM2+q1ZoEYAUULXMnuxjMuZvFl2+l4yN0pYiJrMHA8X6nbeBN8NTuG07vzwabnl2VqB9HajTEFD1Y8Oh/b87DzVJ/vsEZY5lxn851Qzh5amW9d5TaHS4v9xVZbDsFT7J/NmBPxVbay4hHD5X8s0=
-    @DefaultString("7B53AB7F1D9A8FF1")
+    //7B53AB7F1D9A8FF1
+    @DefaultString("039C237E8850DBDC")
     String token();
 
     @DefaultString("")
