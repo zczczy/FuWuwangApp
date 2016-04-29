@@ -1,7 +1,10 @@
 package com.zczczy.leo.fuwuwangapp.rest;
 
+import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
+import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
@@ -35,7 +38,7 @@ import java.util.Map;
  * http://192.168.0.198:8002/
  * http://appapia.86fuwuwang.com/
  */
-@Rest(rootUrl = "http://124.254.56.58:8007/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://192.168.0.198:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
@@ -75,7 +78,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return String
      */
     @Post("api/SMS/SendVerificationCode")
-    BaseModelJson<String> SendVerificationCode(@Body  Map map);
+    BaseModelJson<String> SendVerificationCode(@Body Map map);
 
     /**
      * 功能：验证验证码
@@ -140,7 +143,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @see LotteryInfo
      */
     @Get("api/Lottery/GetAllLotteryInfo?PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<LotteryInfo>> getAllLotteryInfo(@Path int PageIndex,@Path  int PageSize);
+    BaseModelJson<PagerResult<LotteryInfo>> getAllLotteryInfo(@Path int PageIndex, @Path int PageSize);
 
     /**
      * 排队抽奖处理
@@ -164,7 +167,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @see LotteryInfo
      */
     @Get("api/Lottery/GetMyLotteryInfo?UserName={UserName}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<LotteryInfo>> getMyLotteryInfo(@Path String UserName,@Path  int PageIndex,@Path  int PageSize);
+    BaseModelJson<PagerResult<LotteryInfo>> getMyLotteryInfo(@Path String UserName, @Path int PageIndex, @Path int PageSize);
 
     /**
      * 获取龙币
@@ -186,11 +189,12 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = "Token")
     BaseModelJson<Integer> GetMemberLongBi();
 
+
     /**
-     * 获取新服务网Banner
+     * 查询App首页Banner
      */
     @Get("api/ShopContent/GetHomeBanner")
-    BaseModelJson<List<NewBanner>> GetHomeBanner();
+    BaseModelJson<List<NewBanner>> getHomeBanner();
 
     /**
      * 根据广告区分查询广告信息（1：首页广告，2：服务类页面广告）
@@ -199,7 +203,16 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/ShopContent/GetAdvertByKbn?kbn={kbn}")
-    BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getAdvertByKbn(@Path String kbn);
+    BaseModelJson<List<AdvertModel>> getAdvertByKbn(@Path String kbn);
+
+    /**
+     * 查询APP首页分类信息
+     *
+     * @return
+     */
+    @Get("api/ShopContent/GetHomeGoodsTypeList")
+    BaseModelJson<List<GoodsTypeModel>> getHomeGoodsTypeList();
+
 
     /**
      * 查询推荐商品
@@ -209,16 +222,27 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/ShopContent/GetRecommendedGoods?PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getRecommendedGoods(@Path  int PageIndex,@Path  int PageSize);
+    BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getRecommendedGoods(@Path int PageIndex, @Path int PageSize);
 
 
     /**
-     *查询用户购物车信息
+     * 查询用户购物车信息
+     *
      * @return
      */
     @Get("api/Shop/GetBuyCartInfo")
     @RequiresHeader(value = "Token")
     BaseModelJson<List<RebuiltCartInfo>> getBuyCartInfo();
+
+
+    /**
+     * 根据商品ID查询商品明细
+     *
+     * @param GoodsInfoId
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsDetailById?GoodsInfoId={GoodsInfoId}")
+    BaseModelJson<GoodsDetailModel> getGoodsDetailById(@Path String GoodsInfoId);
 
 
 }

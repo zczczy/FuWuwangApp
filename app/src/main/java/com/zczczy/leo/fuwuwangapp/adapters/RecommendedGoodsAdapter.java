@@ -62,15 +62,6 @@ public class RecommendedGoodsAdapter extends BaseRecyclerViewAdapter<RebuiltReco
         BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bmj;
         this.isRefresh = isRefresh;
         bmj = myRestClient.getRecommendedGoods(pageIndex, pageSize);
-        if(bmj.Successful){
-            for (int i=0;i<5;i++){
-                RebuiltRecommendedGoods ss = new RebuiltRecommendedGoods();
-                ss.setGodosName("测试商品"+(i+1));
-                ss.setGoodsLBPrice(2000);
-                ss.setGoodsPrice(12.48);
-                bmj.Data.ListData.add(ss);
-            }
-        }
         afterGetData(bmj);
     }
 

@@ -3,9 +3,17 @@ package com.zczczy.leo.fuwuwangapp;
 import android.app.Application;
 
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
+import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
+import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
+import com.zczczy.leo.fuwuwangapp.model.NewBanner;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Leo on 2016/4/27.
@@ -21,9 +29,62 @@ public class MyApplication extends Application {
 
     public static final Integer PAGECOUNT = 10;
 
+    private List<AdvertModel> advertModelList;
+
+    private List<NewBanner> newBannerList;
+
+    private LotteryConfig lotteryConfig;
+
+    private List<GoodsTypeModel> goodsTypeModelList;
+
+    private boolean isFirst;
+
     @AfterInject
-    void afterInject(){
+    void afterInject() {
         CrashReport.initCrashReport(getApplicationContext(), "900019033", false);
+        advertModelList = new ArrayList<>();
+        newBannerList = new ArrayList<>();
+        goodsTypeModelList = new ArrayList<>();
+        lotteryConfig = new LotteryConfig();
     }
 
+    public List<AdvertModel> getAdvertModelList() {
+        return advertModelList;
+    }
+
+    public void setAdvertModelList(List<AdvertModel> advertModelList) {
+        this.advertModelList = advertModelList;
+    }
+
+    public List<NewBanner> getNewBannerList() {
+        return newBannerList;
+    }
+
+    public void setNewBannerList(List<NewBanner> newBannerList) {
+        this.newBannerList = newBannerList;
+    }
+
+    public LotteryConfig getLotteryConfig() {
+        return lotteryConfig;
+    }
+
+    public void setLotteryConfig(LotteryConfig lotteryConfig) {
+        this.lotteryConfig = lotteryConfig;
+    }
+
+    public List<GoodsTypeModel> getGoodsTypeModelList() {
+        return goodsTypeModelList;
+    }
+
+    public void setGoodsTypeModelList(List<GoodsTypeModel> goodsTypeModelList) {
+        this.goodsTypeModelList = goodsTypeModelList;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+
+    public void setFirst(boolean first) {
+        isFirst = first;
+    }
 }

@@ -37,26 +37,26 @@ public class RecommendedGoodsItemView  extends ItemView<RebuiltRecommendedGoods>
 
     @Override
     protected void init(Object... objects) {
-        if (!StringUtils.isEmpty(_data.getGoodsImgSl())) {
-            Picasso.with(context).load(_data.getGoodsImgSl()).error(R.drawable.goods_default).into(img_pic);
+        if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
+            Picasso.with(context).load(_data.GoodsImgSl).error(R.drawable.goods_default).into(img_pic);
         }
-        txt_product_name.setText(_data.getGodosName());
-        if (_data.getGoodsLBPrice() > 0 && _data.getGoodsPrice() > 0) {
+        txt_product_name.setText(_data.GodosName);
+        if (_data.GoodsLBPrice > 0 && _data.GoodsPrice> 0) {
             txt_rmb.setVisibility(VISIBLE);
             txt_plus.setVisibility(VISIBLE);
             txt_home_lb.setVisibility(VISIBLE);
-            txt_rmb.setText(String.format(home_rmb, _data.getGoodsPrice()));
-            txt_home_lb.setText(String.format(home_lb, _data.getGoodsLBPrice()));
-        } else if (_data.getGoodsLBPrice() > 0) {
+            txt_rmb.setText(String.format(home_rmb, _data.GoodsPrice));
+            txt_home_lb.setText(String.format(home_lb, _data.GoodsLBPrice));
+        } else if (_data.GoodsLBPrice > 0) {
             txt_rmb.setVisibility(GONE);
             txt_plus.setVisibility(GONE);
             txt_home_lb.setVisibility(VISIBLE);
-            txt_home_lb.setText(String.format(home_lb, _data.getGoodsLBPrice()));
-        } else if (_data.getGoodsPrice() > 0) {
+            txt_home_lb.setText(String.format(home_lb, _data.GoodsLBPrice));
+        } else if (_data.GoodsPrice > 0) {
             txt_rmb.setVisibility(VISIBLE);
             txt_plus.setVisibility(GONE);
             txt_home_lb.setVisibility(GONE);
-            txt_rmb.setText(String.format(home_lb, _data.getGoodsLBPrice()));
+            txt_rmb.setText(String.format(home_rmb, _data.GoodsPrice));
         }
     }
 

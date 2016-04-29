@@ -24,7 +24,6 @@ public class BusinessInstituteActivity extends BaseActivity {
     @ViewById
     WebView wv_web;
 
-
     WebSettings settings;
 
 

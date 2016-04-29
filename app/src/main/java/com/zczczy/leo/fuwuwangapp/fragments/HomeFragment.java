@@ -14,34 +14,31 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDivide
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.Advertisement;
+import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
-import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.List;
 
@@ -69,8 +66,8 @@ public class HomeFragment extends BaseFragment {
     @Bean
     MyErrorHandler myErrorHandler;
 
-//    @Bean
-//    MyBackgroundTask myBackgroundTask;
+    @Bean
+    MyBackgroundTask myBackgroundTask;
 
     @Pref
     MyPrefs_ pre;
@@ -89,8 +86,6 @@ public class HomeFragment extends BaseFragment {
 
     TextView textView;
 
-    ItemView<List<Advertisement>> itemView;
-
     BasicGridLayoutManager gridLayoutManager;
 
     MaterialHeader materialHeader;
@@ -98,6 +93,8 @@ public class HomeFragment extends BaseFragment {
     int pageIndex = 1;
 
     boolean isRefresh = false;
+
+    ItemView<List<AdvertModel>> itemView;
 
     @AfterInject
     void afterInject() {
@@ -187,16 +184,16 @@ public class HomeFragment extends BaseFragment {
         myAdapter.setBindHeaderViewHolder(new BaseRecyclerViewAdapter.BindHeaderViewHolder() {
             @Override
             public void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
-//                UltimateRecyclerView.CustomRelativeWrapper customRelativeWrapper = (UltimateRecyclerView.CustomRelativeWrapper) viewHolder.itemView;
-//                itemView = (ItemView<List<Advertisement>>) (customRelativeWrapper.getChildAt(0));
-//                itemView.init(myApplication.getAdvertisementList());
-                ultimateRecyclerView.getEmptyView().setVisibility(View.GONE);
+                UltimateRecyclerView.CustomRelativeWrapper customRelativeWrapper = (UltimateRecyclerView.CustomRelativeWrapper) viewHolder.itemView;
+                itemView = (ItemView<List<AdvertModel>>) (customRelativeWrapper.getChildAt(0));
+                itemView.init(myApplication.getAdvertModelList());
             }
         });
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
 //                NewProductDetailActivity_.intent(NewHomeFragment.this).goods(obj).start();
+                GoodsDetailInfoActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 
             @Override
@@ -229,9 +226,8 @@ public class HomeFragment extends BaseFragment {
             public void onRefreshBegin(PtrFrameLayout frame) {
                 isRefresh = true;
                 pageIndex = 1;
-//                if (myApplication.getAdvertisementList() == null || myApplication.getAdvertisementList().size() <= 0) {
-//                    getData();
-//                }
+                myBackgroundTask.getHomeBanner();
+                myBackgroundTask.getAdvertByKbn();
                 afterLoadMore();
             }
         });
