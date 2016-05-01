@@ -221,7 +221,16 @@
     <string name="city_choose">城市选择</string>
 
 
+    <!--Login-->
+    <string name="normal_member"> 普通会员</string>
+    <string name="vip_member"> VIP会员</string>
+    <string name="auto_login"> 自动登录</string>
+    <string name="register">注册</string>
+    <string name="forgot_password">忘记密码</string>
 
+    <!--cart-->
+    <string name="txt_cart">我的购物车</string>
+    <string name="txt_all_select">全选</string>
 
 
     <string name="timer">%1$sS</string>
@@ -276,4 +285,5 @@
     <string name="goods_detail">商品详情</string>
 
     <string name="txt_review">商品评论</string>
+    <string name="txt_all_review">查看全部评论</string>
 </resources>

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Leo on 2016/4/27.
  */
-public class RebuiltCartInfo implements Serializable{
+public class CartInfo implements Serializable{
 
 
     /**
@@ -15,8 +15,8 @@ public class RebuiltCartInfo implements Serializable{
      * BuyCartInfoList : [{"BuyCartInfoId":1,"GoodsInfoId":"sample string 2","UserInfoId":"sample string 3","CreateTime":"sample string 4","ProductCount":5,"GoodsImgSl":"sample string 6","GoodsPrice":7,"GoodsLBPrice":8,"GodosName":"sample string 9"},{"BuyCartInfoId":1,"GoodsInfoId":"sample string 2","UserInfoId":"sample string 3","CreateTime":"sample string 4","ProductCount":5,"GoodsImgSl":"sample string 6","GoodsPrice":7,"GoodsLBPrice":8,"GodosName":"sample string 9"}]
      */
 
-    private String StoreInfoId;
-    private String StoreName;
+    public String StoreInfoId;
+    public String StoreName;
     /**
      * BuyCartInfoId : 1
      * GoodsInfoId : sample string 2
@@ -29,7 +29,7 @@ public class RebuiltCartInfo implements Serializable{
      * GodosName : sample string 9
      */
 
-    private List<com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList> BuyCartInfoList;
+    public List<BuyCartInfoList> BuyCartInfoList;
 
     public String getStoreInfoId() {
         return StoreInfoId;
@@ -47,11 +47,11 @@ public class RebuiltCartInfo implements Serializable{
         this.StoreName = StoreName;
     }
 
-    public List<com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList> getBuyCartInfoList() {
+    public List<BuyCartInfoList> getBuyCartInfoList() {
         return BuyCartInfoList;
     }
 
-    public void setBuyCartInfoList(List<com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList> BuyCartInfoList) {
+    public void setBuyCartInfoList(List<BuyCartInfoList> BuyCartInfoList) {
         this.BuyCartInfoList = BuyCartInfoList;
     }
 

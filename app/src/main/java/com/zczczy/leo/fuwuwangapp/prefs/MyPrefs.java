@@ -16,6 +16,9 @@ public interface MyPrefs {
     @DefaultString("039C237E8850DBDC")
     String token();
 
+    @DefaultString("A0D3F0B730CECB7E2074DEA6CE4DC85705AEC41311E68D15EDD50C7F66A9EEC984B73F9C8EB2A35C")
+    String shopToken();
+
     @DefaultString("")
     String username();
 
@@ -30,9 +33,6 @@ public interface MyPrefs {
 
     @DefaultString("3")
     String userType();
-
-    @DefaultString("")
-    String userId();
 
     @DefaultString("")
     String avatar();

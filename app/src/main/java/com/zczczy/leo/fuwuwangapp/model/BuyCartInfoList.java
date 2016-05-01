@@ -19,15 +19,15 @@ public class BuyCartInfoList implements Serializable{
      * GodosName : sample string 9
      */
 
-    private int BuyCartInfoId;
-    private String GoodsInfoId;
-    private String UserInfoId;
-    private String CreateTime;
-    private int ProductCount;
-    private String GoodsImgSl;
-    private double GoodsPrice;
-    private int GoodsLBPrice;
-    private String GodosName;
+    public int BuyCartInfoId;
+    public String GoodsInfoId;
+    public String UserInfoId;
+    public String CreateTime;
+    public int ProductCount;
+    public String GoodsImgSl;
+    public double GoodsPrice;
+    public int GoodsLBPrice;
+    public String GodosName;
 
     public int getBuyCartInfoId() {
         return BuyCartInfoId;

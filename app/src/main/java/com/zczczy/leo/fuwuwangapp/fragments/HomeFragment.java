@@ -15,6 +15,8 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
+import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
@@ -76,9 +78,9 @@ public class HomeFragment extends BaseFragment {
     OttoBus bus;
 
     @ColorRes
-    int white,home_search_text_scrolled;
+    int white, home_search_text_scrolled;
 
-    Drawable title_search,title_search_scrolled;
+    Drawable title_search, title_search_scrolled;
 
     Paint paint = new Paint();
 
@@ -104,12 +106,12 @@ public class HomeFragment extends BaseFragment {
     void afterView() {
         //初始化控件
         myTitleBar.getBackground().setAlpha(0);
-        view= myTitleBar.getmCustomView();
-        textView=(TextView) view.findViewById(R.id.txt_title_search);
-        title_search=getResources().getDrawable(R.drawable.title_search);
-        title_search_scrolled= getResources().getDrawable(R.drawable.title_search_scrolled);
-        title_search.setBounds(0,0,title_search.getMinimumWidth(),title_search.getMinimumHeight());
-        title_search_scrolled.setBounds(0,0,title_search_scrolled.getMinimumWidth(),title_search_scrolled.getMinimumHeight());
+        view = myTitleBar.getmCustomView();
+        textView = (TextView) view.findViewById(R.id.txt_title_search);
+        title_search = getResources().getDrawable(R.drawable.title_search);
+        title_search_scrolled = getResources().getDrawable(R.drawable.title_search_scrolled);
+        title_search.setBounds(0, 0, title_search.getMinimumWidth(), title_search.getMinimumHeight());
+        title_search_scrolled.setBounds(0, 0, title_search_scrolled.getMinimumWidth(), title_search_scrolled.getMinimumHeight());
 
         bus.register(this);
         setListener();
@@ -140,18 +142,18 @@ public class HomeFragment extends BaseFragment {
                 } else if (scrollY < 500) {
                     int progress = (int) (new Float(scrollY) / new Float(2));//255
                     myTitleBar.getBackground().setAlpha(progress);
-                    if(scrollY<250){
+                    if (scrollY < 250) {
                         myTitleBar.setNavigationIcon(R.drawable.title_category);
                         myTitleBar.setRightButtonIcon(R.drawable.title_cart);
                         view.setBackgroundResource(R.drawable.title_selector);
                         textView.setHintTextColor(white);
-                        textView.setCompoundDrawables(title_search,null,null,null);
-                    }else{
+                        textView.setCompoundDrawables(title_search, null, null, null);
+                    } else {
                         myTitleBar.setNavigationIcon(R.drawable.title_category_scrolled);
                         myTitleBar.setRightButtonIcon(R.drawable.title_cart_scrolled);
                         view.setBackgroundResource(R.drawable.title_scrolled_selector);
                         textView.setHintTextColor(home_search_text_scrolled);
-                        textView.setCompoundDrawables(title_search_scrolled,null,null,null);
+                        textView.setCompoundDrawables(title_search_scrolled, null, null, null);
                     }
                 } else {
                     myTitleBar.getBackground().setAlpha(250);
@@ -198,6 +200,12 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+            }
+        });
+        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartActivity_.intent(HomeFragment.this).start();
             }
         });
     }

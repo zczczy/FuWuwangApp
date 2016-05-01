@@ -3,14 +3,16 @@ package com.zczczy.leo.fuwuwangapp.rest;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.CartInfo;
+import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
+import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltCartInfo;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 
 
@@ -231,8 +233,8 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/Shop/GetBuyCartInfo")
-    @RequiresHeader(value = "Token")
-    BaseModelJson<List<RebuiltCartInfo>> getBuyCartInfo();
+    @RequiresHeader(value = {"Token","ShopToken","Kbn"})
+    BaseModelJson<List<CartInfo>> getBuyCartInfo();
 
 
     /**
@@ -243,6 +245,38 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/ShopContent/GetGoodsDetailById?GoodsInfoId={GoodsInfoId}")
     BaseModelJson<GoodsDetailModel> getGoodsDetailById(@Path String GoodsInfoId);
+
+    /**
+     * 根据商品ID查询评论信息
+     *
+     * @param PageIndex
+     * @param PageSize
+     * @param GoodsInfoId
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsCommentsByGoodsInfoId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsInfoId={GoodsInfoId}")
+    BaseModelJson<PagerResult<GoodsCommentsModel>> getGoodsCommentsByGoodsInfoId(@Path String GoodsInfoId, @Path int PageIndex, @Path int PageSize);
+
+    /**
+     * 商品加入购物车
+     * @param map GoodsInfoId
+     * @return
+     */
+    @Post("api/Shop/AddShoppingCart")
+    @RequiresHeader(value = {"Token","ShopToken","Kbn"})
+    BaseModel addShoppingCart(@Body Map map);
+
+    /**
+     *
+     * @param UserName 登录账号
+     * @param UserPw 登录密码
+     * @param LoginType 登录类型（1：普通会员，2：VIP用户）
+     * @param Kbn 设备类型（1：Android,2:Ios）
+     * @return
+     */
+    @Get("api/ShopContent/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
+    BaseModelJson<LoginInfo> login(@Path String UserName,@Path String UserPw,@Path String LoginType,@Path String Kbn);
+
 
 
 }

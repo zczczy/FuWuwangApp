@@ -10,10 +10,16 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
+import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
+import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsImgListModel;
+import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -30,8 +36,13 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Leo on 2016/4/29.
@@ -52,10 +63,10 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     View mBuyLayout;
 
     @ViewById
-    LinearLayout parent, ll_rebate, ll_store;
+    LinearLayout parent, ll_rebate, ll_store, ll_review;
 
     @ViewById
-    TextView goods_name, goods_describe, goods_by, goods_kucun, goods_knows, txt_rebate, txt_normal, txt_longbi;
+    TextView goods_name, goods_describe, goods_by, goods_kucun, goods_knows, txt_rebate, txt_rmb, txt_plus, txt_home_lb;
 
     @ViewById
     CardView card_buy;
@@ -75,6 +86,9 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     @ViewById
     SliderLayout sliderLayout;
 
+    @StringRes
+    String home_rmb, home_lb;
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -93,6 +107,26 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
                     }
                 });
         getGoodsDetailById(goodsId);
+        getGoodsComments(goodsId);
+
+    }
+
+    @Background
+    void getGoodsComments(String goodsId) {
+        afterGetGoodsComments(myRestClient.getGoodsCommentsByGoodsInfoId(goodsId, 1, 3));
+    }
+
+    @UiThread
+    void afterGetGoodsComments(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            for (GoodsCommentsModel gcm : bmj.Data.ListData) {
+                GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
+                goodsCommentsItemView.init(gcm);
+                ll_review.addView(goodsCommentsItemView);
+                ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
+            }
+        }
+
     }
 
     @Background
@@ -111,17 +145,25 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
             goods_kucun.setText(bmj.Data.GoodsStock);
             goods_knows.setText(bmj.Data.GoodsPurchaseNotes);
             txt_rebate.setText(bmj.Data.TempDisp + "撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫");
-            txt_normal.setText(bmj.Data.GoodsPrice);
-            txt_longbi.setText(bmj.Data.GoodsLBPrice);
+            if (Float.valueOf(bmj.Data.GoodsPrice) > 0 && Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
+                txt_rmb.setVisibility(View.VISIBLE);
+                txt_plus.setVisibility(View.VISIBLE);
+                txt_rmb.setText(bmj.Data.GoodsPrice);
+                txt_home_lb.setText(bmj.Data.GoodsLBPrice);
+            } else if (Float.valueOf(bmj.Data.GoodsPrice) > 0) {
+                txt_rmb.setVisibility(View.VISIBLE);
+                txt_plus.setVisibility(View.GONE);
+                txt_home_lb.setVisibility(View.GONE);
+                txt_rmb.setText(String.format(home_rmb, bmj.Data.GoodsPrice));
+            } else if (Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
+                txt_rmb.setVisibility(View.GONE);
+                txt_plus.setVisibility(View.GONE);
+                txt_home_lb.setVisibility(View.VISIBLE);
+                txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
+            }
             for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
                 TextSliderView textSliderView = new TextSliderView(this);
                 textSliderView.image(nb.GoodsImgUrl);
-                textSliderView.setOnSliderClickListener(this);
-                sliderLayout.addSlider(textSliderView);
-            }
-            if (bmj.Data.GoodsImgList.size() == 0) {
-                TextSliderView textSliderView = new TextSliderView(this);
-                textSliderView.image(bmj.Data.GoodsImgSl);
                 textSliderView.setOnSliderClickListener(this);
                 sliderLayout.addSlider(textSliderView);
             }
@@ -131,6 +173,10 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         }
     }
 
+    @Click
+    void ll_all_review() {
+        GoodsCommentsActivity_.intent(this).goodsId(goodsId).start();
+    }
 
     @Click
     void txt_buy() {
@@ -139,8 +185,56 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @Click
     void img_cart() {
-        AndroidTool.showToast(this, "cart");
+        if (!checkUserIsLogin()) {
+            AndroidTool.showToast(this, "请登录");
+        } else {
+            AndroidTool.showLoadDialog(this);
+            addShoppingCart(goodsId);
+        }
     }
+
+    /**
+     * 添加商品
+     *
+     * @param goodsId
+     */
+    @Background
+    void addShoppingCart(String goodsId) {
+        myRestClient.setHeader("Token",pre.token().get());
+        myRestClient.setHeader("ShopToken",pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        HashMap<String,String> map = new HashMap();
+        map.put("GoodsInfoId",goodsId);
+        afterAddShoppingCart(myRestClient.addShoppingCart(map));
+    }
+
+    /**
+     * 添加商品后更新UI
+     *
+     * @param bm
+     */
+    @UiThread
+    void afterAddShoppingCart(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
+        if (bm == null) {
+            AndroidTool.showToast(this, "商品添加失败");
+        } else if (bm.Successful) {
+            AndroidTool.showToast(this, "商品添加成功");
+        } else {
+            AndroidTool.showToast(this, bm.Error);
+        }
+    }
+
+    /**
+     * 判断用户是否登录
+     *
+     * @return
+     */
+    boolean checkUserIsLogin() {
+
+        return !(StringUtils.isEmpty(pre.shopToken().get()) || StringUtils.isEmpty(pre.token().get()));
+    }
+
 
     /**
      * 控制购买浮动条的 位置 上面的购买布局（theViewStay）和下面的购买布局（mBuyLayout）重合起来了

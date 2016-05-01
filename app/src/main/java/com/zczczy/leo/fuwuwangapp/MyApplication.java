@@ -29,6 +29,13 @@ public class MyApplication extends Application {
 
     public static final Integer PAGECOUNT = 10;
 
+    public static final String ANDROID="1";
+
+    public static final String NORMAL="1";
+
+    public static final String VIP="2";
+
+
     private List<AdvertModel> advertModelList;
 
     private List<NewBanner> newBannerList;
