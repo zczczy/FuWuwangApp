@@ -1,11 +1,9 @@
 package com.zczczy.leo.fuwuwangapp.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
-import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.CartItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
@@ -30,7 +28,7 @@ import java.util.List;
  * Created by Leo on 2016/4/27.
  */
 @EBean
-public class CartAdapter extends BaseUltimateRecyclerViewAdapter<CartInfo> {
+public class CartAdapter extends BaseRecyclerViewAdapter<CartInfo> {
 
     @RestService
     MyDotNetRestClient myRestClient;
@@ -56,7 +54,7 @@ public class CartAdapter extends BaseUltimateRecyclerViewAdapter<CartInfo> {
 
     @Override
     @Background
-    public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
+    public void getMoreData(Object... objects) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("Kbn", MyApplication.ANDROID);
@@ -69,19 +67,11 @@ public class CartAdapter extends BaseUltimateRecyclerViewAdapter<CartInfo> {
     void afterGetData(BaseModelJson<List<CartInfo>> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
-            AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
-            clear();
-            insertAll(bmj.Data, getAdapterItemCount());
+            insertAll(bmj.Data, getItemCount());
         } else {
-            AndroidTool.showToast(context, bmj.Error);
+//            AndroidTool.showToast(context, bmj.Error);
         }
-    }
-
-
-    @Override
-    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
-
     }
 
     @Override
@@ -90,13 +80,4 @@ public class CartAdapter extends BaseUltimateRecyclerViewAdapter<CartInfo> {
         return CartItemView_.build(parent.getContext());
     }
 
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-    }
 }

@@ -18,14 +18,12 @@
         app:mNavButtonIcon="@drawable/title_back_normal"
         app:mTitle="@string/txt_cart" />
 
-
-    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
-        android:id="@+id/ultimate_recycler_view"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/my_title_bar"
-        android:layout_alignTop="@+id/ll_cart_jiesuan"
-        app:recyclerviewScrollbars="vertical" />
+        android:layout_alignTop="@+id/ll_cart_jiesuan" />
 
     <LinearLayout
         android:id="@+id/ll_cart_jiesuan"
