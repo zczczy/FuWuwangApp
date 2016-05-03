@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.RecommendedGoodsItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -30,7 +30,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/27.
  */
 @EBean
-public class RecommendedGoodsAdapter extends BaseRecyclerViewAdapter<RebuiltRecommendedGoods> {
+public class RecommendedGoodsAdapter extends BaseUltimateRecyclerViewAdapter<RebuiltRecommendedGoods> {
     @App
     MyApplication app;
 
@@ -85,7 +85,7 @@ public class RecommendedGoodsAdapter extends BaseRecyclerViewAdapter<RebuiltReco
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

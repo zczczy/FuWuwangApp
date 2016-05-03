@@ -13,9 +13,8 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.GoodsCommentsAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -23,7 +22,6 @@ import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -41,7 +39,7 @@ public class CartActivity extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(CartAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @Bean
     OttoBus bus;

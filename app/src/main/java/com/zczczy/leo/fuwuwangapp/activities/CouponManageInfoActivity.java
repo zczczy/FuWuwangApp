@@ -5,11 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.CooperationMerchantAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CouponManageInfoAdapter;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
@@ -54,7 +52,7 @@ public class CouponManageInfoActivity extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(CouponManageInfoAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     LinearLayoutManager linearLayoutManager;
 

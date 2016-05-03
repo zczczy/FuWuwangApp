@@ -12,12 +12,11 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.GoodsCommentsAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
-import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -40,7 +39,7 @@ public class GoodsCommentsActivity extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(GoodsCommentsAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @Bean
     OttoBus bus;

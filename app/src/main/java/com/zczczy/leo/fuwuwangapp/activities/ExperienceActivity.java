@@ -8,19 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.ExperienceAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 import com.zczczy.leo.fuwuwangapp.model.Experience;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
@@ -29,12 +26,10 @@ import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.OnActivityResult;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
@@ -60,7 +55,7 @@ public class ExperienceActivity extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(ExperienceAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @Bean
     OttoBus bus;
@@ -135,7 +130,7 @@ public class ExperienceActivity extends BaseActivity {
             }
         });
 
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<Experience>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Experience>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Experience obj, int position) {
                 WebViewActivity_.intent(ExperienceActivity.this).header("体验中心").url(rootUrl + "/DetailPage/CompanyDetail/" + obj.getUserid()).start();

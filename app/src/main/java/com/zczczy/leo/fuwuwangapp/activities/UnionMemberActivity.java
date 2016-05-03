@@ -8,7 +8,7 @@ import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.UnionMemberAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
@@ -48,7 +48,7 @@ public class UnionMemberActivity extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(UnionMemberAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @Bean
     OttoBus bus;
@@ -107,7 +107,7 @@ public class UnionMemberActivity extends BaseActivity {
     }
 
     void setListener() {
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<Purse>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Purse>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Purse obj, int position) {
                 if (Integer.parseInt(obj.childCount) > 0) {

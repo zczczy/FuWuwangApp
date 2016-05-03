@@ -4,11 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.CouponManageInfoItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
-import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.model.QueueCompanyDetail;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -30,7 +28,7 @@ import java.util.List;
  * Created by Leo on 2016/4/29.
  */
 @EBean
-public class CouponManageInfoAdapter extends BaseRecyclerViewAdapter<QueueCompanyDetail> {
+public class CouponManageInfoAdapter extends BaseUltimateRecyclerViewAdapter<QueueCompanyDetail> {
 
     @StringRes
     String no_net;
@@ -80,7 +78,7 @@ public class CouponManageInfoAdapter extends BaseRecyclerViewAdapter<QueueCompan
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.marshalchen.ultimaterecyclerview.itemTouchHelper.ItemTouchHelperViewHolder;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 
 /**
  * Created by Leo on 2016/4/27.
@@ -14,7 +14,7 @@ public abstract class ItemView<T> extends LinearLayout implements ItemTouchHelpe
 
     protected T _data;
 
-    protected BaseRecyclerViewAdapter<T> baseRecyclerViewAdapter;
+    protected BaseUltimateRecyclerViewAdapter<T> baseRecyclerViewAdapter;
 
     protected  RecyclerView.ViewHolder viewHolder;
 
@@ -27,7 +27,7 @@ public abstract class ItemView<T> extends LinearLayout implements ItemTouchHelpe
         init(objects);
     }
 
-    public void init(T t, BaseRecyclerViewAdapter<T> baseRecyclerViewAdapter, RecyclerView.ViewHolder viewHolder, Object... objects) {
+    public void init(T t, BaseUltimateRecyclerViewAdapter<T> baseRecyclerViewAdapter, RecyclerView.ViewHolder viewHolder, Object... objects) {
         this._data = t;
         this.baseRecyclerViewAdapter=baseRecyclerViewAdapter;
         this.viewHolder=viewHolder;

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.LotteryInfoItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -28,7 +28,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/3/9.
  */
 @EBean
-public class LotteryInfoAdapter extends BaseRecyclerViewAdapter<LotteryInfo> {
+public class LotteryInfoAdapter extends BaseUltimateRecyclerViewAdapter<LotteryInfo> {
 
     @RestService
     MyDotNetRestClient myDotNetRestClient;
@@ -89,7 +89,7 @@ public class LotteryInfoAdapter extends BaseRecyclerViewAdapter<LotteryInfo> {
 
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

@@ -4,16 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
@@ -28,7 +26,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/5/1.
  */
 @EBean
-public class GoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCommentsModel> {
+public class GoodsCommentsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsCommentsModel> {
 
     @Bean
     OttoBus bus;
@@ -76,7 +74,7 @@ public class GoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCommentsM
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

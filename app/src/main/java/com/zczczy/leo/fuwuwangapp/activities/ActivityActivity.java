@@ -11,8 +11,7 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.ActivityAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.CooperationMerchantAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
@@ -46,7 +45,7 @@ public class ActivityActivity extends  BaseActivity{
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(ActivityAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @Bean
     OttoBus bus;
@@ -111,7 +110,7 @@ public class ActivityActivity extends  BaseActivity{
             }
         });
 
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<Activity>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Activity>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Activity obj, int position) {
                 ActivityInfoActivity_.intent(ActivityActivity.this).url(rootUrl + "/DetailPage/ActivityDetail/" + obj.getAid()).status(obj.getStatus()).aid(obj.getAid()).start();

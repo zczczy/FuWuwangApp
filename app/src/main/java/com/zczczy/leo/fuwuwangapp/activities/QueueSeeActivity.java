@@ -4,10 +4,9 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.QueueSeeAdapter;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -33,7 +32,7 @@ public class QueueSeeActivity  extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(QueueSeeAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     LinearLayoutManager linearLayoutManager;
 

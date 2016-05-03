@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.TransactionRecordItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -28,7 +28,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/28.
  */
 @EBean
-public class TransactionRecordAdapter extends BaseRecyclerViewAdapter<Purse> {
+public class TransactionRecordAdapter extends BaseUltimateRecyclerViewAdapter<Purse> {
 
     @Bean
     OttoBus bus;
@@ -81,7 +81,7 @@ public class TransactionRecordAdapter extends BaseRecyclerViewAdapter<Purse> {
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

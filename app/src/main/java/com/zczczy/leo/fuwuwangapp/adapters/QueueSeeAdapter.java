@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.QueueSeeItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.YpdRecord;
@@ -28,7 +28,7 @@ import java.util.List;
  * Created by Leo on 2016/4/28.
  */
 @EBean
-public class QueueSeeAdapter extends BaseRecyclerViewAdapter<YpdRecord> {
+public class QueueSeeAdapter extends BaseUltimateRecyclerViewAdapter<YpdRecord> {
 
     @StringRes
     String no_net;
@@ -86,7 +86,7 @@ public class QueueSeeAdapter extends BaseRecyclerViewAdapter<YpdRecord> {
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

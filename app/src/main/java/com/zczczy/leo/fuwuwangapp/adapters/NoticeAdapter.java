@@ -4,14 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.NoticeItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Notice;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
-import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -28,7 +26,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/28.
  */
 @EBean
-public class NoticeAdapter extends BaseRecyclerViewAdapter<Notice> {
+public class NoticeAdapter extends BaseUltimateRecyclerViewAdapter<Notice> {
 
     @Bean
     OttoBus bus;
@@ -86,7 +84,7 @@ public class NoticeAdapter extends BaseRecyclerViewAdapter<Notice> {
 
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

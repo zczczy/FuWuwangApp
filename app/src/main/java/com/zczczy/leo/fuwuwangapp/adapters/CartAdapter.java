@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.CartItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
@@ -30,7 +30,7 @@ import java.util.List;
  * Created by Leo on 2016/4/27.
  */
 @EBean
-public class CartAdapter extends BaseRecyclerViewAdapter<CartInfo> {
+public class CartAdapter extends BaseUltimateRecyclerViewAdapter<CartInfo> {
 
     @RestService
     MyDotNetRestClient myRestClient;
@@ -80,7 +80,7 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartInfo> {
 
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

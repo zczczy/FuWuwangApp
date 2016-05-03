@@ -7,17 +7,14 @@ import android.view.View;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.NoticeAdapter;
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Notice;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
@@ -40,7 +37,7 @@ public class NoticeActivity extends BaseActivity {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(NoticeAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @Bean
     OttoBus bus;
@@ -86,7 +83,7 @@ public class NoticeActivity extends BaseActivity {
     }
 
     void setListener() {
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<Notice>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Notice>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Notice notice, int position) {
                 WebViewActivity_.intent(NoticeActivity.this).header("公告详情").url(rootUrl + "DetailPage/NoticeDetail/" + notice.getNoticeId()).start();

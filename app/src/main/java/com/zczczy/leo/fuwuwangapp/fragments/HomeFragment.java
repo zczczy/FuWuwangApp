@@ -15,13 +15,11 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
@@ -59,7 +57,7 @@ public class HomeFragment extends BaseFragment {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(RecommendedGoodsAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     @ViewById
     MyTitleBar myTitleBar;
@@ -183,15 +181,15 @@ public class HomeFragment extends BaseFragment {
     }
 
     void setListener() {
-        myAdapter.setBindHeaderViewHolder(new BaseRecyclerViewAdapter.BindHeaderViewHolder() {
+        myAdapter.setBindHeaderViewHolder(new BaseUltimateRecyclerViewAdapter.BindHeaderViewHolder() {
             @Override
-            public void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+            public void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
                 UltimateRecyclerView.CustomRelativeWrapper customRelativeWrapper = (UltimateRecyclerView.CustomRelativeWrapper) viewHolder.itemView;
                 itemView = (ItemView<List<AdvertModel>>) (customRelativeWrapper.getChildAt(0));
                 itemView.init(myApplication.getAdvertModelList());
             }
         });
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
 //                NewProductDetailActivity_.intent(NewHomeFragment.this).goods(obj).start();

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.CartDetailItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Leo on 2016/4/27.
  */
 @EBean
-public class CartDetailItemAdapter extends BaseRecyclerViewAdapter<BuyCartInfoList> {
+public class CartDetailItemAdapter extends BaseUltimateRecyclerViewAdapter<BuyCartInfoList> {
 
     @Override
     @Background
@@ -47,7 +47,7 @@ public class CartDetailItemAdapter extends BaseRecyclerViewAdapter<BuyCartInfoLi
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

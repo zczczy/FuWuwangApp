@@ -1,17 +1,15 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
-
 /**
- * Created by leo on 2015/10/31.
+ * Created by Leo on 2016/5/3.
  */
-public class BaseViewHolder extends UltimateRecyclerviewViewHolder {
+public class BaseViewHolder  extends RecyclerView.ViewHolder {
 
 
     public BaseViewHolder(View itemView) {
         super(itemView);
-
     }
 }

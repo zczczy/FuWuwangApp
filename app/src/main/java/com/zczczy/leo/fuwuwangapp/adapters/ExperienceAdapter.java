@@ -4,12 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
-import com.zczczy.leo.fuwuwangapp.items.CooperationMerchantItemView_;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.ExperienceItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 import com.zczczy.leo.fuwuwangapp.model.Experience;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -28,7 +26,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/28.
  */
 @EBean
-public class ExperienceAdapter extends BaseRecyclerViewAdapter<Experience> {
+public class ExperienceAdapter extends BaseUltimateRecyclerViewAdapter<Experience> {
 
     @Bean
     OttoBus bus;
@@ -77,7 +75,7 @@ public class ExperienceAdapter extends BaseRecyclerViewAdapter<Experience> {
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

@@ -4,9 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
-import com.zczczy.leo.fuwuwangapp.items.CooperationMerchantItemView_;
-import com.zczczy.leo.fuwuwangapp.items.UnionMemberItemView;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.UnionMemberItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -30,7 +28,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/29.
  */
 @EBean
-public class UnionMemberAdapter extends BaseRecyclerViewAdapter<Purse> {
+public class UnionMemberAdapter extends BaseUltimateRecyclerViewAdapter<Purse> {
 
     @Bean
     OttoBus bus;
@@ -85,7 +83,7 @@ public class UnionMemberAdapter extends BaseRecyclerViewAdapter<Purse> {
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

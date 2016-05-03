@@ -5,12 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.items.ActivityItemView_;
-import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
-import com.zczczy.leo.fuwuwangapp.items.CooperationMerchantItemView_;
+import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
@@ -28,7 +26,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/28.
  */
 @EBean
-public class ActivityAdapter extends BaseRecyclerViewAdapter<Activity> {
+public class ActivityAdapter extends BaseUltimateRecyclerViewAdapter<Activity> {
 
     @Bean
     OttoBus bus;
@@ -77,7 +75,7 @@ public class ActivityAdapter extends BaseRecyclerViewAdapter<Activity> {
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseViewHolder viewHolder) {
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
 
     }
 

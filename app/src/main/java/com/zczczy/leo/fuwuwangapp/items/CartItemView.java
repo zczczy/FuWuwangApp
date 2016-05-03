@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartDetailItemAdapter;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
 
@@ -34,7 +34,7 @@ public class CartItemView extends ItemView<CartInfo> {
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(CartDetailItemAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+    BaseUltimateRecyclerViewAdapter myAdapter;
 
     LinearLayoutManager linearLayoutManager;
 
