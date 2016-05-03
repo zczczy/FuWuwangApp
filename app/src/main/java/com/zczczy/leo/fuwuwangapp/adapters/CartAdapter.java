@@ -86,6 +86,7 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartInfo> {
 
     @Override
     protected View onCreateItemView(ViewGroup parent) {
+
         return CartItemView_.build(parent.getContext());
     }
 
