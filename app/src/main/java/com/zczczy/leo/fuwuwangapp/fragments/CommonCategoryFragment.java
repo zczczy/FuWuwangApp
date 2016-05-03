@@ -1,8 +1,16 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
-import com.zczczy.leo.fuwuwangapp.R;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.CommonCategoryAdapter;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 /**
  * Created by leo on 2016/5/3.
@@ -10,6 +18,25 @@ import org.androidannotations.annotations.EFragment;
 @EFragment(R.layout.fragment_common_category)
 public class CommonCategoryFragment extends BaseFragment {
 
+    @ViewById
+    RecyclerView recyclerView;
 
+    @Bean(CommonCategoryAdapter.class)
+    BaseRecyclerViewAdapter myAdapter;
 
+    GridLayoutManager gridLayoutManager;
+
+    @AfterViews
+    void afterView() {
+        recyclerView.setHasFixedSize(false);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(myAdapter);
+        myAdapter.getMoreData(0);
+        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, Object obj, int position) {
+            }
+        });
+    }
 }

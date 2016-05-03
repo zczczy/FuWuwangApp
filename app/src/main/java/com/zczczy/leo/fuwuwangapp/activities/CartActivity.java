@@ -2,20 +2,13 @@ package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
-import com.squareup.otto.Subscribe;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
-import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.CartModel;
 import com.zczczy.leo.fuwuwangapp.model.CheckOutModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -29,8 +22,6 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import in.srain.cube.views.ptr.header.MaterialHeader;
 
 /**
  * Created by Leo on 2016/5/1.
@@ -58,11 +49,6 @@ public class CartActivity extends BaseActivity {
 
     LinearLayoutManager linearLayoutManager;
 
-    MaterialHeader materialHeader;
-
-    int pageIndex = 1;
-
-    boolean isRefresh;
 
     @AfterViews
     void afterView() {
