@@ -4,9 +4,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.zczczy.leo.fuwuwangapp.items.CartDetailItemView_;
 import com.zczczy.leo.fuwuwangapp.items.CartItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
+import com.zczczy.leo.fuwuwangapp.model.CartModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -22,17 +25,17 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Leo on 2016/4/27.
  */
 @EBean
-public class CartAdapter extends BaseRecyclerViewAdapter<CartInfo> {
+public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
 
     @RestService
     MyDotNetRestClient myRestClient;
-
 
     @App
     MyApplication app;
@@ -68,16 +71,61 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartInfo> {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
         } else if (bmj.Successful) {
-            insertAll(bmj.Data, getItemCount());
-        } else {
-//            AndroidTool.showToast(context, bmj.Error);
+            List<CartModel> list = new ArrayList<>();
+
+            for (CartInfo aa : bmj.Data) {
+                CartModel cm0 = new CartModel();
+                cm0.StoreInfoId = aa.StoreInfoId;
+                cm0.StoreName = aa.StoreName;
+                cm0.level = 0;
+                list.add(cm0);
+                for (BuyCartInfoList bb : aa.BuyCartInfoList) {
+                    CartModel cm = new CartModel();
+                    cm.BuyCartInfoId = bb.BuyCartInfoId;
+                    cm.CreateTime = bb.CreateTime;
+                    cm.GodosName = bb.GodosName;
+                    cm.GoodsImgSl = bb.GoodsImgSl;
+                    cm.GoodsInfoId = bb.GoodsInfoId;
+                    cm.GoodsLBPrice = bb.GoodsLBPrice;
+                    cm.GoodsPrice = bb.GoodsPrice;
+                    cm.ProductCount = bb.ProductCount;
+                    cm.StoreInfoId = aa.StoreInfoId;
+                    cm.StoreName = aa.StoreName;
+                    cm.UserInfoId = bb.UserInfoId;
+                    cm.level = 1;
+                    list.add(cm);
+                }
+            }
+            insertAll(list, getItemCount());
         }
     }
 
     @Override
-    protected View onCreateItemView(ViewGroup parent) {
-
-        return CartItemView_.build(parent.getContext());
+    protected View onCreateItemView(ViewGroup parent, int viewType) {
+        if (viewType == 0) {
+            return CartItemView_.build(parent.getContext());
+        } else {
+            return CartDetailItemView_.build(parent.getContext());
+        }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+
+        return getItemData(position).level;
+    }
+
+    public void checkAll() {
+        for (CartModel cm : getItems()) {
+            cm.isChecked = true;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void unCheckAll() {
+        for (CartModel cm : getItems()) {
+            cm.isChecked = false;
+        }
+        notifyDataSetChanged();
+    }
 }

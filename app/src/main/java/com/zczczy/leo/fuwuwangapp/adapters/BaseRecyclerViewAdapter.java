@@ -27,12 +27,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return onCreateViewHolder(parent);
-    }
-
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent) {
-
-        return new BaseViewHolder(onCreateItemView(parent));
+        return  new BaseViewHolder(onCreateItemView(parent,viewType));
     }
 
     /**
@@ -41,7 +36,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
      * @param parent
      * @return
      */
-    protected abstract View onCreateItemView(ViewGroup parent);
+    protected abstract View onCreateItemView(ViewGroup parent, int viewType);
 
     @Override
     public void onBindViewHolder(BaseViewHolder viewHolder, int position) {
@@ -85,6 +80,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         notifyItemRemoved(position);
     }
 
+    public T getItemData(int position){
+        return items.size()<position+1?null:items.get(position);
+    }
 
     @Override
     public int getItemCount() {
@@ -119,4 +117,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         void onItemLongClick(RecyclerView.ViewHolder viewHolder, T obj, int position);
     }
 
+    public List<T> getItems() {
+        return items;
+    }
+
+    public void setItems(List<T> items) {
+        this.items = items;
+    }
 }

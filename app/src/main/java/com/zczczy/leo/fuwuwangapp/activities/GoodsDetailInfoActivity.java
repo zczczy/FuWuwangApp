@@ -203,7 +203,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         myRestClient.setHeader("Token",pre.token().get());
         myRestClient.setHeader("ShopToken",pre.shopToken().get());
         myRestClient.setHeader("Kbn", MyApplication.ANDROID);
-        HashMap<String,String> map = new HashMap();
+        HashMap<String,String> map = new HashMap<>();
         map.put("GoodsInfoId",goodsId);
         afterAddShoppingCart(myRestClient.addShoppingCart(map));
     }

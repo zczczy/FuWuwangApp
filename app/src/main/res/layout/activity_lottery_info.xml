@@ -20,6 +20,7 @@
         android:id="@+id/ultimate_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:theme="@style/AlertDialog.AppCompat.Light"
         android:background="@color/home_background"
         app:recyclerviewEmptyView="@layout/lottery_empty_view">
     </com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview>

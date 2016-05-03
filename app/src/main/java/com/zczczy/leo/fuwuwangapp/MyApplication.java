@@ -2,9 +2,7 @@ package com.zczczy.leo.fuwuwangapp;
 
 import android.app.Application;
 
-import com.tencent.bugly.crashreport.CrashReport;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
-import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
@@ -48,7 +46,7 @@ public class MyApplication extends Application {
 
     @AfterInject
     void afterInject() {
-        CrashReport.initCrashReport(getApplicationContext(), "900019033", false);
+//        CrashReport.initCrashReport(getApplicationContext(), "900019033", false);
         advertModelList = new ArrayList<>();
         newBannerList = new ArrayList<>();
         goodsTypeModelList = new ArrayList<>();

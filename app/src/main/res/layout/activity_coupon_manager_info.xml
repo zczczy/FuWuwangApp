@@ -140,6 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
+        app:theme="@style/AlertDialog.AppCompat.Light"
         app:recyclerviewEmptyView="@layout/empty_view"
         app:recyclerviewScrollbars="vertical">
 

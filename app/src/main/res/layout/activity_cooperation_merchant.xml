@@ -50,7 +50,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_search"
         app:recyclerviewEmptyView="@layout/empty_view"
-        app:recyclerviewScrollbars="vertical">
+        app:recyclerviewScrollbars="vertical"
+        app:theme="@style/AlertDialog.AppCompat.Light">
 
     </com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview>
 

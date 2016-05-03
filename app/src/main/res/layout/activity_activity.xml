@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".activities.CooperationMerchantActivity">
 
@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:recyclerviewEmptyView="@layout/empty_view"
+        app:theme="@style/AlertDialog.AppCompat.Light"
         app:recyclerviewScrollbars="vertical">
 
     </com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview>

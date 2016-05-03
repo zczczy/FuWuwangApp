@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:background="@color/main_tab_color"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,6 +15,7 @@
 
         <CheckBox
             android:id="@+id/cb_select"
+            style="@style/CustomCheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -25,8 +28,8 @@
 
         <ImageView
             android:id="@+id/img_cart_goods_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/goods_default" />
     </LinearLayout>
 
@@ -41,9 +44,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:ems="30"
             android:lines="2"
-            android:maxLines="2"
-            android:text="阿萨德发发啊打发打发阿克拉手机发送到的阿斯顿阿萨德" />
+            android:maxLines="2" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,6 +81,7 @@
                     android:id="@+id/quantityView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:qv_addButtonBackground="@color/main_tab_color"
                     app:qv_addButtonText="+"
                     app:qv_addButtonTextColor="@color/buy_button"
                     app:qv_maxQuantity="100"
@@ -85,6 +89,7 @@
                     app:qv_quantity="1"
                     app:qv_quantityBackground="@color/white"
                     app:qv_quantityPadding="15dp"
+                    app:qv_removeButtonBackground="@color/main_tab_color"
                     app:qv_removeButtonText="-"
                     app:qv_removeButtonTextColor="@color/buy_button" />
             </LinearLayout>

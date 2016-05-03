@@ -233,7 +233,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/Shop/GetBuyCartInfo")
-    @RequiresHeader(value = {"Token","ShopToken","Kbn"})
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<List<CartInfo>> getBuyCartInfo();
 
 
@@ -259,24 +259,35 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 商品加入购物车
+     * 购物车加1
+     *
      * @param map GoodsInfoId
      * @return
      */
     @Post("api/Shop/AddShoppingCart")
-    @RequiresHeader(value = {"Token","ShopToken","Kbn"})
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel addShoppingCart(@Body Map map);
 
     /**
+     * 购物车减1
      *
-     * @param UserName 登录账号
-     * @param UserPw 登录密码
+     * @param map GoodsInfoId
+     * @return
+     */
+    @Post("api/Shop/SubShoppingCart")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel subShoppingCart(@Body Map map);
+
+
+    /**
+     * @param UserName  登录账号
+     * @param UserPw    登录密码
      * @param LoginType 登录类型（1：普通会员，2：VIP用户）
-     * @param Kbn 设备类型（1：Android,2:Ios）
+     * @param Kbn       设备类型（1：Android,2:Ios）
      * @return
      */
     @Get("api/ShopContent/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
-    BaseModelJson<LoginInfo> login(@Path String UserName,@Path String UserPw,@Path String LoginType,@Path String Kbn);
-
+    BaseModelJson<LoginInfo> login(@Path String UserName, @Path String UserPw, @Path String LoginType, @Path String Kbn);
 
 
 }

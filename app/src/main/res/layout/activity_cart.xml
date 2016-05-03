@@ -16,14 +16,18 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mRightText="编辑"
+        app:mRightTextMarginRight="10dp"
         app:mTitle="@string/txt_cart" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/my_title_bar"
-        android:layout_alignTop="@+id/ll_cart_jiesuan" />
+        android:layout_above="@+id/ll_cart_jiesuan"
+        android:layout_below="@+id/my_title_bar"
+        android:background="@color/white" />
+
 
     <LinearLayout
         android:id="@+id/ll_cart_jiesuan"
@@ -33,74 +37,81 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+            <CheckBox
+                android:id="@+id/cb_all"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/shopcart_selector" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:gravity="center|left"
-                android:padding="2dp"
-                android:text="@string/txt_all_select" />
+                android:gravity="center"
+                android:text="全选" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txt_total_rmb"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:text="合计：1234567" />
+                    android:text="合计：1234567"
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/txt_total_lb"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:text="龙币：1234567" />
+                    android:text="龙币：1234567"
+                    android:textSize="13sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:background="@color/red"
-                    android:clickable="true"
-                    android:padding="10dp"
-                    android:text="去结算（1）"
-                    android:textColor="@color/white" />
-            </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_checkout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/major_color"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="去结算"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </RelativeLayout>

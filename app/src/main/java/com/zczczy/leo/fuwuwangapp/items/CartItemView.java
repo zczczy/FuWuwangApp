@@ -1,18 +1,16 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.CartDetailItemAdapter;
-import com.zczczy.leo.fuwuwangapp.model.CartInfo;
+import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
+import com.zczczy.leo.fuwuwangapp.model.CartModel;
 
-import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.CheckedChange;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
@@ -20,7 +18,7 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/4/27.
  */
 @EViewGroup(R.layout.activity_cart_item)
-public class CartItemView extends ItemView<CartInfo> {
+public class CartItemView extends ItemView<CartModel> {
 
     @ViewById
     CheckBox cb_store_check;
@@ -30,28 +28,31 @@ public class CartItemView extends ItemView<CartInfo> {
 
     Context context;
 
-    @ViewById
-    RecyclerView recyclerView;
-
-    @Bean(CartDetailItemAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
-
-    LinearLayoutManager linearLayoutManager;
+    CartAdapter cartAdapter;
 
     public CartItemView(Context context) {
         super(context);
         this.context = context;
     }
 
+    @Click
+    void cb_store_check() {
+        _data.isChecked = cb_store_check.isChecked();
+        _data.isStoreChecked=cb_store_check.isChecked();
+        for (CartModel cm : cartAdapter.getItems()) {
+            if (_data.StoreInfoId.equals(cm.StoreInfoId)) {
+                cm.isChecked = _data.isChecked;
+            }
+        }
+        cartAdapter.notifyDataSetChanged();
+    }
+
+
     @Override
     protected void init(Object... objects) {
-        recyclerView.setHasFixedSize(true);
-//        linearLayoutManager = new CustomLinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
-        linearLayoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
-        txt_store.setText(_data.getStoreName());
-        myAdapter.getMoreData(0, 0, false, _data.getBuyCartInfoList());
+        cartAdapter = (CartAdapter) objects[0];
+        txt_store.setText(_data.StoreName);
+        cb_store_check.setChecked(_data.isChecked);
     }
 
     @Override

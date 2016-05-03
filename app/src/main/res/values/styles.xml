@@ -2,7 +2,7 @@
 
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MyAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,8 +11,8 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-    </style>
 
+    </style>
 
 
     <style name="CustomProgressDialog" parent="@style/CustomDialog">
@@ -71,6 +71,13 @@
 
     <style name="ratingbar_style" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbar</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">32dp</item>
+    </style>
+
+
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/shopcart_selector</item>
         <item name="android:minHeight">16dp</item>
         <item name="android:maxHeight">32dp</item>
     </style>
