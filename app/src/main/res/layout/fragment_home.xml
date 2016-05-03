@@ -28,9 +28,8 @@
             android:background="@color/white"
             android:minHeight="50dp"
             app:mCustomView="@layout/search"
-            app:mRightButtonIcon="@drawable/title_cart"
             app:mNavButtonIcon="@drawable/title_category"
-            />
+            app:mRightButtonIcon="@drawable/title_cart" />
     </FrameLayout>
 
 

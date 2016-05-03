@@ -5,11 +5,10 @@ import com.zczczy.leo.fuwuwangapp.R;
 import org.androidannotations.annotations.EFragment;
 
 /**
- * Created by Leo on 2016/4/27.
+ * Created by leo on 2016/5/3.
  */
-@EFragment(R.layout.fragment_category)
-public class CategoryFragment extends BaseFragment {
-
+@EFragment(R.layout.fragment_common_category)
+public class CommonCategoryFragment extends BaseFragment {
 
 
 
