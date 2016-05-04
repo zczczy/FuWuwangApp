@@ -5,12 +5,11 @@ import java.io.Serializable;
 /**
  * Created by Leo on 2016/5/4.
  */
-public class NewCity implements Serializable {
+public class NewArea implements Serializable {
 
-    public String ProvinceId;
+    public  String AreaId;
 
     public String CityId;
 
-    public String CityName;
-
+    public String AreaName;
 }

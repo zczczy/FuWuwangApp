@@ -25,6 +25,7 @@ import com.zczczy.leo.fuwuwangapp.model.Announcement;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost;
@@ -34,6 +35,7 @@ import com.zczczy.leo.fuwuwangapp.views.AnimTextView;
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -55,7 +57,7 @@ import java.util.Date;
  * Created by Leo on 2016/4/27.
  */
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     @ViewById
     FragmentTabHost tabHost;
@@ -69,14 +71,17 @@ public class MainActivity extends BaseActivity{
     @RestService
     MyRestClient myRestClient;
 
+    @Bean
+    MyErrorHandler myErrorHandler;
+
     @Pref
     MyPrefs_ pre;
 
     //导航
-    Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class,NewsFragment_.class, MineFragment_.class };
+    Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class, NewsFragment_.class, MineFragment_.class};
 
     @DrawableRes
-    Drawable home_selector, news_selector, mine_selector,category_selector,service_selector;
+    Drawable home_selector, news_selector, mine_selector, category_selector, service_selector;
 
     Drawable[] drawables = new Drawable[5];
 
@@ -113,6 +118,7 @@ public class MainActivity extends BaseActivity{
         drawables[2] = service_selector;
         drawables[3] = news_selector;
         drawables[4] = mine_selector;
+        myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     @AfterViews
@@ -274,8 +280,8 @@ public class MainActivity extends BaseActivity{
 
     @UiThread
     void Getannouncement(int AppConfigId, String AppConfigTitle, String AppConfigContent, String IsCloseBtn, String IsShow) {
-        if("1".equals(IsShow)){
-            homedialog= new MyHomedialog(this,AppConfigTitle,AppConfigContent,IsCloseBtn,null);
+        if ("1".equals(IsShow)) {
+            homedialog = new MyHomedialog(this, AppConfigTitle, AppConfigContent, IsCloseBtn, null);
             homedialog.show();
             homedialog.setCancelable(false);
         }

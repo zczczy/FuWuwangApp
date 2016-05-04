@@ -4,6 +4,7 @@ import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
+import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
@@ -11,11 +12,16 @@ import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
+import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
+import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
+import com.zczczy.leo.fuwuwangapp.model.NewCity;
+import com.zczczy.leo.fuwuwangapp.model.NewProvince;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Path;
@@ -257,6 +263,112 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetGoodsCommentsByGoodsInfoId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsInfoId={GoodsInfoId}")
     BaseModelJson<PagerResult<GoodsCommentsModel>> getGoodsCommentsByGoodsInfoId(@Path String GoodsInfoId, @Path int PageIndex, @Path int PageSize);
 
+
+    /**
+     * @param UserName  登录账号
+     * @param UserPw    登录密码
+     * @param LoginType 登录类型（1：普通会员，2：VIP用户）
+     * @param Kbn       设备类型（1：Android,2:Ios）
+     * @return
+     */
+    @Get("api/ShopContent/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
+    BaseModelJson<LoginInfo> login(@Path String UserName, @Path String UserPw, @Path String LoginType, @Path String Kbn);
+
+    /**
+     * 查询分类
+     *
+     * @param GoodsTypePid (1邮寄类,2服务类) 如果是一级的分类id，则查询相应二级分类
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsTypeByPid?GoodsTypePid={GoodsTypePid}")
+    BaseModelJson<List<GoodsTypeModel>> getGoodsTypeByPid(@Path String GoodsTypePid);
+
+
+    /**
+     * 查询省下拉数据
+     *
+     * @return
+     */
+    @Get("api/ShopContent/GetAllProvinceList")
+    BaseModelJson<List<NewProvince>> getAllProvinceList();
+
+    /**
+     * 查询市下拉数据
+     *
+     * @return
+     */
+    @Get("api/ShopContent/GetCityListByProvinceId?ProvinceId={ProvinceId}")
+    BaseModelJson<List<NewCity>> getCityListByProvinceId(@Path String ProvinceId);
+
+    /**
+     * 查询区下拉数据
+     *
+     * @return
+     */
+    @Get("api/ShopContent/GetAreaListByCityId?CityId={CityId}")
+    BaseModelJson<List<NewArea>> getAreaListByCityId(@Path String CityId);
+
+    /**
+     * 单商品生成临时订单信息
+     *
+     * @param GoodsInfoId
+     * @param number
+     * @return
+     */
+    @Get("api/Shop/CreateTempGoodsOrderInfo?GoodsInfoId={GoodsInfoId}&number={number}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<ConfirmOrderModel> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number);
+
+    /**
+     * 查询收货地址
+     *
+     * @return
+     */
+    @Get("api/Shop/GetMReceiptAddressListByUserInfoId")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<List<MReceiptAddressModel>> getMReceiptAddressListByUserInfoId();
+
+    /**
+     * 新增收货地址
+     *
+     * @param model
+     * @return
+     */
+    @Post("api/Shop/AddMReceiptAddress")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel addMReceiptAddress(@Body MReceiptAddressModel model);
+
+    /**
+     * 修改收货地址
+     *
+     * @param model
+     * @return
+     */
+    @Post("api/Shop/UpdMReceiptAddress")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel updMReceiptAddress(@Body MReceiptAddressModel model);
+
+    /**
+     * 设置默认收货地址
+     *
+     * @param MReceiptAddressId
+     * @return
+     */
+    @Post("api/Shop/UpdDefaultReceiptAddress")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel updDefaultReceiptAddress(@Body int MReceiptAddressId);
+
+
+    /**
+     * 设置默认收货地址
+     *
+     * @param MReceiptAddressId
+     * @return
+     */
+    @Post("api/Shop/DelReceiptAddress")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel delReceiptAddress(@Body int MReceiptAddressId);
+
     /**
      * 商品加入购物车
      * 购物车加1
@@ -278,24 +390,5 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel subShoppingCart(@Body Map map);
 
-
-    /**
-     * @param UserName  登录账号
-     * @param UserPw    登录密码
-     * @param LoginType 登录类型（1：普通会员，2：VIP用户）
-     * @param Kbn       设备类型（1：Android,2:Ios）
-     * @return
-     */
-    @Get("api/ShopContent/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
-    BaseModelJson<LoginInfo> login(@Path String UserName, @Path String UserPw, @Path String LoginType, @Path String Kbn);
-
-    /**
-     * 查询分类
-     *
-     * @param GoodsTypePid (1邮寄类,2服务类) 如果是一级的分类id，则查询相应二级分类
-     * @return
-     */
-    @Get("api/ShopContent/GetGoodsTypeByPid?GoodsTypePid={GoodsTypePid}")
-    BaseModelJson<List<GoodsTypeModel>> getGoodsTypeByPid(@Path String GoodsTypePid);
 
 }

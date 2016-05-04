@@ -38,8 +38,7 @@ public class CommonCategoryFragment extends BaseFragment {
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(myAdapter);
-        myAdapter.getMoreData(1, id==null?"1":id);
-
+        myAdapter.getMoreData(id==null?"1":id);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Object obj, int position) {

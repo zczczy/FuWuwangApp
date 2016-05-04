@@ -48,7 +48,6 @@
     <string name="txt_activity_info">活动详情</string>
 
 
-
     <!-- me  -->
     <string name="txt_wealth">财富</string>
     <string name="txt_register">注册</string>
@@ -155,7 +154,6 @@
     <string name="txt_totalmadou">总麻豆：</string>
     <string name="txt_registdate">注册时间：</string>
     <string name="txt_tipe">小提示：系统会根据您的会员昵称弹出你的电话号码，请认真核对后再确认订阅，如有问题请去资料完善更改。</string>
-
 
 
     <!--兑现卷管理详细-->
@@ -278,12 +276,29 @@
     <string name="thanks_for_you_participation">谢谢参与</string>
 
 
-
-
     <string name="buy">立即抢购</string>
     <string name="rebate">支持返券</string>
     <string name="goods_detail">商品详情</string>
 
     <string name="txt_review">商品评论</string>
     <string name="txt_all_review">查看全部评论</string>
+
+    <!--下订单-->
+    <string name="txt_pre_order">确认订单</string>
+    <string name="txt_shipping">收货人:%1$s</string>
+    <string name="txt_shipping_address">收货地址:%1$s</string>
+    <string name="use_dian">使用电子币</string>
+    <string name="dian_balance">剩余%1$s电子币</string>
+
+    <!--收货地址-->
+    <string name="txt_add_shipping_address">新增地址</string>
+    <string name="txt_edit_shipping_address">编辑</string>
+    <string name="txt_delete_shipping_address">删除</string>
+    <string name="txt_default_shipping_address">默认地址</string>
+    <string name="txt_p_c_a">省、市、区</string>
+    <string name="txt_mobile">手机号码</string>
+    <string name="txt_shipping_name">收 货 人</string>
+    <string name="txt_detail_address">详细地址</string>
+
+
 </resources>

@@ -3,6 +3,7 @@
     android:id="@+id/txt_first_category"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
     android:background="@color/white"
     android:ellipsize="marquee"
     android:ems="7"

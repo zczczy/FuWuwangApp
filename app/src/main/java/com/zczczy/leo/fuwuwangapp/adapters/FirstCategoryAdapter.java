@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.items.FirstCategoryItemView_;
-import com.zczczy.leo.fuwuwangapp.items.SecondCategoryItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
@@ -23,14 +22,13 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by leo on 2016/5/4.
+ * Created by Leo on 2016/5/4.
  */
 @EBean
-public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel> {
+public class FirstCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel> {
 
     @RestService
     MyDotNetRestClient myRestClient;
@@ -45,13 +43,15 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
     String no_net;
 
     @Bean
+    OttoBus bus;
+
+    @Bean
     MyErrorHandler myErrorHandler;
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
-
 
     @Override
     @Background
@@ -60,13 +60,12 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
 //        bmj = new BaseModelJson<>();
 //        bmj.Data = new ArrayList<>();
 //        bmj.Successful = true;
-//        for (int i = 0; i < 20; i++) {
+//        for (int i = 0; i < 10; i++) {
 //            GoodsTypeModel goodsTypeModel = new GoodsTypeModel();
-//            goodsTypeModel.GoodsTypeName = "二级分类" + i;
-//            goodsTypeModel.GoodsTypeIcon = "https://img.alicdn.com/imgextra/i4/1974919058/TB2.H.xnVXXXXbpXXXXXXXXXXXX_!!1974919058.jpg_190x190q90.jpg_.webp";
+//            goodsTypeModel.GoodsTypeName = "一级分类" + i;
 //            bmj.Data.add(goodsTypeModel);
 //        }
-        bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
+        bmj = myRestClient.getGoodsTypeByPid("1");
         afterGetData(bmj);
     }
 
@@ -80,11 +79,14 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
                 insertAll(bmj.Data, getItems().size());
             }
         }
-
+        bus.post(bmj);
     }
+
 
     @Override
     protected View onCreateItemView(ViewGroup parent, int viewType) {
-        return SecondCategoryItemView_.build(parent.getContext());
+        return FirstCategoryItemView_.build(parent.getContext());
     }
+
+
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/title_selector"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical|left">
+
+    <TextView
+        android:id="@+id/txt_title_search"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/title_search_scrolled"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:hint="@string/search_hint"
+        android:paddingRight="40dp"
+        android:textColorHint="@color/home_search_text_scrolled"
+        android:textSize="13sp" />
+</LinearLayout>
+
+

@@ -180,7 +180,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @Click
     void txt_buy() {
-        AndroidTool.showToast(this, "buy");
+        PreOrderActivity_.intent(this).goodsInfoId(goodsId).orderCount(1).start();
     }
 
     @Click

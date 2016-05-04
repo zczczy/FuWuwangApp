@@ -37,9 +37,9 @@
 
                 <ImageView
                     android:id="@+id/img_trendw"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_nv" />
 
                 <TextView
                     android:id="@+id/text_trendw"
@@ -60,9 +60,9 @@
 
                 <ImageView
                     android:id="@+id/img_trendm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_nz" />
 
                 <TextView
                     android:id="@+id/text_trendm"
@@ -83,9 +83,9 @@
 
                 <ImageView
                     android:id="@+id/img_huazhuang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_hz" />
 
                 <TextView
                     android:id="@+id/text_huazhuang"
@@ -106,9 +106,9 @@
 
                 <ImageView
                     android:id="@+id/img_digital"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_sm" />
 
                 <TextView
                     android:id="@+id/text_digital"
@@ -129,9 +129,9 @@
 
                 <ImageView
                     android:id="@+id/img_baby"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_my" />
 
                 <TextView
                     android:id="@+id/text_baby"
@@ -161,9 +161,9 @@
 
                 <ImageView
                     android:id="@+id/img_life"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_jj" />
 
                 <TextView
                     android:id="@+id/text_life"
@@ -184,9 +184,9 @@
 
                 <ImageView
                     android:id="@+id/img_food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_sp" />
 
                 <TextView
                     android:id="@+id/text_food"
@@ -207,9 +207,9 @@
 
                 <ImageView
                     android:id="@+id/img_healthcare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_bj" />
 
                 <TextView
                     android:id="@+id/text_healthcare"
@@ -229,9 +229,9 @@
 
                 <ImageView
                     android:id="@+id/img_service"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/home_sh" />
 
                 <TextView
                     android:id="@+id/text_service"
@@ -251,9 +251,9 @@
 
                 <ImageView
                     android:id="@+id/img_whole"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/goods_default" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/all_category" />
 
                 <TextView
                     android:id="@+id/text_whole"

@@ -49,6 +49,10 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     @ViewById
     TextView text_trendw, text_trendm, text_huazhuang, text_digital, text_baby, text_life, text_food, text_healthcare, text_service, text_whole;
 
+    ImageView[] imageViews = new ImageView[10];
+
+    TextView[] textViews = new TextView[10];
+
     Context context;
 
     @App
@@ -61,6 +65,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         super(context);
         this.context = context;
 
+
     }
 
     @UiThread
@@ -70,6 +75,30 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
     @Override
     protected void init(Object... objects) {
+
+        imageViews[0] = img_trendw;
+        imageViews[1] = img_trendm;
+        imageViews[2] = img_huazhuang;
+        imageViews[3] = img_digital;
+        imageViews[4] = img_baby;
+        imageViews[5] = img_life;
+        imageViews[6] = img_food;
+        imageViews[7] = img_healthcare;
+        imageViews[8] = img_service;
+//        imageViews[9] = img_whole;
+
+        textViews[0] = text_trendw;
+        textViews[1] = text_trendm;
+        textViews[2] = text_huazhuang;
+        textViews[3] = text_digital;
+        textViews[4] = text_baby;
+        textViews[5] = text_life;
+        textViews[6] = text_food;
+        textViews[7] = text_healthcare;
+        textViews[8] = text_service;
+//        textViews[9] = text_whole;
+
+
         if (!app.isFirst()) {
             for (NewBanner nb : app.getNewBannerList()) {
                 TextSliderView textSliderView = new TextSliderView(context);
@@ -109,39 +138,13 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                 rc.into(ad_nine);
             }
         }
+
+        int i = 0;
         for (GoodsTypeModel gtm : app.getGoodsTypeModelList()) {
             RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
-            if (gtm.GoodsTypeId == 1) {
-                rc.into(img_trendw);
-                text_trendw.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 2) {
-                rc.into(img_trendm);
-                text_trendm.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 3) {
-                rc.into(img_huazhuang);
-                text_huazhuang.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 4) {
-                rc.into(img_digital);
-                text_digital.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 5) {
-                rc.into(img_baby);
-                text_baby.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 6) {
-                rc.into(img_life);
-                text_life.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 7) {
-                rc.into(img_food);
-                text_food.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 8) {
-                rc.into(img_healthcare);
-                text_healthcare.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 9) {
-                rc.into(img_service);
-                text_service.setText(gtm.GoodsTypeName);
-            } else if (gtm.GoodsTypeId == 10) {
-                rc.into(img_whole);
-                text_whole.setText(gtm.GoodsTypeName);
-            }
+            rc.into(imageViews[i]);
+            textViews[i].setText(gtm.GoodsTypeName);
+            i++;
         }
     }
 

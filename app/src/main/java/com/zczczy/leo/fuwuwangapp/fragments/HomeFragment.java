@@ -137,7 +137,7 @@ public class HomeFragment extends BaseFragment {
                 if (scrollY < 0) {
                     myTitleBar.getBackground().setAlpha(0);
                 } else if (scrollY < 500) {
-                    int progress = (int) (new Float(scrollY) / new Float(2));//255
+                    int progress = (scrollY / 2);//255
                     myTitleBar.getBackground().setAlpha(progress);
                     if (scrollY < 250) {
                         myTitleBar.setNavigationIcon(R.drawable.title_category);
@@ -191,7 +191,6 @@ public class HomeFragment extends BaseFragment {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
-//                NewProductDetailActivity_.intent(NewHomeFragment.this).goods(obj).start();
                 GoodsDetailInfoActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 
@@ -203,6 +202,13 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 CartActivity_.intent(HomeFragment.this).start();
+            }
+        });
+
+        myTitleBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

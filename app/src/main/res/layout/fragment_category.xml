@@ -12,9 +12,9 @@
         android:id="@+id/my_title_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="@color/major_color"
         android:minHeight="50dp"
-        app:mCustomView="@layout/search"
+        app:mCustomView="@layout/category_search"
         app:mNavButtonIcon="@drawable/title_category"
         app:mRightButtonIcon="@drawable/title_cart" />
 
