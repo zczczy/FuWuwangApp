@@ -62,7 +62,6 @@ public class HomeFragment extends BaseFragment {
     @ViewById
     MyTitleBar myTitleBar;
 
-
     @Bean
     MyErrorHandler myErrorHandler;
 

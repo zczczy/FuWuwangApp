@@ -289,5 +289,13 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/Login?UserName={UserName}&UserPw={UserPw}&LoginType={LoginType}&Kbn={Kbn}")
     BaseModelJson<LoginInfo> login(@Path String UserName, @Path String UserPw, @Path String LoginType, @Path String Kbn);
 
+    /**
+     * 查询分类
+     *
+     * @param GoodsTypePid (1邮寄类,2服务类) 如果是一级的分类id，则查询相应二级分类
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsTypeByPid?GoodsTypePid={GoodsTypePid}")
+    BaseModelJson<List<GoodsTypeModel>> getGoodsTypeByPid(@Path String GoodsTypePid);
 
 }

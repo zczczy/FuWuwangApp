@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.items.FirstCategoryItemView_;
 import com.zczczy.leo.fuwuwangapp.items.SecondCategoryItemView_;
+import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -44,6 +45,9 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
     String no_net;
 
     @Bean
+    OttoBus bus;
+
+    @Bean
     MyErrorHandler myErrorHandler;
 
     int type = 0;
@@ -60,41 +64,48 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
         BaseModelJson<List<GoodsTypeModel>> bmj = null;
         switch (Integer.valueOf(objects[0].toString())) {
             case 0:
+                type = 0;
                 bmj = new BaseModelJson<>();
-                bmj.Data= new ArrayList<>();
+                bmj.Data = new ArrayList<>();
                 bmj.Successful = true;
                 for (int i = 0; i < 10; i++) {
                     GoodsTypeModel goodsTypeModel = new GoodsTypeModel();
                     goodsTypeModel.GoodsTypeName = "一级分类" + i;
                     bmj.Data.add(goodsTypeModel);
                 }
+
+                bmj = myRestClient.getGoodsTypeByPid("1");
                 break;
             case 1:
+                type = 1;
                 bmj = new BaseModelJson<>();
-                bmj.Data= new ArrayList<>();
+                bmj.Data = new ArrayList<>();
                 bmj.Successful = true;
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
                     GoodsTypeModel goodsTypeModel = new GoodsTypeModel();
                     goodsTypeModel.GoodsTypeName = "二级分类" + i;
-                    goodsTypeModel.GoodsTypeIcon="https://img.alicdn.com/imgextra/i4/1974919058/TB2.H.xnVXXXXbpXXXXXXXXXXXX_!!1974919058.jpg_190x190q90.jpg_.webp";
+                    goodsTypeModel.GoodsTypeIcon = "https://img.alicdn.com/imgextra/i4/1974919058/TB2.H.xnVXXXXbpXXXXXXXXXXXX_!!1974919058.jpg_190x190q90.jpg_.webp";
                     bmj.Data.add(goodsTypeModel);
                 }
-                bmj = new BaseModelJson<>();
+                bmj = myRestClient.getGoodsTypeByPid(objects[1].toString());
                 break;
         }
+
+
         afterGetData(bmj);
     }
 
     @UiThread
     void afterGetData(BaseModelJson<List<GoodsTypeModel>> bmj) {
         if (bmj == null) {
-
+            bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
             if (bmj.Data.size() > 0) {
                 insertAll(bmj.Data, getItems().size());
             }
         }
+        bus.post(bmj);
     }
 
 
