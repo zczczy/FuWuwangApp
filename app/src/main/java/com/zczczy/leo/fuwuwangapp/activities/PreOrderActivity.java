@@ -129,7 +129,6 @@ public class PreOrderActivity extends BaseActivity {
         setShipping(model);
     }
 
-
     @Click
     void ll_store() {
 

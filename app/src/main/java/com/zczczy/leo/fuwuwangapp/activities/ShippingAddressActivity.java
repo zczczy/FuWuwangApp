@@ -1,8 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
 
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
@@ -38,7 +38,10 @@ public class ShippingAddressActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<MReceiptAddressModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, MReceiptAddressModel obj, int position) {
-
+                Intent intent = new Intent();
+                intent.putExtra("model",obj);
+                setResult(1001,intent);
+                finish();
             }
         });
         myAdapter.getMoreData();
@@ -46,7 +49,7 @@ public class ShippingAddressActivity extends BaseActivity {
 
     @Click
     void btn_add_shipping_address(){
-
+        AddShippingAddressActivity_.intent(this).startForResult(1000);
     }
 
 }

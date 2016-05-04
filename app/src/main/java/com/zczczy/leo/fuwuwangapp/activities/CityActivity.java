@@ -1,12 +1,12 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CityAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.ProvinceAdapter;
 import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
 
@@ -14,6 +14,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
 /**
@@ -46,6 +47,14 @@ public class CityActivity extends BaseActivity {
             }
         });
         myAdapter.getMoreData(province.ProvinceId);
+    }
+
+    @OnActivityResult(1000)
+    void onSelectPCA(int resultCode, Intent intent) {
+        if (resultCode == RESULT_OK) {
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 
 }

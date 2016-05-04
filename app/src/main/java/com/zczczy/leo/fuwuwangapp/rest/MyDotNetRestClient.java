@@ -20,8 +20,6 @@ import com.zczczy.leo.fuwuwangapp.model.NewProvince;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 
-
-import org.androidannotations.annotations.Bean;
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Path;
@@ -360,7 +358,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
 
     /**
-     * 设置默认收货地址
+     * 删除收货地址
      *
      * @param MReceiptAddressId
      * @return
@@ -368,6 +366,16 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/DelReceiptAddress")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel delReceiptAddress(@Body int MReceiptAddressId);
+
+
+    /**
+     * 查询收货地址
+     *
+     * @return
+     */
+    @Get("api/Shop/GetMReceiptAddressById?MReceiptAddressId={MReceiptAddressId}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<MReceiptAddressModel> getMReceiptAddressById(@Path int MReceiptAddressId);
 
     /**
      * 商品加入购物车

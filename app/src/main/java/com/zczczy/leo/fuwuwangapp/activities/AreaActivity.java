@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.AreaAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.CityAdapter;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
@@ -48,11 +47,12 @@ public class AreaActivity extends BaseActivity {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, NewArea obj, int position) {
                 Intent intent = new Intent();
-//                setResult(1001,obj.AreaId);
+                intent.putExtra("areaId", obj.AreaId);
+                intent.putExtra("pca", province.ProvinceName + city.CityName + obj.AreaName);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
         myAdapter.getMoreData(city.ProvinceId);
     }
-
 }
