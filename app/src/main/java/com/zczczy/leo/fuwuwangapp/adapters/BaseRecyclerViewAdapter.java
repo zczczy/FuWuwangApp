@@ -85,6 +85,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         notifyItemRangeRemoved(0, size);
     }
 
+    public void insertData(T t, int position) {
+        items.add(position, t);
+        notifyItemInserted(position);
+    }
+
     public void deleteItem(T t, int position) {
         items.remove(position);
         notifyItemRemoved(position);
