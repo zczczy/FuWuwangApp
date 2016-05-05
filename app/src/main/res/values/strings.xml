@@ -311,8 +311,11 @@
     <string name="text_store_goods">商品详情</string>
 
     <!--个人信息-->
-    
+
     <string name="txt_member_info">个人信息</string>
 
+
+    <!--搜索-->
+    <string name="search">搜索</string>
 
 </resources>
