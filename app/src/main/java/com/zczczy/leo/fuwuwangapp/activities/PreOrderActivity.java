@@ -113,7 +113,7 @@ public class PreOrderActivity extends BaseActivity {
             storeId = bmj.Data.StoreInfoId;
             txt_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_dian_balance.setText(String.format(dian_balance, bmj.Data.MaxDzb));
-            txt_coupon.setText(bmj.Data.RetTicketNum);
+//            txt_coupon.setText(bmj.Data.RetTicketNum);
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));

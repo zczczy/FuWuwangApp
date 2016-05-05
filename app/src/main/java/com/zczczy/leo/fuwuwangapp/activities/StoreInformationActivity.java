@@ -9,10 +9,13 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDivide
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.GoodsAdapters;
+import com.zczczy.leo.fuwuwangapp.items.StoreInformationHeaderItemView;
 import com.zczczy.leo.fuwuwangapp.items.StoreInformationHeaderItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -49,6 +52,8 @@ public class StoreInformationActivity extends BaseActivity {
     @Extra
     String storeId;
 
+    StoreInformationHeaderItemView storeInformationHeaderItemView;
+
     LinearLayoutManager linearLayoutManager;
 
     int pageIndex = 1;
@@ -65,7 +70,8 @@ public class StoreInformationActivity extends BaseActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setAdapter(myAdapter);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        ultimateRecyclerView.setNormalHeader(StoreInformationHeaderItemView_.build(this));
+        storeInformationHeaderItemView = StoreInformationHeaderItemView_.build(this);
+        ultimateRecyclerView.setNormalHeader(storeInformationHeaderItemView);
         Paint paint = new Paint();
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
@@ -77,6 +83,17 @@ public class StoreInformationActivity extends BaseActivity {
             }
         }).paint(paint).build());
         getStoreInfo();
+
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
+                GoodsDetailInfoActivity_.intent(StoreInformationActivity.this).goodsId(obj.GoodsInfoId).start();
+            }
+
+            @Override
+            public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+            }
+        });
     }
 
 
@@ -93,8 +110,8 @@ public class StoreInformationActivity extends BaseActivity {
             AndroidTool.showToast(this, bmj.Error);
         } else {
             myAdapter.getMoreData(pageIndex, MyApplication.PAGECOUNT, false, 0, bmj.Data.GoodsList);
+            storeInformationHeaderItemView.init(bmj.Data);
         }
-
     }
 
 }
