@@ -113,7 +113,6 @@ public class PreOrderActivity extends BaseActivity {
             storeId = bmj.Data.StoreInfoId;
             txt_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_dian_balance.setText(String.format(dian_balance, bmj.Data.MaxDzb));
-//            txt_coupon.setText(bmj.Data.RetTicketNum);
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
@@ -146,8 +145,27 @@ public class PreOrderActivity extends BaseActivity {
                 txt_home_lb.setVisibility(View.VISIBLE);
                 txt_home_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
             }
-
             txt_count.setText(String.format(text_count, bmj.Data.GoodsAllCount));
+
+            String temp = "不返券";
+            if (bmj.Data.FanQuan != null) {
+                if (bmj.Data.FanQuan.RetMianZhi7 > 0) {
+                    temp += bmj.Data.FanQuan.RetMianZhi7Str + "*" + bmj.Data.FanQuan.RetMianZhi7+"+";
+                }
+                if (bmj.Data.FanQuan.RetMianZhi8 > 0) {
+                    temp += bmj.Data.FanQuan.RetMianZhi8Str + "*" + bmj.Data.FanQuan.RetMianZhi8+"+";
+                }
+                if (bmj.Data.FanQuan.RetMianZhi10 > 0) {
+                    temp += bmj.Data.FanQuan.RetMianZhi10Str + "*" + bmj.Data.FanQuan.RetMianZhi10+"+";
+                }
+                if (bmj.Data.FanQuan.RetMianZhi9 > 0) {
+                    temp += bmj.Data.FanQuan.RetMianZhi9Str + "*" + bmj.Data.FanQuan.RetMianZhi9+"+";
+                }
+            }else{
+                temp+="+";
+            }
+            txt_coupon.setText(temp.substring(0,temp.lastIndexOf('+')));
+
 
         } else {
             AndroidTool.showToast(this, bmj.Error);

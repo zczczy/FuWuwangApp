@@ -310,5 +310,9 @@
     <string name="text_store">店铺详情</string>
     <string name="text_store_goods">商品详情</string>
 
+    <!--个人信息-->
+    
+    <string name="txt_member_info">个人信息</string>
+
 
 </resources>

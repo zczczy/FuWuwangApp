@@ -153,16 +153,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:lines="2"
                     android:padding="15dp"
-                    android:text="赠送:" />
+                    android:text="赠 送:(兑现券)" />
 
                 <TextView
                     android:id="@+id/txt_coupon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:padding="15dp"
-                    android:text="200" />
+                    android:gravity="center"
+                    android:lines="2"
+                    android:padding="15dp" />
             </RelativeLayout>
 
             <include layout="@layout/horizontal_line" />

@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 
     @Click
     void sign_up_account() {
-//        NewRegisterActivity_.intent(this).start();
+        RegisterActivity_.intent(this).start();
     }
 
 
@@ -83,9 +83,6 @@ public class LoginActivity extends BaseActivity {
     void forget() {
 //        NewResetPasswordActivity_.intent(this).start();
     }
-
-
-
 
 
     @Background
@@ -104,6 +101,7 @@ public class LoginActivity extends BaseActivity {
             pre.token().put(bmj.Data.Token);
             pre.shopToken().put(bmj.Data.ShopToken);
             pre.userType().put(bmj.Data.LoginType);
+            pre.username().put(username.getText().toString());
             finish();
         } else {
             AndroidTool.showToast(this, bmj.Error);

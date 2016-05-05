@@ -13,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
+import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
 import com.zczczy.leo.fuwuwangapp.model.NewCity;
@@ -274,6 +275,20 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<LoginInfo> login(@Path String UserName, @Path String UserPw, @Path String LoginType, @Path String Kbn);
 
     /**
+     * @param map userLogin
+     *            passWord
+     *            passWordConfirm
+     *            zy
+     *            MemberEmail
+     *            MemberRealName
+     *            UserType
+     * @return
+     */
+    @Post("api/ShopContent/Register")
+    BaseModel register(@Body Map map);
+
+
+    /**
      * 查询分类
      *
      * @param GoodsTypePid (1邮寄类,2服务类) 如果是一级的分类id，则查询相应二级分类
@@ -410,4 +425,24 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModel subShoppingCart(@Body Map map);
 
 
+    /**
+     * 修改会员信息
+     *
+     * @param map MemberEmail
+     *            MemberQQ
+     *            MemberBlog
+     *            HeadImg
+     * @return
+     */
+    @Post("api/Shop/UpdateMemberInfo")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel updateMemberInfo(@Body Map map);
+
+    /***
+     * 查询用户信息
+     * @return
+     */
+    @Get("api/Shop/GetMemberInfo")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<MemberInfo> getMemberInfo();
 }
