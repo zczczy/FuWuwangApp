@@ -17,4 +17,6 @@ public class CheckOutModel implements Serializable {
 
     public double lbTotal;
 
+    public boolean isChecked;
+
 }

@@ -2,6 +2,7 @@ package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -75,6 +76,7 @@ public class CartActivity extends BaseActivity {
                 CheckOutModel checkOutModel = new CheckOutModel();
                 checkOutModel.StoreInfoId = cm.StoreInfoId;
                 checkOutModel.StoreName = cm.StoreName;
+                checkOutModel.isChecked = cm.isChecked;
                 tempList.add(checkOutModel);
             }
 
@@ -82,26 +84,22 @@ public class CartActivity extends BaseActivity {
         //统计店铺下面的对应商品
         for (CartModel cm : myAdapter.getItems()) {
             if (cm.isChecked && cm.level == 1) {
-                for (CheckOutModel com : tempList) {
-                    if (cm.StoreInfoId.equals(com.StoreInfoId)) {
-                        com.StoreInfoId = cm.StoreInfoId;
-                        com.StoreName = cm.StoreName;
-                        com.ProductCount += cm.ProductCount;
-                        com.rmbTotal += cm.GoodsPrice;
-                        com.lbTotal += cm.GoodsLBPrice;
+                for (CheckOutModel checkOutModel : tempList) {
+                    if (cm.StoreInfoId.equals(checkOutModel.StoreInfoId)) {
+                        checkOutModel.ProductCount += cm.ProductCount;
+                        checkOutModel.rmbTotal += cm.GoodsPrice;
+                        checkOutModel.lbTotal += cm.GoodsLBPrice;
                     }
                 }
             }
         }
-
         List<CheckOutModel> list = new ArrayList<>();
         //取出有商品的店铺
         for (CheckOutModel com : tempList) {
-            if (com.ProductCount >= 0) {
+            if (com.ProductCount > 0) {
                 list.add(com);
             }
         }
-
         AndroidTool.showToast(this, "" + list.size());
     }
 

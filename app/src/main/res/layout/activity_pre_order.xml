@@ -295,7 +295,7 @@
                 android:id="@+id/txt_home_lb"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:gravity="center"
                 android:text="@string/home_lb"
                 android:textColor="@color/price_color" />
