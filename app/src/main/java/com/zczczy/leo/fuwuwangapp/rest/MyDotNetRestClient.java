@@ -12,6 +12,7 @@ import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
+import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
@@ -53,7 +54,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：订阅安全信使
-     * <p/>
+     * <p>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -66,7 +67,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：取消订阅安全信使
-     * <p/>
+     * <p>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -78,7 +79,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：获取手机验证码
-     * <p/>
+     * <p>
      *
      * @param map SendType （0：提现，1：变更资料，2：订阅服务，3：取消订阅,4.转账）
      *            UserName  用户名
@@ -90,7 +91,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：验证验证码
-     * <p/>
+     * <p>
      *
      * @param username 用户名
      * @param code     验证码
@@ -103,7 +104,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * SubscriptionExist
      * 功能：根据用户名验证查询是否订阅
-     * <p/>
+     * <p>
      *
      * @param UserName 用户名
      * @return String
@@ -440,9 +441,23 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /***
      * 查询用户信息
+     *
      * @return
      */
     @Get("api/Shop/GetMemberInfo")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<MemberInfo> getMemberInfo();
+
+    /**
+     * 查询会员自己所有的订单信息
+     *
+     * @param PageIndex    当前页
+     * @param PageSize     每页显示多少
+     * @param MorderStatus 订单状态(0:待支付，1：已支付，2:已取消,3：已发货4:确认收货,5:交易完成,9)
+     * @return
+     */
+    @Get("api/Shop/GetAllOrderInfoList?PageIndex={PageIndex}&PageSize={PageSize}&MorderStatus={MorderStatus}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<PagerResult<MAppOrder>> getAllOrderInfoList(@Path int PageIndex, @Path int PageSize, @Path int MorderStatus);
+
 }

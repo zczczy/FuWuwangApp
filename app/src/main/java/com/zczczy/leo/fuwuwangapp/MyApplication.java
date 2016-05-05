@@ -27,11 +27,18 @@ public class MyApplication extends Application {
 
     public static final Integer PAGECOUNT = 10;
 
-    public static final String ANDROID="1";
+    public static final String ANDROID = "1";
 
-    public static final String NORMAL="1";
+    public static final String NORMAL = "1";
 
-    public static final String VIP="2";
+    public static final String VIP = "2";
+
+    public static final Integer DUEPAYMENT = 0; //0:待支付
+    public static final Integer PAID = 1;   //1：已支付
+    public static final Integer CANCEL = 2; //2:已取消,
+    public static final Integer SEND = 3; //3：已发货
+    public static final Integer CONFIRM = 4; //4:确认收货
+    public static final Integer FINISH = 5; //5:交易完成
 
 
     private List<AdvertModel> advertModelList;

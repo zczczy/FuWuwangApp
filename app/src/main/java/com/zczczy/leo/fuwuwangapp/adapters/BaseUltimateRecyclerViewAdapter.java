@@ -90,7 +90,6 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
         } else if (getItemViewType(position) == VIEW_TYPES.FOOTER) {
 
-        } else if (getItemViewType(position) == VIEW_TYPES.CHANGED_FOOTER) {
         }
         if (!isFirstOnly || position > mLastPosition) {
             for (Animator anim : getAdapterAnimations(viewHolder.itemView, AdapterAnimationType.ScaleIn)) {
