@@ -61,8 +61,9 @@ public class ShippingAddressAdapter extends BaseRecyclerViewAdapter<MReceiptAddr
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
+            clear();
             if (bmj.Data.size() > 0) {
-                insertAll(bmj.Data, getItems().size());
+                insertAll(bmj.Data, getItemCount());
             }
         }
     }

@@ -13,6 +13,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
 /**
@@ -39,17 +40,31 @@ public class ShippingAddressActivity extends BaseActivity {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, MReceiptAddressModel obj, int position) {
                 Intent intent = new Intent();
-                intent.putExtra("model",obj);
-                setResult(1001,intent);
+                intent.putExtra("model", obj);
+                setResult(1001, intent);
                 finish();
             }
         });
-        myAdapter.getMoreData();
+//        myAdapter.getMoreData();
     }
 
     @Click
-    void btn_add_shipping_address(){
-        AddShippingAddressActivity_.intent(this).startForResult(1000);
+    void btn_add_shipping_address() {
+//        AddShippingAddressActivity_.intent(this).startForResult(1000);
+        AddShippingAddressActivity_.intent(this).start();
     }
+
+//    @OnActivityResult(1000)
+//    void afterAdd(int resultCode) {
+//        if (resultCode == RESULT_OK) {
+//            myAdapter.getMoreData();
+//        }
+//    }
+
+    public void onResume() {
+        super.onResume();
+        myAdapter.getMoreData();
+    }
+
 
 }

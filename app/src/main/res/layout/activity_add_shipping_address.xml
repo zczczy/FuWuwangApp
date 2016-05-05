@@ -38,7 +38,7 @@
                     android:id="@+id/txt_people"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:ems="5"
                     android:text="@string/txt_shipping_name"
                     android:textSize="15sp" />
 
@@ -67,7 +67,7 @@
                     android:id="@+id/txt_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:ems="5"
                     android:text="@string/txt_mobile"
                     android:textSize="15sp" />
 
@@ -96,7 +96,7 @@
                     android:id="@+id/txt_province"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:ems="5"
                     android:text="@string/txt_p_c_a"
                     android:textSize="15sp" />
 
@@ -127,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
+                    android:ems="5"
                     android:text="@string/txt_detail_address"
                     android:textSize="15sp" />
 

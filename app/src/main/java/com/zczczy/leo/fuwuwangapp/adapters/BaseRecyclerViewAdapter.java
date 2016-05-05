@@ -27,7 +27,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return  new BaseViewHolder(onCreateItemView(parent,viewType));
+        return new BaseViewHolder(onCreateItemView(parent, viewType));
     }
 
     /**
@@ -75,13 +75,23 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         notifyItemInserted(position);
     }
 
+
+    /**
+     * Clear the list of the adapter
+     */
+    public void clear() {
+        int size = items.size();
+        items.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     public void deleteItem(T t, int position) {
         items.remove(position);
         notifyItemRemoved(position);
     }
 
-    public T getItemData(int position){
-        return items.size()<position+1?null:items.get(position);
+    public T getItemData(int position) {
+        return items.size() < position + 1 ? null : items.get(position);
     }
 
     @Override

@@ -12,11 +12,12 @@ public class ConfirmOrderModel implements Serializable {
     public String StoreName;
     public double Postage; //邮费
     public String RetTicketNum; //返券数量
-    public double MOrderMoney; //
+    public double MOrderMoney; //总金额
     public int MOrderLbCount; //订单龙币数量
     public double MOrderDzb; //电子币
     public int GoodsAllCount; //商品总数
-    public double MaxDzb; //电子币数
+    public double MaxDzb; //用户能使用的电子币数
+    public int SellerType; //1:服务网商家，2：普通商家，3：商城会员申请商家)
 
     public List<BuyCartInfoList> BuyCartInfoList;
 

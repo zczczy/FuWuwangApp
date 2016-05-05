@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -74,7 +75,6 @@ public class AddShippingAddressActivity extends BaseActivity {
         if (receiptAddressId != 0) {
             myTitleBar.setTitle("编辑收货地址");
             btn_save.setText("编辑");
-            AndroidTool.showLoadDialog(this);
             getMReceiptAddressById();
         }
     }
@@ -89,7 +89,6 @@ public class AddShippingAddressActivity extends BaseActivity {
 
     @UiThread
     void afterGetMReceiptAddressById(BaseModelJson<MReceiptAddressModel> bmj) {
-        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bmj.Successful) {
@@ -156,11 +155,13 @@ public class AddShippingAddressActivity extends BaseActivity {
 
     @UiThread
     void afterAddShippingAddress(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
         if (bm == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bm.Successful) {
             AndroidTool.showToast(this, bm.Error);
         } else {
+//            setResult(RESULT_OK);
             finish();
         }
     }

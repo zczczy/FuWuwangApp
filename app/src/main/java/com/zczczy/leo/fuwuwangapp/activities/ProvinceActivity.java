@@ -1,9 +1,11 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.ProvinceAdapter;
@@ -29,6 +31,8 @@ public class ProvinceActivity extends BaseActivity {
 
     LinearLayoutManager linearLayoutManager;
 
+    Paint paint = new Paint();
+
     @AfterViews
     void afterView() {
         linearLayoutManager = new LinearLayoutManager(this);
@@ -42,6 +46,9 @@ public class ProvinceActivity extends BaseActivity {
             }
         });
         myAdapter.getMoreData();
+        paint.setStrokeWidth(1);
+        paint.setColor(line_color);
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
     }
 
     @OnActivityResult(1000)

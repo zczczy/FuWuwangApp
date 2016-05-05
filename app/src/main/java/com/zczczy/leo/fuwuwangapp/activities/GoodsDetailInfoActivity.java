@@ -89,6 +89,8 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     @StringRes
     String home_rmb, home_lb;
 
+    String storeId;
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -144,12 +146,12 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
             goods_by.setText(bmj.Data.GoodsIsBy);
             goods_kucun.setText(bmj.Data.GoodsStock);
             goods_knows.setText(bmj.Data.GoodsPurchaseNotes);
-            txt_rebate.setText(bmj.Data.TempDisp + "撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫撒旦法撒旦发射发放的阿萨德法撒旦发射点发射得分阿萨德发生大阿道夫");
+            txt_rebate.setText(bmj.Data.TempDisp);
             if (Float.valueOf(bmj.Data.GoodsPrice) > 0 && Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
                 txt_rmb.setVisibility(View.VISIBLE);
                 txt_plus.setVisibility(View.VISIBLE);
-                txt_rmb.setText(bmj.Data.GoodsPrice);
-                txt_home_lb.setText(bmj.Data.GoodsLBPrice);
+                txt_rmb.setText(String.format(home_rmb, bmj.Data.GoodsPrice));
+                txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
             } else if (Float.valueOf(bmj.Data.GoodsPrice) > 0) {
                 txt_rmb.setVisibility(View.VISIBLE);
                 txt_plus.setVisibility(View.GONE);
@@ -167,10 +169,16 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
                 textSliderView.setOnSliderClickListener(this);
                 sliderLayout.addSlider(textSliderView);
             }
+            storeId = bmj.Data.StoreInfoId;
 
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }
+    }
+
+    @Click
+    void ll_store() {
+        StoreInformationActivity_.intent(this).storeId(storeId).start();
     }
 
     @Click
@@ -200,11 +208,11 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
      */
     @Background
     void addShoppingCart(String goodsId) {
-        myRestClient.setHeader("Token",pre.token().get());
-        myRestClient.setHeader("ShopToken",pre.shopToken().get());
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("Kbn", MyApplication.ANDROID);
-        HashMap<String,String> map = new HashMap<>();
-        map.put("GoodsInfoId",goodsId);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("GoodsInfoId", goodsId);
         afterAddShoppingCart(myRestClient.addShoppingCart(map));
     }
 

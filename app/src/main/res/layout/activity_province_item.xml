@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ems="20"
-    android:gravity="center"
+    android:gravity="center_vertical"
     android:maxLines="1"
-    android:padding="10dp"
+    android:padding="15dp"
     android:text="黑龙江省" />
 

@@ -362,7 +362,7 @@ public class AndroidTool {
      */
     public static boolean checkMPhone(String mPhone) {
         Pattern p = Pattern.compile(MPHONE);
-        Matcher m = p.matcher(mPhone);
+        Matcher m = p.matcher(mPhone.trim());
         return !m.matches();
     }
 
@@ -374,7 +374,7 @@ public class AndroidTool {
      */
     public static boolean checkTPhone(String tPhone) {
         Pattern p = Pattern.compile(TPHONE);
-        Matcher m = p.matcher(tPhone);
+        Matcher m = p.matcher(tPhone.trim());
         return !m.matches();
     }
 

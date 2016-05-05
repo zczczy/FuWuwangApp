@@ -289,6 +289,11 @@
     <string name="txt_shipping_address">收货地址:%1$s</string>
     <string name="use_dian">使用电子币</string>
     <string name="dian_balance">剩余%1$s电子币</string>
+    <string name="text_count">共%1$s件商品</string>
+    <string name="text_total">合计:</string>
+    <string name="text_pay_total_rmb">实付款</string>
+    <string name="text_postal">运费</string>
+
 
     <!--收货地址-->
     <string name="txt_add_shipping_address">新增地址</string>
@@ -299,6 +304,11 @@
     <string name="txt_mobile">手机号码</string>
     <string name="txt_shipping_name">收 货 人</string>
     <string name="txt_detail_address">详细地址</string>
+
+
+    <!-- store -->
+    <string name="text_store">店铺详情</string>
+    <string name="text_store_goods">商品详情</string>
 
 
 </resources>

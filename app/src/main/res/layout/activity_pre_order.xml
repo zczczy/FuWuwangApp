@@ -55,72 +55,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_pre_order_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="15dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/img_cart_goods_img"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/goods_default" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txt_cart_goods_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:ems="30"
-                        android:lines="2"
-                        android:maxLines="2" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txt_cart_goods_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/home_rmb" />
-
-                            <TextView
-                                android:id="@+id/txt_cart_goods_lb_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/home_lb" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/txt_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="0.5"
-                            android:gravity="right"
-                            android:text="X1" />
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -245,18 +185,18 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="运费:" />
+                        android:text="@string/text_postal" />
 
                     <TextView
                         android:id="@+id/txt_sub_express_charges"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"
-                        android:text="200" />
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/ll_lb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -265,36 +205,37 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="实付款:" />
-
-                    <TextView
-                        android:id="@+id/txt_total_rmb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:padding="15dp"
-                        android:text="200" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:padding="15dp"
-                        android:text="龙币:" />
+                        android:text="@string/txt_bi" />
 
                     <TextView
                         android:id="@+id/txt_total_lb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"
-                        android:text="200" />
+                        android:padding="15dp" />
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="15dp"
+                        android:text="@string/text_pay_total_rmb" />
+
+                    <TextView
+                        android:id="@+id/txt_pay_total_rmb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="15dp" />
+                </RelativeLayout>
+
+
             </LinearLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -313,8 +254,47 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/txt_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_count" />
+
+            <TextView
+                android:id="@+id/txt_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_total" />
+
+            <TextView
+                android:id="@+id/txt_rmb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/home_rmb"
+                android:textColor="@color/price_color" />
+
+            <TextView
+                android:id="@+id/txt_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/price_color" />
+
+            <TextView
+                android:id="@+id/txt_home_lb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="@string/home_lb"
+                android:textColor="@color/price_color" />
 
         </LinearLayout>
 
@@ -322,7 +302,7 @@
             android:id="@+id/txt_take"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@drawable/button_selector"
             android:gravity="center"
             android:padding="10dp"

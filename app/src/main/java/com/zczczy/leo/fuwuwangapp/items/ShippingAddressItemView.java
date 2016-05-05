@@ -1,6 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -8,6 +9,7 @@ import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.AddShippingAddressActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.ShippingAddressAdapter;
+import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -20,11 +22,14 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.util.HashMap;
 
 /**
  * Created by Leo on 2016/5/4.
@@ -93,7 +98,9 @@ public class ShippingAddressItemView extends ItemView<MReceiptAddressModel> {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("Kbn", MyApplication.ANDROID);
-        afterDelete(myRestClient.delReceiptAddress(_data.MReceiptAddressId));
+        HashMap<String, Integer> map = new HashMap<>(1);
+        map.put("MReceiptAddressId", _data.MReceiptAddressId);
+        afterDelete(myRestClient.delReceiptAddress(map));
     }
 
     @UiThread
@@ -103,14 +110,41 @@ public class ShippingAddressItemView extends ItemView<MReceiptAddressModel> {
         } else if (!bm.Successful) {
             AndroidTool.showToast(context, bm.Error);
         } else {
-            shippingAddressAdapter.deleteItem(_data,viewHolder.getAdapterPosition());
+            shippingAddressAdapter.deleteItem(_data, viewHolder.getAdapterPosition());
         }
     }
 
     @Click
     void txt_default() {
-        if (!txt_default.isChecked()) {
+        if (txt_default.isChecked()) {
+            setDefaultShippingAddress();
+        } else {
+            txt_default.setChecked(true);
+        }
+    }
 
+    @Background
+    void setDefaultShippingAddress() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        HashMap<String, Integer> map = new HashMap<>(1);
+        map.put("MReceiptAddressId", _data.MReceiptAddressId);
+        afterSetDefaultShippingAddress(myRestClient.updDefaultReceiptAddress(map));
+    }
+
+    @UiThread
+    void afterSetDefaultShippingAddress(BaseModel bm) {
+        if (bm == null) {
+            AndroidTool.showToast(context, no_net);
+        } else if (!bm.Successful) {
+            AndroidTool.showToast(context, bm.Error);
+        } else {
+            for (MReceiptAddressModel mReceiptAddressModel : shippingAddressAdapter.getItems()) {
+                mReceiptAddressModel.IsPrimary = "0";
+            }
+            _data.IsPrimary = "1";
+            shippingAddressAdapter.notifyDataSetChanged();
         }
     }
 

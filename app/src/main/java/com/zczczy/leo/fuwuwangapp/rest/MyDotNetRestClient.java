@@ -19,6 +19,7 @@ import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
@@ -283,6 +284,16 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
 
     /**
+     * 根据店铺ID查询店铺详细
+     *
+     * @param StoreInfoId
+     * @return
+     */
+    @Get("api/ShopContent/GetStoreDetailById?StoreInfoId={StoreInfoId}")
+    BaseModelJson<StoreDetailModel> getStoreDetailById(@Path String StoreInfoId);
+
+
+    /**
      * 查询省下拉数据
      *
      * @return
@@ -349,23 +360,23 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * 设置默认收货地址
      *
-     * @param MReceiptAddressId
+     * @param map MReceiptAddressId
      * @return
      */
     @Post("api/Shop/UpdDefaultReceiptAddress")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModel updDefaultReceiptAddress(@Body int MReceiptAddressId);
+    BaseModel updDefaultReceiptAddress(@Body Map map);
 
 
     /**
      * 删除收货地址
      *
-     * @param MReceiptAddressId
+     * @param map MReceiptAddressId
      * @return
      */
     @Post("api/Shop/DelReceiptAddress")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModel delReceiptAddress(@Body int MReceiptAddressId);
+    BaseModel delReceiptAddress(@Body Map map);
 
 
     /**
