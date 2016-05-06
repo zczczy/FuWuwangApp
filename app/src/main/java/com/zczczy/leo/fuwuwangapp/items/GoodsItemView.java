@@ -25,7 +25,7 @@ public class GoodsItemView extends ItemView<Goods> {
     ImageView pic;
 
     @ViewById
-    TextView goods_name, goods_describe, txt_normal, txt_longbi, txt_add_price;
+    TextView goods_name, goods_describe, txt_normal, txt_longbi, txt_add_price, txt_review_count, txt_review_pre;
 
     @ViewById
     LinearLayout ll_longbi;
@@ -33,7 +33,7 @@ public class GoodsItemView extends ItemView<Goods> {
     Context context;
 
     @StringRes
-    String home_rmb, home_lb;
+    String home_rmb, home_lb, text_review_count, text_review_pre;
 
     public GoodsItemView(Context context) {
         super(context);
@@ -45,7 +45,7 @@ public class GoodsItemView extends ItemView<Goods> {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Picasso.with(context).
                     load(_data.GoodsImgSl).
-                    resize(200, 168).
+                    resize(200, 200).
                     centerCrop().
                     placeholder(R.drawable.goods_default).
                     error(R.drawable.goods_default).into(pic);
@@ -64,9 +64,12 @@ public class GoodsItemView extends ItemView<Goods> {
             txt_longbi.setText(_data.GoodsLBPrice);
             txt_add_price.setText("");
             if (_data.GoodsPrice != null) {
-                txt_add_price.setText(String.format(home_lb, _data.GoodsPrice));
+                txt_add_price.setText(String.format(home_rmb, _data.GoodsPrice));
             }
         }
+        txt_review_count.setText(String.format(text_review_count, _data.PjNum));
+        txt_review_pre.setText(String.format(text_review_pre, _data.PJBfb));
+
     }
 
     @Override

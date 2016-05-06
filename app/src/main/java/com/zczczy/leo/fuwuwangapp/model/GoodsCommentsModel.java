@@ -28,7 +28,7 @@ public class GoodsCommentsModel implements Serializable {
     public String MOrderDetailId;
     public String UserInfoId;
     public String UserLogin;
-    public int GoodsCommentsDj;
+    public int GoodsCommentsDj;  //评论等级(1:好评，2：中评，3：差评)
     public String GoodsCommentsNr;
     public int XNum;
     public String PlTime;

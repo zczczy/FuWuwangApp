@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -8,6 +9,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.SearchHistoryAdapter;
@@ -18,6 +21,7 @@ import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
@@ -46,16 +50,23 @@ public class SearchActivity extends BaseActivity {
 
     SearchHistory searchHistory;
 
+    Paint paint = new Paint();
+
     @AfterViews
     void afterView() {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAdapter);
+        myAdapter.getMoreData(0, 0);
+        paint.setStrokeWidth(1);
+        paint.setColor(line_color);
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
 
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, SearchHistory obj, int position) {
-
+                searchHistoryDao.update(obj);
+                CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
             }
         });
         View view = myTitleBar.getmCustomView();
@@ -68,7 +79,7 @@ public class SearchActivity extends BaseActivity {
                     searchHistory.setSearchContent(text_search.getText().toString());
                     searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
                     searchHistoryDao.insert(searchHistory);
-//                    NewSearchResultActivity_.intent(NewSearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                    CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
                 }
                 return true;
             }
@@ -81,17 +92,23 @@ public class SearchActivity extends BaseActivity {
                     searchHistory.setSearchContent(text_search.getText().toString());
                     searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
                     searchHistoryDao.insert(searchHistory);
-//                    NewSearchResultActivity_.intent(NewSearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                    CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
                 }
             }
         });
     }
 
+    @Click
+    void btn_clear() {
+        searchHistoryDao.clear();
+        myAdapter.getMoreData(0, 0);
+    }
+
+
     @OnActivityResult(value = 1000)
     void onResult(int resultCode) {
         if (resultCode == RESULT_OK) {
             myAdapter.getMoreData(0, 0);
-            myAdapter.insertData(searchHistory, 0);
         }
     }
 

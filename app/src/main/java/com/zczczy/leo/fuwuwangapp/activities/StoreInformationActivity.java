@@ -109,7 +109,7 @@ public class StoreInformationActivity extends BaseActivity {
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
         } else {
-            myAdapter.getMoreData(pageIndex, MyApplication.PAGECOUNT, false, 0, bmj.Data.GoodsList);
+            myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, false, 0, bmj.Data.GoodsList);
             storeInformationHeaderItemView.init(bmj.Data);
         }
     }

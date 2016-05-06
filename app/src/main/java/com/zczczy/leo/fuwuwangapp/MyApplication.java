@@ -25,13 +25,23 @@ public class MyApplication extends Application {
 
     public static final String DETAILPAGE = "DetailPage/";
 
-    public static final Integer PAGECOUNT = 10;
+    public static final Integer PAGE_COUNT = 10;
 
     public static final String ANDROID = "1";
 
     public static final String NORMAL = "1";
 
     public static final String VIP = "2";
+
+    public static final String ASC = "asc"; //asc升序
+    public static final String DESC = "desc"; //desc降序
+    public static final int DEFUALT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+    public static final int PRICE_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+    public static final int COUNT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+
+    public static final int STORE_GOODS = 0; // 店铺入口
+    public static final int SEARCH_GOODS = 1; // 搜索入口
+
 
     public static final Integer DUEPAYMENT = 0; //0:待支付
     public static final Integer PAID = 1;   //1：已支付

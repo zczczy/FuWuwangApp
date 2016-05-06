@@ -276,6 +276,8 @@
     <string name="thanks_for_you_participation">谢谢参与</string>
 
 
+
+    <!--商品详情-->
     <string name="buy">立即抢购</string>
     <string name="rebate">支持返券</string>
     <string name="goods_detail">商品详情</string>
@@ -317,5 +319,13 @@
 
     <!--搜索-->
     <string name="search">搜索</string>
+
+
+    <!--商品列表页面-->
+    <string name="text_review_count">%1$s条评价</string>
+    <string name="text_review_pre">好评%1$s</string>
+    <string name="text_review_lb">龙币:</string>
+
+
 
 </resources>

@@ -99,7 +99,7 @@ public class LotteryInfoRecordActivity extends BaseActivity {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGECOUNT, isRefresh, method);
+        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, method);
     }
 
     void refreshingMaterial() {

@@ -13,6 +13,7 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CommonCategoryAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.FirstCategoryAdapter;
@@ -48,7 +49,6 @@ public class CategoryFragment extends BaseFragment {
 
     @Bean
     OttoBus bus;
-
 
     Paint paint = new Paint();
 
@@ -91,6 +91,13 @@ public class CategoryFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchActivity_.intent(CategoryFragment.this).start();
             }
         });
     }

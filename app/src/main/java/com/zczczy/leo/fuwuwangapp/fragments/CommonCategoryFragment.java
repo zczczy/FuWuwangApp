@@ -4,8 +4,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CommonCategoryAdapter;
+import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -33,16 +35,15 @@ public class CommonCategoryFragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
-
         recyclerView.setHasFixedSize(false);
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(myAdapter);
-        myAdapter.getMoreData(id==null?"1":id);
-        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener() {
+        myAdapter.getMoreData(id == null ? "1" : id);
+        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, Object obj, int position) {
-
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
+                CommonSearchResultActivity_.intent(CommonCategoryFragment.this).goodsTypeId(obj.GoodsTypeId).start();
             }
         });
     }

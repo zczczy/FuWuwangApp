@@ -92,7 +92,7 @@ public class GoodsCommentsActivity extends BaseActivity {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGECOUNT, isRefresh, goodsId);
+        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, goodsId);
     }
 
     void refreshingMaterial() {

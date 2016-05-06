@@ -18,6 +18,7 @@ import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
@@ -60,6 +61,7 @@ public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
     }
 
     @Override
+    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         BaseModelJson<PagerResult<Goods>> bmj = null;
         this.isRefresh = isRefresh;
@@ -70,6 +72,15 @@ public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
                 bmj.Data = pagerResult;
                 bmj.Successful = true;
                 pagerResult.ListData = (List<Goods>) objects[1];
+                break;
+            case 1:
+                bmj = myRestClient.getGoodsByGoodsTypeId(
+                        Integer.valueOf(objects[1].toString()),
+                        objects[2] == null ? null : objects[2].toString(),
+                        objects[3] == null ? null : objects[3].toString(),
+                        Integer.valueOf(objects[4].toString()),
+                        objects[5].toString(),
+                        pageIndex, pageSize);
                 break;
         }
         afterGetData(bmj);

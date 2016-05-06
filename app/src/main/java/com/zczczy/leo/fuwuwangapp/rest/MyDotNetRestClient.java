@@ -5,6 +5,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
@@ -54,7 +55,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：订阅安全信使
-     * <p>
+     * <p/>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -67,7 +68,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：取消订阅安全信使
-     * <p>
+     * <p/>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -79,7 +80,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：获取手机验证码
-     * <p>
+     * <p/>
      *
      * @param map SendType （0：提现，1：变更资料，2：订阅服务，3：取消订阅,4.转账）
      *            UserName  用户名
@@ -91,7 +92,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：验证验证码
-     * <p>
+     * <p/>
      *
      * @param username 用户名
      * @param code     验证码
@@ -104,7 +105,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * SubscriptionExist
      * 功能：根据用户名验证查询是否订阅
-     * <p>
+     * <p/>
      *
      * @param UserName 用户名
      * @return String
@@ -332,6 +333,20 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/ShopContent/GetAreaListByCityId?CityId={CityId}")
     BaseModelJson<List<NewArea>> getAreaListByCityId(@Path String CityId);
+
+    /**
+     * @param GoodsTypeId 商品分类
+     * @param GoodsType   是否是服务类商品(1:服务类，2：邮寄类)
+     * @param GodosName   商品名称
+     * @param sort        排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+     * @param desc        asc升序 desc降序
+     * @param PageIndex   当前页
+     * @param PageSize    条数
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsByGoodsTypeId?GoodsTypeId={GoodsTypeId}&GoodsType={GoodsType}&GodosName={GodosName}&sort={sort}&desc={desc}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Goods>> getGoodsByGoodsTypeId(@Path int GoodsTypeId, @Path String GoodsType, @Path String GodosName, @Path int sort, @Path String desc, @Path int PageIndex, @Path int PageSize);
+
 
     /**
      * 单商品生成临时订单信息
