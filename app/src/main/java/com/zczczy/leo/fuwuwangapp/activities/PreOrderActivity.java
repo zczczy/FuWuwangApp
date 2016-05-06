@@ -6,8 +6,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +42,9 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Leo on 2016/5/4.
@@ -85,7 +90,7 @@ public class PreOrderActivity extends BaseActivity {
     //电子币余额
     double balance = 10;
 
-    //输入的电子币数
+    //输入的电子币数 使用的电子币
     double useDianZiBi = 0.0;
 
     //实际付款
@@ -97,8 +102,18 @@ public class PreOrderActivity extends BaseActivity {
     //店铺类型
     int sellerType = 0;
 
+    int longBi;
+
     //邮费
     double postal;
+
+    AlertDialog.Builder adb;
+
+    AlertDialog ad;
+
+    String password;
+
+    EditText pass;
 
     @AfterInject
     void afterInject() {
@@ -130,7 +145,7 @@ public class PreOrderActivity extends BaseActivity {
             storeId = bmj.Data.StoreInfoId;
             txt_express_charges.setText(bmj.Data.Postage > 0 ? String.format(home_rmb, bmj.Data.Postage) : "包邮");
             txt_dian_balance.setText(String.format(dian_balance, bmj.Data.MaxDzb));
-//            balance = bmj.Data.MaxDzb;
+            balance = bmj.Data.MaxDzb;
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
@@ -191,6 +206,7 @@ public class PreOrderActivity extends BaseActivity {
                 temp = "不返券+";
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
+            longBi = bmj.Data.MOrderLbCount;
 
         } else {
             AndroidTool.showToast(this, bmj.Error);
@@ -248,6 +264,96 @@ public class PreOrderActivity extends BaseActivity {
             builder.show();
         }
     }
+
+    @Click
+    void txt_take() {
+        if (useDianZiBi > 0 || longBi > 0) {
+            final View view = layoutInflater.inflate(R.layout.pay_pass, null);
+            adb = new AlertDialog.Builder(this);
+            ad = adb.setView(view).create();
+            ad.show();
+            pass = (EditText) view.findViewById(R.id.pass);
+            Button cancel = (Button) view.findViewById(R.id.cancel);
+            Button confirm = (Button) view.findViewById(R.id.btn_confirm);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    ad.dismiss();
+                }
+            });
+            confirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (AndroidTool.checkIsNull(pass)) {
+                        AndroidTool.showToast(PreOrderActivity.this, "密码不能为空");
+                    } else {
+                        password = pass.getText().toString().trim();
+                        ad.dismiss();
+                        AndroidTool.showLoadDialog(PreOrderActivity.this);
+                        payOrder();
+                    }
+                }
+            });
+        }
+    }
+
+    @Background
+    void payOrder() {
+        Map<String, String> map = new HashMap<>(4);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("kbn", MyApplication.ANDROID);
+        map.put("GoodsInfoId", goodsInfoId);
+        map.put("number", orderCount + "");
+        map.put("DZB", useDianZiBi + "");
+        map.put("TwoPass", password);
+        afterPayOrder(myRestClient.createGoodsOrderInfo(map));
+    }
+
+    @UiThread
+    void afterPayOrder(BaseModelJson<ConfirmOrderModel> bmj) {
+        AndroidTool.dismissLoadDialog();
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (bmj.Successful) {
+            if (bmj.Data.MPaymentType == MyApplication.DZB || bmj.Data.MPaymentType == MyApplication.LONG_BI || bmj.Data.MPaymentType == MyApplication.DZB_LONGBI) {
+
+
+            } else {
+                UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
+            }
+        } else {
+            AndroidTool.showToast(this, bmj.Error);
+        }
+    }
+
+//    void showVoucher(String str) {
+//        order.setElectronics_evidence(str);
+//        order.setLongbi_pay_state(1);
+//        order.setDianzibi_pay_state(1);
+//        order.setOrder_state(MyApplication.PAID);
+//        View view = layoutInflater.inflate(R.layout.new_voucher, null);
+//        TextView voucher = (TextView) view.findViewById(R.id.voucher);
+//        ImageView img_close = (ImageView) view.findViewById(R.id.img_close);
+//        voucher.setText(str.replaceAll("([\\d]{4})", "$1 "));
+//        adb = new AlertDialog.Builder(this);
+//        ad = adb.setView(view).create();
+//        ad.setCanceledOnTouchOutside(false);
+//        ad.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                NewOrderDetailActivity_.intent(NewPayOrderActivity.this).order(order).start();
+//            }
+//        });
+//        ad.show();
+//        img_close.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ad.dismiss();
+//            }
+//        });
+//    }
 
 
     //设置 收货地址

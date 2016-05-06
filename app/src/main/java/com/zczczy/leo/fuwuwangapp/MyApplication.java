@@ -21,6 +21,11 @@ public class MyApplication extends Application {
 
     public static final String URL = "http://124.254.56.58:8007/";
 
+    public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
+    //正式环境
+//    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
+
+
     public static final String LOTTERYDIST = "LotteryDist";
 
     public static final String DETAILPAGE = "DetailPage/";
@@ -43,12 +48,20 @@ public class MyApplication extends Application {
     public static final int SEARCH_GOODS = 1; // 搜索入口
 
 
-    public static final Integer DUEPAYMENT = 0; //0:待支付
-    public static final Integer PAID = 1;   //1：已支付
-    public static final Integer CANCEL = 2; //2:已取消,
-    public static final Integer SEND = 3; //3：已发货
-    public static final Integer CONFIRM = 4; //4:确认收货
-    public static final Integer FINISH = 5; //5:交易完成
+    public static final int DUEPAYMENT = 0; //0:待支付
+    public static final int PAID = 1;   //1：已支付
+    public static final int CANCEL = 2; //2:已取消,
+    public static final int SEND = 3; //3：已发货
+    public static final int CONFIRM = 4; //4:确认收货
+    public static final int FINISH = 5; //5:交易完成
+
+    public static final int UMSPAY = 1; //1:网银
+    public static final int DZB = 2;   //2电子币
+    public static final int LONG_BI = 3; //3龙币
+    public static final int DZB_LONGBI = 4; //4电子币+龙币
+    public static final int DZB_UMSPAY = 5; //5电子币+网银
+    public static final int LONGBI_UMSPAY = 6; //6龙币+网银
+    public static final int LONGBI_UMSPAY_DZB = 7; //7电子币+龙币+网银
 
 
     private List<AdvertModel> advertModelList;

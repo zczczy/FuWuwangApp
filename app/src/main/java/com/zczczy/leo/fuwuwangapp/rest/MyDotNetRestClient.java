@@ -475,4 +475,23 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<PagerResult<MAppOrder>> getAllOrderInfoList(@Path int PageIndex, @Path int PageSize, @Path int MorderStatus);
 
+    /**
+     * @param map GoodsInfoId 商品id
+     *            number 数量
+     *            DZB 电子币
+     *            TwoPass 支付密码
+     * @return
+     */
+    @Post("api/Shop/CreateGoodsOrderInfo")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<ConfirmOrderModel> createGoodsOrderInfo(@Body Map map);
+
+    /**
+     * 根据订单ID查询订单信息
+     * @param MOrderId 订单ID
+     * @return
+     */
+    @Get("api/Shop/GetOrderDetailById?MOrderId={MOrderId}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<MAppOrder> getOrderDetailById(@Path String MOrderId);
 }

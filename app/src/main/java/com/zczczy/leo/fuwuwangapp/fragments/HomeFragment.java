@@ -17,6 +17,7 @@ import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.OrderDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
@@ -217,7 +218,7 @@ public class HomeFragment extends BaseFragment {
         myTitleBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                OrderDetailActivity_.intent(HomeFragment.this).start();
             }
         });
     }

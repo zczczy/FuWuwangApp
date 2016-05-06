@@ -276,7 +276,6 @@
     <string name="thanks_for_you_participation">谢谢参与</string>
 
 
-
     <!--商品详情-->
     <string name="buy">立即抢购</string>
     <string name="rebate">支持返券</string>
@@ -295,6 +294,10 @@
     <string name="text_total">合计:</string>
     <string name="text_pay_total_rmb">实付款</string>
     <string name="text_postal">运费</string>
+    <string name="text_order_no">订单号:%1$s</string>
+    <string name="text_order_logistics">感谢您的购买，点击查看物流信息！</string>
+    <string name="text_order_detail">订单详情</string>
+    <string name="text_give">赠 送:(兑现券)</string>
 
 
     <!--收货地址-->
@@ -325,7 +328,6 @@
     <string name="text_review_count">%1$s条评价</string>
     <string name="text_review_pre">好评%1$s</string>
     <string name="text_review_lb">龙币:</string>
-
 
 
 </resources>

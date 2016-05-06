@@ -28,7 +28,7 @@ public class MAppOrder implements Serializable {
     public String MOrderId;
     public String UserInfoId;
     public String MOrderNo;
-    public int MorderStatus;
+    public int MorderStatus; //订单状态(0:待支付，1：已支付，2:已取消,3：已发货4:确认收货,5:交易完成)
     public String ShrName;
     public String Lxdh;
     public String DetailAddress;
@@ -38,5 +38,7 @@ public class MAppOrder implements Serializable {
     public double MOrderMoney;
     public int MOrderLbCount;
     public double MOrderDzb;
-    public List<BuyCartInfoList> BuyCartInfoList;
+    public List<OrderDetailModel> MOrderDetailList;
+
+    public CouponModel FunQun;
 }
