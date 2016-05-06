@@ -76,26 +76,7 @@
 
             <include layout="@layout/horizontal_line" />
 
-            <LinearLayout
-                android:id="@+id/ll_store"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/txt_store"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/order_cart_store_icon"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@drawable/next_icon"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:maxLines="1" />
-            </LinearLayout>
+            <include layout="@layout/common_order_item" />
 
             <include layout="@layout/horizontal_line" />
 
@@ -124,8 +105,6 @@
                     android:lines="2"
                     android:padding="15dp" />
             </RelativeLayout>
-
-            <include layout="@layout/horizontal_line" />
 
             <include layout="@layout/horizontal_line" />
 

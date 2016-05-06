@@ -32,36 +32,7 @@
 
             <include layout="@layout/horizontal_line" />
 
-            <LinearLayout
-                android:id="@+id/ll_store"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/txt_store"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/cart_store_icon"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@drawable/next_icon"
-                    android:ellipsize="end"
-                    android:ems="20"
-                    android:gravity="center_vertical"
-                    android:maxLines="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_pre_order_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-            </LinearLayout>
+            <include layout="@layout/common_order_item" />
 
             <include layout="@layout/horizontal_line" />
 

@@ -291,18 +291,19 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
         <ImageView
             android:id="@+id/ad_two"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
-
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
     </LinearLayout>
 
@@ -321,18 +322,19 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
         <ImageView
             android:id="@+id/ad_four"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
-
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
     </LinearLayout>
 
@@ -350,29 +352,30 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
         <ImageView
             android:id="@+id/ad_six"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
-
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
         <ImageView
             android:id="@+id/ad_seven"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
-
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
         <ImageView
             android:id="@+id/ad_eight"
@@ -382,7 +385,8 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/goods_default" />
 
     </LinearLayout>
 
@@ -392,7 +396,8 @@
         android:layout_height="75dp"
         android:background="@color/home_background"
         android:foreground="?android:attr/selectableItemBackground"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/goods_default" />
 
 
     <View
