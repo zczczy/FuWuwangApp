@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.LoginActivity;
+import com.zczczy.leo.fuwuwangapp.activities.ActivityMemberOrder_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
@@ -21,7 +21,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.ViewsById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.springframework.util.StringUtils;
 
@@ -60,6 +59,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_already_order() {
         if (isLogin()) {
+            ActivityMemberOrder_.intent(this).orderState(MyApplication.SEND).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -68,6 +68,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_waiting_order() {
         if (isLogin()) {
+            ActivityMemberOrder_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -76,6 +77,8 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_hole_order() {
         if (isLogin()) {
+            ActivityMemberOrder_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
+
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }

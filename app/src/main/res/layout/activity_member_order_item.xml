@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".items.MemberOrderItemView">
 
     <include layout="@layout/common_order_item" />
 
@@ -69,12 +71,22 @@
             android:padding="10dp">
 
             <Button
+                android:id="@+id/btn_canceled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/order_gray"
+                android:text="已取消"
+                android:visibility="gone" />
+
+            <Button
                 android:id="@+id/btn_cancel_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/order_gray"
-                android:text="取消订单" />
+                android:text="取消订单"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_logistics"
@@ -82,7 +94,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/order_gray"
-                android:text="物流信息" />
+                android:text="物流信息"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_finished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/order_gray"
+                android:text="物流信息"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_pay"
@@ -90,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/order_orange"
                 android:text="付款"
-                android:textColor="@color/major_color" />
+                android:textColor="@color/major_color"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_finish"
@@ -98,7 +121,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/order_orange"
                 android:text="确认收货"
-                android:textColor="@color/major_color" />
+                android:textColor="@color/major_color"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

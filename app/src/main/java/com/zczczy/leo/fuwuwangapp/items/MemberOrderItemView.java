@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
@@ -21,24 +22,24 @@ import org.androidannotations.annotations.res.StringRes;
  * Created by leo on 2016/5/6.
  */
 @EViewGroup(R.layout.activity_member_order_item)
-public class ActivityMemberOrderItemView extends ItemView<MAppOrder> {
+public class MemberOrderItemView extends ItemView<MAppOrder> {
 
 
     @ViewById
     LinearLayout ll_pre_order_item;
 
     @ViewById
-    TextView txt_store, txt_count, txt_rmb, txt_plus, txt_home_lb;
+    TextView txt_store, txt_count, txt_rmb, txt_plus, txt_home_lb, txt_do_message;
 
     @StringRes
     String home_rmb, home_lb, text_count;
 
     @ViewById
-    Button btn_cancel_order, btn_logistics, btn_pay, btn_finish;
+    Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished;
 
     Context context;
 
-    public ActivityMemberOrderItemView(Context context) {
+    public MemberOrderItemView(Context context) {
         super(context);
         this.context = context;
     }
@@ -78,6 +79,44 @@ public class ActivityMemberOrderItemView extends ItemView<MAppOrder> {
             preOrderItemView.init(buyCartInfoList);
             ll_pre_order_item.addView(preOrderItemView);
         }
+        if (_data.MorderStatus == MyApplication.DUEPAYMENT) {
+            txt_do_message.setVisibility(VISIBLE);
+            txt_do_message.setText("等待买家付款");
+            btn_cancel_order.setVisibility(VISIBLE);
+            btn_pay.setVisibility(VISIBLE);
+            btn_logistics.setVisibility(GONE);
+            btn_finish.setVisibility(GONE);
+            btn_canceled.setVisibility(GONE);
+        } else if (_data.MorderStatus == MyApplication.PAID) {
+            txt_do_message.setVisibility(VISIBLE);
+            txt_do_message.setText("商家处理量中");
+            btn_logistics.setVisibility(VISIBLE);
+            btn_finish.setVisibility(VISIBLE);
+            btn_cancel_order.setVisibility(GONE);
+            btn_pay.setVisibility(GONE);
+            btn_canceled.setVisibility(GONE);
+        } else if (_data.MorderStatus == MyApplication.CANCEL) {
+            txt_do_message.setVisibility(GONE);
+            btn_canceled.setVisibility(VISIBLE);
+            btn_logistics.setVisibility(GONE);
+            btn_finish.setVisibility(GONE);
+            btn_cancel_order.setVisibility(GONE);
+            btn_pay.setVisibility(GONE);
+        } else if (_data.MorderStatus == MyApplication.SEND) {
+            txt_do_message.setVisibility(VISIBLE);
+            txt_do_message.setText("卖家已发货");
+            btn_logistics.setVisibility(VISIBLE);
+            btn_finish.setVisibility(VISIBLE);
+            btn_cancel_order.setVisibility(GONE);
+            btn_pay.setVisibility(GONE);
+            btn_canceled.setVisibility(GONE);
+        } else if (_data.MorderStatus == MyApplication.CONFIRM) {
+
+        } else if (_data.MorderStatus == MyApplication.FINISH) {
+
+        }
+
+
     }
 
     @Click

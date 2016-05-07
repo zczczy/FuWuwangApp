@@ -329,5 +329,8 @@
     <string name="text_review_pre">好评%1$s</string>
     <string name="text_review_lb">龙币:</string>
 
+    <!---->
+    <string name="text_due_payment">我的订单</string>
+
 
 </resources>
