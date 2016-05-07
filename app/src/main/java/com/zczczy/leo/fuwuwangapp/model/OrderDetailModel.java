@@ -7,27 +7,27 @@ import java.io.Serializable;
  */
 public class OrderDetailModel implements Serializable {
 
-    public String MOrderDetailId;
-    public String MOrderId;
-    public String StoreInfoId;
-    public int LogisticsInfoId;
-    public String MOrderDetailPrice;
-    public String MOrderDetailLbCount;
-    public String MOrderDetailDzbPrice;
-    public String MOrderDetailStatus;
-    public String ProductName;
-    public String ProductPrice;
-    public String Postage;
-    public String ProductNum;
-    public String GoodsInfoId;
-    public String GoodsImgSl;
-    public String XfNo;
-    public String GoodsType;
-    public String TrackingNo;
-    public String RetQueueStatus;
-    public String CreateTime;
-    public int RetMianZhi;
-    public int GoodsReturnTicket;
-    public String MOrderNo;
+    public String MOrderDetailId; //订单详细id
+    public String MOrderId;  //订单id
+    public String StoreInfoId; //店铺id
+    public int LogisticsInfoId; //公司id
+    public String MOrderDetailPrice; // 金额
+    public String MOrderDetailLbCount; //龙币数量
+    public String MOrderDetailDzbPrice; //电子币
+    public String MOrderDetailStatus; //订单详细状态
+    public String ProductName; //产品名称
+    public String ProductPrice; // 商品单格
+    public String Postage; //运费
+    public String ProductNum; //产品数量
+    public String GoodsInfoId; //产品id
+    public String GoodsImgSl; //图片
+    public String XfNo; //消费码
+    public String GoodsType; // 产品类别
+    public String TrackingNo; //运单号
+    public String RetQueueStatus; //返券状态
+    public String CreateTime; //创建时间
+    public int RetMianZhi; //返券面值
+    public int GoodsReturnTicket; //返券数量
+    public String MOrderNo; //订单号
 
 }

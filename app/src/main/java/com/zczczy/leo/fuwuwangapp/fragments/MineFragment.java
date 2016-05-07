@@ -50,7 +50,6 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_review() {
         if (isLogin()) {
-            VipActivity_.intent(this).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -75,9 +74,9 @@ public class MineFragment extends BaseFragment {
     }
 
     @Click
-    void txt_hole_order() {
+    void txt_paid_order() {
         if (isLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.PAID).start();
 
         } else {
             LoginActivity_.intent(this).startForResult(1000);

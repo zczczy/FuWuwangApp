@@ -48,7 +48,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
     protected void init(Object... objects) {
         txt_store.setText(_data.StoreName);
         //设置商品总数
-//        txt_count.setText(String.format(text_count, _data.));
+        txt_count.setText(String.format(text_count, _data.GoodsAllCount));
         //设置费用
         if (_data.MOrderMoney > 0 && _data.MOrderLbCount > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
@@ -68,12 +68,14 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             txt_home_lb.setVisibility(View.VISIBLE);
             txt_home_lb.setText(String.format(home_lb, _data.MOrderLbCount));
         }
+        //先清空所以布局
+        ll_pre_order_item.removeAllViews();
         for (OrderDetailModel orderDetailModel : _data.MOrderDetailList) {
             BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
             buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
             buyCartInfoList.GodosName = orderDetailModel.ProductName;
-            buyCartInfoList.GoodsPrice = Double.valueOf(orderDetailModel.ProductPrice);
-            //buyCartInfoList.GoodsLBPrice=orderDetailModel.
+            buyCartInfoList.GoodsPrice = Double.valueOf(orderDetailModel.MOrderDetailPrice);
+            buyCartInfoList.GoodsLBPrice = Integer.valueOf(orderDetailModel.MOrderDetailLbCount == null ? "0" : orderDetailModel.MOrderDetailLbCount);
             buyCartInfoList.ProductCount = Integer.valueOf(orderDetailModel.ProductNum);
             PreOrderItemView preOrderItemView = PreOrderItemView_.build(context);
             preOrderItemView.init(buyCartInfoList);

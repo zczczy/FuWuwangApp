@@ -25,5 +25,5 @@ public class AdvertModel implements Serializable {
     public int AdvertStatus;
     public String CreateTime;
     public String AdsenseTypeName;
-    public int JumpType;
+    public int JumpType; //1 店铺 2商品
 }

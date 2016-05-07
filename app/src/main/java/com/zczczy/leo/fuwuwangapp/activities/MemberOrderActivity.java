@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.MemberOrderAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
+import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
@@ -23,6 +24,8 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
+
+import java.lang.reflect.Member;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -34,6 +37,7 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  */
 @EActivity(R.layout.activity_member_order)
 public class MemberOrderActivity extends BaseActivity {
+
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 
@@ -88,6 +92,19 @@ public class MemberOrderActivity extends BaseActivity {
             }
         }).paint(paint).build());
         refreshingMaterial();
+
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<MAppOrder>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, MAppOrder obj, int position) {
+                OrderDetailActivity_.intent(MemberOrderActivity.this).orderId(obj.MOrderId).start();
+            }
+
+            @Override
+            public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+
+            }
+        });
+
     }
 
     void refreshingMaterial() {

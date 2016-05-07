@@ -84,8 +84,6 @@ public class OrderDetailActivity extends BaseActivity {
         }else{
 
 
-
-
         }
     }
 

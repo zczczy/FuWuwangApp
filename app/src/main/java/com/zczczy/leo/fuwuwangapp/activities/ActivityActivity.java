@@ -36,7 +36,7 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  * Created by Leo on 2016/4/28.
  */
 @EActivity(R.layout.activity_activity)
-public class ActivityActivity extends  BaseActivity{
+public class ActivityActivity extends BaseActivity {
 
     @ViewById
     MyTitleBar myTitleBar;
@@ -87,6 +87,7 @@ public class ActivityActivity extends  BaseActivity{
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(ActivityActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
+//                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
                 } else {
                     pageIndex++;
                     afterLoadMore();

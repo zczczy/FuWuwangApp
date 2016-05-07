@@ -149,7 +149,7 @@ public class CommonSearchResultActivity extends BaseActivity {
             isSelected = false;
             rb_price.setSelected(isSelected);
             sort = MyApplication.PRICE_SORT;
-            desc = MyApplication.ASC;
+            desc = MyApplication.DESC;
             afterLoadMore();
 
         } else if (rb_price.isChecked() && !isSelected) {
