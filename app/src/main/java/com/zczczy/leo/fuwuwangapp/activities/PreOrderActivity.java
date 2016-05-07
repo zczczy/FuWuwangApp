@@ -3,13 +3,11 @@ package com.zczczy.leo.fuwuwangapp.activities;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -312,11 +310,19 @@ public class PreOrderActivity extends BaseActivity {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("kbn", MyApplication.ANDROID);
-        map.put("GoodsInfoId", goodsInfoId);
-        map.put("number", orderCount + "");
-        map.put("DZB", useDianZiBi + "");
-        map.put("TwoPass", password);
-        afterPayOrder(myRestClient.createGoodsOrderInfo(map));
+        if (isCart) {
+            map.put("BuyCartInfoIds", BuyCartInfoIds);
+            map.put("StoreInfoId", StoreInfoId);
+            map.put("DZB", useDianZiBi + "");
+            map.put("TwoPass", password);
+            afterPayOrder(myRestClient.createOrderInfo(map));
+        } else {
+            map.put("GoodsInfoId", goodsInfoId);
+            map.put("number", orderCount + "");
+            map.put("DZB", useDianZiBi + "");
+            map.put("TwoPass", password);
+            afterPayOrder(myRestClient.createGoodsOrderInfo(map));
+        }
     }
 
     @UiThread

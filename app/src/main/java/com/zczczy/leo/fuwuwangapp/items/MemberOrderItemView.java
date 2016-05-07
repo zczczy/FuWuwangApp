@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.LogisticsInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
@@ -43,6 +44,32 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
         super(context);
         this.context = context;
     }
+
+    @Click
+    void btn_canceled() {
+
+    }
+
+    @Click
+    void btn_cancel_order() {
+
+    }
+
+    @Click
+    void btn_logistics() {
+        LogisticsInfoActivity_.intent(context).MOrderId(_data.MOrderId).start();
+    }
+
+    @Click
+    void btn_pay() {
+
+    }
+
+    @Click
+    void btn_finished() {
+
+    }
+
 
     @Override
     protected void init(Object... objects) {

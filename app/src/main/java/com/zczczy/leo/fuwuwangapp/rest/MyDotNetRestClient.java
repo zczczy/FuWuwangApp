@@ -10,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
+import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
@@ -488,6 +489,8 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<PagerResult<MAppOrder>> getAllOrderInfoList(@Path int PageIndex, @Path int PageSize, @Path int MorderStatus);
 
     /**
+     * 单个商品下单支付
+     *
      * @param map GoodsInfoId 商品id
      *            number 数量
      *            DZB 电子币
@@ -499,6 +502,20 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<ConfirmOrderModel> createGoodsOrderInfo(@Body Map map);
 
     /**
+     * 购物车下单支付
+     *
+     * @param map BuyCartInfoIds 商品id
+     *            StoreInfoId 数量
+     *            DZB 电子币
+     *            TwoPass 支付密码
+     * @return
+     */
+    @Post("api/Shop/CreateOrderInfo")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<ConfirmOrderModel> createOrderInfo(@Body Map map);
+
+
+    /**
      * 根据订单ID查询订单信息
      *
      * @param MOrderId 订单ID
@@ -507,4 +524,22 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Shop/GetOrderDetailById?MOrderId={MOrderId}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<MAppOrder> getOrderDetailById(@Path String MOrderId);
+
+    /**
+     * @param MOrderId 订单id
+     * @return
+     */
+    @Get("api/Shop/GetLogistics?MOrderId={MOrderId}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<List<LogisticsInfo>> getLogistics(@Path String MOrderId);
+
+    /**
+     * @param PageIndex 当前页数
+     * @param PageSize 每页显示多少
+     * @return
+     */
+    @Get("api/Shop/GetOrderMorderStatus?PageIndex={PageIndex}&PageSize={PageSize}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<PagerResult<LogisticsInfo>> getOrderMorderStatus(@Path int PageIndex, @Path int PageSize);
+
 }
