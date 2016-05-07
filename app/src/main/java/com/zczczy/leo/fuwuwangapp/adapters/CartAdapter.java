@@ -71,8 +71,8 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
         } else if (bmj.Successful) {
+            clear();
             List<CartModel> list = new ArrayList<>();
-
             for (CartInfo aa : bmj.Data) {
                 CartModel cm0 = new CartModel();
                 cm0.StoreInfoId = aa.StoreInfoId;

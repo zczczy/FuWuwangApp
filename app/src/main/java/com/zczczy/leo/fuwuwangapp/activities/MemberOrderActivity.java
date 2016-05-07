@@ -33,7 +33,7 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  * Created by leo on 2016/5/7.
  */
 @EActivity(R.layout.activity_member_order)
-public class ActivityMemberOrder extends BaseActivity {
+public class MemberOrderActivity extends BaseActivity {
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 
@@ -68,7 +68,7 @@ public class ActivityMemberOrder extends BaseActivity {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(ActivityMemberOrder.this, "没有更多的数据了！~");
+                    AndroidTool.showToast(MemberOrderActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
 //                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
                 } else {

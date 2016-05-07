@@ -79,10 +79,13 @@ public class PreOrderActivity extends BaseActivity {
     CheckBox use_dian;
 
     @Extra
-    String goodsInfoId;
+    String goodsInfoId, BuyCartInfoIds, StoreInfoId;
 
     @Extra
     int orderCount;
+
+    @Extra
+    boolean isCart;
 
     //商品总价
     double yuan;
@@ -131,7 +134,11 @@ public class PreOrderActivity extends BaseActivity {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("Kbn", MyApplication.ANDROID);
-        afterCreateTempOrderInfo(myRestClient.createTempGoodsOrderInfo(goodsInfoId, orderCount));
+        if (isCart) {
+            afterCreateTempOrderInfo(myRestClient.createTempOrderInfo(BuyCartInfoIds, StoreInfoId));
+        } else {
+            afterCreateTempOrderInfo(myRestClient.createTempGoodsOrderInfo(goodsInfoId, orderCount));
+        }
     }
 
     @UiThread
@@ -149,10 +156,11 @@ public class PreOrderActivity extends BaseActivity {
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
+            int i = 0;
             for (BuyCartInfoList buyCartInfoList : bmj.Data.BuyCartInfoList) {
                 PreOrderItemView preOrderItemView = PreOrderItemView_.build(this);
                 preOrderItemView.init(buyCartInfoList);
-                ll_pre_order_item.addView(preOrderItemView);
+                ll_pre_order_item.addView(preOrderItemView, i);
             }
             sellerType = bmj.Data.SellerType;
             //设置商品总价（去除邮费）

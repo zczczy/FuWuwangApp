@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root"
+    android:layout_alignParentBottom="true"
+    android:background="@color/pop_pu_bg"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical"
+    tools:context=".items.CartBuyPopup">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/cart_tips"
+            android:drawablePadding="10dp"
+            android:padding="15dp"
+            android:text="@string/text_tips"
+            android:textColor="@color/major_color" />
+
+        <ImageView
+            android:id="@+id/img_close"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:padding="10dp"
+            android:src="@drawable/car_close" />
+
+    </LinearLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+</LinearLayout>

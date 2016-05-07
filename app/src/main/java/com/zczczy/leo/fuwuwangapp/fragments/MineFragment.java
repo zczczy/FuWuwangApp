@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.ActivityMemberOrder_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 
@@ -59,7 +59,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_already_order() {
         if (isLogin()) {
-            ActivityMemberOrder_.intent(this).orderState(MyApplication.SEND).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.SEND).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -68,7 +68,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_waiting_order() {
         if (isLogin()) {
-            ActivityMemberOrder_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -77,7 +77,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_hole_order() {
         if (isLogin()) {
-            ActivityMemberOrder_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
 
         } else {
             LoginActivity_.intent(this).startForResult(1000);

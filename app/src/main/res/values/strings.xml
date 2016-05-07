@@ -229,6 +229,8 @@
     <!--cart-->
     <string name="txt_cart">我的购物车</string>
     <string name="txt_all_select">全选</string>
+    <string name="text_buy">去结算</string>
+    <string name="text_tips">请分开结算下面商品</string>
 
 
     <string name="timer">%1$sS</string>

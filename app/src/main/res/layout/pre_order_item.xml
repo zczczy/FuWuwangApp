@@ -2,69 +2,78 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/img_cart_goods_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/goods_default" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:padding="5dp">
 
-        <TextView
-            android:id="@+id/txt_cart_goods_product"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:ems="30"
-            android:lines="2"
-            android:maxLines="2"
-            android:textColor="@color/black" />
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/img_cart_goods_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/goods_default" />
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txt_cart_goods_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_rmb" />
-
-                <TextView
-                    android:id="@+id/txt_cart_goods_lb_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/home_lb" />
-            </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
-                android:id="@+id/txt_num"
+                android:id="@+id/txt_cart_goods_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="0.5"
-                android:gravity="right"
-                android:text="X1" />
+                android:ellipsize="end"
+                android:ems="30"
+                android:lines="2"
+                android:maxLines="2"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_cart_goods_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_rmb" />
+
+                    <TextView
+                        android:id="@+id/txt_cart_goods_lb_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/home_lb" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:text="X1" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <include layout="@layout/horizontal_line" />
 </LinearLayout>

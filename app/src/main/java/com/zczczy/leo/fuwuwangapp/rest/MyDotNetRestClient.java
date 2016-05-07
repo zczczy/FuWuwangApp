@@ -359,6 +359,18 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<ConfirmOrderModel> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number);
 
+
+    /**
+     * 购物车生成临时订单信息
+     *
+     * @param BuyCartInfoIds 购物车 商品id 以,分开 example：  adfa,asdfasf,adfa
+     * @param StoreInfoId    店铺Id
+     * @return
+     */
+    @Get("api/Shop/CreateTempOrderInfo?BuyCartInfoIds={BuyCartInfoIds}&StoreInfoId={StoreInfoId}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<ConfirmOrderModel> createTempOrderInfo(@Path String BuyCartInfoIds, @Path String StoreInfoId);
+
     /**
      * 查询收货地址
      *
@@ -488,6 +500,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 根据订单ID查询订单信息
+     *
      * @param MOrderId 订单ID
      * @return
      */

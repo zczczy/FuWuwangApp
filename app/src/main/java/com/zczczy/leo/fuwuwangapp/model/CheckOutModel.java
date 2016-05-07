@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class CheckOutModel implements Serializable {
 
+    public String BuyCartInfoIds;
+
     public String StoreInfoId;
 
     public String StoreName;

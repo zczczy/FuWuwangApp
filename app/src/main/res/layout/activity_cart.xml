@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -24,15 +25,21 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_cart_jiesuan"
+        android:layout_above="@+id/line"
         android:layout_below="@+id/my_title_bar"
         android:background="@color/white" />
 
+    <include
+        android:id="@+id/line"
+        layout="@layout/horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_above="@+id/ll_cart_jiesuan" />
 
     <LinearLayout
         android:id="@+id/ll_cart_jiesuan"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="49.5dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 

@@ -18,6 +18,7 @@
     <color name="home_special">#ea5404</color>
 
 
+
     <!-- common  -->
     <color name="background_color">#f5f5f5</color>
     <color name="home_background">#f0f0f0</color>
@@ -54,4 +55,6 @@
 
     <color name="colorPrimaryDarkTrans">#CCf57257</color>
 
+
+    <color name="pop_pu_bg">#11000000</color>
 </resources>
