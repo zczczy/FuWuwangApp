@@ -332,11 +332,11 @@ public class PreOrderActivity extends BaseActivity {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
             if (bmj.Data.MPaymentType == MyApplication.DZB || bmj.Data.MPaymentType == MyApplication.LONG_BI || bmj.Data.MPaymentType == MyApplication.DZB_LONGBI) {
-
-
+                OrderDetailActivity_.intent(this).orderId(bmj.Data.MOrderId).start();
             } else {
                 UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
             }
+            finish();
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }

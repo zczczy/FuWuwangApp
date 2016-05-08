@@ -81,7 +81,6 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:text="合计：1234567"
                     android:textSize="13sp" />
 
                 <TextView
@@ -91,7 +90,6 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:text="龙币：1234567"
                     android:textSize="13sp" />
             </LinearLayout>
 

@@ -12,7 +12,10 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:gravity="center"
     android:maxLines="1"
-    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp"
     android:text="服装"
     android:textColor="@color/first_category"
     android:textSize="14sp" />

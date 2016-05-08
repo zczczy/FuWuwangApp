@@ -1,15 +1,14 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
 import com.zczczy.leo.fuwuwangapp.model.CartModel;
 
-import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -28,11 +27,14 @@ public class CartItemView extends ItemView<CartModel> {
 
     Context context;
 
+    CartActivity cartActivity;
+
     CartAdapter cartAdapter;
 
     public CartItemView(Context context) {
         super(context);
         this.context = context;
+        cartActivity = (CartActivity) context;
     }
 
     @Click
@@ -45,6 +47,7 @@ public class CartItemView extends ItemView<CartModel> {
             }
         }
         cartAdapter.notifyDataSetChanged();
+        cartActivity.setTotalMoney();
     }
 
 

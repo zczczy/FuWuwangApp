@@ -67,7 +67,9 @@ public class CategoryFragment extends BaseFragment {
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
-                changeFragment(obj);
+                if (!obj.isSelected) {
+                    changeFragment(obj);
+                }
             }
         });
         paint.setStrokeWidth(1);
@@ -98,9 +100,12 @@ public class CategoryFragment extends BaseFragment {
 
     void changeFragment(GoodsTypeModel model) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        for (GoodsTypeModel goodsTypeModel : myAdapter.getItems()) {
+            goodsTypeModel.isSelected = false;
+        }
         model.isSelected = true;
         myAdapter.notifyDataSetChanged();
-        commonCategoryFragment = CommonCategoryFragment_.builder().id(model.GoodsTypeId+"").build();
+        commonCategoryFragment = CommonCategoryFragment_.builder().id(model.GoodsTypeId + "").build();
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();
     }

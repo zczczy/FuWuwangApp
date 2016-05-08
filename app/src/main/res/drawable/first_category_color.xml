@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true">
+    <item android:state_selected="false">
         <layer-list>
             <!-- 相当于padding -->
             <item>
@@ -10,7 +10,7 @@
             </item>
         </layer-list>
     </item>
-    <item android:state_selected="false">
+    <item android:state_selected="true">
         <layer-list>
             <item>
                 <shape>

@@ -25,7 +25,7 @@ public class FirstCategoryItemView extends ItemView<GoodsTypeModel> {
     @Override
     protected void init(Object... objects) {
         txt_first_category.setText(_data.GoodsTypeName);
-        txt_first_category.setSelected(!_data.isSelected);
+        txt_first_category.setSelected(_data.isSelected);
     }
 
     @Override

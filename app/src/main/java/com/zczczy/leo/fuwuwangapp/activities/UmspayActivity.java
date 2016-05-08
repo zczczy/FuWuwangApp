@@ -66,7 +66,7 @@ public class UmspayActivity extends BaseActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 Log.e("onPageStarted", url);
                 if (url.contains("http://www.zczczy.com")) {
-//                    NewOrderDetailActivity_.intent(NewUmspayActivity.this).order(order).flag(true).start();
+                    OrderDetailActivity_.intent(UmspayActivity.this).orderId(MOrderId).start();
                     finish();
                 } else {
                     AndroidTool.showLoadDialog(UmspayActivity.this);

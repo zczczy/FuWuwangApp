@@ -1,7 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -10,10 +9,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
-import com.zczczy.leo.fuwuwangapp.model.CartInfo;
 import com.zczczy.leo.fuwuwangapp.model.CartModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -21,7 +19,6 @@ import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.UiThread;
@@ -66,11 +63,14 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
 
     Context context;
 
+    CartActivity cartActivity;
+
     CartAdapter cartAdapter;
 
     public CartDetailItemView(Context context) {
         super(context);
         this.context = context;
+        cartActivity = (CartActivity) context;
     }
 
     @AfterViews
@@ -131,6 +131,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
             }
         }
         cartAdapter.notifyDataSetChanged();
+        cartActivity.setTotalMoney();
     }
 
     @Override

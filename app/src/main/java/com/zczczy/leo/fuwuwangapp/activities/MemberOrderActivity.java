@@ -25,8 +25,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
-import java.lang.reflect.Member;
-
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -61,7 +59,7 @@ public class MemberOrderActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         bus.register(this);
-        ultimateRecyclerView.setHasFixedSize(true);
+        ultimateRecyclerView.setHasFixedSize(false);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
         ultimateRecyclerView.setAdapter(myAdapter);
