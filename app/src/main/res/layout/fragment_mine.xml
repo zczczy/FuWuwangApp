@@ -12,7 +12,7 @@
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/major_color"
+        android:background="@drawable/mine_bg"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="20dp">
@@ -98,7 +98,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:clickable="true"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/next_icon"
             android:text="查看全部订单"

@@ -1,7 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,24 +11,22 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LotteryInfoRecordActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
-import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
-import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
-import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.ViewsById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -49,9 +46,11 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     @ViewById
     TextView text_trendw, text_trendm, text_huazhuang, text_digital, text_baby, text_life, text_food, text_healthcare, text_service, text_whole;
 
-    ImageView[] imageViews = new ImageView[10];
+    @ViewsById({R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_service})
+    List<ImageView> imageViews;
 
-    TextView[] textViews = new TextView[10];
+    @ViewsById({R.id.text_trendw, R.id.text_trendm, R.id.text_huazhuang, R.id.text_digital, R.id.text_baby, R.id.text_life, R.id.text_food, R.id.text_healthcare, R.id.text_service})
+    List<TextView> textViews;
 
     Context context;
 
@@ -64,8 +63,6 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     public HomeAdvertisementItemView(Context context) {
         super(context);
         this.context = context;
-
-
     }
 
     @UiThread
@@ -75,30 +72,6 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
     @Override
     protected void init(Object... objects) {
-
-        imageViews[0] = img_trendw;
-        imageViews[1] = img_trendm;
-        imageViews[2] = img_huazhuang;
-        imageViews[3] = img_digital;
-        imageViews[4] = img_baby;
-        imageViews[5] = img_life;
-        imageViews[6] = img_food;
-        imageViews[7] = img_healthcare;
-        imageViews[8] = img_service;
-//        imageViews[9] = img_whole;
-
-        textViews[0] = text_trendw;
-        textViews[1] = text_trendm;
-        textViews[2] = text_huazhuang;
-        textViews[3] = text_digital;
-        textViews[4] = text_baby;
-        textViews[5] = text_life;
-        textViews[6] = text_food;
-        textViews[7] = text_healthcare;
-        textViews[8] = text_service;
-//        textViews[9] = text_whole;
-
-
         if (!app.isFirst()) {
             for (NewBanner nb : app.getNewBannerList()) {
                 TextSliderView textSliderView = new TextSliderView(context);
@@ -108,7 +81,6 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
             }
             app.setFirst(true);
         }
-
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
             img_winners_order.setVisibility(VISIBLE);
             Picasso.with(context).load(app.getLotteryConfig().AppLotteryImgUrl).into(img_winners_order);
@@ -117,35 +89,87 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
 
         for (AdvertModel am : app.getAdvertModelList()) {
-            RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
-            if (am.AdsenseTypeId == 3) {
-                rc.into(ad_one);
-            } else if (am.AdsenseTypeId == 4) {
-                rc.into(ad_two);
-            } else if (am.AdsenseTypeId == 5) {
-                rc.into(ad_three);
-            } else if (am.AdsenseTypeId == 6) {
-                rc.into(ad_four);
-            } else if (am.AdsenseTypeId == 7) {
-                rc.into(ad_five);
-            } else if (am.AdsenseTypeId == 8) {
-                rc.into(ad_six);
-            } else if (am.AdsenseTypeId == 9) {
-                rc.into(ad_seven);
-            } else if (am.AdsenseTypeId == 10) {
-                rc.into(ad_eight);
-            } else if (am.AdsenseTypeId == 11) {
-                rc.into(ad_nine);
+            if (!StringUtils.isEmpty(am.AdvertImg)) {
+                if (am.AdsenseTypeId == 3) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_one.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_one);
+                } else if (am.AdsenseTypeId == 4) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_two.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_two);
+                } else if (am.AdsenseTypeId == 5) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_three.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_three);
+                } else if (am.AdsenseTypeId == 6) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_four.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_four);
+                } else if (am.AdsenseTypeId == 7) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_five.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_five);
+                } else if (am.AdsenseTypeId == 8) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_six.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_six);
+                } else if (am.AdsenseTypeId == 9) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_seven.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_seven);
+                } else if (am.AdsenseTypeId == 10) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_eight.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_eight);
+                } else if (am.AdsenseTypeId == 11) {
+                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+                    ad_nine.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.into(ad_nine);
+                }
             }
         }
-
         int i = 0;
         for (GoodsTypeModel gtm : app.getGoodsTypeModelList()) {
             RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
-            rc.into(imageViews[i]);
-            textViews[i].setText(gtm.GoodsTypeName);
+            rc.into(imageViews.get(i));
+            imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "");
+            textViews.get(i).setText(gtm.GoodsTypeName);
             i++;
         }
+    }
+
+    public void stopAutoCycle() {
+        new_slider_Layout.stopAutoCycle();
+    }
+
+    public void startAutoCycle() {
+        new_slider_Layout.startAutoCycle();
+    }
+
+    @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine})
+    void adClick(ImageView view) {
+        if (view.getContentDescription() != null) {
+            String[] temp = view.getContentDescription().toString().split(",");
+            if (temp.length == 2) {
+                //1跳转到店铺页面  2跳转到商品页面
+                if ("1".equals(temp[0])) {
+                    StoreInformationActivity_.intent(context).storeId(temp[1]).start();
+                } else {
+                    GoodsDetailInfoActivity_.intent(context).goodsId(temp[1]).start();
+                }
+            }
+        }
+    }
+
+    @Click(value = {R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_service})
+    void goodsTypeClick(ImageView view) {
+        CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).start();
+    }
+
+    @Click
+    void img_whole() {
+        CommonSearchResultActivity_.intent(context).goodsType("2").start();
     }
 
     @Click

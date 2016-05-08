@@ -294,6 +294,7 @@ public class MainActivity extends BaseActivity {
             firstTime = secondTime;
         } else {
             finish();
+            System.exit(-1);
         }
     }
 }

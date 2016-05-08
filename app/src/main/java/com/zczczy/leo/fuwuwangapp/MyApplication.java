@@ -54,6 +54,7 @@ public class MyApplication extends Application {
     public static final int SEND = 3; //3：已发货
     public static final int CONFIRM = 4; //4:确认收货
     public static final int FINISH = 5; //5:交易完成
+    public static final int ALL_ORDER = 9; //5:交易完成
 
     public static final int UMSPAY = 1; //1:网银
     public static final int DZB = 2;   //2电子币

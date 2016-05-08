@@ -17,15 +17,13 @@ import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.OrderDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
+import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
-import com.zczczy.leo.fuwuwangapp.items.ItemView;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -41,8 +39,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
-
-import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -95,10 +91,12 @@ public class HomeFragment extends BaseFragment {
 
     boolean isRefresh = false;
 
-    ItemView<List<AdvertModel>> itemView;
+    HomeAdvertisementItemView itemView;
+
 
     @AfterInject
     void afterInject() {
+
     }
 
     @AfterViews
@@ -194,7 +192,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
                 UltimateRecyclerView.CustomRelativeWrapper customRelativeWrapper = (UltimateRecyclerView.CustomRelativeWrapper) viewHolder.itemView;
-                itemView = (ItemView<List<AdvertModel>>) (customRelativeWrapper.getChildAt(0));
+                itemView = (HomeAdvertisementItemView) (customRelativeWrapper.getChildAt(0));
                 itemView.init(myApplication.getAdvertModelList());
             }
         });
@@ -218,7 +216,7 @@ public class HomeFragment extends BaseFragment {
         myTitleBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OrderDetailActivity_.intent(HomeFragment.this).start();
+
             }
         });
     }
@@ -275,8 +273,10 @@ public class HomeFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (hidden) {
             bus.unregister(this);
+            itemView.stopAutoCycle();
         } else {
             bus.register(this);
+            itemView.startAutoCycle();
         }
     }
 }

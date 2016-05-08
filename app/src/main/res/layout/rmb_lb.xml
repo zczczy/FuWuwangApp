@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/home_rmb"
         android:textColor="@color/price_color"
         android:textSize="18sp" />
 
@@ -24,7 +23,8 @@
         android:gravity="center"
         android:text="+"
         android:textColor="@color/price_color"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/txt_home_lb"
@@ -32,7 +32,6 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="3dp"
         android:gravity="center"
-        android:text="@string/home_lb"
         android:textColor="@color/price_color"
         android:textSize="16sp" />
 </LinearLayout>

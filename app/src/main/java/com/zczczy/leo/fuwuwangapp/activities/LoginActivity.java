@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity {
 
     public void finish() {
         if (!(StringUtils.isEmpty(pre.token().get()) || StringUtils.isEmpty(pre.shopToken().get()))) {
-            setResult(1001);
+            setResult(RESULT_OK);
         }
         super.finish();
     }

@@ -38,7 +38,8 @@ public class RecommendedGoodsItemView  extends ItemView<RebuiltRecommendedGoods>
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).error(R.drawable.goods_default).into(img_pic);
+            Picasso.with(context).load(_data.GoodsImgSl). resize(200, 200).
+                    centerCrop().error(R.drawable.goods_default).into(img_pic);
         }
         txt_product_name.setText(_data.GodosName);
         if (_data.GoodsLBPrice > 0 && _data.GoodsPrice> 0) {

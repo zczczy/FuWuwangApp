@@ -13,7 +13,8 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/category_search"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mRightButtonIcon="@drawable/title_cart" />
+        app:mRightText="@string/search"
+        app:mRightTextMarginRight="15dp" />
 
     <RadioGroup
         android:layout_width="match_parent"

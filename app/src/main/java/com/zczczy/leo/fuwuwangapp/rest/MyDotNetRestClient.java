@@ -507,7 +507,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<NewArea>> getAreaListByCityId(@Path String CityId);
 
     /**
-     * @param GoodsTypeId 商品分类
+     * @param GoodsTypeId 商品分类id
      * @param GoodsType   是否是服务类商品(1:服务类，2：邮寄类)
      * @param GodosName   商品名称
      * @param sort        排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）

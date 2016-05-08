@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
@@ -39,6 +40,9 @@ public class MineFragment extends BaseFragment {
 
     @ViewById
     RelativeLayout rl_vip, rl_setting;
+
+    @ViewById
+    ImageView img_avatar;
 
     @Pref
     MyPrefs_ pre;
@@ -79,7 +83,6 @@ public class MineFragment extends BaseFragment {
     void txt_paid_order() {
         if (isLogin()) {
             MemberOrderActivity_.intent(this).orderState(MyApplication.PAID).start();
-
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -88,6 +91,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_whole() {
         if (isLogin()) {
+            MemberOrderActivity_.intent(this).orderState(MyApplication.ALL_ORDER).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -125,8 +129,11 @@ public class MineFragment extends BaseFragment {
 
     void setData() {
         if (isLogin()) {
-            img_vip_icon.setVisibility(View.VISIBLE);
             txt_name.setText(pre.username().get());
+            if (!StringUtils.isEmpty(pre.avatar().get())) {
+                Picasso.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable
+                        .default_header).error(R.drawable.default_header).into(img_avatar);
+            }
             if (MyApplication.VIP.equals(pre.userType().get())) {
                 rl_vip.setVisibility(View.VISIBLE);
                 img_vip_icon.setVisibility(View.VISIBLE);
@@ -136,6 +143,13 @@ public class MineFragment extends BaseFragment {
                 img_vip_icon.setVisibility(View.INVISIBLE);
                 rl_setting.setVisibility(View.VISIBLE);
             }
+        } else {
+            img_vip_icon.setVisibility(View.GONE);
+            rl_vip.setVisibility(View.INVISIBLE);
+            img_avatar.setImageResource(R.drawable.default_header);
+            rl_setting.setVisibility(View.VISIBLE);
+            txt_name.setText("点击登录");
+            txt_address.setText("地址");
         }
     }
 
