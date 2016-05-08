@@ -83,7 +83,7 @@
         android:id="@+id/rl_whole"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/common_shadow_selector"
+        android:background="@drawable/common_white_bg"
         android:clickable="true"
         android:padding="15dp">
 

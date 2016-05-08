@@ -1,8 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.Manifest;
-import android.content.Intent;
-import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,11 +37,11 @@ import pub.devrel.easypermissions.EasyPermissions;
  * Created by Leo on 2016/4/28.
  */
 @EActivity(R.layout.activity_qrcode)
-public class QrCodeActivity extends BaseActivity  implements EasyPermissions.PermissionCallbacks {
+public class QrCodeActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     private String code;
 
     @ViewById
-    Button btn_paper_transfer,btn_coupon_scan;
+    Button btn_paper_transfer, btn_coupon_scan;
 
     @ViewById
     EditText edt_coupon_code;
@@ -60,33 +59,28 @@ public class QrCodeActivity extends BaseActivity  implements EasyPermissions.Per
     MyRestClient myRestClient;
 
     @AfterInject
-    void afterInject(){
+    void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     //排队按钮点击事件
     @Click
-    void btn_paper_transfer(){
-        if(isNetworkAvailable(this)){
+    void btn_paper_transfer() {
+        if (isNetworkAvailable(this)) {
             code = edt_coupon_code.getText().toString();
-            if(StringUtils.isEmpty(code)){
-                MyAlertDialog dialog = new MyAlertDialog(this,"请输入二维码券号",null);
+            if (StringUtils.isEmpty(code)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "请输入二维码券号", null);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
                 return;
             }
             AndroidTool.showCancelabledialog(this);
             getHttp(code);
-        }
-        else{
+        } else {
             Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
 
     @Override
     protected void onStart() {
@@ -94,51 +88,40 @@ public class QrCodeActivity extends BaseActivity  implements EasyPermissions.Per
 
     }
 
-    @AfterPermissionGranted(1)
-    private void requestCodeQrcodePermissions() {
-        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.FLASHLIGHT};
-        if (!EasyPermissions.hasPermissions(this, perms)) {
-            EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", 1, perms);
-        }else{
-            ScanActivity_.intent(this).startForResult(1000);
-        }
-    }
 
     //扫一扫按钮点击事件
     @Click
-    void btn_coupon_scan(){
-        if(isNetworkAvailable(this)){
+    void btn_coupon_scan() {
+        if (isNetworkAvailable(this)) {
             requestCodeQrcodePermissions();
-        }
-        else{
-            Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
         }
     }
 
     @OnActivityResult(1000)
-    void getBillId(int resultCode,@OnActivityResult.Extra String result) {
+    void getBillId(int resultCode, @OnActivityResult.Extra String result) {
         if (resultCode == RESULT_OK) {
-            if(isNetworkAvailable(this)){
+            if (isNetworkAvailable(this)) {
                 getHttp(result);
-            }
-            else{
-                Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     @Background
-    void getHttp(String scanResult){
+    void getHttp(String scanResult) {
         String token = pre.token().get();
-        myRestClient.setHeader("Token",token);
+        myRestClient.setHeader("Token", token);
         BaseModelJson<PaperFace> bmj = myRestClient.ScanLogin(scanResult);
         show_activity(bmj);
     }
 
     @UiThread
-    void show_activity(BaseModelJson<PaperFace> bmj){
+    void show_activity(BaseModelJson<PaperFace> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj!=null) {
+        if (bmj != null) {
             if (bmj.Successful) {
                 //跳转到纸劵排队页
                 PaperCouponQueueActivity_.intent(this).qi_id(bmj.Data.getQi_id()).queuesId(bmj.Data.getQueuesId()).queuesInRule(bmj.Data.getQueuesInRule()).start();
@@ -150,13 +133,32 @@ public class QrCodeActivity extends BaseActivity  implements EasyPermissions.Per
         }
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @AfterPermissionGranted(1)
+    private void requestCodeQrcodePermissions() {
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.FLASHLIGHT};
+        if (!EasyPermissions.hasPermissions(this, perms)) {
+            Log.e("requestCod", "1111111111111111111");
+            EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", 1, perms);
+        } else {
+            ScanActivity_.intent(this).startForResult(1000);
+        }
+    }
+
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        ScanActivity_.intent(this).startForResult(1000);
+        if (perms.size() == 2) {
+            ScanActivity_.intent(this).startForResult(1000);
+        }
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        AndroidTool.showToast(this,"你拒绝授权");
+        AndroidTool.showToast(this, "你拒绝授权!请到设置里去重新授权");
     }
 }

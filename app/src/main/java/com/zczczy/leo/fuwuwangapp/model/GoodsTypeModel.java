@@ -27,5 +27,6 @@ public class GoodsTypeModel implements Serializable {
     public String GoodsTypeIcon;
     public String IsHomeDisp;
     public String FGoodsTypeName;
+    public boolean isSelected;
 
 }

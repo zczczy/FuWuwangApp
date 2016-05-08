@@ -1,13 +1,11 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
@@ -15,11 +13,9 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.CommonCategoryAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.FirstCategoryAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
@@ -28,8 +24,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.ColorRes;
-import org.androidannotations.annotations.res.DrawableRes;
 
 /**
  * Created by Leo on 2016/4/27.
@@ -73,7 +67,7 @@ public class CategoryFragment extends BaseFragment {
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
-                changeFragment(obj.GoodsTypeId + "");
+                changeFragment(obj);
             }
         });
         paint.setStrokeWidth(1);
@@ -102,9 +96,11 @@ public class CategoryFragment extends BaseFragment {
         });
     }
 
-    void changeFragment(String id) {
+    void changeFragment(GoodsTypeModel model) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        commonCategoryFragment = CommonCategoryFragment_.builder().id(id).build();
+        model.isSelected = true;
+        myAdapter.notifyDataSetChanged();
+        commonCategoryFragment = CommonCategoryFragment_.builder().id(model.GoodsTypeId+"").build();
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();
     }
@@ -112,7 +108,7 @@ public class CategoryFragment extends BaseFragment {
     @Subscribe
     public void notifyUI(BaseModel bm) {
         if (bm.Successful) {
-            changeFragment(myAdapter.getItemData(0).GoodsTypeId + "");
+            changeFragment(myAdapter.getItemData(0));
         }
     }
 

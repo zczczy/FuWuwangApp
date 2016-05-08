@@ -1,8 +1,10 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.R;
@@ -29,12 +31,16 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.io.File;
+import java.util.List;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Leo on 2016/4/28.
  */
 @EActivity(R.layout.activity_vip)
-public class VipActivity extends BaseActivity {
+public class VipActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     @ViewById
     TextView txt_username, txt_realname;
@@ -159,15 +165,20 @@ public class VipActivity extends BaseActivity {
     @Click
     void ll_scan() {
         if (isNetworkAvailable(this)) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            File f1 = new File(fileName);
-            Uri u1 = Uri.fromFile(f1);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, u1);
-            startActivityForResult(intent, CAMERA_ACTIVITY);
+            requestCodeQrcodePermissions();
         } else {
             AndroidTool.showToast(this, no_net);
         }
     }
+
+    void scan() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File f1 = new File(fileName);
+        Uri u1 = Uri.fromFile(f1);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, u1);
+        startActivityForResult(intent, CAMERA_ACTIVITY);
+    }
+
 
     @OnActivityResult(ImageUtil.CAMERA_ACTIVITY)
     void onCameraResult(int resultCode, Intent data) {
@@ -226,5 +237,32 @@ public class VipActivity extends BaseActivity {
         } else {
             AndroidTool.showToast(this, no_net);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @AfterPermissionGranted(1)
+    private void requestCodeQrcodePermissions() {
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.FLASHLIGHT};
+        if (!EasyPermissions.hasPermissions(this, perms)) {
+            EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", 1, perms);
+        } else {
+            scan();
+        }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        if (perms.size() == 2) {
+            scan();
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        AndroidTool.showToast(this, "你拒绝授权!请到设置里去重新授权");
     }
 }
