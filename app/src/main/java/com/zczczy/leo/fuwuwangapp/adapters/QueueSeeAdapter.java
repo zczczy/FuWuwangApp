@@ -9,8 +9,8 @@ import com.zczczy.leo.fuwuwangapp.items.QueueSeeItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.YpdRecord;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
@@ -37,7 +37,7 @@ public class QueueSeeAdapter extends BaseUltimateRecyclerViewAdapter<YpdRecord> 
     MyErrorHandler myErrorHandler;
 
     @RestService
-    MyRestClient myRestClient;
+    MyDotNetRestClient myRestClient;
 
 
     @Pref

@@ -100,7 +100,7 @@ public class OrderDetailActivity extends BaseActivity {
             for (OrderDetailModel orderDetailModel : bmj.Data.MOrderDetailList) {
                 BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
                 buyCartInfoList.GoodsLBPrice = orderDetailModel.MOrderDetailLbCount == null ? 0 : Integer.valueOf(orderDetailModel.MOrderDetailLbCount);
-                buyCartInfoList.GoodsPrice = orderDetailModel.MOrderDetailPrice == null ? 0 : Integer.valueOf(orderDetailModel.MOrderDetailPrice);
+                buyCartInfoList.GoodsPrice = orderDetailModel.MOrderDetailPrice == null ? 0.00 : Double.valueOf(orderDetailModel.MOrderDetailPrice);
                 buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
                 buyCartInfoList.GodosName = orderDetailModel.ProductName;
                 buyCartInfoList.ProductCount = orderDetailModel.ProductNum == null ? 0 : Integer.valueOf(orderDetailModel.ProductNum);

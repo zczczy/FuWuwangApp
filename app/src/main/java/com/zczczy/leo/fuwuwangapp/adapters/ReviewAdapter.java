@@ -4,15 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
-import com.zczczy.leo.fuwuwangapp.items.CooperationMerchantItemView_;
+import com.zczczy.leo.fuwuwangapp.items.ReviewItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
+import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
+import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -20,16 +21,20 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
- * Created by Leo on 2016/4/28.
+ * Created by leo on 2016/5/8.
  */
 @EBean
-public class CooperationMerchantAdapter extends BaseUltimateRecyclerViewAdapter<CooperationMerchant> {
+public class ReviewAdapter extends BaseUltimateRecyclerViewAdapter<OrderDetailModel> {
 
-    @Bean
-    OttoBus bus;
+    @RestService
+    MyDotNetRestClient myRestClient;
+
+    @Pref
+    MyPrefs_ pre;
 
     @StringRes
     String no_net;
@@ -37,26 +42,28 @@ public class CooperationMerchantAdapter extends BaseUltimateRecyclerViewAdapter<
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @RestService
-    MyDotNetRestClient myRestClient;
+    @Bean
+    OttoBus bus;
 
-    boolean isRefresh = false;
+    boolean isRefresh;
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
-
     @Override
     @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
-        afterGetData(myRestClient.GetCompany((objects[0]).toString(), (objects[1]).toString(), pageIndex, pageSize));
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        afterGetData(myRestClient.getOrderMorderStatus(1, 100));
     }
 
     @UiThread
-    void afterGetData(BaseModelJson<PagerResult<CooperationMerchant>> bmj) {
+    void afterGetData(BaseModelJson<PagerResult<OrderDetailModel>> bmj) {
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);
@@ -68,20 +75,18 @@ public class CooperationMerchantAdapter extends BaseUltimateRecyclerViewAdapter<
             if (bmj.Data.ListData.size() > 0) {
                 insertAll(bmj.Data.ListData, getItems().size());
             }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
         }
         bus.post(bmj);
     }
 
     @Override
-    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
-
+    protected View onCreateItemView(ViewGroup parent) {
+        return ReviewItemView_.build(parent.getContext());
     }
 
     @Override
-    protected View onCreateItemView(ViewGroup parent) {
-        return CooperationMerchantItemView_.build(context);
+    void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
+
     }
 
     @Override

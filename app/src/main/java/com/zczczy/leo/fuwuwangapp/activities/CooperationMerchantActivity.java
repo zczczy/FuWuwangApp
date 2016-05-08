@@ -21,8 +21,8 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
@@ -70,7 +70,7 @@ public class CooperationMerchantActivity extends BaseActivity {
     MyErrorHandler myErrorHandler;
 
     @RestService
-    MyRestClient myRestClient;
+    MyDotNetRestClient myRestClient;
 
     //本地定位的城市名称
     String city;

@@ -10,8 +10,8 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Experience;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
@@ -38,7 +38,7 @@ public class ExperienceAdapter extends BaseUltimateRecyclerViewAdapter<Experienc
     MyErrorHandler myErrorHandler;
 
     @RestService
-    MyRestClient myRestClient;
+    MyDotNetRestClient myRestClient;
 
     boolean isRefresh = false;
 

@@ -334,8 +334,9 @@
     <!---->
     <string name="text_due_payment">我的订单</string>
 
-    <!--带评论-->
+    <!--待评论-->
     <string name="text_review">待评论</string>
+    <string name="text_comment">评论</string>
 
     <string name="text_logistics">物流信息</string>
 

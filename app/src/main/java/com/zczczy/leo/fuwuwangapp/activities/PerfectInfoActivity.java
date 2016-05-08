@@ -78,8 +78,7 @@ public class PerfectInfoActivity extends BaseActivity {
 
     CountDownTimer countDownTimer;
 
-    @RestService
-    MyDotNetRestClient newMyRestClient;
+
 
     @ViewById
     RadioButton rb_user_info, rb_finance_info;
@@ -121,6 +120,9 @@ public class PerfectInfoActivity extends BaseActivity {
     MyErrorHandler myErrorHandler;
 
     @RestService
+    MyDotNetRestClient myDotNetRestClient;
+
+    @RestService
     MyRestClient myRestClient;
 
     //验证码弹框
@@ -138,7 +140,7 @@ public class PerfectInfoActivity extends BaseActivity {
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
-        newMyRestClient.setRestErrorHandler(myErrorHandler);
+        myDotNetRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     @AfterViews
@@ -154,7 +156,7 @@ public class PerfectInfoActivity extends BaseActivity {
 
     @Background
     void getBankItems() {
-        BaseModelJson<List<Bank>> bmj = myRestClient.GetBankItemsList();
+        BaseModelJson<List<Bank>> bmj = myDotNetRestClient.GetBankItemsList();
         if (bmj != null) {
             if (bmj.Successful) {
                 BankItems = new String[bmj.Data.size() + 1];
@@ -166,7 +168,7 @@ public class PerfectInfoActivity extends BaseActivity {
             }
         }
 
-        BaseModelJson<List<ProvinceModel>> bmjp = myRestClient.GetProvinceList();
+        BaseModelJson<List<ProvinceModel>> bmjp = myDotNetRestClient.GetProvinceList();
         if (bmj != null) {
             if (bmjp.Successful) {
                 provs = new String[bmjp.Data.size() + 1];
@@ -223,7 +225,7 @@ public class PerfectInfoActivity extends BaseActivity {
         if (code == null || code == "" || code.equals("") || code.isEmpty()) {
             code = listprov.get(provsize - 1).getCode().toString();
         }
-        BaseModelJson<List<CityModel>> bmjp = myRestClient.GetCityList(code);
+        BaseModelJson<List<CityModel>> bmjp = myDotNetRestClient.GetCityList(code);
         if (bmjp != null) {
             if (bmjp.Successful) {
                 citys = new String[bmjp.Data.size() + 1];
@@ -275,7 +277,7 @@ public class PerfectInfoActivity extends BaseActivity {
         if (bankid == null || bankid == "" || bankid.equals("") || bankid.isEmpty()) {
             bankid = listBanks.get(banksize - 1).getBankId().toString();
         }
-        BaseModelJson<List<OpenAccount>> bmjp = myRestClient.GetBankNumBerList(citycode, bankid);
+        BaseModelJson<List<OpenAccount>> bmjp = myDotNetRestClient.GetBankNumBerList(citycode, bankid);
         if (bmjp.Successful) {
             OpenAccounts = new String[bmjp.Data.size() + 1];
             OpenAccounts[0] = "请选择";
@@ -338,11 +340,11 @@ public class PerfectInfoActivity extends BaseActivity {
     @Background
     void getBindFinance() {
         String token = pre.token().get();
-        myRestClient.setHeader("Token", token);
-        BaseModelJson<UserFinanceInfo> bmj = myRestClient.GetFinancialById();
+        myDotNetRestClient.setHeader("Token", token);
+        BaseModelJson<UserFinanceInfo> bmj = myDotNetRestClient.GetFinancialById();
 
         if (bmj != null) {
-            BaseModelJson<List<CityModel>> bmjp = myRestClient.GetCityList(bmj.Data.getProviceCode());
+            BaseModelJson<List<CityModel>> bmjp = myDotNetRestClient.GetCityList(bmj.Data.getProviceCode());
 
             if (bmjp != null) {
                 if (bmjp.Successful) {
@@ -356,7 +358,7 @@ public class PerfectInfoActivity extends BaseActivity {
                 }
             }
 
-            BaseModelJson<List<OpenAccount>> bmjpo = myRestClient.GetBankNumBerList(bmj.Data.getCityCode(), bmj.Data.getBankName());
+            BaseModelJson<List<OpenAccount>> bmjpo = myDotNetRestClient.GetBankNumBerList(bmj.Data.getCityCode(), bmj.Data.getBankName());
             if (bmjpo != null) {
                 if (bmjpo.Successful) {
                     OpenAccounts = new String[bmjpo.Data.size() + 1];
@@ -442,7 +444,7 @@ public class PerfectInfoActivity extends BaseActivity {
     //验证订阅
     @Background
     void GetSafeMessage() {
-        BaseModelJson<String> bmj = newMyRestClient.SubscriptionExist(pre.username().get());
+        BaseModelJson<String> bmj = myDotNetRestClient.SubscriptionExist(pre.username().get());
         AfterGetSafe(bmj);
 
     }
@@ -463,7 +465,7 @@ public class PerfectInfoActivity extends BaseActivity {
     @Background
     void getMobile() {
 
-        BaseModelJson<String> bmj = newMyRestClient.GetMobile(pre.username().get());
+        BaseModelJson<String> bmj = myDotNetRestClient.GetMobile(pre.username().get());
         setMobile(bmj);
     }
 
@@ -485,7 +487,7 @@ public class PerfectInfoActivity extends BaseActivity {
     @Background
     void GetResult() {
         code = edit_code.getText().toString();
-        BaseModelJson<String> bmj = newMyRestClient.VerifyExite(pre.username().get(), code, "1");
+        BaseModelJson<String> bmj = myDotNetRestClient.VerifyExite(pre.username().get(), code, "1");
         AfterGetResult(bmj);
 
     }
@@ -513,7 +515,7 @@ public class PerfectInfoActivity extends BaseActivity {
         map.put("UserName", pre.username().get());
         map.put("SendType", "1");
         map.put("mobile", mobile);
-        afterSendCode(newMyRestClient.SendVerificationCode(map));
+        afterSendCode(myDotNetRestClient.SendVerificationCode(map));
     }
 
     @UiThread
@@ -531,8 +533,8 @@ public class PerfectInfoActivity extends BaseActivity {
     @Background
     void getBind() {
         String token = pre.token().get();
-        myRestClient.setHeader("Token", token);
-        BaseModelJson<UserBaseInfo> bmj = myRestClient.GetZcUserById();
+        myDotNetRestClient.setHeader("Token", token);
+        BaseModelJson<UserBaseInfo> bmj = myDotNetRestClient.GetZcUserById();
         setBind(bmj);
     }
 

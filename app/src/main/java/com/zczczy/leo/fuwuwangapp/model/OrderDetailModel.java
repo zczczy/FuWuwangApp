@@ -29,5 +29,6 @@ public class OrderDetailModel implements Serializable {
     public int RetMianZhi; //返券面值
     public int GoodsReturnTicket; //返券数量
     public String MOrderNo; //订单号
+    public String GoodsDesc;//商品描述
 
 }

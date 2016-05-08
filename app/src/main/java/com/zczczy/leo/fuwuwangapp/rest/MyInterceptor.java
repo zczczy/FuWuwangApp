@@ -30,11 +30,14 @@ public class MyInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] data,
-                                        ClientHttpRequestExecution execution) throws IOException {
-        // do something
-        //afterCheck();
-        System.out.println();
-        return execution.execute(request, data);
+                                        ClientHttpRequestExecution execution) {
+        ClientHttpResponse clientHttpResponse = null;
+        try {
+            clientHttpResponse = execution.execute(request, data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return clientHttpResponse;
     }
 
     @Background

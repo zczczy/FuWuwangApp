@@ -13,11 +13,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.AllCity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.sortlistview.CharacterParser;
 import com.zczczy.leo.fuwuwangapp.sortlistview.ClearEditText;
 import com.zczczy.leo.fuwuwangapp.sortlistview.PinyinComparator;
@@ -25,7 +24,6 @@ import com.zczczy.leo.fuwuwangapp.sortlistview.SideBar;
 import com.zczczy.leo.fuwuwangapp.sortlistview.SortAdapter;
 import com.zczczy.leo.fuwuwangapp.sortlistview.SortModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
-import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -52,7 +50,7 @@ public class CityChooseActivity extends BaseActivity {
     SideBar sideBar;
 
     @RestService
-    MyRestClient myRestClient;
+    MyDotNetRestClient myRestClient;
 
     @ViewById
     ClearEditText filter_edit;

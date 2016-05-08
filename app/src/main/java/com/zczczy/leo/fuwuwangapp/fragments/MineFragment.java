@@ -13,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.ReviewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 
@@ -50,6 +51,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_review() {
         if (isLogin()) {
+            ReviewActivity_.intent(this).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }

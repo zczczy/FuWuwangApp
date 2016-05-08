@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -65,11 +66,16 @@ public class CouponTransferActivity extends BaseActivity {
     MyErrorHandler myErrorHandler;
 
     @RestService
+    MyDotNetRestClient myDotNetRestClient;
+
+
+    @RestService
     MyRestClient myRestClient;
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        myDotNetRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     @AfterViews
@@ -94,7 +100,7 @@ public class CouponTransferActivity extends BaseActivity {
     //从服务器接口获取会员真实姓名
     @Background
     void getmember() {
-        BaseModelJson<String> bmj = myRestClient.GetUserNameByUlogin(edt_receiver.getText().toString());
+        BaseModelJson<String> bmj = myDotNetRestClient.GetUserNameByUlogin(edt_receiver.getText().toString());
         setmembername(bmj);
     }
 

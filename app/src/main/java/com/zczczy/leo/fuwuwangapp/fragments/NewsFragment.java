@@ -17,12 +17,11 @@ import com.zczczy.leo.fuwuwangapp.activities.FundActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.InformationActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.NoticeActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ServiceActivity_;
-import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.Banner;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.viewgroup.BadgeView;
 
 import org.androidannotations.annotations.AfterInject;
@@ -59,7 +58,7 @@ public class NewsFragment extends BaseFragment implements BaseSliderView.OnSlide
     MyPrefs_ pre;
 
     @RestService
-    MyRestClient myRestClient;
+    MyDotNetRestClient myRestClient;
 
     @StringRes
     String no_net;

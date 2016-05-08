@@ -25,8 +25,8 @@ import com.zczczy.leo.fuwuwangapp.model.Announcement;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyHomedialog;
@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
     TabWidget tabWidget;
 
     @RestService
-    MyRestClient myRestClient;
+    MyDotNetRestClient myRestClient;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -271,7 +271,6 @@ public class MainActivity extends BaseActivity {
     // 通告
     @Background
     void getannouncement() {
-//          myRestClient.setRestErrorHandler(myErrorHandler);
         BaseModelJson<Announcement> bmj = myRestClient.GetAppConfig(1);
         if (bmj != null && bmj.Successful) {
             Getannouncement(bmj.Data.getAppConfigId(), bmj.Data.getAppConfigTitle(), bmj.Data.getAppConfigContent(), bmj.Data.getIsCloseBtn(), bmj.Data.getIsShow());

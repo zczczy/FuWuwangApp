@@ -1,14 +1,24 @@
 package com.zczczy.leo.fuwuwangapp.rest;
 
+import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
+import com.zczczy.leo.fuwuwangapp.model.AllCity;
+import com.zczczy.leo.fuwuwangapp.model.Announcement;
+import com.zczczy.leo.fuwuwangapp.model.Bank;
+import com.zczczy.leo.fuwuwangapp.model.Banner;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CartInfo;
+import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
+import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
+import com.zczczy.leo.fuwuwangapp.model.Experience;
+import com.zczczy.leo.fuwuwangapp.model.FwwUser;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
+import com.zczczy.leo.fuwuwangapp.model.Information;
 import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
 import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
@@ -21,9 +31,23 @@ import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
 import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
+import com.zczczy.leo.fuwuwangapp.model.Notice;
+import com.zczczy.leo.fuwuwangapp.model.OpenAccount;
+import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
+import com.zczczy.leo.fuwuwangapp.model.ProvinceModel;
+import com.zczczy.leo.fuwuwangapp.model.Purse;
+import com.zczczy.leo.fuwuwangapp.model.QueueCompanyDetail;
+import com.zczczy.leo.fuwuwangapp.model.QueueCount;
+import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
+import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
+import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
+import com.zczczy.leo.fuwuwangapp.model.UserFinanceInfo;
+import com.zczczy.leo.fuwuwangapp.model.Volume;
+import com.zczczy.leo.fuwuwangapp.model.Wealth;
+import com.zczczy.leo.fuwuwangapp.model.YpdRecord;
 
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
@@ -50,8 +74,155 @@ import java.util.Map;
  * http://appapia.86fuwuwang.com/
  */
 @Rest(rootUrl = "http://124.254.56.58:8007/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
-        converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
+        converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class}
+)
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
+
+    /**
+     * 版本升级
+     * @param kbn
+     * @return
+     */
+    @Get("api/Content/AppUpdCheck?kbn={kbn}")
+    BaseModelJson<UpdateApp> AppUpdCheck(@Path int kbn);
+
+
+    /**
+     * 获取通知
+     * @param id
+     * @return
+     */
+    @Get("api/Content/GetAppConfig/{id}")
+    BaseModelJson<Announcement>GetAppConfig(@Path int id);
+
+
+    /**
+     * 非会员模块
+     */
+    //公告列表
+    @Get("api/Content/GetNoticeList?PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Notice>> GetNoticeList(@Path int PageIndex, @Path int PageSize);
+
+    //资讯列表
+    @Get("api/Content/GetNewsList?PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Information>> GetInformationList(@Path int PageIndex, @Path int PageSize);
+
+    //麻团基金列表
+    @Get("api/Content/GetMtFuncList?PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Notice>> GetMtFuncList(@Path int PageIndex, @Path int PageSize);
+
+    //联盟商家列表
+    @Get("api/Content/GetCompany?CompanyName={CompanyName}&CityCode={CityCode}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<CooperationMerchant>> GetCompany(@Path String CompanyName, @Path String CityCode, @Path  int PageIndex, @Path int PageSize);
+
+    //体验中心列表
+    @Get("api/Content/GetBusinessList?BusinessName={BusinessName}&CityCode={CityCode}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Experience>> GetBusinessList(@Path String BusinessName, @Path  String CityCode, @Path  int PageIndex, @Path int PageSize);
+
+    //活动列表
+    @Get("api/Content/GetActivity?PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Activity>> GetActivity(@Path int PageIndex, @Path  int PageSize);
+
+
+
+    //新会员注册
+    @Post("api/Content/RegisterNew")
+    BaseModelJson<String> RegisterNew(@Body FwwUser ff);
+
+    //省下拉数据
+    @Get("api/Content/GetProvinceList")
+    BaseModelJson<List<ProvinceModel>> GetProvinceList();
+
+    //市下拉数据(根据省Code)
+    @Get("api/Content/GetCityList?Pno={Pno}")
+    BaseModelJson<List<CityModel>> GetCityList(@Path String Pno);
+
+    //查询开户行名称下拉数据
+    @Get("api/Content/GetBankNumBerList?CityCode={CityCode}&BankKey={BankKey}")
+    BaseModelJson<List<OpenAccount>> GetBankNumBerList(@Path String CityCode, @Path String BankKey);
+
+    //查询银行下拉数据
+    @Get("api/Content/GetBankItemsList")
+    BaseModelJson<List<Bank>> GetBankItemsList();
+
+    //查询APP上方的banner
+    @Get("api/Content/GetTopBanner")
+    BaseModelJson<List<Banner>> GetTopBanner();
+
+    //根据会员账号查询商家名称
+    @Get("api/Content/GetCompanyNameByUlogin?ulogin={ulogin}")
+    BaseModelJson<String> GetCompanyNameByUlogin(@Path String ulogin);
+
+    //根据会员账号查询会员真实姓名
+    @Get("api/Content/GetUserNameByUlogin?ulogin={ulogin}")
+    BaseModelJson<String> GetUserNameByUlogin(@Path String ulogin);
+
+    /**
+     * 会员模块
+     */
+    //获取财富相关信息
+    @Get("api/Member/GetWealth")
+    @RequiresHeader("Token")
+    BaseModelJson<Wealth> GetWealth();
+
+    //获取会员基本信息
+    @Get("api/Member/GetZcUserById")
+    @RequiresHeader("Token")
+    BaseModelJson<UserBaseInfo> GetZcUserById();
+
+
+    //获取会员财务信息
+    @Get("api/Member/GetFinancialById")
+    @RequiresHeader("Token")
+    BaseModelJson<UserFinanceInfo> GetFinancialById();
+
+
+
+    //电子钱包交易明细
+    @Get("api/Member/WalletTransaction?PageIndex={PageIndex}&PageSize={PageSize}")
+    @RequiresHeader("Token")
+    BaseModelJson<PagerResult<Purse>> WalletTransaction(@Path int PageIndex, @Path int PageSize);
+    //我的联盟会员
+    @Get("api/Member/GetUnionMember?PageIndex={PageIndex}&PageSize={PageSize}&PId={PId}")
+    @RequiresHeader("Token")
+    BaseModelJson<PagerResult<Purse>> GetUnionMember(@Path int PageIndex,@Path  int PageSize,@Path  int PId);
+    //查询兑现券数量
+    @Get("api/Member/GetQueueCount")
+    @RequiresHeader("Token")
+    BaseModelJson<Volume> GetQueueCount();
+
+
+
+    //兑现券管理
+    @Get("api/Member/QueueM")
+    @RequiresHeader("Token")
+    BaseModelJson<QueueCount> QueueM();
+
+    //查询50进1兑现券详细
+    @Get("api/Member/QueueMDetail?QueuesInRule={QueuesInRule}")
+    @RequiresHeader("Token")
+    BaseModelJson<QueueMDetailModel> QueueMDetail(@Path String QueuesInRule);
+
+
+    //查询所有城市信息
+    @Get("api/Content/GetAllCity")
+    BaseModelJson<List<AllCity>> GetAllCity();
+
+    //根据城市名称模糊查询当前城市code
+    @Get("api/Content/GetCityCodeByName?Cname={Cname}")
+    BaseModelJson<String> GetCityCodeByName(@Path String Cname);
+
+
+    //查询会员商家队列明细
+    @Get("api/Member/GetCompanyQueueDetail?queueRuleId={queueRuleId}")
+    @RequiresHeader("Token")
+    BaseModelJson<List<QueueCompanyDetail>> GetCompanyQueueDetail(@Path String queueRuleId);
+
+    //查询会员当日已排队信息
+    @Get("api/Member/GetCurrYpdInfo?date={date}&flag={flag}")
+    @RequiresHeader("Token")
+    BaseModelJson<List<YpdRecord>> GetCurrYpdInfo(@Path String date, @Path String flag);
+
 
 
     /**
@@ -534,12 +705,28 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<LogisticsInfo>> getLogistics(@Path String MOrderId);
 
     /**
+     * 查询待评价订单
+     *
      * @param PageIndex 当前页数
-     * @param PageSize 每页显示多少
+     * @param PageSize  每页显示多少
      * @return
      */
     @Get("api/Shop/GetOrderMorderStatus?PageIndex={PageIndex}&PageSize={PageSize}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<PagerResult<LogisticsInfo>> getOrderMorderStatus(@Path int PageIndex, @Path int PageSize);
+    BaseModelJson<PagerResult<OrderDetailModel>> getOrderMorderStatus(@Path int PageIndex, @Path int PageSize);
+
+    /**
+     * 添加商品评论
+     *
+     * @param map XNum 星星
+     *            GoodsInfoId 商品id
+     *            MOrderDetailId 订单详细id
+     *            GoodsCommentsDj 评论等级(1:好评，2：中评，3：差评)
+     *            GoodsCommentsNr 评论内容
+     * @return
+     */
+    @Post("api/Shop/InsertGoodsComments")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel publishReview(@Body Map map);
 
 }

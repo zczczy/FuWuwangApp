@@ -9,10 +9,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -72,13 +72,18 @@ public class ElectronCouponQueueActivity extends BaseActivity {
     MyErrorHandler myErrorHandler;
 
     @RestService
+    MyDotNetRestClient myDotNetRestClient;
+
+
+    @RestService
     MyRestClient myRestClient;
 
-    int flag=0;
+    int flag = 0;
 
     @AfterInject
-    void afterInject(){
+    void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        myDotNetRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     private String guize;
@@ -91,14 +96,13 @@ public class ElectronCouponQueueActivity extends BaseActivity {
         edt_business.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(!b){
+                if (!b) {
                     if (rb_business_queue.isChecked() && rb_business_queue.isChecked() && (!edt_business.getText().toString().isEmpty())) {
-                        if(isNetworkAvailable(ElectronCouponQueueActivity.this)){
+                        if (isNetworkAvailable(ElectronCouponQueueActivity.this)) {
                             AndroidTool.showLoadDialog(ElectronCouponQueueActivity.this);
                             getBusinessName();
-                        }
-                        else{
-                            Toast.makeText(ElectronCouponQueueActivity.this,no_net,Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ElectronCouponQueueActivity.this, no_net, Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         img_line.setVisibility(View.GONE);
@@ -110,14 +114,14 @@ public class ElectronCouponQueueActivity extends BaseActivity {
     }
 
     @AfterTextChange
-    void edt_business(){
-        flag=0;
+    void edt_business() {
+        flag = 0;
     }
 
     //查询商家名称
     @Background
     void getBusinessName() {
-        BaseModelJson<String> bmj = myRestClient.GetCompanyNameByUlogin(edt_business.getText().toString());
+        BaseModelJson<String> bmj = myDotNetRestClient.GetCompanyNameByUlogin(edt_business.getText().toString());
         showBusinessName(bmj);
     }
 
@@ -125,9 +129,9 @@ public class ElectronCouponQueueActivity extends BaseActivity {
     @UiThread
     void showBusinessName(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj!=null) {
+        if (bmj != null) {
             if (bmj.Successful) {
-                flag=1;
+                flag = 1;
                 img_line.setVisibility(View.VISIBLE);
                 edt_user_name.setText(bmj.Data);
                 ll_user_name.setVisibility(View.VISIBLE);
@@ -154,7 +158,7 @@ public class ElectronCouponQueueActivity extends BaseActivity {
     @UiThread
     void showsuccess(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj!=null) {
+        if (bmj != null) {
             if (bmj.Successful) {
                 if ("0".equals(bmj.Data)) {
                     dialog = new MyAlertDialog(this, "操作成功", new View.OnClickListener() {
@@ -171,7 +175,7 @@ public class ElectronCouponQueueActivity extends BaseActivity {
                     finish();
                 }
             } else {
-                MyAlertDialog dialog = new MyAlertDialog(this, bmj.Error,null);
+                MyAlertDialog dialog = new MyAlertDialog(this, bmj.Error, null);
                 dialog.setCancelable(false);
                 dialog.show();
             }
@@ -229,7 +233,7 @@ public class ElectronCouponQueueActivity extends BaseActivity {
      */
     @Click
     void btn_start() {
-        if(isNetworkAvailable(this)){
+        if (isNetworkAvailable(this)) {
             if (rb_fifty_queue.isChecked()) {
                 if (rb_business_queue.isChecked()) {
                     this.guize = "1";
@@ -242,17 +246,17 @@ public class ElectronCouponQueueActivity extends BaseActivity {
                         dialog.setCanceledOnTouchOutside(false);
                         return;
                     }
-                    if(flag==0){
+                    if (flag == 0) {
                         closeInputMethod(ElectronCouponQueueActivity.this);
                         AndroidTool.showCancelabledialog(this);
                         getBusinessName();
                         return;
-                    }else if(paiduinum == "" || paiduinum == null || paiduinum.isEmpty()){
+                    } else if (paiduinum == "" || paiduinum == null || paiduinum.isEmpty()) {
                         MyAlertDialog dialog = new MyAlertDialog(this, "排队数量不能为空", null);
                         dialog.show();
                         dialog.setCanceledOnTouchOutside(false);
                         return;
-                    }else{
+                    } else {
                         closeInputMethod(ElectronCouponQueueActivity.this);
                         AndroidTool.showCancelabledialog(this);
                         getHttp();
@@ -277,9 +281,8 @@ public class ElectronCouponQueueActivity extends BaseActivity {
                 AndroidTool.showCancelabledialog(this);
                 getHttp();
             }
-        }
-        else{
-            Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
         }
     }
 

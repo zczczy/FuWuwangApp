@@ -3,7 +3,6 @@ package com.zczczy.leo.fuwuwangapp.activities;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -181,8 +180,8 @@ public class TransferActivity extends BaseActivity {
     @Background
     void getBind() {
         String token = pre.token().get();
-        myRestClient.setHeader("Token", token);
-        BaseModelJson<UserBaseInfo> bmj = myRestClient.GetZcUserById();
+        newMyRestClient.setHeader("Token", token);
+        BaseModelJson<UserBaseInfo> bmj = newMyRestClient.GetZcUserById();
         aftergetBind(bmj);
     }
 
@@ -262,7 +261,7 @@ public class TransferActivity extends BaseActivity {
 
     @Background
     void getmember() {
-        BaseModelJson<String> bmj = myRestClient.GetUserNameByUlogin(edt_receiver.getText().toString());
+        BaseModelJson<String> bmj = newMyRestClient.GetUserNameByUlogin(edt_receiver.getText().toString());
         setmembername(bmj);
     }
 

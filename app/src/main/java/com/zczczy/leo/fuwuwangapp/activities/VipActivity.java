@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -12,7 +11,6 @@ import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.ImageUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
@@ -47,8 +45,6 @@ public class VipActivity extends BaseActivity {
     @StringRes
     String my_lottery_record;
 
-    @RestService
-    MyRestClient myRestClient;
 
     @RestService
     MyDotNetRestClient newMyRestClient;
@@ -68,7 +64,6 @@ public class VipActivity extends BaseActivity {
 
     @AfterInject
     void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
         newMyRestClient.setRestErrorHandler(myErrorHandler);
     }
 
@@ -83,8 +78,8 @@ public class VipActivity extends BaseActivity {
     @Background
     void getBind() {
         String token = pre.token().get();
-        myRestClient.setHeader("Token", token);
-        BaseModelJson<UserBaseInfo> bmj = myRestClient.GetZcUserById();
+        newMyRestClient.setHeader("Token", token);
+        BaseModelJson<UserBaseInfo> bmj = newMyRestClient.GetZcUserById();
         setBind(bmj);
     }
 

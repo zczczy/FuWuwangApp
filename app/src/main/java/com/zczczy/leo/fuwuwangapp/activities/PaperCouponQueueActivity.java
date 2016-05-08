@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -74,11 +75,15 @@ public class PaperCouponQueueActivity extends BaseActivity {
     MyErrorHandler myErrorHandler;
 
     @RestService
+    MyDotNetRestClient myDotNetRestClient;
+
+    @RestService
     MyRestClient myRestClient;
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        myDotNetRestClient.setRestErrorHandler(myErrorHandler);
     }
 
     private String guize;
@@ -99,7 +104,7 @@ public class PaperCouponQueueActivity extends BaseActivity {
     //查询商家名称
     @Background
     void getBusinessName() {
-        BaseModelJson<String> bmj = myRestClient.GetCompanyNameByUlogin(edt_business.getText().toString());
+        BaseModelJson<String> bmj = myDotNetRestClient.GetCompanyNameByUlogin(edt_business.getText().toString());
         showBusinessName(bmj);
     }
 
