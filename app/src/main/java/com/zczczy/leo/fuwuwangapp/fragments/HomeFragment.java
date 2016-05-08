@@ -73,7 +73,7 @@ public class HomeFragment extends BaseFragment {
     OttoBus bus;
 
     @ColorRes
-    int white, home_search_text_scrolled;
+    int white_color, home_search_text_scrolled;
 
     Drawable title_search, title_search_scrolled;
 
@@ -151,7 +151,7 @@ public class HomeFragment extends BaseFragment {
                         myTitleBar.setNavigationIcon(R.drawable.title_category);
                         myTitleBar.setRightButtonIcon(R.drawable.title_cart);
                         view.setBackgroundResource(R.drawable.title_selector);
-                        textView.setHintTextColor(white);
+                        textView.setHintTextColor(white_color);
                         textView.setCompoundDrawables(title_search, null, null, null);
                     } else {
                         myTitleBar.setNavigationIcon(R.drawable.title_category_scrolled);
@@ -273,10 +273,14 @@ public class HomeFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (hidden) {
             bus.unregister(this);
-            itemView.stopAutoCycle();
+            if (itemView != null) {
+                itemView.stopAutoCycle();
+            }
         } else {
             bus.register(this);
-            itemView.startAutoCycle();
+            if (itemView != null) {
+                itemView.startAutoCycle();
+            }
         }
     }
 }

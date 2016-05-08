@@ -17,12 +17,13 @@
     <color name="home_rmb">#dd2727</color>
     <color name="home_special">#ea5404</color>
 
-
+    <!--home title 透明度变化 专用-->
+    <color name="white_color">#ffffff</color>
 
     <!-- common  -->
     <color name="background_color">#f5f5f5</color>
     <color name="home_background">#f0f0f0</color>
-    <color name="white_color">#ffffff</color>
+
     <color name="major_color">#f6ab00</color>
     <color name="major_text_color">#525252</color>
     <color name="sub_text_color">#888888</color>

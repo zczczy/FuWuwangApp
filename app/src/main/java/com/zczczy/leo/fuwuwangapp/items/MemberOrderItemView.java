@@ -9,10 +9,13 @@ import android.widget.TextView;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.LogisticsInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.OrderDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.UmspayActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
+import com.zczczy.leo.fuwuwangapp.model.UnionPay;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
@@ -47,7 +50,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
 
     @Click
     void btn_canceled() {
-
+        OrderDetailActivity_.intent(context).orderId(_data.MOrderId).start();
     }
 
     @Click
@@ -62,7 +65,11 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
 
     @Click
     void btn_pay() {
-
+        UnionPay order = new UnionPay();
+        order.ChrCode = _data.chrCode;
+        order.MerSign = _data.merSign;
+        order.TransId = _data.transId;
+        UmspayActivity_.intent(context).MOrderId(_data.MOrderId).order(order).start();
     }
 
     @Click

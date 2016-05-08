@@ -14,17 +14,6 @@
     </item>
     <item android:state_pressed="false">
         <layer-list>
-            <!--
-            SHADOW LAYER
-            <item >
-                <shape>
-                    <solid android:color="#66000000" />
-                    <corners android:radius="3dp"/>
-                </shape>
-            </item>
-            -->
-            <!-- CONTENT LAYER -->
-            <!-- 相当于padding -->
             <item>
                 <shape>
                     <solid android:color="#ffffff" />

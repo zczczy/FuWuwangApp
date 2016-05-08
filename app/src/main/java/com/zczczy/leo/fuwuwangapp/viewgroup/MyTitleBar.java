@@ -461,7 +461,7 @@ public class MyTitleBar extends RelativeLayout {
                 if (mLeftTextColor != 0) {
                     mLeftTextView.setTextColor(mLeftTextColor);
                 } else {
-                    mLeftTextView.setTextColor(getResources().getColor(R.color.white));
+                    mLeftTextView.setTextColor(getResources().getColor(R.color.white_color));
                 }
                 if (mLeftTextSize != 0) {
                     mLeftTextView.setTextSize(mLeftTextSize);
@@ -524,7 +524,7 @@ public class MyTitleBar extends RelativeLayout {
                 if (mRightTextColor != 0) {
                     mRightTextView.setTextColor(mRightTextColor);
                 } else {
-                    mRightTextView.setTextColor(getResources().getColor(R.color.white));
+                    mRightTextView.setTextColor(getResources().getColor(R.color.white_color));
                 }
                 if (mRightTextSize != 0) {
                     mRightTextView.setTextSize(mRightTextSize);
@@ -583,7 +583,7 @@ public class MyTitleBar extends RelativeLayout {
                 if (mTitleTextColor != 0) {
                     mTitleTextView.setTextColor(mTitleTextColor);
                 } else {
-                    mTitleTextView.setTextColor(getResources().getColor(R.color.white));
+                    mTitleTextView.setTextColor(getResources().getColor(R.color.white_color));
                 }
                 if (mTitleSize != 0) {
                     mTitleTextView.setTextSize(mTitleSize);

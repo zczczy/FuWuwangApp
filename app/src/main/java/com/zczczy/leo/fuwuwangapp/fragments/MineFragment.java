@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,9 @@ public class MineFragment extends BaseFragment {
 
     @ViewById
     TextView txt_name, txt_address;
+
+    @ViewById
+    LinearLayout ll_color_control;
 
     @ViewById
     RelativeLayout rl_vip, rl_setting;
@@ -137,7 +141,7 @@ public class MineFragment extends BaseFragment {
             if (MyApplication.VIP.equals(pre.userType().get())) {
                 rl_vip.setVisibility(View.VISIBLE);
                 img_vip_icon.setVisibility(View.VISIBLE);
-                rl_setting.setVisibility(View.GONE);
+                rl_setting.setVisibility(View.INVISIBLE);
             } else {
                 rl_vip.setVisibility(View.INVISIBLE);
                 img_vip_icon.setVisibility(View.INVISIBLE);

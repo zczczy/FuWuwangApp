@@ -23,6 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/home_background"
-        app:recyclerviewEmptyView="@layout/lottery_empty_view"
+        app:recyclerviewEmptyView="@layout/empty_view"
         app:theme="@style/AlertDialog.AppCompat.Light" />
 </LinearLayout>

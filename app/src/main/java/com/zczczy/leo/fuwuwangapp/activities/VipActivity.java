@@ -227,6 +227,4 @@ public class VipActivity extends BaseActivity {
             AndroidTool.showToast(this, no_net);
         }
     }
-
-
 }
