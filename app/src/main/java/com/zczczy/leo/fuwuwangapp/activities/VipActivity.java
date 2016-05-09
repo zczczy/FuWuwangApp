@@ -3,6 +3,7 @@ package com.zczczy.leo.fuwuwangapp.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.TextView;
@@ -165,7 +166,11 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     @Click
     void ll_scan() {
         if (isNetworkAvailable(this)) {
-            requestCodeQrcodePermissions();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestCodeQrcodePermissions();
+            } else {
+                scan();
+            }
         } else {
             AndroidTool.showToast(this, no_net);
         }

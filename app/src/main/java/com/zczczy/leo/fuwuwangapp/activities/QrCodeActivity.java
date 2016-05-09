@@ -1,6 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.Manifest;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,7 +94,11 @@ public class QrCodeActivity extends BaseActivity implements EasyPermissions.Perm
     @Click
     void btn_coupon_scan() {
         if (isNetworkAvailable(this)) {
-            requestCodeQrcodePermissions();
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                requestCodeQrcodePermissions();
+            }else{
+                ScanActivity_.intent(this).startForResult(1000);
+            }
         } else {
             Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
         }
@@ -143,7 +148,6 @@ public class QrCodeActivity extends BaseActivity implements EasyPermissions.Perm
     private void requestCodeQrcodePermissions() {
         String[] perms = {Manifest.permission.CAMERA, Manifest.permission.FLASHLIGHT};
         if (!EasyPermissions.hasPermissions(this, perms)) {
-            Log.e("requestCod", "1111111111111111111");
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", 1, perms);
         } else {
             ScanActivity_.intent(this).startForResult(1000);
