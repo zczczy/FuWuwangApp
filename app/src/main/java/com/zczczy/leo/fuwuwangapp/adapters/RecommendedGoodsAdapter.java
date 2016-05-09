@@ -59,9 +59,18 @@ public class RecommendedGoodsAdapter extends BaseUltimateRecyclerViewAdapter<Reb
     @Override
     @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
-        BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bmj;
+        BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bmj = null;
         this.isRefresh = isRefresh;
-        bmj = myRestClient.getRecommendedGoods(pageIndex, pageSize);
+
+        switch (Integer.valueOf(objects[0].toString())) {
+            case 1:
+                bmj = myRestClient.getRecommendedGoods(pageIndex, pageSize);
+                break;
+            case 2:
+                bmj = myRestClient.getGoodsInfoByCity(objects[1] == null ? "" : objects[1].toString(), pageIndex, pageSize);
+                break;
+        }
+
         afterGetData(bmj);
     }
 

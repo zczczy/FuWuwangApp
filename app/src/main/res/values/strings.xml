@@ -342,7 +342,14 @@
 
     <string name="text_logistics">物流信息</string>
 
-
+    <!--service 服务-->
+    <string name="food">美食</string>
+    <string name="longbi">龙币兑换区</string>
+    <string name="yule">休闲娱乐</string>
+    <string name="hotel">酒店</string>
+    <string name="liren">丽人</string>
+    <string name="around">周边游玩</string>
+    <string name="suggest">精彩推荐</string>
 
 
 </resources>

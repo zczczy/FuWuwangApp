@@ -14,7 +14,10 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.liulishuo.magicprogresswidget.MagicProgressCircle;
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.CategoryFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.HomeFragment_;
@@ -27,6 +30,7 @@ import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.service.LocationService;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyHomedialog;
@@ -34,6 +38,7 @@ import com.zczczy.leo.fuwuwangapp.views.AnimTextView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
@@ -57,7 +62,7 @@ import java.util.Date;
  * Created by Leo on 2016/4/27.
  */
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements BDLocationListener {
 
     @ViewById
     FragmentTabHost tabHost;
@@ -77,6 +82,9 @@ public class MainActivity extends BaseActivity {
     @Pref
     MyPrefs_ pre;
 
+    @App
+    MyApplication myApp;
+
     //导航
     Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class, NewsFragment_.class, MineFragment_.class};
 
@@ -87,6 +95,8 @@ public class MainActivity extends BaseActivity {
 
     @StringRes
     String progress_de;
+
+    LocationService locationService;
 
     BaseModelJson<UpdateApp> appInfo;
 
@@ -119,11 +129,15 @@ public class MainActivity extends BaseActivity {
         drawables[3] = news_selector;
         drawables[4] = mine_selector;
         myRestClient.setRestErrorHandler(myErrorHandler);
+        locationService = myApp.locationService;
     }
 
     @AfterViews
     void afterView() {
         initTab();
+        locationService.registerListener(this);
+        locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        locationService.start();
         getUpdateApp();
     }
 
@@ -297,4 +311,12 @@ public class MainActivity extends BaseActivity {
             System.exit(-1);
         }
     }
+
+
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        pre.locationAddress().put(bdLocation.getCity());
+        AndroidTool.showToast(this, bdLocation.getCity());
+    }
+
 }

@@ -42,6 +42,7 @@ import com.zczczy.leo.fuwuwangapp.model.QueueCount;
 import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
+import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
 import com.zczczy.leo.fuwuwangapp.model.UserFinanceInfo;
@@ -80,6 +81,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 版本升级
+     *
      * @param kbn
      * @return
      */
@@ -89,12 +91,12 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 获取通知
+     *
      * @param id
      * @return
      */
     @Get("api/Content/GetAppConfig/{id}")
-    BaseModelJson<Announcement>GetAppConfig(@Path int id);
-
+    BaseModelJson<Announcement> GetAppConfig(@Path int id);
 
     /**
      * 非会员模块
@@ -113,17 +115,15 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     //联盟商家列表
     @Get("api/Content/GetCompany?CompanyName={CompanyName}&CityCode={CityCode}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<CooperationMerchant>> GetCompany(@Path String CompanyName, @Path String CityCode, @Path  int PageIndex, @Path int PageSize);
+    BaseModelJson<PagerResult<CooperationMerchant>> GetCompany(@Path String CompanyName, @Path String CityCode, @Path int PageIndex, @Path int PageSize);
 
     //体验中心列表
     @Get("api/Content/GetBusinessList?BusinessName={BusinessName}&CityCode={CityCode}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<Experience>> GetBusinessList(@Path String BusinessName, @Path  String CityCode, @Path  int PageIndex, @Path int PageSize);
+    BaseModelJson<PagerResult<Experience>> GetBusinessList(@Path String BusinessName, @Path String CityCode, @Path int PageIndex, @Path int PageSize);
 
     //活动列表
     @Get("api/Content/GetActivity?PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<Activity>> GetActivity(@Path int PageIndex, @Path  int PageSize);
-
-
+    BaseModelJson<PagerResult<Activity>> GetActivity(@Path int PageIndex, @Path int PageSize);
 
     //新会员注册
     @Post("api/Content/RegisterNew")
@@ -177,21 +177,20 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<UserFinanceInfo> GetFinancialById();
 
 
-
     //电子钱包交易明细
     @Get("api/Member/WalletTransaction?PageIndex={PageIndex}&PageSize={PageSize}")
     @RequiresHeader("Token")
     BaseModelJson<PagerResult<Purse>> WalletTransaction(@Path int PageIndex, @Path int PageSize);
+
     //我的联盟会员
     @Get("api/Member/GetUnionMember?PageIndex={PageIndex}&PageSize={PageSize}&PId={PId}")
     @RequiresHeader("Token")
-    BaseModelJson<PagerResult<Purse>> GetUnionMember(@Path int PageIndex,@Path  int PageSize,@Path  int PId);
+    BaseModelJson<PagerResult<Purse>> GetUnionMember(@Path int PageIndex, @Path int PageSize, @Path int PId);
+
     //查询兑现券数量
     @Get("api/Member/GetQueueCount")
     @RequiresHeader("Token")
     BaseModelJson<Volume> GetQueueCount();
-
-
 
     //兑现券管理
     @Get("api/Member/QueueM")
@@ -203,7 +202,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader("Token")
     BaseModelJson<QueueMDetailModel> QueueMDetail(@Path String QueuesInRule);
 
-
     //查询所有城市信息
     @Get("api/Content/GetAllCity")
     BaseModelJson<List<AllCity>> GetAllCity();
@@ -211,7 +209,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     //根据城市名称模糊查询当前城市code
     @Get("api/Content/GetCityCodeByName?Cname={Cname}")
     BaseModelJson<String> GetCityCodeByName(@Path String Cname);
-
 
     //查询会员商家队列明细
     @Get("api/Member/GetCompanyQueueDetail?queueRuleId={queueRuleId}")
@@ -222,8 +219,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Member/GetCurrYpdInfo?date={date}&flag={flag}")
     @RequiresHeader("Token")
     BaseModelJson<List<YpdRecord>> GetCurrYpdInfo(@Path String date, @Path String flag);
-
-
 
     /**
      * 功能：订阅安全信使
@@ -282,7 +277,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param UserName 用户名
      * @return String
      */
-
     @Get("api/SMS/SubscriptionExist?UserName={UserName}")
     BaseModelJson<String> SubscriptionExist(@Path String UserName);
 
@@ -293,7 +287,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param UserName 用户名
      * @return 获取电话
      */
-
     @Get("api/SMS/GetMobile?UserName={UserName}")
     BaseModelJson<String> GetMobile(@Path String UserName);
 
@@ -337,7 +330,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Lottery/Lottery?UserName={UserName}")
     BaseModelJson<Lottery> lottery(@Path String UserName);
 
-
     /**
      * 查询会员自己的中奖信息
      *
@@ -360,7 +352,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Member/GetMemberElectronicMoney")
     @RequiresHeader(value = "Token")
     BaseModelJson<Double> GetMemberElectronicMoney();
-
 
     /**
      * 获取电子币
@@ -406,7 +397,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetRecommendedGoods?PageIndex={PageIndex}&PageSize={PageSize}")
     BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getRecommendedGoods(@Path int PageIndex, @Path int PageSize);
 
-
     /**
      * 查询用户购物车信息
      *
@@ -437,7 +427,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetGoodsCommentsByGoodsInfoId?PageIndex={PageIndex}&PageSize={PageSize}&GoodsInfoId={GoodsInfoId}")
     BaseModelJson<PagerResult<GoodsCommentsModel>> getGoodsCommentsByGoodsInfoId(@Path String GoodsInfoId, @Path int PageIndex, @Path int PageSize);
 
-
     /**
      * @param UserName  登录账号
      * @param UserPw    登录密码
@@ -461,7 +450,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/ShopContent/Register")
     BaseModel register(@Body Map map);
 
-
     /**
      * 查询分类
      *
@@ -471,7 +459,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetGoodsTypeByPid?GoodsTypePid={GoodsTypePid}")
     BaseModelJson<List<GoodsTypeModel>> getGoodsTypeByPid(@Path String GoodsTypePid);
 
-
     /**
      * 根据店铺ID查询店铺详细
      *
@@ -480,7 +467,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/ShopContent/GetStoreDetailById?StoreInfoId={StoreInfoId}")
     BaseModelJson<StoreDetailModel> getStoreDetailById(@Path String StoreInfoId);
-
 
     /**
      * 查询省下拉数据
@@ -507,6 +493,50 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<NewArea>> getAreaListByCityId(@Path String CityId);
 
     /**
+     * 根据区域查询商圈
+     *
+     * @return
+     */
+    @Get("api/ShopContent/GetStreetInfoByAreaId?AreaId={AreaId}")
+    BaseModelJson<List<StreetInfo>> getStreetInfoByAreaId(@Path String AreaId);
+
+    /**
+     * 根据 商业圈,商品类别 查询商品
+     *
+     * @param StreetInfoId 商圈id
+     * @param GoodsTypeId  分类id
+     * @param PageIndex    当前页
+     * @param PageSize     条数
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsInfo?StreetInfoId={StreetInfoId}&GoodsTypeId={GoodsTypeId}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Goods>> GetGoodsInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int PageIndex, @Path int PageSize);
+
+    /**
+     * 根据 商业圈,商品类别 查询店铺
+     *
+     * @param StreetInfoId 商圈id
+     * @param GoodsTypeId  分类id
+     * @param PageIndex    当前页
+     * @param PageSize     条数
+     * @return
+     */
+    @Get("api/ShopContent/GetStoreInfo?StreetInfoId={StreetInfoId}&GoodsTypeId={GoodsTypeId}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Goods>> GetStoreInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int PageIndex, @Path int PageSize);
+
+    /**
+     * 查询服务类推荐商品
+     *
+     * @param CityId    城市id 全国传空
+     * @param PageIndex 当前页号
+     * @param PageSize  条数
+     * @return
+     * @see RebuiltRecommendedGoods
+     */
+    @Get("api/ShopContent/GetGoodsInfoByCity?CityId={CityId}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getGoodsInfoByCity(@Path String CityId, @Path int PageIndex, @Path int PageSize);
+
+    /**
      * @param GoodsTypeId 商品分类id
      * @param GoodsType   是否是服务类商品(1:服务类，2：邮寄类)
      * @param GodosName   商品名称
@@ -519,7 +549,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetGoodsByGoodsTypeId?GoodsTypeId={GoodsTypeId}&GoodsType={GoodsType}&GodosName={GodosName}&sort={sort}&desc={desc}&PageIndex={PageIndex}&PageSize={PageSize}")
     BaseModelJson<PagerResult<Goods>> getGoodsByGoodsTypeId(@Path int GoodsTypeId, @Path String GoodsType, @Path String GodosName, @Path int sort, @Path String desc, @Path int PageIndex, @Path int PageSize);
 
-
     /**
      * 单商品生成临时订单信息
      *
@@ -530,7 +559,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Shop/CreateTempGoodsOrderInfo?GoodsInfoId={GoodsInfoId}&number={number}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<ConfirmOrderModel> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number);
-
 
     /**
      * 购物车生成临时订单信息
@@ -582,7 +610,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel updDefaultReceiptAddress(@Body Map map);
 
-
     /**
      * 删除收货地址
      *
@@ -592,7 +619,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/DelReceiptAddress")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel delReceiptAddress(@Body Map map);
-
 
     /**
      * 查询收货地址
@@ -623,7 +649,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/SubShoppingCart")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel subShoppingCart(@Body Map map);
-
 
     /**
      * 修改会员信息
@@ -684,7 +709,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/CreateOrderInfo")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<ConfirmOrderModel> createOrderInfo(@Body Map map);
-
 
     /**
      * 根据订单ID查询订单信息

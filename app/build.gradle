@@ -12,6 +12,7 @@ buildscript {
     }
 }
 
+
 apt {
     arguments {
         androidManifestFile variant.outputs[0]?.processResources?.manifestFile
@@ -53,10 +54,19 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile files('libs/locSDK_6.23.jar')
+    compile files('libs/baidumapapi_v3_5_0.jar')
     //http://docs.spring.io/spring-android/docs/
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.android.support:appcompat-v7:23.3.0'

@@ -95,7 +95,6 @@ public class HomeFragment extends BaseFragment {
 
     int progress;
 
-
     @AfterInject
     void afterInject() {
 
@@ -224,7 +223,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, 10, isRefresh);
+        myAdapter.getMoreData(pageIndex, 10, isRefresh,1);
     }
 
     void refreshingMaterial() {

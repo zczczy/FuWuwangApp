@@ -123,4 +123,19 @@ public class MyBackgroundTask {
         }
         bus.post(bmj);
     }
+
+    @Background
+    public void getServiceAd() {
+        afterGetServiceAd(myRestClient.getAdvertByKbn("2"));
+    }
+
+    @UiThread
+    void afterGetServiceAd(BaseModelJson<List<AdvertModel>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            app.setServiceAdvertModelList(bmj.Data);
+        } else {
+            bmj = new BaseModelJson<>();
+        }
+    }
+
 }

@@ -27,8 +27,8 @@ public interface MyPrefs {
     @DefaultString("")
     String realname();
 
-//    @DefaultString("大连市")
-//    String locationAddress();
+    @DefaultString("")
+    String locationAddress();
 //
 //    @DefaultString("全国")
 //    String address();
