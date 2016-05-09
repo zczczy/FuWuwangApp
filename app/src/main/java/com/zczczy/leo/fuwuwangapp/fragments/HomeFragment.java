@@ -93,6 +93,8 @@ public class HomeFragment extends BaseFragment {
 
     HomeAdvertisementItemView itemView;
 
+    int progress;
+
 
     @AfterInject
     void afterInject() {
@@ -145,7 +147,7 @@ public class HomeFragment extends BaseFragment {
                 if (scrollY < 0) {
                     myTitleBar.getBackground().setAlpha(0);
                 } else if (scrollY < 500) {
-                    int progress = (scrollY / 2);//255
+                    progress = (scrollY / 2);//255
                     myTitleBar.getBackground().setAlpha(progress);
                     if (scrollY < 250) {
                         myTitleBar.setNavigationIcon(R.drawable.title_category);
@@ -272,11 +274,13 @@ public class HomeFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
+            myTitleBar.getBackground().setAlpha(250);
             bus.unregister(this);
             if (itemView != null) {
                 itemView.stopAutoCycle();
             }
         } else {
+            myTitleBar.getBackground().setAlpha(progress);
             bus.register(this);
             if (itemView != null) {
                 itemView.startAutoCycle();

@@ -18,6 +18,7 @@
         android:id="@+id/ultimate_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/common_white_bg"
         app:recyclerviewEmptyView="@layout/empty_view"
         app:recyclerviewScrollbars="vertical"
         app:theme="@style/AlertDialog.AppCompat.Light" />
