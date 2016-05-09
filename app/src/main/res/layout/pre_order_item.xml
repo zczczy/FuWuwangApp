@@ -52,15 +52,13 @@
                     <TextView
                         android:id="@+id/txt_cart_goods_price"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_rmb" />
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/txt_cart_goods_lb_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_lb" />
+                        android:layout_marginTop="5dp" />
                 </LinearLayout>
 
                 <TextView
@@ -72,6 +70,15 @@
                     android:gravity="right"
                     android:text="X1" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_ticket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/text_ticket_no"
+                android:visibility="gone" />
+
         </LinearLayout>
     </LinearLayout>
 

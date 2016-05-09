@@ -28,4 +28,5 @@ public class BuyCartInfoList implements Serializable{
     public double GoodsPrice;
     public int GoodsLBPrice;
     public String GodosName;
+    public String XfNo;
 }

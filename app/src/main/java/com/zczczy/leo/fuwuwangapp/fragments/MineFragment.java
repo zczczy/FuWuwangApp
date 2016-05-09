@@ -141,9 +141,9 @@ public class MineFragment extends BaseFragment {
             if (MyApplication.VIP.equals(pre.userType().get())) {
                 rl_vip.setVisibility(View.VISIBLE);
                 img_vip_icon.setVisibility(View.VISIBLE);
-                rl_setting.setVisibility(View.INVISIBLE);
+                rl_setting.setVisibility(View.GONE);
             } else {
-                rl_vip.setVisibility(View.INVISIBLE);
+                rl_vip.setVisibility(View.GONE);
                 img_vip_icon.setVisibility(View.INVISIBLE);
                 rl_setting.setVisibility(View.VISIBLE);
             }

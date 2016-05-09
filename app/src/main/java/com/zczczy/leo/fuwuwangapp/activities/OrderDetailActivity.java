@@ -1,5 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
+import com.zczczy.leo.fuwuwangapp.model.UnionPay;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -21,6 +24,7 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
@@ -46,6 +50,9 @@ public class OrderDetailActivity extends BaseActivity {
     @ViewById
     RelativeLayout ll_lb, ll_pay;
 
+    @ViewById
+    Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished;
+
     @StringRes
     String text_order_no, txt_shipping_address, dian_balance, home_rmb, home_lb, txt_shipping, text_count;
 
@@ -60,6 +67,8 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Extra
     String orderId;
+
+    MAppOrder mAppOrder;
 
     @AfterInject
     void afterInject() {
@@ -88,7 +97,8 @@ public class OrderDetailActivity extends BaseActivity {
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
         } else {
-            txt_order_no.setText(bmj.Data.MOrderNo);
+            mAppOrder = bmj.Data;
+            txt_order_no.setText(String.format(text_order_no, bmj.Data.MOrderNo));
             tv_shipping.setText(String.format(txt_shipping, bmj.Data.ShrName));
             txt_phone.setText(bmj.Data.Lxdh);
             tv_shipping_address.setText(String.format(txt_shipping_address, bmj.Data.DetailAddress));
@@ -104,6 +114,7 @@ public class OrderDetailActivity extends BaseActivity {
                 buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
                 buyCartInfoList.GodosName = orderDetailModel.ProductName;
                 buyCartInfoList.ProductCount = orderDetailModel.ProductNum == null ? 0 : Integer.valueOf(orderDetailModel.ProductNum);
+                buyCartInfoList.XfNo = orderDetailModel.XfNo;
                 PreOrderItemView preOrderItemView = PreOrderItemView_.build(this);
                 preOrderItemView.init(buyCartInfoList);
                 ll_pre_order_item.addView(preOrderItemView, i);
@@ -130,7 +141,57 @@ public class OrderDetailActivity extends BaseActivity {
                 temp = "不返券+";
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
+
+
+            if (bmj.Data.MorderStatus == MyApplication.DUEPAYMENT) {
+                btn_cancel_order.setVisibility(View.VISIBLE);
+                btn_pay.setVisibility(View.VISIBLE);
+                btn_logistics.setVisibility(View.GONE);
+                btn_finish.setVisibility(View.GONE);
+                btn_canceled.setVisibility(View.GONE);
+            } else if (bmj.Data.MorderStatus == MyApplication.PAID) {
+                btn_logistics.setVisibility(View.VISIBLE);
+                btn_finish.setVisibility(View.VISIBLE);
+                btn_cancel_order.setVisibility(View.GONE);
+                btn_pay.setVisibility(View.GONE);
+                btn_canceled.setVisibility(View.GONE);
+            } else if (bmj.Data.MorderStatus == MyApplication.CANCEL) {
+                btn_canceled.setVisibility(View.VISIBLE);
+                btn_logistics.setVisibility(View.GONE);
+                btn_finish.setVisibility(View.GONE);
+                btn_cancel_order.setVisibility(View.GONE);
+                btn_pay.setVisibility(View.GONE);
+            } else if (bmj.Data.MorderStatus == MyApplication.SEND) {
+                btn_logistics.setVisibility(View.VISIBLE);
+                btn_finish.setVisibility(View.VISIBLE);
+                btn_cancel_order.setVisibility(View.GONE);
+                btn_pay.setVisibility(View.GONE);
+                btn_canceled.setVisibility(View.GONE);
+            } else if (bmj.Data.MorderStatus == MyApplication.CONFIRM) {
+
+            } else if (bmj.Data.MorderStatus == MyApplication.FINISH) {
+
+            }
+
         }
+
     }
+
+
+    @Click
+    void btn_logistics() {
+        LogisticsInfoActivity_.intent(this).MOrderId(mAppOrder.MOrderId).start();
+    }
+
+    @Click
+    void btn_pay() {
+        UnionPay order = new UnionPay();
+        order.ChrCode = mAppOrder.chrCode;
+        order.MerSign = mAppOrder.merSign;
+        order.TransId = mAppOrder.transId;
+        UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).start();
+        finish();
+    }
+
 
 }
