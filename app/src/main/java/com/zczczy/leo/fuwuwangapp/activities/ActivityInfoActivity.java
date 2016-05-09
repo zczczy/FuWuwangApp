@@ -47,9 +47,6 @@ public class ActivityInfoActivity extends BaseActivity {
     @Extra
     Integer aid;
 
-    @Pref
-    MyPrefs_ pre;
-
     WebSettings settings;
 
     @Bean

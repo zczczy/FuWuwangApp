@@ -38,9 +38,6 @@ public class LoginActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
     @ViewById
     RadioButton gal_id_normal;
 

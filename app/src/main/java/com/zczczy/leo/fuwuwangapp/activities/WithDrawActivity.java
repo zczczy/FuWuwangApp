@@ -53,9 +53,6 @@ public class WithDrawActivity extends BaseActivity {
     @ViewById
     Button btn_withdraw;
 
-    @Pref
-    MyPrefs_ pre;
-
     @StringRes
     String txt_withdraw_title;
 

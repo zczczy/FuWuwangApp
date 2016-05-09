@@ -11,14 +11,13 @@ import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDivi
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
-import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.items.ServiceHeaderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -29,7 +28,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -57,9 +55,6 @@ public class ServiceFragment extends BaseFragment {
 
     @RestService
     MyDotNetRestClient myRestClient;
-
-    @Pref
-    MyPrefs_ pre;
 
     @Bean
     OttoBus bus;
@@ -118,10 +113,31 @@ public class ServiceFragment extends BaseFragment {
             }
         }).paint(paint).build());
         refreshingMaterial();
+        setListener();
     }
 
+    void setListener() {
+        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkUserIsLogin()) {
+                    CartActivity_.intent(ServiceFragment.this).start();
+                } else {
+                    AndroidTool.showToast(ServiceFragment.this, "请先登录");
+                }
+            }
+        });
+        myTitleBar.setLeftTextOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, 10, isRefresh, 2,"");
+        myAdapter.getMoreData(pageIndex, 10, isRefresh, 2, "");
     }
 
     void refreshingMaterial() {

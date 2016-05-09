@@ -43,9 +43,6 @@ public class FasterRegisterActivity extends BaseActivity {
     @ViewById
     TextView id_num, txt_name;
 
-    @Pref
-    MyPrefs_ pre;
-
     @RestService
     MyRestClient myRestClient;
 

@@ -56,9 +56,6 @@ public class RegisterActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
     Map<String, String> map;
 
     @AfterInject

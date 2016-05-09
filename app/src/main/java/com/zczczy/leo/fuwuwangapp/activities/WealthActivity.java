@@ -39,9 +39,6 @@ public class WealthActivity extends BaseActivity {
     @StringRes
     String txt_w_wealth;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

@@ -56,9 +56,6 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     @RestService
     MyDotNetRestClient newMyRestClient;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

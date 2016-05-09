@@ -70,9 +70,6 @@ public class PreOrderActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
     @ViewById
     CheckBox use_dian;
 

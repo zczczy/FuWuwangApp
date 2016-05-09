@@ -55,7 +55,6 @@ public class MyBackgroundTask {
     @Bean
     OttoBus bus;
 
-
     @Pref
     MyPrefs_ pre;
 

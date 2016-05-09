@@ -48,9 +48,6 @@ public class MineFragment extends BaseFragment {
     @ViewById
     ImageView img_avatar;
 
-    @Pref
-    MyPrefs_ pre;
-
     @AfterViews
     void afterView() {
         setData();

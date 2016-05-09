@@ -25,9 +25,6 @@ public class QueueSeeActivity  extends BaseActivity {
     @ViewById
     MyTitleBar myTitleBar;
 
-    @Pref
-    MyPrefs_ pre;
-
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 

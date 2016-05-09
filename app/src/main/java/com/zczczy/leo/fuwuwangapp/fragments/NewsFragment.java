@@ -54,9 +54,6 @@ public class NewsFragment extends BaseFragment implements BaseSliderView.OnSlide
     @ViewById
     LinearLayout ll_notice;
 
-    @Pref
-    MyPrefs_ pre;
-
     @RestService
     MyDotNetRestClient myRestClient;
 

@@ -53,9 +53,6 @@ public class PublishReviewActivity extends BaseActivity {
     @Extra
     OrderDetailModel model;
 
-    @Pref
-    MyPrefs_ pre;
-
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);

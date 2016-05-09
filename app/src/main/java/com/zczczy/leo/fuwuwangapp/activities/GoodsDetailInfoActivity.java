@@ -39,10 +39,8 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
-import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Leo on 2016/4/29.
@@ -70,9 +68,6 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @ViewById
     CardView card_buy;
-
-    @Pref
-    MyPrefs_ pre;
 
     @Extra
     String goodsId;
@@ -188,7 +183,12 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @Click
     void txt_buy() {
-        PreOrderActivity_.intent(this).goodsInfoId(goodsId).orderCount(1).start();
+        if (!checkUserIsLogin()) {
+            AndroidTool.showToast(this, "请登录");
+        }
+        {
+            PreOrderActivity_.intent(this).goodsInfoId(goodsId).orderCount(1).start();
+        }
     }
 
     @Click
@@ -233,15 +233,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         }
     }
 
-    /**
-     * 判断用户是否登录
-     *
-     * @return
-     */
-    boolean checkUserIsLogin() {
 
-        return !(StringUtils.isEmpty(pre.shopToken().get()) || StringUtils.isEmpty(pre.token().get()));
-    }
 
 
     /**

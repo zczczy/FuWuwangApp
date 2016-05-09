@@ -37,9 +37,6 @@ public class CouponManageActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient myRestClient;
 
-    @Pref
-    MyPrefs_ pre;
-
     @AfterInject
     void afterInject(){
         myRestClient.setRestErrorHandler(myErrorHandler);

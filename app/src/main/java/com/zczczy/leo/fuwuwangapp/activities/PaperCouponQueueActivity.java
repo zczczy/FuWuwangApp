@@ -62,9 +62,6 @@ public class PaperCouponQueueActivity extends BaseActivity {
 
     MyAlertDialog dialog;
 
-    @Pref
-    MyPrefs_ pre;
-
     @StringRes
     String txt_paper_coupon_queue_title;
 

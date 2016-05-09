@@ -45,10 +45,6 @@ public class MemberInfoActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
-
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);

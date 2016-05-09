@@ -45,9 +45,6 @@ public class CouponManageInfoActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient myRestClient;
 
-    @Pref
-    MyPrefs_ pre;
-
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 

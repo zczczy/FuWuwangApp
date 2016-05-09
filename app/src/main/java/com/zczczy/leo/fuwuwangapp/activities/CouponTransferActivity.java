@@ -46,9 +46,6 @@ public class CouponTransferActivity extends BaseActivity {
     @ViewById
     Button btn_transfer;
 
-    @Pref
-    MyPrefs_ pre;
-
     MyAlertDialog dialog1;
 
     @ViewById

@@ -53,9 +53,6 @@ public class SubscribeActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient newMyRestClient;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

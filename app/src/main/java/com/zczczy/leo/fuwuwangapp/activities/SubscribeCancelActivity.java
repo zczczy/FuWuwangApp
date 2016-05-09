@@ -50,9 +50,6 @@ public class SubscribeCancelActivity extends  BaseActivity {
     @RestService
     MyDotNetRestClient newMyRestClient;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

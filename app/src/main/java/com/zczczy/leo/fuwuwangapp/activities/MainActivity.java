@@ -79,9 +79,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
     @App
     MyApplication myApp;
 

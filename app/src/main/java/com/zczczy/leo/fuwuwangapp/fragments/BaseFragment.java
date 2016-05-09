@@ -8,12 +8,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/4/27.
@@ -30,8 +33,20 @@ public abstract class BaseFragment extends Fragment {
     @StringRes
     String no_net;
 
+    @Pref
+    MyPrefs_ pre;
+
     @ColorRes
     int line_color;
+
+    /**
+     * 判断用户是否登录
+     *
+     * @return
+     */
+    protected boolean checkUserIsLogin() {
+        return !StringUtils.isEmpty(pre.shopToken().get());
+    }
 
     @Override
     public void onPause() {

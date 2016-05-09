@@ -51,10 +51,6 @@ public class TransferActivity extends BaseActivity {
     @ViewById
     LinearLayout ll_mobile, ll_code;
 
-    @Pref
-    MyPrefs_ pre;
-
-
     MyAlertDialog dialog;
 
     @Bean

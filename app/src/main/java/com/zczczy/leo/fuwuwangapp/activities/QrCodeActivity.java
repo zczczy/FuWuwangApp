@@ -50,9 +50,6 @@ public class QrCodeActivity extends BaseActivity implements EasyPermissions.Perm
     @StringRes
     String txt_ewmzq;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

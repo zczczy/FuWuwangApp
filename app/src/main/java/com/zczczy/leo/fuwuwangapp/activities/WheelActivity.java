@@ -67,9 +67,6 @@ public class WheelActivity extends BaseActivity implements Runnable {
     @StringRes
     String lottery_introduce, my_lottery_record, left_times, zero_times, thanks_for_you_participation;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Extra
     int times;
 

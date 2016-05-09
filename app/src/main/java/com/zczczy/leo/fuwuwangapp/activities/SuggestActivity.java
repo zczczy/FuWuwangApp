@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.FwwUser;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -24,7 +23,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
@@ -37,9 +35,6 @@ public class SuggestActivity extends BaseActivity {
     EditText edt_suggest_username, edt_suggest_pass, edt_confirm_pass;
 
     MyAlertDialog dialog;
-
-    @Pref
-    MyPrefs_ pre;
 
     @Bean
     MyErrorHandler myErrorHandler;

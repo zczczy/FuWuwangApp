@@ -26,7 +26,6 @@ import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -38,7 +37,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -65,9 +63,6 @@ public class HomeFragment extends BaseFragment {
 
     @Bean
     MyBackgroundTask myBackgroundTask;
-
-    @Pref
-    MyPrefs_ pre;
 
     @Bean
     OttoBus bus;
@@ -210,7 +205,11 @@ public class HomeFragment extends BaseFragment {
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartActivity_.intent(HomeFragment.this).start();
+                if(checkUserIsLogin()){
+                    CartActivity_.intent(HomeFragment.this).start();
+                }else{
+                    AndroidTool.showToast(HomeFragment.this,"请先登录");
+                }
             }
         });
 

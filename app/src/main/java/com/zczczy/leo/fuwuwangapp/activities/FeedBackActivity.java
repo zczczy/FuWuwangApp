@@ -31,9 +31,6 @@ public class FeedBackActivity extends BaseActivity {
     @ViewById
     EditText edit_feedback;
 
-    @Pref
-    MyPrefs_ pre;
-
     MyAlertDialog dialog;
 
     @Bean

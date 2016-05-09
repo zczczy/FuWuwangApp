@@ -111,9 +111,6 @@ public class PerfectInfoActivity extends BaseActivity {
     List<OpenAccount> listOpenAccount = new ArrayList<>();
     int OpenAccountsize = 0;
 
-    @Pref
-    MyPrefs_ pre;
-
     EditText editText;
 
     @Bean

@@ -44,9 +44,6 @@ public class PaperCouponQueueWxActivity extends BaseActivity {
     @StringRes
     String txt_ptzqpd;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

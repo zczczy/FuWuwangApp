@@ -36,9 +36,6 @@ public class ElectronQueueWxActivity extends BaseActivity {
     @ViewById
     TextView txt_one_hundred, txt_two_hundred, txt_four_hundred, txt_five_hundred;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Bean
     MyErrorHandler myErrorHandler;
 

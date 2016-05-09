@@ -62,9 +62,6 @@ public class OrderDetailActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
     @Extra
     String orderId;
 

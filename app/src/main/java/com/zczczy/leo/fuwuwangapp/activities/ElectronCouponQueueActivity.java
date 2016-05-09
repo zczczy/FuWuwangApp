@@ -62,9 +62,6 @@ public class ElectronCouponQueueActivity extends BaseActivity {
 
     MyAlertDialog dialog;
 
-    @Pref
-    MyPrefs_ pre;
-
     @StringRes
     String txt_electron_coupon_queue_title;
 

@@ -54,9 +54,6 @@ public class AddShippingAddressActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @Pref
-    MyPrefs_ pre;
-
     @ViewById
     Button btn_save;
 
