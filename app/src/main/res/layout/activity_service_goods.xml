@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ServiceGoodsActivity">
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
+        android:id="@+id/my_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/major_color"
+        android:minHeight="50dp"
+        app:mCustomView="@layout/search"
+        app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mRightText="@string/search"
+        app:mRightTextMarginRight="15dp" />
+
+    <include layout="@layout/drop_menu_title" />
+
+    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
+        android:id="@+id/ultimate_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:recyclerviewEmptyView="@layout/empty_view" />
+
+
+</LinearLayout>

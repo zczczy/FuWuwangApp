@@ -189,7 +189,7 @@ public class HomeFragment extends BaseFragment {
             public void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {
                 UltimateRecyclerView.CustomRelativeWrapper customRelativeWrapper = (UltimateRecyclerView.CustomRelativeWrapper) viewHolder.itemView;
                 itemView = (HomeAdvertisementItemView) (customRelativeWrapper.getChildAt(0));
-                itemView.init(myApplication.getAdvertModelList());
+                itemView.init(app.getAdvertModelList());
             }
         });
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {

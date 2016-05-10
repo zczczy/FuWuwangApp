@@ -8,7 +8,9 @@ import com.baidu.mapapi.SDKInitializer;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
+import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
+import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.service.LocationService;
 
 import org.androidannotations.annotations.AfterInject;
@@ -36,11 +38,11 @@ public class MyApplication extends Application {
 
     public static final Integer PAGE_COUNT = 10;
 
-    public static final String ANDROID = "1";
+    public static final String ANDROID = "1";//请求类型  android
 
-    public static final String NORMAL = "1";
+    public static final String NORMAL = "1"; //会员类型  1.普通会员
 
-    public static final String VIP = "2";
+    public static final String VIP = "2"; //会员类型 2.vip（服务网会员）
 
     public static final String ASC = "asc"; //asc升序
     public static final String DESC = "desc"; //desc降序
@@ -50,6 +52,9 @@ public class MyApplication extends Application {
 
     public static final int STORE_GOODS = 0; // 店铺入口
     public static final int SEARCH_GOODS = 1; // 搜索入口
+
+    public static final String SERVIE_CATEGORY = "2"; //(1邮寄类,2服务类)
+    public static final String NORMAL_CATEGORY = "1"; //(1邮寄类,2服务类)
 
 
     public static final int DUEPAYMENT = 0; //0:待支付
@@ -73,7 +78,18 @@ public class MyApplication extends Application {
     private List<AdvertModel> serviceAdvertModelList;
 
     //服务商品类型
-    private List<GoodsTypeModel> serviceGoodsTypeModelList;
+    private List<GoodsTypeModel> firstCategoryList;
+    //一级分类
+    private GoodsTypeModel firstCategory;
+    //二级分类
+    private GoodsTypeModel secondCategory;
+
+
+    private List<NewArea> regionList;
+    private NewArea newRegion;
+    private StreetInfo newStreet;
+
+
 
 
     //首页广告
@@ -87,6 +103,7 @@ public class MyApplication extends Application {
 
     //首页商品类型
     private List<GoodsTypeModel> goodsTypeModelList;
+
 
     private boolean isFirst;
 
@@ -156,11 +173,51 @@ public class MyApplication extends Application {
         this.serviceAdvertModelList = serviceAdvertModelList;
     }
 
-    public List<GoodsTypeModel> getServiceGoodsTypeModelList() {
-        return serviceGoodsTypeModelList;
+    public List<GoodsTypeModel> getFirstCategoryList() {
+        return firstCategoryList;
     }
 
-    public void setServiceGoodsTypeModelList(List<GoodsTypeModel> serviceGoodsTypeModelList) {
-        this.serviceGoodsTypeModelList = serviceGoodsTypeModelList;
+    public void setFirstCategoryList(List<GoodsTypeModel> firstCategoryList) {
+        this.firstCategoryList = firstCategoryList;
+    }
+
+    public GoodsTypeModel getFirstCategory() {
+        return firstCategory;
+    }
+
+    public void setFirstCategory(GoodsTypeModel firstCategory) {
+        this.firstCategory = firstCategory;
+    }
+
+    public GoodsTypeModel getSecondCategory() {
+        return secondCategory;
+    }
+
+    public void setSecondCategory(GoodsTypeModel secondCategory) {
+        this.secondCategory = secondCategory;
+    }
+
+    public List<NewArea> getRegionList() {
+        return regionList;
+    }
+
+    public void setRegionList(List<NewArea> regionList) {
+        this.regionList = regionList;
+    }
+
+    public NewArea getNewRegion() {
+        return newRegion;
+    }
+
+    public void setNewRegion(NewArea newRegion) {
+        this.newRegion = newRegion;
+    }
+
+    public StreetInfo getNewStreet() {
+        return newStreet;
+    }
+
+    public void setNewStreet(StreetInfo newStreet) {
+        this.newStreet = newStreet;
     }
 }

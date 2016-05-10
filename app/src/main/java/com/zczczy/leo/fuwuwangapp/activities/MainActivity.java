@@ -26,6 +26,8 @@ import com.zczczy.leo.fuwuwangapp.fragments.NewsFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.ServiceFragment_;
 import com.zczczy.leo.fuwuwangapp.model.Announcement;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.CityModel;
+import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -57,6 +59,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Leo on 2016/4/27.
@@ -313,7 +316,30 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         pre.locationAddress().put(bdLocation.getCity());
-        AndroidTool.showToast(this, bdLocation.getCity());
+        getCityCode();
+    }
+
+
+    @Background
+    void getCityCode() {
+        afterGetCityCode(myRestClient.getCityId(pre.locationAddress().getOr("北京")));
+    }
+
+    @UiThread
+    void afterGetCityCode(BaseModelJson<CityModel> bmj) {
+        if (bmj != null && bmj.Successful) {
+            pre.locationAddress().put(bmj.Data.CityName);
+            pre.cityId().put(bmj.Data.CityId);
+            getArea(bmj.Data.CityId);
+        }
+    }
+
+    @Background
+    void getArea(String cityId) {
+        BaseModelJson<List<NewArea>> bmj = myRestClient.getAreaListByCityId(cityId);
+        if (bmj != null && bmj.Successful) {
+            app.setRegionList(bmj.Data);
+        }
     }
 
 }

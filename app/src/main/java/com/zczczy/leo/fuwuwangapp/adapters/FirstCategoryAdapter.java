@@ -57,15 +57,16 @@ public class FirstCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel
     @Background
     public void getMoreData(Object... objects) {
         BaseModelJson<List<GoodsTypeModel>> bmj = null;
-//        bmj = new BaseModelJson<>();
-//        bmj.Data = new ArrayList<>();
-//        bmj.Successful = true;
-//        for (int i = 0; i < 10; i++) {
-//            GoodsTypeModel goodsTypeModel = new GoodsTypeModel();
-//            goodsTypeModel.GoodsTypeName = "一级分类" + i;
-//            bmj.Data.add(goodsTypeModel);
-//        }
-        bmj = myRestClient.getGoodsTypeByPid("1");
+        switch (Integer.valueOf(objects[0].toString())) {
+            case 1:
+                bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
+                break;
+            case 2:
+                bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
+                break;
+        }
+
+
         afterGetData(bmj);
     }
 

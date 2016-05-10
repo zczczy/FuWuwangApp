@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.res.ColorRes;
@@ -34,6 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Pref
     MyPrefs_ pre;
+
+    @App
+    MyApplication app;
 
     @ColorRes
     int line_color;

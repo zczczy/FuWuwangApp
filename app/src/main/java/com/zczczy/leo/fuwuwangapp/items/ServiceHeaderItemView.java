@@ -9,6 +9,7 @@ import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.ServiceGoodsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
@@ -146,6 +147,11 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
                 }
             }
         }
+    }
+
+    @Click
+    void img_food() {
+        ServiceGoodsActivity_.intent(context).start();
     }
 
     @Override

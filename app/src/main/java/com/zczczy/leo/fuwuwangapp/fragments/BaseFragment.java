@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
     LayoutInflater layoutInflater;
 
     @App
-    MyApplication myApplication;
+    MyApplication app;
 
     @StringRes
     String no_net;

@@ -18,6 +18,9 @@ import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.items.ServiceHeaderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
+import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.CityModel;
+import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -25,10 +28,14 @@ import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -76,6 +83,7 @@ public class ServiceFragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
+
         ultimateRecyclerView.setHasFixedSize(true);
         gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, myAdapter);
         ultimateRecyclerView.setLayoutManager(gridLayoutManager);
@@ -180,6 +188,7 @@ public class ServiceFragment extends BaseFragment {
             gridLayoutManager.scrollToPosition(0);
         }
     }
+
 
     @Override
     public void onHiddenChanged(boolean hidden) {

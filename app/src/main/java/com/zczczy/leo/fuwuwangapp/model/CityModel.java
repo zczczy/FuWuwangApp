@@ -5,6 +5,7 @@ package com.zczczy.leo.fuwuwangapp.model;
  * Created by darkwh on 2015/6/30.
  */
 public class CityModel {
+
     public Integer no;
 
     public String code;
@@ -14,6 +15,7 @@ public class CityModel {
     public String pno;
 
     public String keyword;
+
 
     public Integer getNo() {
         return no;
@@ -54,4 +56,12 @@ public class CityModel {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
+
+
+    public String CityName;
+
+    public String CityId;
+
+    public String ProvinceId;
+
 }

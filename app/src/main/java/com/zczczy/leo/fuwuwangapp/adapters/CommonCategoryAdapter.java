@@ -57,16 +57,9 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
     @Background
     public void getMoreData(Object... objects) {
         BaseModelJson<List<GoodsTypeModel>> bmj = null;
-//        bmj = new BaseModelJson<>();
-//        bmj.Data = new ArrayList<>();
-//        bmj.Successful = true;
-//        for (int i = 0; i < 20; i++) {
-//            GoodsTypeModel goodsTypeModel = new GoodsTypeModel();
-//            goodsTypeModel.GoodsTypeName = "二级分类" + i;
-//            goodsTypeModel.GoodsTypeIcon = "https://img.alicdn.com/imgextra/i4/1974919058/TB2.H.xnVXXXXbpXXXXXXXXXXXX_!!1974919058.jpg_190x190q90.jpg_.webp";
-//            bmj.Data.add(goodsTypeModel);
-//        }
-        bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
+        if (objects.length == 1) {
+            bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
+        }
         afterGetData(bmj);
     }
 

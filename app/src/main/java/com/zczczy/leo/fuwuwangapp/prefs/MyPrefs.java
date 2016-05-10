@@ -29,6 +29,9 @@ public interface MyPrefs {
 
     @DefaultString("")
     String locationAddress();
+
+    @DefaultString("")
+    String cityId();
 //
 //    @DefaultString("全国")
 //    String address();

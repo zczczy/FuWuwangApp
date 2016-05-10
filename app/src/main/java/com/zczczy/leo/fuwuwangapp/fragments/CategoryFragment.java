@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
@@ -63,7 +64,7 @@ public class CategoryFragment extends BaseFragment {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAdapter);
-        myAdapter.getMoreData();
+        myAdapter.getMoreData(MyApplication.NORMAL_CATEGORY);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {

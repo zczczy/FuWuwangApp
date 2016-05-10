@@ -451,13 +451,25 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModel register(@Body Map map);
 
     /**
+     * 为服务类准备
+     * 查询一级分类待二级分类的列表
+     *
+     * @param GoodsTypePid (1邮寄类,2服务类)
+     * @return
+     */
+    @Get("api/ShopContent/GetGoodsType?GoodsTypePid={GoodsTypePid}")
+    BaseModelJson<List<GoodsTypeModel>> getGoodsType(@Path String GoodsTypePid);
+
+    /**
      * 查询分类
      *
-     * @param GoodsTypePid (1邮寄类,2服务类) 如果是一级的分类id，则查询相应二级分类
+     * @param GoodsTypePid (1邮寄类,2服务类)
+     *                     如果是一级的分类id，则查询相应二级分类
      * @return
      */
     @Get("api/ShopContent/GetGoodsTypeByPid?GoodsTypePid={GoodsTypePid}")
     BaseModelJson<List<GoodsTypeModel>> getGoodsTypeByPid(@Path String GoodsTypePid);
+
 
     /**
      * 根据店铺ID查询店铺详细
@@ -510,19 +522,22 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/ShopContent/GetGoodsInfo?StreetInfoId={StreetInfoId}&GoodsTypeId={GoodsTypeId}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<Goods>> GetGoodsInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int PageIndex, @Path int PageSize);
+    BaseModelJson<PagerResult<Goods>> getGoodsInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int PageIndex, @Path int PageSize);
 
     /**
      * 根据 商业圈,商品类别 查询店铺
      *
-     * @param StreetInfoId 商圈id
-     * @param GoodsTypeId  分类id
-     * @param PageIndex    当前页
-     * @param PageSize     条数
+     * @param StreetInfoId   商商圈id 全部 0
+     * @param GoodsTypeId    一级分类id 全部0 （二级级分类为0 一级分类不能为0）
+     * @param TwoGoodsTypeId 二级级分类id 全部0
+     * @param CityId         城市id 全部为空 区域id和商圈id为空或0的时候值不能为空
+     * @param AreaId         区域id 全部为空
+     * @param PageIndex      当前页
+     * @param PageSize       条数
      * @return
      */
-    @Get("api/ShopContent/GetStoreInfo?StreetInfoId={StreetInfoId}&GoodsTypeId={GoodsTypeId}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<Goods>> GetStoreInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int PageIndex, @Path int PageSize);
+    @Get("api/ShopContent/GetStoreInfo?StreetInfoId={StreetInfoId}&GoodsTypeId={GoodsTypeId}&TwoGoodsTypeId={TwoGoodsTypeId}&CityId={CityId}&AreaId={AreaId}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<StoreDetailModel>> getStoreInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int TwoGoodsTypeId, @Path String CityId, @Path String AreaId, @Path int PageIndex, @Path int PageSize);
 
     /**
      * 查询服务类推荐商品
@@ -535,6 +550,15 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/ShopContent/GetGoodsInfoByCity?CityId={CityId}&PageIndex={PageIndex}&PageSize={PageSize}")
     BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getGoodsInfoByCity(@Path String CityId, @Path int PageIndex, @Path int PageSize);
+
+    /**
+     * 根据城市名称查询城市ID
+     *
+     * @param CityName 城市名称
+     * @return
+     */
+    @Get("api/ShopContent/GetCityId?CityName={CityName}")
+    BaseModelJson<CityModel> getCityId(@Path String CityName);
 
     /**
      * @param GoodsTypeId 商品分类id
