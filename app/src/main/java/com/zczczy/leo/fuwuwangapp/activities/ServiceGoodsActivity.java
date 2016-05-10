@@ -99,8 +99,8 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
 
     LinearLayoutManager linearLayoutManager;
 
-
     MaterialHeader materialHeader;
+
 
     PopupWindow areaPopWin, categoryPopWin;
 
@@ -111,7 +111,6 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
-
     }
 
     @AfterViews
@@ -171,14 +170,31 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
     }
 
     void afterLoadMore() {
+        Integer StreetInfoId = null;
+        Integer GoodsTypeId = null;
+        Integer TwoGoodsTypeId = null;
+        String CityId = null;
+        String AreaId = null;
+        if (app.getNewRegion() == null && app.getNewStreet() == null) {
+            CityId = pre.cityId().get();
+        } else if (app.getNewStreet() != null && app.getNewRegion() != null) {
+            if (app.getNewRegion().AreaId.equals(app.getNewStreet().StreetInfoId + "")) {
+                AreaId = app.getNewRegion().AreaId;
+            } else {
+                StreetInfoId = app.getNewStreet().StreetInfoId;
+            }
+        }
 
-        String cityName = null;
-        Integer region_id = null;
-        Integer street_id = null;
-        Integer store_type1_id = null;
-        Integer store_type2_id = null;
-
-//        myAdapter.getMoreData(,pageIndex, MyApplication.PAGE_COUNT, isRefresh);
+        if (app.getFirstCategory() == null && app.getSecondCategory() == null) {
+            GoodsTypeId = typeId;
+        } else if (app.getFirstCategory() != null && app.getSecondCategory() != null) {
+            if (app.getFirstCategory().GoodsTypeId == app.getSecondCategory().GoodsTypeId) {
+                GoodsTypeId = app.getSecondCategory().GoodsTypeId;
+            } else {
+                TwoGoodsTypeId = app.getSecondCategory().GoodsTypeId;
+            }
+        }
+        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, StreetInfoId, GoodsTypeId, TwoGoodsTypeId, CityId, AreaId);
     }
 
     @Click
