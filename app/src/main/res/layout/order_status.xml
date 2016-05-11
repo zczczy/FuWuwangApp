@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:background="@drawable/order_gray"
-        android:text="物流信息"
+        android:text="已完成"
         android:visibility="gone" />
 
     <Button

@@ -17,14 +17,12 @@ import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ReviewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.springframework.util.StringUtils;
 
 /**
@@ -55,7 +53,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void txt_review() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             ReviewActivity_.intent(this).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
@@ -64,7 +62,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void txt_already_order() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(MyApplication.SEND).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
@@ -73,7 +71,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void txt_waiting_order() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
@@ -82,7 +80,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void txt_paid_order() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(MyApplication.PAID).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
@@ -91,7 +89,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_whole() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             MemberOrderActivity_.intent(this).orderState(MyApplication.ALL_ORDER).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
@@ -100,7 +98,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void ll_login() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             MemberInfoActivity_.intent(this).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
@@ -116,7 +114,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void card_logout() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
             adb.setTitle("提示").setMessage("确定要注销吗？").setPositiveButton("注销", new DialogInterface.OnClickListener() {
                 @Override
@@ -129,7 +127,7 @@ public class MineFragment extends BaseFragment {
     }
 
     void setData() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             txt_name.setText(pre.username().get());
             if (!StringUtils.isEmpty(pre.avatar().get())) {
                 Picasso.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable
@@ -156,13 +154,8 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_vip() {
-        if (isLogin()) {
+        if (checkUserIsLogin()) {
             VipActivity_.intent(this).start();
         }
-    }
-
-    //判断是否登录
-    boolean isLogin() {
-        return !StringUtils.isEmpty(pre.token().get()) && !StringUtils.isEmpty(pre.shopToken().get());
     }
 }

@@ -14,7 +14,6 @@ import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.CooperationMerchantAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.GoodsAdapters;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
@@ -22,7 +21,6 @@ import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
-import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.CheckedChange;
@@ -30,7 +28,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
-import org.w3c.dom.Text;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -97,6 +94,9 @@ public class CommonSearchResultActivity extends BaseActivity {
         myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isStart) {
+                    SearchActivity_.intent(CommonSearchResultActivity.this).start();
+                }
                 finish();
             }
         });

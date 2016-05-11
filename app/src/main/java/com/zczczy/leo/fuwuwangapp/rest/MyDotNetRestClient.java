@@ -763,6 +763,18 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<LogisticsInfo>> getLogistics(@Path String MOrderId);
 
     /**
+     * 确认收货
+     * 两个id传一个就行
+     *
+     * @param map MOrderDetailId
+     *            MOrderId
+     * @return
+     */
+    @Post("api/Shop/ConfirmReceipt")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel confirmReceipt(@Body Map map);
+
+    /**
      * 查询待评价订单
      *
      * @param PageIndex 当前页数

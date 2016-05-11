@@ -43,7 +43,7 @@ public class CommonCategoryFragment extends BaseFragment {
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {
-                CommonSearchResultActivity_.intent(CommonCategoryFragment.this).goodsTypeId(obj.GoodsTypeId).start();
+                CommonSearchResultActivity_.intent(CommonCategoryFragment.this).goodsTypeId(obj.GoodsTypeId).isStart(true).start();
             }
         });
     }

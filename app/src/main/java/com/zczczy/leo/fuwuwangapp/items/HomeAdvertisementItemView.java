@@ -165,7 +165,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     @Click(value = {R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_xxxb, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_lbdh})
     void goodsTypeClick(ImageView view) {
         if (view.getContentDescription() != null) {
-            CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).start();
+            CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).isStart(true).start();
         }
     }
 

@@ -32,7 +32,6 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.fragment_category)
 public class CategoryFragment extends BaseFragment {
 
-
     @ViewById
     MyTitleBar myTitleBar;
 
@@ -80,7 +79,9 @@ public class CategoryFragment extends BaseFragment {
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartActivity_.intent(CategoryFragment.this).start();
+                if (checkUserIsLogin()) {
+                    CartActivity_.intent(CategoryFragment.this).start();
+                }
             }
         });
 
@@ -127,5 +128,4 @@ public class CategoryFragment extends BaseFragment {
             bus.register(this);
         }
     }
-
 }

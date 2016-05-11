@@ -1,7 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +58,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             // 获取NetworkInfo对象
             NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();
-
             if (networkInfo != null && networkInfo.length > 0) {
                 for (int i = 0; i < networkInfo.length; i++) {
                     System.out.println(i + "===状态===" + networkInfo[i].getState());
@@ -83,10 +81,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         return !StringUtils.isEmpty(pre.shopToken().get());
     }
 
+    public void finish() {
+        closeInputMethod(this);
+        super.finish();
+    }
+
+
     //隐藏软键盘
     void closeInputMethod(Activity activity) {
         /*隐藏软键盘*/
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager.isActive()) {
             if (activity.getCurrentFocus() != null) {
                 inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
