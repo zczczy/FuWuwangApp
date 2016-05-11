@@ -139,7 +139,6 @@ public class OrderDetailActivity extends BaseActivity {
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
 
-
             if (bmj.Data.MorderStatus == MyApplication.DUEPAYMENT) {
                 btn_cancel_order.setVisibility(View.VISIBLE);
                 btn_pay.setVisibility(View.VISIBLE);

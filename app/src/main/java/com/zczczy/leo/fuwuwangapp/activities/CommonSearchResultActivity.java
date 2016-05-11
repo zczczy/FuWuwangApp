@@ -61,6 +61,9 @@ public class CommonSearchResultActivity extends BaseActivity {
     @Extra
     String goodsType;
 
+    @Extra
+    boolean isStart;
+
     @ViewById
     MyTitleBar myTitleBar;
 
