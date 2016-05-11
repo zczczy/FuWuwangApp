@@ -107,7 +107,7 @@ public class CategoryFragment extends BaseFragment {
         }
         model.isSelected = true;
         myAdapter.notifyDataSetChanged();
-        commonCategoryFragment = CommonCategoryFragment_.builder().id(model.GoodsTypeId + "").build();
+        commonCategoryFragment = CommonCategoryFragment_.builder().mGoodsTypeModel(model).build();
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();
     }

@@ -8,11 +8,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ServiceGoodsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
-import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
@@ -107,7 +105,7 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
             RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon);
 //                    .error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
             rc.into(imageViews.get(i));
-            imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "");
+            imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "," + gtm.GoodsTypeName);
             textViews.get(i).setText(gtm.GoodsTypeName);
             i++;
             if (i == 6) {
@@ -164,7 +162,8 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
     @Click(value = {R.id.img_food, R.id.img_longbi, R.id.img_yule, R.id.img_hotel, R.id.img_liren, R.id.img_around})
     void goodsTypeClick(ImageView view) {
         if (view.getContentDescription() != null) {
-            ServiceGoodsActivity_.intent(context).typeId(Integer.valueOf(view.getContentDescription().toString())).start();
+            String[] temp = view.getContentDescription().toString().split(",");
+            ServiceGoodsActivity_.intent(context).typeId(Integer.valueOf(temp[0])).typeName(temp[1]).start();
         }
 //        CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).start();
     }

@@ -77,6 +77,10 @@ public class MyApplication extends Application {
     //服务商品类型
     private List<AdvertModel> serviceAdvertModelList;
 
+
+    //服务页商品类型
+    private List<GoodsTypeModel> serviceGoodsTypeModelList;
+
     //服务商品类型
     private List<GoodsTypeModel> firstCategoryList;
     //一级分类
@@ -101,10 +105,6 @@ public class MyApplication extends Application {
 
     //首页商品类型
     private List<GoodsTypeModel> goodsTypeModelList;
-
-
-    //首页商品类型
-    private List<GoodsTypeModel> serviceGoodsTypeModelList;
 
     private boolean isFirst;
 

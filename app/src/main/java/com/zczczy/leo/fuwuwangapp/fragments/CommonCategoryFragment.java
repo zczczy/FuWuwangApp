@@ -29,8 +29,11 @@ public class CommonCategoryFragment extends BaseFragment {
 
     GridLayoutManager gridLayoutManager;
 
+//    @FragmentArg
+//    String id;
+
     @FragmentArg
-    String id;
+    GoodsTypeModel mGoodsTypeModel;
 
 
     @AfterViews
@@ -39,7 +42,7 @@ public class CommonCategoryFragment extends BaseFragment {
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(myAdapter);
-        myAdapter.getMoreData(id == null ? "1" : id);
+        myAdapter.getMoreData(mGoodsTypeModel.ChildGoodsType);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<GoodsTypeModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, GoodsTypeModel obj, int position) {

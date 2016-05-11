@@ -4,9 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
-import com.zczczy.leo.fuwuwangapp.items.FirstCategoryItemView_;
 import com.zczczy.leo.fuwuwangapp.items.SecondCategoryItemView_;
-import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -23,7 +21,6 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,10 +53,12 @@ public class CommonCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeMode
     @Override
     @Background
     public void getMoreData(Object... objects) {
-        BaseModelJson<List<GoodsTypeModel>> bmj = null;
-        if (objects.length == 1) {
-            bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
-        }
+        BaseModelJson<List<GoodsTypeModel>> bmj = new BaseModelJson<>();
+        bmj.Data = (List<GoodsTypeModel>) objects[0];
+        bmj.Successful = true;
+//        if (objects.length == 1) {
+//            bmj = myRestClient.getGoodsTypeByPid(objects[0].toString());
+//        }
         afterGetData(bmj);
     }
 

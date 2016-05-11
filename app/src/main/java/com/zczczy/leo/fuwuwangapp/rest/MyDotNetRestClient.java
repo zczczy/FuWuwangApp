@@ -379,15 +379,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<AdvertModel>> getAdvertByKbn(@Path String kbn);
 
     /**
-     * 查询APP首页分类信息
-     *
-     * @return
-     */
-    @Get("api/ShopContent/GetHomeGoodsTypeList")
-    BaseModelJson<List<GoodsTypeModel>> getHomeGoodsTypeList();
-
-
-    /**
      * 查询推荐商品
      *
      * @param PageIndex
@@ -452,7 +443,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 为服务类准备
-     * 查询一级分类待二级分类的列表
+     * 查询一级分类带二级分类的列表
      *
      * @param GoodsTypePid (1邮寄类,2服务类)
      * @return

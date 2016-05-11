@@ -3,7 +3,6 @@ package com.zczczy.leo.fuwuwangapp.rest;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
@@ -24,7 +23,6 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
