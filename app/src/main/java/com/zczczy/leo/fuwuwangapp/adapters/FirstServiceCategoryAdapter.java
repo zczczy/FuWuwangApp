@@ -62,7 +62,7 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
     @Override
     @Background
     public void getMoreData(int pageIndex, int pageSize, Object... objects) {
-        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType("2");
+        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType(MyApplication.SERVIE_CATEGORY);
         afterGetData(bmj);
 
     }
@@ -74,13 +74,14 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
         } else if (bmj.Successful) {
             app.setFirstCategoryList(bmj.Data);
             for (GoodsTypeModel firstCategory : app.getFirstCategoryList()) {
-                if (firstCategory.ChildGoodsType != null) {
-                    GoodsTypeModel secondCategory = new GoodsTypeModel();
-                    secondCategory.GoodsTypeName = "全部";
-                    secondCategory.GoodsTypeId = firstCategory.GoodsTypeId;
-                    secondCategory.GoodsTypePid = firstCategory.GoodsTypeId + "";
-                    firstCategory.ChildGoodsType.add(0, secondCategory);
+                if (firstCategory.ChildGoodsType == null) {
+                    firstCategory.ChildGoodsType = new ArrayList<>();
                 }
+                GoodsTypeModel secondCategory = new GoodsTypeModel();
+                secondCategory.GoodsTypeName = "全部";
+                secondCategory.GoodsTypeId = firstCategory.GoodsTypeId;
+                secondCategory.GoodsTypePid = firstCategory.GoodsTypeId + "";
+                firstCategory.ChildGoodsType.add(0, secondCategory);
             }
             setList(app.getFirstCategoryList());
         } else {

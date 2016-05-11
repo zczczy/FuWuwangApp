@@ -298,6 +298,8 @@ public class PreOrderActivity extends BaseActivity {
                     }
                 }
             });
+        } else {
+            payOrder();
         }
     }
 

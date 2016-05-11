@@ -47,8 +47,8 @@ public class MyApplication extends Application {
     public static final String ASC = "asc"; //asc升序
     public static final String DESC = "desc"; //desc降序
     public static final int DEFUALT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
-    public static final int PRICE_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
-    public static final int COUNT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+    public static final int PRICE_SORT = 1; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+    public static final int COUNT_SORT = 2; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
 
     public static final int STORE_GOODS = 0; // 店铺入口
     public static final int SEARCH_GOODS = 1; // 搜索入口
@@ -90,8 +90,6 @@ public class MyApplication extends Application {
     private StreetInfo newStreet;
 
 
-
-
     //首页广告
     private List<AdvertModel> advertModelList;
 
@@ -104,6 +102,9 @@ public class MyApplication extends Application {
     //首页商品类型
     private List<GoodsTypeModel> goodsTypeModelList;
 
+
+    //首页商品类型
+    private List<GoodsTypeModel> serviceGoodsTypeModelList;
 
     private boolean isFirst;
 
@@ -119,6 +120,7 @@ public class MyApplication extends Application {
         goodsTypeModelList = new ArrayList<>(9);
         lotteryConfig = new LotteryConfig();
         serviceAdvertModelList = new ArrayList<>(9);
+        serviceGoodsTypeModelList = new ArrayList<>(6);
         //百度地图
         locationService = new LocationService(getApplicationContext());
         mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
@@ -219,5 +221,13 @@ public class MyApplication extends Application {
 
     public void setNewStreet(StreetInfo newStreet) {
         this.newStreet = newStreet;
+    }
+
+    public List<GoodsTypeModel> getServiceGoodsTypeModelList() {
+        return serviceGoodsTypeModelList;
+    }
+
+    public void setServiceGoodsTypeModelList(List<GoodsTypeModel> serviceGoodsTypeModelList) {
+        this.serviceGoodsTypeModelList = serviceGoodsTypeModelList;
     }
 }

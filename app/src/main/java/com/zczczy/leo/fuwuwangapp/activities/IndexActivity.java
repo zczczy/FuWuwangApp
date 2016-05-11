@@ -45,6 +45,8 @@ public class IndexActivity extends BaseActivity {
         myBackgroundTask.getHomeBanner();
         myBackgroundTask.getLotteryConfigInfo();
         myBackgroundTask.getHomeGoodsTypeList();
+        myBackgroundTask.getServiceAd();
+        myBackgroundTask.getServiceGoodsTypeList();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class IndexActivity extends BaseActivity {
     @Subscribe
     public void notifyUI(BaseModel bm) {
         i++;
-        if (i == 4) {
+        if (i == 6) {
             getPersimmions();
         }
     }
@@ -75,7 +77,7 @@ public class IndexActivity extends BaseActivity {
                 permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
             }
             /*
-			 * 读写权限和电话状态权限非必要权限(建议授予)只会申请一次，用户同意或者禁止，只会弹一次
+             * 读写权限和电话状态权限非必要权限(建议授予)只会申请一次，用户同意或者禁止，只会弹一次
 			 */
             // 读写权限
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

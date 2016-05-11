@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
+import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -141,7 +143,18 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
         paint.setColor(line_color);
         ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
         refreshingMaterial();
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<StoreDetailModel>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, StoreDetailModel obj, int position) {
+                StoreInformationActivity_.intent(ServiceGoodsActivity.this).storeId(obj.StoreInfoId).start();
 
+            }
+
+            @Override
+            public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+
+            }
+        });
     }
 
     void refreshingMaterial() {

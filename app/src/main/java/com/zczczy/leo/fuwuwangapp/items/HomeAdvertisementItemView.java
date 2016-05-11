@@ -40,16 +40,12 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     SliderLayout new_slider_Layout;
 
     @ViewById
-    ImageView ad_one, ad_two, ad_three, ad_four, ad_five, ad_six, ad_seven, ad_eight, ad_nine, img_winners_order,
-            img_trendw, img_trendm, img_huazhuang, img_digital, img_baby, img_life, img_food, img_healthcare, img_service, img_whole;
+    ImageView ad_one, ad_two, ad_three, ad_four, ad_five, ad_six, ad_seven, ad_eight, ad_nine, img_winners_order;
 
-    @ViewById
-    TextView text_trendw, text_trendm, text_huazhuang, text_digital, text_baby, text_life, text_food, text_healthcare, text_service, text_whole;
-
-    @ViewsById({R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_service})
+    @ViewsById({R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_xxxb, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_lbdh})
     List<ImageView> imageViews;
 
-    @ViewsById({R.id.text_trendw, R.id.text_trendm, R.id.text_huazhuang, R.id.text_digital, R.id.text_baby, R.id.text_life, R.id.text_food, R.id.text_healthcare, R.id.text_service})
+    @ViewsById({R.id.text_trendw, R.id.text_trendm, R.id.text_huazhuang, R.id.text_digital, R.id.text_baby, R.id.text_xxxb, R.id.text_life, R.id.text_food, R.id.text_healthcare, R.id.text_lbdh})
     List<TextView> textViews;
 
     Context context;
@@ -131,11 +127,15 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
         int i = 0;
         for (GoodsTypeModel gtm : app.getGoodsTypeModelList()) {
-            RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
+            RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon);
+            //.error(R.drawable.goods_default).placeholder(R.drawable.goods_default)
             rc.into(imageViews.get(i));
             imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "");
             textViews.get(i).setText(gtm.GoodsTypeName);
             i++;
+            if (i == 10) {
+                break;
+            }
         }
     }
 
@@ -162,14 +162,11 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
     }
 
-    @Click(value = {R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_service})
+    @Click(value = {R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_xxxb, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_lbdh})
     void goodsTypeClick(ImageView view) {
-        CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).start();
-    }
-
-    @Click
-    void img_whole() {
-        CommonSearchResultActivity_.intent(context).goodsType("2").start();
+        if (view.getContentDescription() != null) {
+            CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).start();
+        }
     }
 
     @Click

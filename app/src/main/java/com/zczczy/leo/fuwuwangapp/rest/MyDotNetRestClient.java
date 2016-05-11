@@ -513,6 +513,16 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<StreetInfo>> getStreetInfoByAreaId(@Path String AreaId);
 
     /**
+     * 查询区域（包括商圈）根据城市id
+     *
+     * @param CityId 城市id
+     * @return
+     */
+    @Get("api/ShopContent/GetAreaByCity?CityId={CityId}")
+    BaseModelJson<List<NewArea>> getAreaByCity(@Path String CityId);
+
+
+    /**
      * 根据 商业圈,商品类别 查询商品
      *
      * @param StreetInfoId 商圈id

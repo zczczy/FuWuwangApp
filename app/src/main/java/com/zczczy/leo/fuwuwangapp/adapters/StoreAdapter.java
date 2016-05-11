@@ -89,7 +89,6 @@ public class StoreAdapter extends BaseUltimateRecyclerViewAdapter<StoreDetailMod
             }
         } else {
             AndroidTool.showToast(context, bmj.Error);
-
         }
         bus.post(bmj);
     }

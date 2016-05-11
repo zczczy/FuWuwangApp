@@ -63,6 +63,9 @@ public class MyBackgroundTask {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
+    /**
+     * 获取首页banner
+     */
     @Background
     public void getHomeBanner() {
         afterGetHomeBanner(myRestClient.getHomeBanner());
@@ -78,9 +81,12 @@ public class MyBackgroundTask {
         bus.post(bmj);
     }
 
+    /**
+     * 获取首页广告
+     */
     @Background
     public void getAdvertByKbn() {
-        afterGetAdvertByKbn(myRestClient.getAdvertByKbn("1"));
+        afterGetAdvertByKbn(myRestClient.getAdvertByKbn(MyApplication.NORMAL_CATEGORY));
     }
 
     @UiThread
@@ -93,6 +99,9 @@ public class MyBackgroundTask {
         bus.post(bmj);
     }
 
+    /**
+     * 获取首页中奖通知
+     */
     @Background
     public void getLotteryConfigInfo() {
         afterGetLotteryConfigInfo(myRestClient.getLotteryConfigInfo());
@@ -108,9 +117,12 @@ public class MyBackgroundTask {
         bus.post(bmj);
     }
 
+    /**
+     * 获取首页类别
+     */
     @Background
     public void getHomeGoodsTypeList() {
-        afterGetHomeGoodsTypeList(myRestClient.getHomeGoodsTypeList());
+        afterGetHomeGoodsTypeList(myRestClient.getGoodsTypeByPid(MyApplication.NORMAL_CATEGORY));
     }
 
     @UiThread
@@ -123,9 +135,12 @@ public class MyBackgroundTask {
         bus.post(bmj);
     }
 
+    /**
+     * 获取服务页面广告
+     */
     @Background
     public void getServiceAd() {
-        afterGetServiceAd(myRestClient.getAdvertByKbn("2"));
+        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVIE_CATEGORY));
     }
 
     @UiThread
@@ -135,6 +150,25 @@ public class MyBackgroundTask {
         } else {
             bmj = new BaseModelJson<>();
         }
+        bus.post(bmj);
     }
 
+
+    /**
+     * 获取服务类别
+     */
+    @Background
+    public void getServiceGoodsTypeList() {
+        afterGetServiceGoodsTypeList(myRestClient.getGoodsTypeByPid(MyApplication.SERVIE_CATEGORY));
+    }
+
+    @UiThread
+    void afterGetServiceGoodsTypeList(BaseModelJson<List<GoodsTypeModel>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            app.setServiceGoodsTypeModelList(bmj.Data);
+        } else {
+            bmj = new BaseModelJson<>();
+        }
+        bus.post(bmj);
+    }
 }

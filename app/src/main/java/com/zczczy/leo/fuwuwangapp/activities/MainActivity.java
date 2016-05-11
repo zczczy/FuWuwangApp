@@ -28,6 +28,7 @@ import com.zczczy.leo.fuwuwangapp.model.Announcement;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
+import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -300,26 +301,21 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        long secondTime = System.currentTimeMillis();
-        if (secondTime - firstTime > 2000) {
-            AndroidTool.showToast(this, "再按一次退出程序");
-            firstTime = secondTime;
-        } else {
-            finish();
-            System.exit(-1);
-        }
-    }
 
-
+    /**
+     * 百度定位回调
+     *
+     * @param bdLocation
+     */
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         pre.locationAddress().put(bdLocation.getCity());
         getCityCode();
     }
 
-
+    /**
+     * 获取城市id
+     */
     @Background
     void getCityCode() {
         afterGetCityCode(myRestClient.getCityId(pre.locationAddress().getOr("北京")));
@@ -334,11 +330,38 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         }
     }
 
+    /**
+     * 查询区域（包括商圈）根据城市id （服务页面用的）
+     *
+     * @param cityId
+     */
     @Background
     void getArea(String cityId) {
-        BaseModelJson<List<NewArea>> bmj = myRestClient.getAreaListByCityId(cityId);
+        BaseModelJson<List<NewArea>> bmj = myRestClient.getAreaByCity(cityId);
         if (bmj != null && bmj.Successful) {
             app.setRegionList(bmj.Data);
+            for (NewArea newRegion : app.getRegionList()) {
+                if (newRegion.listStreet != null) {
+                    StreetInfo newStreet = new StreetInfo();
+                    newStreet.StreetInfoId = Integer.valueOf(newRegion.CityId);
+                    newStreet.StreetName = "全部";
+                    newStreet.AreaId = Integer.valueOf(newRegion.AreaId);
+                    newRegion.listStreet.add(0, newStreet);
+                }
+            }
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime > 2000) {
+            AndroidTool.showToast(this, "再按一次退出程序");
+            firstTime = secondTime;
+        } else {
+            finish();
+            System.exit(-1);
         }
     }
 

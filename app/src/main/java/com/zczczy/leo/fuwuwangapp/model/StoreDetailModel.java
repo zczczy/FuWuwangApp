@@ -30,7 +30,7 @@ public class StoreDetailModel implements Serializable {
     public String StoreName;
     public String StoreDesc;
     public String StoreImgSl;
-    public int StoreStatus;
+    public String StoreStatus;
     public String CreateTime;
     public String LinkTel;
     public String StoreAddress;

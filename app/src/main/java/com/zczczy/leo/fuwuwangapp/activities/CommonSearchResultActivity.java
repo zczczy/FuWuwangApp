@@ -2,6 +2,7 @@ package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -122,6 +123,17 @@ public class CommonSearchResultActivity extends BaseActivity {
         paint.setColor(line_color);
         ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
         refreshingMaterial();
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
+                GoodsDetailInfoActivity_.intent(CommonSearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
+            }
+
+            @Override
+            public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+
+            }
+        });
     }
 
     @CheckedChange
@@ -149,7 +161,7 @@ public class CommonSearchResultActivity extends BaseActivity {
             isSelected = false;
             rb_price.setSelected(isSelected);
             sort = MyApplication.PRICE_SORT;
-            desc = MyApplication.DESC;
+            desc = MyApplication.ASC;
             afterLoadMore();
 
         } else if (rb_price.isChecked() && !isSelected) {
@@ -157,7 +169,7 @@ public class CommonSearchResultActivity extends BaseActivity {
             isSelected = true;
             rb_price.setSelected(isSelected);
             sort = MyApplication.PRICE_SORT;
-            desc = MyApplication.ASC;
+            desc = MyApplication.DESC;
             afterLoadMore();
         }
     }

@@ -58,6 +58,7 @@ public class FirstAreaAdapter extends MyBaseAdapter<NewArea> {
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
         if (app.getRegionList() != null) {
+
             setList(app.getRegionList());
         }
     }
