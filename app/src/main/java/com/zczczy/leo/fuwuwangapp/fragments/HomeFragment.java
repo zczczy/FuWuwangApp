@@ -138,6 +138,8 @@ public class HomeFragment extends BaseFragment {
         ultimateRecyclerView.setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
             @Override
             public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+                myTitleBar.setVisibility(View.VISIBLE);
+                AndroidTool.showToast(HomeFragment.this, scrollY + "");
                 if (scrollY < 0) {
                     myTitleBar.getBackground().setAlpha(0);
                 } else if (scrollY < 500) {
@@ -205,10 +207,10 @@ public class HomeFragment extends BaseFragment {
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkUserIsLogin()){
+                if (checkUserIsLogin()) {
                     CartActivity_.intent(HomeFragment.this).start();
-                }else{
-                    AndroidTool.showToast(HomeFragment.this,"请先登录");
+                } else {
+                    AndroidTool.showToast(HomeFragment.this, "请先登录");
                 }
             }
         });
@@ -222,7 +224,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, 10, isRefresh,1);
+        myAdapter.getMoreData(pageIndex, 10, isRefresh, 1);
     }
 
     void refreshingMaterial() {
@@ -238,7 +240,13 @@ public class HomeFragment extends BaseFragment {
         ultimateRecyclerView.mPtrFrameLayout.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+                boolean g = PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+                if (g) {
+                    myTitleBar.setVisibility(View.GONE);
+                } else {
+                    myTitleBar.setVisibility(View.VISIBLE);
+                }
+                return g;
             }
 
             @Override
@@ -254,6 +262,7 @@ public class HomeFragment extends BaseFragment {
 
     @Subscribe
     public void notifyUI(BaseModel bm) {
+        myTitleBar.setVisibility(View.VISIBLE);
         if (isRefresh) {
             gridLayoutManager.scrollToPosition(0);
             ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
