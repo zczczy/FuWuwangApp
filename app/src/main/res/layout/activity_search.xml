@@ -48,6 +48,7 @@
             android:id="@+id/btn_clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/order_gray"
             android:layout_margin="30dp"
             android:text="清空历史搜索" />
     </LinearLayout>

@@ -121,6 +121,7 @@ public class PreOrderActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
+        txt_dian_quantity.setClickable(false);
         createTempOrderInfo();
     }
 

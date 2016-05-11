@@ -32,12 +32,10 @@ public class SearchHistoryAdapter extends BaseRecyclerViewAdapter<SearchHistory>
 
     @UiThread
     void afterGetData(List<SearchHistory> bmj) {
-        if (bmj.size() > 0) {
-            if (getItemCount() > 0) {
-                clear();
-            }
-            insertAll(bmj, getItems().size());
+        if (getItemCount() > 0) {
+            clear();
         }
+        insertAll(bmj, getItems().size());
     }
 
 
