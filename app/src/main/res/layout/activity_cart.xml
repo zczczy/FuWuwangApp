@@ -17,7 +17,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mRightText="编辑"
+        app:mRightText="@string/text_edit"
         app:mRightTextMarginRight="10dp"
         app:mTitle="@string/txt_cart" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="全选" />
+                android:text="@string/text_all_select" />
 
         </LinearLayout>
 
@@ -110,7 +110,28 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="去结算"
+                android:text="@string/text_buy"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/major_color"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/text_delete"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

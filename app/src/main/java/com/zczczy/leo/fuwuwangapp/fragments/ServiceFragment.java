@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
+import android.app.Activity;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.CityChooseActivity;
+import com.zczczy.leo.fuwuwangapp.activities.CityChooseActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
@@ -23,6 +26,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -33,6 +37,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -140,7 +145,7 @@ public class ServiceFragment extends BaseFragment {
         myTitleBar.setLeftTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                CityChooseActivity_.intent(ServiceFragment.this).flagType("3").startForResult(1000);
             }
         });
 
@@ -185,6 +190,40 @@ public class ServiceFragment extends BaseFragment {
                 afterLoadMore();
             }
         });
+    }
+
+    @OnActivityResult(1000)
+    void changed(int resultCode, @OnActivityResult.Extra String ncity, @OnActivityResult.Extra String ncitycode) {
+        if (resultCode == Activity.RESULT_OK) {
+            pre.locationAddress().put(ncity);
+            myTitleBar.setLeftText(ncity);
+            pre.cityId().put(ncitycode);
+//            newHomeFragment.afterCityChanged();
+            getArea(ncitycode);
+        }
+    }
+
+
+    /**
+     * 查询区域（包括商圈）根据城市id （服务页面用的）
+     *
+     * @param cityId
+     */
+    @Background
+    void getArea(String cityId) {
+        BaseModelJson<List<NewArea>> bmj = myRestClient.getAreaByCity(cityId);
+        if (bmj != null && bmj.Successful) {
+            app.setRegionList(bmj.Data);
+            for (NewArea newRegion : app.getRegionList()) {
+                if (newRegion.listStreet != null) {
+                    StreetInfo newStreet = new StreetInfo();
+                    newStreet.StreetInfoId = Integer.valueOf(newRegion.CityId);
+                    newStreet.StreetName = "全部";
+                    newStreet.AreaId = Integer.valueOf(newRegion.AreaId);
+                    newRegion.listStreet.add(0, newStreet);
+                }
+            }
+        }
     }
 
     @Subscribe

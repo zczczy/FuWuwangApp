@@ -37,7 +37,7 @@ import java.math.BigDecimal;
 //http://192.168.0.198:8002/
 //http://appapia.86fuwuwang.com/
 
-@Rest(rootUrl = "http://124.254.56.58:8007/", requestFactory = MyRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
@@ -45,33 +45,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Post("/Post/{id}")
     @RequiresHeader(value = {"Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE, "Content-Disposition", "filename", "charset"})
     String uploadAvatar(@Path int id, @Body MultiValueMap<String, Object> formData);
-
-    @Post("/testPostEntity/{id}")
-    BaseModelJson<Notice> testPostEntity(@Path int id, @Body BaseModel bm);
-
-
-    @Delete("/deleteTest/{id}")
-    @RequiresAuthentication
-    BaseModel deleteTest(@Path int id);
-
-
-    @Get("/Login/{id}")
-    BaseModel login(@Path int id);
-
-    /**
-     * 必须传入一个JSESSIONID
-     * 也就是说，必须在登录的情况下才可以
-     *
-     * @param page
-     * @param rows
-     * @return
-     */
-    @Post("/getVideoInfoList/{page}/{rows}")
-    String getVideoInfoList(@Path int page, @Path int rows);
-
-    @Put("/Put")
-    String putTest(@Body BaseModel bm);
-
 
     //保存个人信息
     @Post("api/Member/SaveBaseInfo?RealName={RealName}&Mobile={Mobile}&ZipCode={ZipCode}&Address={Address}&EjPass={EjPass}&IdCard={IdCard}&Email={Email}")

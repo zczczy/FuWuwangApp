@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.AllCity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.sortlistview.CharacterParser;
 import com.zczczy.leo.fuwuwangapp.sortlistview.ClearEditText;
@@ -131,8 +132,7 @@ public class CityChooseActivity extends BaseActivity {
                             bundle.putString("ncitycode", "");
                             bundle.putString("ncity", "全国");
                         } else {
-                            bundle.putString("ncitycode", ((SortModel) adapter.getItem(position - 2)).getCode
-                                    ());
+                            bundle.putString("ncitycode", ((SortModel) adapter.getItem(position - 2)).getCode());
                             bundle.putString("ncity", ((SortModel) adapter.getItem(position - 2)).getName());
                         }
                         resultIntent.putExtras(bundle);
@@ -153,8 +153,28 @@ public class CityChooseActivity extends BaseActivity {
                             bundle.putString("ncity", "全国");
 
                         } else {
-                            bundle.putString("ncitycode", ((SortModel) adapter.getItem(position)).getCode
-                                    ());
+                            bundle.putString("ncitycode", ((SortModel) adapter.getItem(position)).getCode());
+                            bundle.putString("ncity", ((SortModel) adapter.getItem(position)).getName());
+                        }
+                        resultIntent.putExtras(bundle);
+                        CityChooseActivity.this.setResult(RESULT_OK, resultIntent);
+                        CityChooseActivity.this.finish();
+                    } else {
+                        Toast.makeText(CityChooseActivity.this, no_net, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                if ("3".equals(flagType)) {
+                    if (isNetworkAvailable(CityChooseActivity.this)) {
+                        closeInputMethod(CityChooseActivity.this);
+                        Intent resultIntent = new Intent();
+                        Bundle bundle = new Bundle();
+
+                        if (position == 1) {
+                            bundle.putString("ncitycode", "");
+                            bundle.putString("ncity", "全国");
+
+                        } else {
+                            bundle.putString("ncitycode", ((SortModel) adapter.getItem(position)).getCode());
                             bundle.putString("ncity", ((SortModel) adapter.getItem(position)).getName());
                         }
                         resultIntent.putExtras(bundle);
@@ -171,7 +191,11 @@ public class CityChooseActivity extends BaseActivity {
         });
 
         //SourceDateList = filledData(getResources().getStringArray(R.array.date));
-        getBind();
+        if ("3".equals(flagType)) {
+            getBindOfService();
+        } else {
+            getBind();
+        }
         filter_edit = (ClearEditText) findViewById(R.id.filter_edit);
 
         //根据输入框输入值的改变来过滤搜索
@@ -193,6 +217,26 @@ public class CityChooseActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
+
+    @Background
+    void getBindOfService() {
+        BaseModelJson<List<NewCity>> bmj = myRestClient.getCityListByProvinceId("");
+        if (bmj == null) {
+            setBind(null);
+        } else {
+            BaseModelJson<List<AllCity>> result = new BaseModelJson<>();
+            result.Data = new ArrayList<>();
+            result.Successful = bmj.Successful;
+            result.Error = bmj.Error;
+            for (NewCity newCity : bmj.Data) {
+                AllCity allCity = new AllCity();
+                allCity.ccode = newCity.CityId;
+                allCity.cname = newCity.CityName;
+                result.Data.add(allCity);
+            }
+            setBind(result);
+        }
     }
 
 

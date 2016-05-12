@@ -18,11 +18,10 @@ public class MyOkHttpClientHttpRequestFactory extends OkHttpClientHttpRequestFac
     Context context;
 
     @AfterInject
-    void afterInject(){
-
+    void afterInject() {
         this.setConnectTimeout(30 * 1000);
-        this.setReadTimeout(30 * 1000);
-
+        this.setReadTimeout(15 * 1000);
+        this.setWriteTimeout(30 * 1000);
     }
 
 }

@@ -74,7 +74,7 @@ import java.util.Map;
  * http://192.168.0.198:8002/
  * http://appapia.86fuwuwang.com/
  */
-@Rest(rootUrl = "http://124.254.56.58:8007/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class}
 )
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
@@ -760,5 +760,15 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/UpdateUserInfo")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel changePassword(@Body Map map);
+
+    /**
+     * 删除购物车商品
+     *
+     * @param map BuyCartInfoIds  以逗号隔开
+     * @return
+     */
+    @Post("api/Shop/DelShoppingCartCountByIds")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel deleteShoppingCartById(@Body Map map);
 
 }

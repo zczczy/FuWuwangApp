@@ -2,7 +2,7 @@
     <string name="app_name">消费服务网</string>
     <string name="no_net">网络连接失败</string>
 
-    <string name="search_hint">输入商品名、商家名等...</string>
+    <string name="search_hint">输入商品名、关键字等...</string>
 
 
     <string name="home">首页</string>
@@ -246,6 +246,9 @@
     <string name="txt_all_select">全选</string>
     <string name="text_buy">去结算</string>
     <string name="text_tips">请分开结算下面商品</string>
+    <string name="text_all_select">全选</string>
+    <string name="text_edit">编辑</string>
+    <string name="text_delete">删除</string>
 
 
     <string name="timer">%1$sS</string>
@@ -306,7 +309,7 @@
     <string name="txt_shipping">收货人:%1$s</string>
     <string name="txt_shipping_address">收货地址:%1$s</string>
     <string name="use_dian">使用电子币</string>
-    <string name="dian_balance">剩余%1$s电子币</string>
+    <string name="dian_balance">可用%1$s电子币</string>
     <string name="text_count">共%1$s件商品</string>
     <string name="text_total">合计:</string>
     <string name="text_pay_total_rmb">实付款</string>

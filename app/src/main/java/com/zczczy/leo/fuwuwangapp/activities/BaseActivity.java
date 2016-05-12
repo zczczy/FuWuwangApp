@@ -90,9 +90,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     //隐藏软键盘
     void closeInputMethod(Activity activity) {
         /*隐藏软键盘*/
-        if (inputMethodManager.isActive()) {
-            if (activity.getCurrentFocus() != null) {
-                inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        if (inputMethodManager != null) {
+            if (inputMethodManager.isActive()) {
+                if (activity.getCurrentFocus() != null) {
+                    inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+                }
             }
         }
     }

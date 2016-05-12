@@ -25,7 +25,8 @@ import java.util.List;
 @EApplication
 public class MyApplication extends Application {
 
-    public static final String URL = "http://124.254.56.58:8007/";
+    public static final String URL = "http://218.61.203.50:8002/";
+//    public static final String URL = "http://124.254.56.58:8007/";
 
     public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
     //正式环境

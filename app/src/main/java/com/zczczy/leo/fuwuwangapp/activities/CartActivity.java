@@ -1,6 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -12,25 +14,36 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
 import com.zczczy.leo.fuwuwangapp.items.CartBuyPopup;
 import com.zczczy.leo.fuwuwangapp.items.CartBuyPopup_;
+import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CartModel;
 import com.zczczy.leo.fuwuwangapp.model.CheckOutModel;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
+import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
+import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Leo on 2016/5/1.
@@ -48,7 +61,7 @@ public class CartActivity extends BaseActivity {
     CartAdapter myAdapter;
 
     @ViewById
-    LinearLayout ll_checkout, ll_cart_jiesuan;
+    LinearLayout ll_checkout, ll_delete;
 
     @ViewById
     RelativeLayout rl_root;
@@ -68,6 +81,18 @@ public class CartActivity extends BaseActivity {
 
     List<CheckOutModel> list;
 
+    @RestService
+    MyDotNetRestClient myRestClient;
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+
+    @AfterInject
+    void afterInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+    }
+
     @AfterViews
     void afterView() {
         recyclerView.setHasFixedSize(false);
@@ -77,11 +102,60 @@ public class CartActivity extends BaseActivity {
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (ll_delete.isShown()) {
+                    ll_delete.setVisibility(View.GONE);
+                    myTitleBar.setRightText("编辑");
+                    ll_checkout.setVisibility(View.VISIBLE);
+                } else {
+                    myTitleBar.setRightText("取消");
+                    ll_delete.setVisibility(View.VISIBLE);
+                    ll_checkout.setVisibility(View.GONE);
+                }
             }
         });
         setTotalMoney();
     }
+
+    @Click
+    void ll_delete() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("提示").setMessage("确定要删除吗？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteShopping();
+            }
+        }).setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();
+    }
+
+    @Background
+    void deleteShopping() {
+        calc();
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        Map<String, String> map = new HashMap<>(1);
+        String temp = "";
+        for (int i = 0; i < list.size(); i++) {
+            temp += list.get(i).BuyCartInfoIds;
+        }
+        map.put("BuyCartInfoIds", temp.substring(0, temp.lastIndexOf(',')));
+        afterDeleteShopping(myRestClient.deleteShoppingCartById(map));
+    }
+
+    @UiThread
+    void afterDeleteShopping(BaseModel bm) {
+        if (bm == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bm.Successful) {
+            AndroidTool.showToast(this, bm.Error);
+        } else {
+            myAdapter.getMoreData();
+            ll_delete.setVisibility(View.GONE);
+            myTitleBar.setRightText("编辑");
+            ll_checkout.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     @Click
     void ll_checkout() {
@@ -146,10 +220,9 @@ public class CartActivity extends BaseActivity {
             d += list.get(i).rmbTotal;
             lb += list.get(i).lbTotal;
         }
-        txt_total_rmb.setText(String.format(home_lb, d));
-        txt_total_lb.setText(String.format(he_ji, lb));
+        txt_total_rmb.setText(String.format(he_ji, d));
+        txt_total_lb.setText(String.format(home_lb, lb));
     }
-
 
     @Override
     public void onPause() {
@@ -163,7 +236,6 @@ public class CartActivity extends BaseActivity {
         myAdapter.getMoreData();
         super.onResume();
     }
-
 
     @Click
     void cb_all() {

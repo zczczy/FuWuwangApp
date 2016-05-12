@@ -76,8 +76,6 @@
             android:drawableRight="@drawable/next_icon"
             android:gravity="top|right"
             android:singleLine="true"
-            android:text="陆景强"
-
             android:textSize="16dp" />
     </LinearLayout>
 

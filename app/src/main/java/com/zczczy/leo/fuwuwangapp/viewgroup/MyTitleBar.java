@@ -374,11 +374,11 @@ public class MyTitleBar extends RelativeLayout {
 
 
     public void setRightButtonIcon(@DrawableRes int resId) {
-        setRightButtonIcon(mDrawableManager.getDrawable(getContext(),resId));
+        setRightButtonIcon(mDrawableManager.getDrawable(getContext(), resId));
     }
 
     public void setNavigationIcon(@DrawableRes int resId) {
-        setNavButtonIcon(mDrawableManager.getDrawable(getContext(),resId));
+        setNavButtonIcon(mDrawableManager.getDrawable(getContext(), resId));
     }
 
     public void setNavButtonIcon(@Nullable Drawable icon) {
@@ -402,7 +402,7 @@ public class MyTitleBar extends RelativeLayout {
     }
 
     public void setLogoIcon(@DrawableRes int resId) {
-        setLogoIcon(mDrawableManager.getDrawable(getContext(),resId));
+        setLogoIcon(mDrawableManager.getDrawable(getContext(), resId));
     }
 
     public void setLogoIcon(@Nullable Drawable icon) {
@@ -458,6 +458,7 @@ public class MyTitleBar extends RelativeLayout {
                 mLeftTextView.setGravity(Gravity.CENTER);
                 mLeftTextView.setId(R.id.m_left_text);
                 mLeftTextView.setEllipsize(TextUtils.TruncateAt.END);
+                mLeftTextView.setEms(4);
                 if (mLeftTextColor != 0) {
                     mLeftTextView.setTextColor(mLeftTextColor);
                 } else {
@@ -627,28 +628,30 @@ public class MyTitleBar extends RelativeLayout {
     }
 
 
-    public void showCustomView(){
-        if (mCustomView!=null){
+    public void showCustomView() {
+        if (mCustomView != null) {
             mCustomView.setVisibility(VISIBLE);
             mTitleTextView.setVisibility(GONE);
         }
     }
-    public void showLeftTextView(){
-        if (mLeftTextView!=null)
+
+    public void showLeftTextView() {
+        if (mLeftTextView != null)
             mLeftTextView.setVisibility(VISIBLE);
     }
 
-    public void hideLeftTextView(){
-        if (mLeftTextView!=null)
+    public void hideLeftTextView() {
+        if (mLeftTextView != null)
             mLeftTextView.setVisibility(GONE);
     }
 
-    public void showRightTextView(){
-        if (mRightTextView!=null)
+    public void showRightTextView() {
+        if (mRightTextView != null)
             mRightTextView.setVisibility(VISIBLE);
     }
-    public void hideRightTextView(){
-        if (mRightTextView!=null)
+
+    public void hideRightTextView() {
+        if (mRightTextView != null)
             mRightTextView.setVisibility(GONE);
     }
 }

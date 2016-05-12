@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.CartModel;
@@ -56,6 +57,8 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
     @RestService
     MyDotNetRestClient myRestClient;
 
+    BaseViewHolder baseViewHolder;
+
     @Pref
     MyPrefs_ pre;
 
@@ -88,6 +91,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
     @Override
     protected void init(Object... objects) {
         cartAdapter = (CartAdapter) objects[0];
+        baseViewHolder = (BaseViewHolder) objects[1];
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
@@ -143,7 +147,6 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
                 subShoppingCart();
             }
         }
-
     }
 
     @Background
@@ -162,6 +165,10 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
             AndroidTool.showToast(context, "商品添加失败");
         } else if (!bm.Successful) {
             AndroidTool.showToast(context, bm.Error);
+        } else {
+            _data.ProductCount++;
+            cartActivity.setTotalMoney();
+            cartAdapter.notifyItemChanged(baseViewHolder.getAdapterPosition());
         }
     }
 
@@ -181,6 +188,10 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
             AndroidTool.showToast(context, "修改失败");
         } else if (!bm.Successful) {
             AndroidTool.showToast(context, bm.Error);
+        } else {
+            _data.ProductCount--;
+            cartActivity.setTotalMoney();
+            cartAdapter.notifyItemChanged(baseViewHolder.getAdapterPosition());
         }
     }
 

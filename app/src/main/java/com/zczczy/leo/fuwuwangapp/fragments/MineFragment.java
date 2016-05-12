@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ReviewActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.SettingActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
 
 import org.androidannotations.annotations.AfterViews;
@@ -119,7 +120,7 @@ public class MineFragment extends BaseFragment {
 
     @Click
     void rl_setting() {
-        
+        SettingActivity_.intent(this).start();
     }
 
     @Click
