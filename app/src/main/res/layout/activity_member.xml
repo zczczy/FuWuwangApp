@@ -219,7 +219,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/button_selector"
         android:padding="15dp"
-        android:text="保存"
+        android:text="@string/text_save"
         android:textColor="#ffffff"
         android:textSize="17dp"/>
 
