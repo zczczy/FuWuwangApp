@@ -29,7 +29,7 @@
             android:layout_marginTop="20dp"
             android:drawablePadding="10dp"
             android:text="头像"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="真实姓名:"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/txt_name"
@@ -76,7 +76,7 @@
             android:drawableRight="@drawable/next_icon"
             android:gravity="top|right"
             android:singleLine="true"
-            android:textSize="16dp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <include layout="@layout/horizontal_line"/>
@@ -96,7 +96,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="邮箱:"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/edt_email"
@@ -108,7 +108,7 @@
             android:gravity="top|right"
             android:inputType="textEmailAddress"
             android:singleLine="true"
-            android:textSize="16dp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <include layout="@layout/horizontal_line"/>
@@ -128,7 +128,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="QQ:"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/edt_qq"
@@ -139,7 +139,7 @@
             android:drawableRight="@drawable/next_icon"
             android:gravity="top|right"
             android:singleLine="true"
-            android:textSize="16dp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <include layout="@layout/horizontal_line"/>
