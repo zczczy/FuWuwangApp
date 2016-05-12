@@ -48,7 +48,7 @@
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
                     android:inputType="text"
-                    android:maxLength="50"
+                    android:maxLength="20"
                     android:singleLine="true"
                     android:textSize="15sp" />
             </LinearLayout>

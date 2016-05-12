@@ -9,7 +9,6 @@ import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -22,9 +21,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
-import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/5/1.
@@ -106,7 +103,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void finish() {
-        if (!(StringUtils.isEmpty(pre.token().get()) || StringUtils.isEmpty(pre.shopToken().get()))) {
+        if (checkUserIsLogin()) {
             setResult(RESULT_OK);
         }
         super.finish();

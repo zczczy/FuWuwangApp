@@ -1,14 +1,13 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -19,10 +18,8 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.HashMap;
@@ -34,10 +31,10 @@ import java.util.HashMap;
 public class MemberInfoActivity extends BaseActivity {
 
     @ViewById
-    TextView txt_name, txt_change;
+    TextView txt_change;
 
     @ViewById
-    EditText edt_blog, edt_qq, edt_email;
+    EditText txt_name, edt_blog, edt_qq, edt_email;
 
     @RestService
     MyDotNetRestClient myRestClient;
@@ -52,23 +49,48 @@ public class MemberInfoActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-
+        AndroidTool.showLoadDialog(this);
+        getMemberInfo();
     }
+
+    @Background
+    void getMemberInfo() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        afterGetMemberInfo(myRestClient.getMemberInfo());
+    }
+
+    @UiThread
+    void afterGetMemberInfo(BaseModelJson<MemberInfo> bmj) {
+        AndroidTool.dismissLoadDialog();
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bmj.Successful) {
+            AndroidTool.showToast(this, bmj.Error);
+        } else {
+            txt_name.setText(bmj.Data.MemberRealName);
+            edt_email.setText(bmj.Data.MemberEmail);
+            edt_qq.setText(bmj.Data.MemberQQ);
+            edt_blog.setText(bmj.Data.MemberBlog);
+        }
+    }
+
 
     //保存
     @Click
     void btn_save() {
-        if (AndroidTool.checkIsNull(edt_blog)) {
-            AndroidTool.showToast(this, "微博不能为空");
-        } else if (AndroidTool.checkIsNull(edt_qq)) {
-            AndroidTool.showToast(this, "qq不能为空");
-        } else if (AndroidTool.checkIsNull(edt_email)) {
-            AndroidTool.showToast(this, "邮箱不能为空");
-        } else if (AndroidTool.checkEmail(edt_email)) {
-            AndroidTool.showToast(this, "邮箱格式不正确");
-        } else {
-            changeInfo(edt_email.getText().toString().trim(), edt_qq.getText().toString().trim(), edt_blog.getText().toString().trim());
-        }
+//        if (AndroidTool.checkIsNull(edt_blog)) {
+//            AndroidTool.showToast(this, "微博不能为空");
+//        } else if (AndroidTool.checkIsNull(edt_qq)) {
+//            AndroidTool.showToast(this, "qq不能为空");
+//        } else if (AndroidTool.checkIsNull(edt_email)) {
+//            AndroidTool.showToast(this, "邮箱不能为空");
+//        } else if (AndroidTool.checkEmail(edt_email)) {
+//            AndroidTool.showToast(this, "邮箱格式不正确");
+//        } else {
+//        }
+        changeInfo(edt_email.getText().toString().trim(), edt_qq.getText().toString().trim(), edt_blog.getText().toString().trim());
     }
 
     @Click
@@ -85,7 +107,7 @@ public class MemberInfoActivity extends BaseActivity {
         map.put("MemberBlog", MemberBlog);
         map.put("MemberQQ", MemberQQ);
         map.put("MemberEmail", MemberEmail);
-        map.put("HeadImg", null);
+        map.put("MemberRealName", txt_name.getText().toString().trim());
         BaseModel bmj = myRestClient.updateMemberInfo(map);
         afterChange(bmj);
     }
@@ -101,5 +123,4 @@ public class MemberInfoActivity extends BaseActivity {
             AndroidTool.showToast(this, bmj.Error);
         }
     }
-
 }

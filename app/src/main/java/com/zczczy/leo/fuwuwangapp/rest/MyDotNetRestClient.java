@@ -42,7 +42,6 @@ import com.zczczy.leo.fuwuwangapp.model.QueueCount;
 import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
-import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
 import com.zczczy.leo.fuwuwangapp.model.UserFinanceInfo;
@@ -75,7 +74,8 @@ import java.util.Map;
  * http://appapia.86fuwuwang.com/
  */
 @Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
-        converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class}
+        converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
+        responseErrorHandler = MyResponseErrorHandlerBean.class
 )
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
@@ -222,7 +222,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：订阅安全信使
-     * <p/>
+     * <p>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -235,7 +235,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：取消订阅安全信使
-     * <p/>
+     * <p>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -247,7 +247,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：获取手机验证码
-     * <p/>
+     * <p>
      *
      * @param map SendType （0：提现，1：变更资料，2：订阅服务，3：取消订阅,4.转账）
      *            UserName  用户名
@@ -259,7 +259,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：验证验证码
-     * <p/>
+     * <p>
      *
      * @param username 用户名
      * @param code     验证码
@@ -272,7 +272,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * SubscriptionExist
      * 功能：根据用户名验证查询是否订阅
-     * <p/>
+     * <p>
      *
      * @param UserName 用户名
      * @return String

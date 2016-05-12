@@ -20,7 +20,6 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -37,7 +36,6 @@ import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
@@ -334,7 +332,9 @@ public class PreOrderActivity extends BaseActivity {
             if (bmj.Data.MPaymentType == MyApplication.DZB || bmj.Data.MPaymentType == MyApplication.LONG_BI || bmj.Data.MPaymentType == MyApplication.DZB_LONGBI) {
                 OrderDetailActivity_.intent(this).orderId(bmj.Data.MOrderId).start();
             } else {
-                UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
+                if (bmj.Data.unionPay != null) {
+                    UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
+                }
             }
             finish();
         } else {
@@ -383,7 +383,7 @@ public class PreOrderActivity extends BaseActivity {
 
     @Click
     void ll_shipping() {
-        ShippingAddressActivity_.intent(this).startForResult(1000);
+        ShippingAddressActivity_.intent(this).isFinish(true).startForResult(1000);
     }
 
     @OnActivityResult(1000)

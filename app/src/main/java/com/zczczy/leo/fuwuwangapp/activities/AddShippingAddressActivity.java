@@ -1,6 +1,5 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -11,7 +10,6 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -27,7 +25,6 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
@@ -71,7 +68,6 @@ public class AddShippingAddressActivity extends BaseActivity {
     void afterView() {
         if (receiptAddressId != 0) {
             myTitleBar.setTitle("编辑收货地址");
-            btn_save.setText("编辑");
             getMReceiptAddressById();
         }
     }
@@ -118,6 +114,8 @@ public class AddShippingAddressActivity extends BaseActivity {
         if (AndroidTool.checkIsNull(edt_shipping)) {
             AndroidTool.showToast(this, "收货人不能为空");
         } else if (AndroidTool.checkIsNull(edt_phone)) {
+            AndroidTool.showToast(this, "联系电话不能为空");
+        } else if (AndroidTool.checkMPhone(edt_phone)) {
             AndroidTool.showToast(this, "联系电话不能为空");
         } else if (areaId == 0) {
             AndroidTool.showToast(this, "请选择省、市、区");

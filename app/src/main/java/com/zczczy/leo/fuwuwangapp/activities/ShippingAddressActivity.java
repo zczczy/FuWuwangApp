@@ -13,7 +13,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OnActivityResult;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
 /**
@@ -30,6 +30,9 @@ public class ShippingAddressActivity extends BaseActivity {
 
     LinearLayoutManager linearLayoutManager;
 
+    @Extra
+    boolean isFinish;
+
     @AfterViews
     void afterView() {
         linearLayoutManager = new LinearLayoutManager(this);
@@ -39,10 +42,12 @@ public class ShippingAddressActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<MReceiptAddressModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, MReceiptAddressModel obj, int position) {
-                Intent intent = new Intent();
-                intent.putExtra("model", obj);
-                setResult(1001, intent);
-                finish();
+                if(isFinish){
+                    Intent intent = new Intent();
+                    intent.putExtra("model", obj);
+                    setResult(1001, intent);
+                    finish();
+                }
             }
         });
 //        myAdapter.getMoreData();

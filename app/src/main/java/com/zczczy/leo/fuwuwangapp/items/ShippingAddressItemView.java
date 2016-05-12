@@ -1,7 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -9,7 +10,6 @@ import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.AddShippingAddressActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.ShippingAddressAdapter;
-import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -22,7 +22,6 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -90,7 +89,13 @@ public class ShippingAddressItemView extends ItemView<MReceiptAddressModel> {
 
     @Click
     void txt_delete() {
-        delete();
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setTitle("提示").setMessage("确定要删除吗？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                delete();
+            }
+        }).setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();
     }
 
     @Background

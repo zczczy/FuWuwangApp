@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -13,7 +13,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/txt_member_info" />
+        app:mTitle="@string/txt_member_info"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,14 +29,14 @@
             android:layout_marginTop="20dp"
             android:drawablePadding="10dp"
             android:text="头像"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/default_header" />
+            android:background="@drawable/default_header"/>
 
         <ImageView
             android:id="@+id/img_header"
@@ -44,11 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/next_icon" />
+            android:src="@drawable/next_icon"/>
 
     </RelativeLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <LinearLayout
 
@@ -65,7 +65,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="真实姓名:"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <EditText
             android:id="@+id/txt_name"
@@ -76,10 +76,10 @@
             android:drawableRight="@drawable/next_icon"
             android:gravity="top|right"
             android:singleLine="true"
-            android:textSize="16dp" />
+            android:textSize="16dp"/>
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <LinearLayout
         android:id="@+id/ll_companyarea"
@@ -96,7 +96,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="邮箱:"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <EditText
             android:id="@+id/edt_email"
@@ -105,14 +105,13 @@
             android:background="@android:color/white"
             android:drawablePadding="5dp"
             android:drawableRight="@drawable/next_icon"
-            android:editable="false"
-            android:focusable="false"
             android:gravity="top|right"
+            android:inputType="textEmailAddress"
             android:singleLine="true"
-            android:textSize="16dp" />
+            android:textSize="16dp"/>
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <LinearLayout
 
@@ -129,7 +128,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="QQ:"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <EditText
             android:id="@+id/edt_qq"
@@ -140,10 +139,10 @@
             android:drawableRight="@drawable/next_icon"
             android:gravity="top|right"
             android:singleLine="true"
-            android:textSize="16dp" />
+            android:textSize="16dp"/>
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <LinearLayout
 
@@ -160,7 +159,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="微博:"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <EditText
             android:id="@+id/edt_blog"
@@ -171,10 +170,10 @@
             android:drawableRight="@drawable/next_icon"
             android:gravity="top|right"
             android:singleLine="true"
-            android:textSize="16dp" />
+            android:textSize="16dp"/>
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
     <LinearLayout
         android:id="@+id/ll_shipping"
@@ -191,7 +190,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="收货地址:"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/txt_change"
@@ -205,10 +204,10 @@
             android:maxEms="10"
             android:singleLine="true"
             android:text=""
-            android:textSize="16dp" />
+            android:textSize="16dp"/>
     </LinearLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/horizontal_line"/>
 
 
     <Button
@@ -222,6 +221,6 @@
         android:padding="15dp"
         android:text="保存"
         android:textColor="#ffffff"
-        android:textSize="17dp" />
+        android:textSize="17dp"/>
 
 </LinearLayout>

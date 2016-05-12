@@ -20,7 +20,6 @@ import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsImgListModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -37,7 +36,6 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.HashMap;
@@ -184,9 +182,8 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     @Click
     void txt_buy() {
         if (!checkUserIsLogin()) {
-            AndroidTool.showToast(this, "请登录");
-        }
-        {
+            LoginActivity_.intent(this).start();
+        } else {
             PreOrderActivity_.intent(this).goodsInfoId(goodsId).orderCount(1).start();
         }
     }
@@ -194,7 +191,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     @Click
     void img_cart() {
         if (!checkUserIsLogin()) {
-            AndroidTool.showToast(this, "请登录");
+            LoginActivity_.intent(this).start();
         } else {
             AndroidTool.showLoadDialog(this);
             addShoppingCart(goodsId);
@@ -232,8 +229,6 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
             AndroidTool.showToast(this, bm.Error);
         }
     }
-
-
 
 
     /**
