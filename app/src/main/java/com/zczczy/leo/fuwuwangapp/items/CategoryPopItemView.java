@@ -72,7 +72,7 @@ public class CategoryPopItemView extends LinearLayout {
 
         rootCategory.setAdapter(firstCategoryAdapter);
         //如果 index 没查出来数据  再查询一遍
-        if (app.getFirstCategoryList() == null) {
+        if (app.getServiceGoodsTypeModelList().size()==0) {
             firstCategoryAdapter.getMoreData(0, 0);
         }
         childCategory.setAdapter(secondCategoryAdapter);

@@ -78,11 +78,12 @@ public class MyApplication extends Application {
     private List<AdvertModel> serviceAdvertModelList;
 
 
-    //服务页商品类型
+    //服务页商品类型 包括二级分类
     private List<GoodsTypeModel> serviceGoodsTypeModelList;
 
-    //服务商品类型
-    private List<GoodsTypeModel> firstCategoryList;
+//    //服务商品类型
+//    private List<GoodsTypeModel> firstCategoryList;
+
     //一级分类
     private GoodsTypeModel firstCategory;
     //二级分类
@@ -103,7 +104,7 @@ public class MyApplication extends Application {
     //首页中奖配置
     private LotteryConfig lotteryConfig;
 
-    //首页商品类型
+    //首页商品类型 包括二级菜单
     private List<GoodsTypeModel> goodsTypeModelList;
 
     private boolean isFirst;
@@ -175,13 +176,13 @@ public class MyApplication extends Application {
         this.serviceAdvertModelList = serviceAdvertModelList;
     }
 
-    public List<GoodsTypeModel> getFirstCategoryList() {
-        return firstCategoryList;
-    }
-
-    public void setFirstCategoryList(List<GoodsTypeModel> firstCategoryList) {
-        this.firstCategoryList = firstCategoryList;
-    }
+//    public List<GoodsTypeModel> getFirstCategoryList() {
+//        return firstCategoryList;
+//    }
+//
+//    public void setFirstCategoryList(List<GoodsTypeModel> firstCategoryList) {
+//        this.firstCategoryList = firstCategoryList;
+//    }
 
     public GoodsTypeModel getFirstCategory() {
         return firstCategory;

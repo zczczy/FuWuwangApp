@@ -120,7 +120,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getHomeGoodsTypeList() {
-        afterGetHomeGoodsTypeList(myRestClient.getGoodsTypeByPid(MyApplication.NORMAL_CATEGORY));
+        afterGetHomeGoodsTypeList(myRestClient.getGoodsType(MyApplication.NORMAL_CATEGORY));
     }
 
     @UiThread
@@ -157,7 +157,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getServiceGoodsTypeList() {
-        afterGetServiceGoodsTypeList(myRestClient.getGoodsTypeByPid(MyApplication.SERVIE_CATEGORY));
+        afterGetServiceGoodsTypeList(myRestClient.getGoodsType(MyApplication.SERVIE_CATEGORY));
     }
 
     @UiThread

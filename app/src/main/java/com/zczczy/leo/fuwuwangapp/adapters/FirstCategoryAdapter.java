@@ -56,7 +56,14 @@ public class FirstCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel
     @Override
     @Background
     public void getMoreData(Object... objects) {
-        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType(objects[0].toString());
+        BaseModelJson<List<GoodsTypeModel>> bmj;
+        if (app.getGoodsTypeModelList().size() == 0) {
+            bmj = myRestClient.getGoodsType(objects[0].toString());
+        } else {
+            bmj = new BaseModelJson<>();
+            bmj.Successful = true;
+            bmj.Data = app.getGoodsTypeModelList();
+        }
         afterGetData(bmj);
     }
 

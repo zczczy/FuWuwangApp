@@ -139,7 +139,6 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
                 myTitleBar.setVisibility(View.VISIBLE);
-                AndroidTool.showToast(HomeFragment.this, scrollY + "");
                 if (scrollY < 0) {
                     myTitleBar.getBackground().setAlpha(0);
                 } else if (scrollY < 500) {

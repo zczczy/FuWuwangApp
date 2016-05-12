@@ -344,26 +344,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<PagerResult<LotteryInfo>> getMyLotteryInfo(@Path String UserName, @Path int PageIndex, @Path int PageSize);
 
     /**
-     * 获取龙币
-     * Header  Token
-     *
-     * @return Double
-     */
-    @Get("api/Member/GetMemberElectronicMoney")
-    @RequiresHeader(value = "Token")
-    BaseModelJson<Double> GetMemberElectronicMoney();
-
-    /**
-     * 获取电子币
-     *
-     * @return Integer
-     */
-    @Get("api/Member/GetMemberLongBi")
-    @RequiresHeader(value = "Token")
-    BaseModelJson<Integer> GetMemberLongBi();
-
-
-    /**
      * 查询App首页Banner
      */
     @Get("api/ShopContent/GetHomeBanner")
@@ -396,7 +376,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Shop/GetBuyCartInfo")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<List<CartInfo>> getBuyCartInfo();
-
 
     /**
      * 根据商品ID查询商品明细
@@ -452,17 +431,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<GoodsTypeModel>> getGoodsType(@Path String GoodsTypePid);
 
     /**
-     * 查询分类
-     *
-     * @param GoodsTypePid (1邮寄类,2服务类)
-     *                     如果是一级的分类id，则查询相应二级分类
-     * @return
-     */
-    @Get("api/ShopContent/GetGoodsTypeByPid?GoodsTypePid={GoodsTypePid}")
-    BaseModelJson<List<GoodsTypeModel>> getGoodsTypeByPid(@Path String GoodsTypePid);
-
-
-    /**
      * 根据店铺ID查询店铺详细
      *
      * @param StoreInfoId
@@ -496,14 +464,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<NewArea>> getAreaListByCityId(@Path String CityId);
 
     /**
-     * 根据区域查询商圈
-     *
-     * @return
-     */
-    @Get("api/ShopContent/GetStreetInfoByAreaId?AreaId={AreaId}")
-    BaseModelJson<List<StreetInfo>> getStreetInfoByAreaId(@Path String AreaId);
-
-    /**
      * 查询区域（包括商圈）根据城市id
      *
      * @param CityId 城市id
@@ -511,7 +471,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/ShopContent/GetAreaByCity?CityId={CityId}")
     BaseModelJson<List<NewArea>> getAreaByCity(@Path String CityId);
-
 
     /**
      * 根据 商业圈,商品类别 查询商品

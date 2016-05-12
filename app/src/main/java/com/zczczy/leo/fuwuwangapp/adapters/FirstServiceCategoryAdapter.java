@@ -53,8 +53,8 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
-        if (app.getFirstCategoryList() != null) {
-            setList(app.getFirstCategoryList());
+        if (app.getServiceGoodsTypeModelList().size() > 0) {
+            setList(app.getServiceGoodsTypeModelList());
         }
     }
 
@@ -72,8 +72,8 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
         if (bmj == null) {
             AndroidTool.showToast(context, no_net);
         } else if (bmj.Successful) {
-            app.setFirstCategoryList(bmj.Data);
-            for (GoodsTypeModel firstCategory : app.getFirstCategoryList()) {
+            app.setServiceGoodsTypeModelList(bmj.Data);
+            for (GoodsTypeModel firstCategory : app.getServiceGoodsTypeModelList()) {
                 if (firstCategory.ChildGoodsType == null) {
                     firstCategory.ChildGoodsType = new ArrayList<>();
                 }
@@ -83,7 +83,7 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
                 secondCategory.GoodsTypePid = firstCategory.GoodsTypeId + "";
                 firstCategory.ChildGoodsType.add(0, secondCategory);
             }
-            setList(app.getFirstCategoryList());
+            setList(app.getServiceGoodsTypeModelList());
         } else {
             AndroidTool.showToast(context, bmj.Error);
         }
