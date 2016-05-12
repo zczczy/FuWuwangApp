@@ -155,7 +155,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/major_color"
-                android:text="保存"
+                android:text="@string/text_save"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 

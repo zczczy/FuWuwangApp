@@ -216,7 +216,10 @@
     <string name="txt_id_card">身份证号：</string>
     <string name="txt_region">国家/地区：</string>
     <string name="txt_is_show"> 显示密码</string>
+    <string name="text_type"> 身份:</string>
     <string name="txt_service_man">服务专员：</string>
+    <string name="text_normal">普通用户</string>
+    <string name="text_vip">VIP会员</string>
 
 
     <!-- safe -->
@@ -330,6 +333,7 @@
     <string name="txt_mobile">手机号码</string>
     <string name="txt_shipping_name">收 货 人</string>
     <string name="txt_detail_address">详细地址</string>
+    <string name="text_save">保存</string>
 
 
     <!-- store -->

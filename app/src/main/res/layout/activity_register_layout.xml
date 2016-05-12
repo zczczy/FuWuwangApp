@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="身份:" />
+                    android:text="@string/text_type" />
 
                 <RadioGroup
                     android:id="@+id/gar_id_group"
@@ -143,7 +143,7 @@
                         android:layout_weight="1"
                         android:button="@drawable/radio_button_selector"
                         android:checked="true"
-                        android:text="普通用户" />
+                        android:text="@string/text_normal" />
 
                     <RadioButton
                         android:id="@+id/gar_id_vip"
@@ -151,7 +151,7 @@
                         android:layout_height="20dp"
                         android:layout_weight="1"
                         android:button="@drawable/radio_button_selector"
-                        android:text="VIP会员" />
+                        android:text="@string/text_vip" />
                 </RadioGroup>
 
             </LinearLayout>
