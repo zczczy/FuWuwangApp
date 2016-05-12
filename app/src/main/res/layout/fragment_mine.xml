@@ -53,7 +53,7 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
                 android:lines="1"
-                android:text="点击登录"
+                android:text="@string/text_login"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -70,7 +70,6 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
                 android:lines="1"
-                android:text="地址"
                 android:textColor="@color/sub_text_color" />
         </LinearLayout>
 
@@ -91,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
-            android:text="全部订单"
+            android:text="@string/text_all_order"
             android:textSize="18dp" />
 
         <TextView
@@ -100,7 +99,7 @@
             android:layout_alignParentRight="true"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/next_icon"
-            android:text="查看全部订单"
+            android:text="@string/text_to_all_order"
             android:textSize="16sp" />
 
 
@@ -126,7 +125,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/tobepaid"
             android:gravity="center_horizontal"
-            android:text="待支付" />
+            android:text="@string/text_no_pay" />
 
 
         <TextView
@@ -139,7 +138,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/paid"
             android:gravity="center_horizontal"
-            android:text="已支付" />
+            android:text="@string/text_paid" />
 
 
         <TextView
@@ -152,7 +151,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/yifahuo"
             android:gravity="center_horizontal"
-            android:text="已发货" />
+            android:text="@string/text_send" />
 
         <TextView
             android:id="@+id/txt_review"
@@ -164,7 +163,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/tobeevaluate"
             android:gravity="center_horizontal"
-            android:text="待评价" />
+            android:text="@string/text_review" />
 
 
     </LinearLayout>
@@ -186,7 +185,7 @@
             android:layout_marginLeft="15dp"
             android:drawableLeft="@drawable/newset"
             android:drawablePadding="10dp"
-            android:text="设置" />
+            android:text="@string/text_setting" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -212,7 +211,7 @@
             android:layout_marginLeft="15dp"
             android:drawableLeft="@drawable/vipcenter"
             android:drawablePadding="10dp"
-            android:text="VIP专区" />
+            android:text="@string/vip_area" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -240,7 +239,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="10dp"
-            android:text="注销"
+            android:text="@string/logout"
             android:textColor="@color/white"
             android:textSize="18sp" />
 

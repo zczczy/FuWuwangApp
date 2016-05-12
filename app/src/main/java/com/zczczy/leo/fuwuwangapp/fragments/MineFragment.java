@@ -21,8 +21,10 @@ import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.springframework.util.StringUtils;
 
 /**
@@ -45,6 +47,9 @@ public class MineFragment extends BaseFragment {
 
     @ViewById
     ImageView img_avatar;
+
+    @StringRes
+    String text_location, text_login;
 
     @AfterViews
     void afterView() {
@@ -113,6 +118,11 @@ public class MineFragment extends BaseFragment {
     }
 
     @Click
+    void rl_setting() {
+        
+    }
+
+    @Click
     void card_logout() {
         if (checkUserIsLogin()) {
             AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
@@ -137,18 +147,20 @@ public class MineFragment extends BaseFragment {
                 rl_vip.setVisibility(View.VISIBLE);
                 img_vip_icon.setVisibility(View.VISIBLE);
                 rl_setting.setVisibility(View.GONE);
+                txt_address.setText(String.format(text_location, pre.locationAddress().getOr("北京")));
             } else {
                 rl_vip.setVisibility(View.GONE);
                 img_vip_icon.setVisibility(View.INVISIBLE);
                 rl_setting.setVisibility(View.VISIBLE);
+                txt_address.setText(String.format(text_location, pre.locationAddress().getOr("北京")));
             }
         } else {
             img_vip_icon.setVisibility(View.GONE);
             rl_vip.setVisibility(View.INVISIBLE);
             img_avatar.setImageResource(R.drawable.default_header);
             rl_setting.setVisibility(View.VISIBLE);
-            txt_name.setText("点击登录");
-            txt_address.setText("地址");
+            txt_name.setText(text_login);
+            txt_address.setText(String.format(text_location, ""));
         }
     }
 

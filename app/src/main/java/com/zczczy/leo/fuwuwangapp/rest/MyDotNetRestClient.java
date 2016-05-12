@@ -749,4 +749,16 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel publishReview(@Body Map map);
 
+    /**
+     * 修改用户密码信息
+     *
+     * @param map UserPw
+     *            NewUserPw
+     *            QNewUserPw
+     * @return
+     */
+    @Post("api/Shop/UpdateUserInfo")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel changePassword(@Body Map map);
+
 }

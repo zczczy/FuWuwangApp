@@ -13,6 +13,18 @@
 
     <string name="progress_de">%1$s\%</string>
 
+    <!--mine-->
+    <string name="vip_area">VIP专区</string>
+    <string name="logout">注销</string>
+    <string name="text_no_pay">待支付</string>
+    <string name="text_paid">已支付</string>
+    <string name="text_send">已发货</string>
+    <string name="text_all_order">全部订单</string>
+    <string name="text_to_all_order">查看全部订单</string>
+    <string name="text_setting">设置</string>
+    <string name="text_login">点击登录</string>
+    <string name="text_location">当前位置:%1$s</string>
+
 
     <string name="home_rmb">￥%1$s</string>
     <string name="home_lb">龙币:%1$s</string>
