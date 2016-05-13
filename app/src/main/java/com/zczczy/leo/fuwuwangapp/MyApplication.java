@@ -116,14 +116,13 @@ public class MyApplication extends Application {
 
     @AfterInject
     void afterInject() {
-//        CrashReport.initCrashReport(getApplicationContext(), "900019033", false);
         advertModelList = new ArrayList<>(9);
         newBannerList = new ArrayList<>();
         goodsTypeModelList = new ArrayList<>(9);
         lotteryConfig = new LotteryConfig();
         serviceAdvertModelList = new ArrayList<>(9);
         serviceGoodsTypeModelList = new ArrayList<>(6);
-        //百度地图
+//        百度地图
         locationService = new LocationService(getApplicationContext());
         mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());
@@ -176,14 +175,6 @@ public class MyApplication extends Application {
     public void setServiceAdvertModelList(List<AdvertModel> serviceAdvertModelList) {
         this.serviceAdvertModelList = serviceAdvertModelList;
     }
-
-//    public List<GoodsTypeModel> getFirstCategoryList() {
-//        return firstCategoryList;
-//    }
-//
-//    public void setFirstCategoryList(List<GoodsTypeModel> firstCategoryList) {
-//        this.firstCategoryList = firstCategoryList;
-//    }
 
     public GoodsTypeModel getFirstCategory() {
         return firstCategory;

@@ -122,14 +122,16 @@ public class CartActivity extends BaseActivity {
         adb.setTitle("提示").setMessage("确定要删除吗？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                deleteShopping();
+                calc();
+                if(list.size()>0){
+                    deleteShopping();
+                }
             }
         }).setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();
     }
 
     @Background
     void deleteShopping() {
-        calc();
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("Kbn", MyApplication.ANDROID);
@@ -155,7 +157,6 @@ public class CartActivity extends BaseActivity {
             ll_checkout.setVisibility(View.VISIBLE);
         }
     }
-
 
     @Click
     void ll_checkout() {
@@ -244,6 +245,11 @@ public class CartActivity extends BaseActivity {
         } else {
             myAdapter.unCheckAll();
         }
+
+    }
+
+    public void notifyChanged(){
+        cb_all.setChecked(false);
         setTotalMoney();
     }
 }

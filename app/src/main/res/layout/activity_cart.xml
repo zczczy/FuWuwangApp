@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".activities.CartActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/rl_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                tools:context=".activities.CartActivity">
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -19,7 +19,7 @@
         app:mNavButtonIcon="@drawable/title_back_normal"
         app:mRightText="@string/text_edit"
         app:mRightTextMarginRight="10dp"
-        app:mTitle="@string/txt_cart" />
+        app:mTitle="@string/txt_cart"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -27,14 +27,14 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/line"
         android:layout_below="@+id/my_title_bar"
-        android:background="@color/white" />
+        android:background="@color/white"/>
 
     <include
         android:id="@+id/line"
         layout="@layout/horizontal_line"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:layout_above="@+id/ll_cart_jiesuan" />
+        android:layout_above="@+id/ll_cart_jiesuan"/>
 
     <LinearLayout
         android:id="@+id/ll_cart_jiesuan"
@@ -47,7 +47,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.7"
             android:orientation="horizontal">
 
             <CheckBox
@@ -57,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/text_all_select" />
+                android:text="@string/text_all_select"/>
 
         </LinearLayout>
 
@@ -81,7 +82,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/txt_total_lb"
@@ -90,7 +91,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
             </LinearLayout>
 
 
@@ -112,7 +113,7 @@
                 android:padding="5dp"
                 android:text="@string/text_buy"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
@@ -133,7 +134,7 @@
                 android:padding="5dp"
                 android:text="@string/text_delete"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
