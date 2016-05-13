@@ -35,6 +35,7 @@ import java.math.BigDecimal;
  */
 //http://124.254.56.58:8007/
 //http://192.168.0.198:8002/
+//http://218.61.203.50:8002/
 //http://appapia.86fuwuwang.com/
 
 @Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyRequestFactory.class, interceptors = {MyInterceptor.class},

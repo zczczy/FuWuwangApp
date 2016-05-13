@@ -138,7 +138,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getServiceAd() {
-        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVIE_CATEGORY));
+        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVICE_CATEGORY));
     }
 
     @UiThread
@@ -157,7 +157,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getServiceGoodsTypeList() {
-        afterGetServiceGoodsTypeList(myRestClient.getGoodsType(MyApplication.SERVIE_CATEGORY));
+        afterGetServiceGoodsTypeList(myRestClient.getGoodsType(MyApplication.SERVICE_CATEGORY));
     }
 
     @UiThread

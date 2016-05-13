@@ -80,6 +80,8 @@ public class PreOrderActivity extends BaseActivity {
     @Extra
     boolean isCart;
 
+    boolean isService;
+
     //商品总价
     double yuan;
 
@@ -209,7 +211,8 @@ public class PreOrderActivity extends BaseActivity {
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
             longBi = bmj.Data.MOrderLbCount;
-
+            //1:服务类，2：邮寄类
+            ll_shipping.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }
@@ -269,36 +272,40 @@ public class PreOrderActivity extends BaseActivity {
 
     @Click
     void txt_take() {
-        if (useDianZiBi > 0 || longBi > 0) {
-            final View view = layoutInflater.inflate(R.layout.pay_pass, null);
-            adb = new AlertDialog.Builder(this);
-            ad = adb.setView(view).create();
-            ad.show();
-            pass = (EditText) view.findViewById(R.id.pass);
-            Button cancel = (Button) view.findViewById(R.id.cancel);
-            Button confirm = (Button) view.findViewById(R.id.btn_confirm);
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    ad.dismiss();
-                }
-            });
-            confirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (AndroidTool.checkIsNull(pass)) {
-                        AndroidTool.showToast(PreOrderActivity.this, "密码不能为空");
-                    } else {
-                        password = pass.getText().toString().trim();
-                        ad.dismiss();
-                        AndroidTool.showLoadDialog(PreOrderActivity.this);
-                        payOrder();
-                    }
-                }
-            });
+        if (!isService && AndroidTool.checkTextViewIsNull(tv_shipping, txt_phone, tv_shipping_address)) {
+            AndroidTool.showToast(this, "请选择收货地址");
         } else {
-            payOrder();
+            if (useDianZiBi > 0 || longBi > 0) {
+                final View view = layoutInflater.inflate(R.layout.pay_pass, null);
+                adb = new AlertDialog.Builder(this);
+                ad = adb.setView(view).create();
+                ad.show();
+                pass = (EditText) view.findViewById(R.id.pass);
+                Button cancel = (Button) view.findViewById(R.id.cancel);
+                Button confirm = (Button) view.findViewById(R.id.btn_confirm);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        ad.dismiss();
+                    }
+                });
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (AndroidTool.checkIsNull(pass)) {
+                            AndroidTool.showToast(PreOrderActivity.this, "密码不能为空");
+                        } else {
+                            password = pass.getText().toString().trim();
+                            ad.dismiss();
+                            AndroidTool.showLoadDialog(PreOrderActivity.this);
+                            payOrder();
+                        }
+                    }
+                });
+            } else {
+                payOrder();
+            }
         }
     }
 

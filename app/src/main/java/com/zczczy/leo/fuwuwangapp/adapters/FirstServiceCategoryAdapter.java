@@ -62,7 +62,7 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
     @Override
     @Background
     public void getMoreData(int pageIndex, int pageSize, Object... objects) {
-        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType(MyApplication.SERVIE_CATEGORY);
+        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType(MyApplication.SERVICE_CATEGORY);
         afterGetData(bmj);
 
     }

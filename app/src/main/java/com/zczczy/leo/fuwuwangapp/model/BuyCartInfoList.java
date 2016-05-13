@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Leo on 2016/4/27.
  */
-public class BuyCartInfoList implements Serializable{
+public class BuyCartInfoList implements Serializable {
 
     /**
      * BuyCartInfoId : 1
@@ -29,4 +29,5 @@ public class BuyCartInfoList implements Serializable{
     public int GoodsLBPrice;
     public String GodosName;
     public String XfNo;
+    public String GoodsType; //1:服务类，2：邮寄类
 }

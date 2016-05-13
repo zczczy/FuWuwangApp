@@ -58,8 +58,8 @@ public class AndroidTool {
 //        }
 //    }
 
-    public static long getCodeTime(long timer){
-        return Math.abs(System.currentTimeMillis()-timer)>=120000L?120000L:Math.abs(System.currentTimeMillis()-timer);
+    public static long getCodeTime(long timer) {
+        return Math.abs(System.currentTimeMillis() - timer) >= 120000L ? 120000L : Math.abs(System.currentTimeMillis() - timer);
     }
 
 
@@ -82,7 +82,7 @@ public class AndroidTool {
         return format.format(cale.getTime());
     }
 
-    public static String getYYYYMMDDHHMMSS(Date date){
+    public static String getYYYYMMDDHHMMSS(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         return sdf.format(date);
     }
@@ -341,6 +341,24 @@ public class AndroidTool {
     }
 
     /**
+     * 判断TextView是否为空！ 如果为空 返回true 否者返回false
+     *
+     * @param e
+     * @return
+     */
+    public static boolean checkTextViewIsNull(TextView... e) {
+        if (e == null) {
+            return true;
+        }
+        for (TextView t : e) {
+            if ("".equals(t.getText().toString().trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 判断手机号码 是否有误！ 如果有误 返回true 否者返回false
      *
      * @param mPhone
@@ -498,11 +516,10 @@ public class AndroidTool {
         return sb.toString();
     }
 
-    public static String test(String str){
+    public static String test(String str) {
 
 
-
-        return  "";
+        return "";
     }
 
 }

@@ -59,10 +59,12 @@ import org.androidannotations.rest.spring.api.RestClientErrorHandling;
 import org.androidannotations.rest.spring.api.RestClientHeaders;
 import org.androidannotations.rest.spring.api.RestClientRootUrl;
 import org.androidannotations.rest.spring.api.RestClientSupport;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 import java.util.Map;
@@ -222,7 +224,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：订阅安全信使
-     * <p>
+     * <p/>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -235,7 +237,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：取消订阅安全信使
-     * <p>
+     * <p/>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -247,7 +249,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：获取手机验证码
-     * <p>
+     * <p/>
      *
      * @param map SendType （0：提现，1：变更资料，2：订阅服务，3：取消订阅,4.转账）
      *            UserName  用户名
@@ -259,7 +261,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：验证验证码
-     * <p>
+     * <p/>
      *
      * @param username 用户名
      * @param code     验证码
@@ -272,7 +274,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * SubscriptionExist
      * 功能：根据用户名验证查询是否订阅
-     * <p>
+     * <p/>
      *
      * @param UserName 用户名
      * @return String
@@ -770,5 +772,15 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/DelShoppingCartCountByIds")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel deleteShoppingCartById(@Body Map map);
+
+    /**
+     * 更新头像
+     *
+     * @param data
+     * @return
+     */
+    @Post("api/Shop/UploadHeadImg")
+    @RequiresHeader(HttpHeaders.CONTENT_TYPE)
+    BaseModelJson<String> uploadAvatar(@Body MultiValueMap<String, Object> data);
 
 }

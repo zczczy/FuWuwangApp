@@ -15,7 +15,7 @@
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="@string/search_hint"
-        android:paddingRight="40dp"
+        android:paddingRight="30dp"
         android:textColorHint="@color/home_search_text_scrolled"
         android:textSize="13sp" />
 </LinearLayout>

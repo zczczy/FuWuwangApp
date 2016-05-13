@@ -100,7 +100,7 @@ public class CommonSearchResultActivity extends BaseActivity {
                 finish();
             }
         });
-        sort = MyApplication.DEFUALT_SORT;
+        sort = MyApplication.DEFAULT_SORT;
         desc = MyApplication.DESC;
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -142,7 +142,7 @@ public class CommonSearchResultActivity extends BaseActivity {
     @CheckedChange
     void rb_others(boolean isChecked) {
         if (isChecked) {
-            sort = MyApplication.DEFUALT_SORT;
+            sort = MyApplication.DEFAULT_SORT;
             isRefresh = true;
             afterLoadMore();
         }

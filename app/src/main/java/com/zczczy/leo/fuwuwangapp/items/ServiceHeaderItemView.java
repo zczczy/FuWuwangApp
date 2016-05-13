@@ -80,7 +80,7 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
 
     @Background
     public void getServiceAd() {
-        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVIE_CATEGORY));
+        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVICE_CATEGORY));
     }
 
     @UiThread

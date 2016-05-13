@@ -47,15 +47,15 @@ public class MyApplication extends Application {
 
     public static final String ASC = "asc"; //asc升序
     public static final String DESC = "desc"; //desc降序
-    public static final int DEFUALT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+    public static final int DEFAULT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
     public static final int PRICE_SORT = 1; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
     public static final int COUNT_SORT = 2; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
 
     public static final int STORE_GOODS = 0; // 店铺入口
     public static final int SEARCH_GOODS = 1; // 搜索入口
 
-    public static final String SERVIE_CATEGORY = "2"; //(1邮寄类,2服务类)
     public static final String NORMAL_CATEGORY = "1"; //(1邮寄类,2服务类)
+    public static final String SERVICE_CATEGORY = "2"; //(1邮寄类,2服务类)
 
 
     public static final int DUEPAYMENT = 0; //0:待支付

@@ -1,8 +1,11 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
@@ -18,11 +21,21 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import me.iwf.photopicker.PhotoPickerActivity;
+import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 /**
  * Created by zczczy on 2016/5/5.
@@ -39,6 +52,9 @@ public class MemberInfoActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient myRestClient;
 
+    @ViewById
+    ImageView img_avatar;
+
     @Bean
     MyErrorHandler myErrorHandler;
 
@@ -52,6 +68,49 @@ public class MemberInfoActivity extends BaseActivity {
         AndroidTool.showLoadDialog(this);
         getMemberInfo();
     }
+
+
+    @Click
+    void img_avatar() {
+        PhotoPickerIntent intent = new PhotoPickerIntent(MemberInfoActivity.this);
+        intent.setPhotoCount(1);
+        intent.setShowCamera(true);
+        intent.setShowGif(true);
+        startActivityForResult(intent, 1000);
+    }
+
+    @Background
+    void uploadAvatar(String avatarUrl) {
+        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
+        FileSystemResource image = new FileSystemResource(avatarUrl);
+        data.set("image", image);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.MULTIPART_FORM_DATA_VALUE);
+        afterUploadAvatar(myRestClient.uploadAvatar(data));
+    }
+
+    @UiThread
+    void afterUploadAvatar(BaseModelJson<String> bmj){
+        AndroidTool.dismissLoadDialog();
+        if(bmj==null){
+            AndroidTool.showToast(this,no_net);
+        }else if(!bmj.Successful){
+            AndroidTool.showToast(this,bmj.Error);
+        }else{
+            Picasso.with(this).load(bmj.Data).placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
+        }
+    }
+
+    @OnActivityResult(1000)
+    void onSelectPicture(int resultCode, @OnActivityResult.Extra(value = PhotoPickerActivity.KEY_SELECTED_PHOTOS) ArrayList<String> photos) {
+        if (resultCode == RESULT_OK) {
+            AndroidTool.showLoadDialog(this);
+            uploadAvatar(photos.get(0));
+        }
+    }
+
 
     @Background
     void getMemberInfo() {

@@ -315,6 +315,8 @@
     <string name="dian_balance">可用%1$s电子币</string>
     <string name="text_count">共%1$s件商品</string>
     <string name="text_total">合计:</string>
+    <string name="text_order_paid">已支付:</string>
+    <string name="text_should_pay">还需支付:</string>
     <string name="text_pay_total_rmb">实付款</string>
     <string name="text_postal">运费</string>
     <string name="text_order_no">订单号:%1$s</string>

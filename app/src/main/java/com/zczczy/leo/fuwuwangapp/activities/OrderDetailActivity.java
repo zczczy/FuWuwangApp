@@ -46,13 +46,14 @@ public class OrderDetailActivity extends BaseActivity {
 
     @ViewById
     TextView tv_shipping, txt_phone, tv_shipping_address, txt_store,
-            txt_order_no, txt_coupon, txt_sub_express_charges, txt_total_lb, txt_pay_total_rmb;
+            txt_order_no, txt_coupon, txt_sub_express_charges, txt_total_lb, txt_pay_total_rmb,
+            txt_should_pay_l_rmb, txt_paid_rmb;
 
     @ViewById
-    LinearLayout ll_logistics, ll_store, ll_pre_order_item;
+    LinearLayout ll_take, ll_logistics, ll_store, ll_pre_order_item, ll_shipping;
 
     @ViewById
-    RelativeLayout ll_lb, ll_pay;
+    RelativeLayout ll_lb, ll_pay, ll_should_pay, ll_paid;
 
     @ViewById
     Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished;
@@ -106,6 +107,7 @@ public class OrderDetailActivity extends BaseActivity {
             txt_store.setText(bmj.Data.StoreName);
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
+
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
             int i = 0;
             for (OrderDetailModel orderDetailModel : bmj.Data.MOrderDetailList) {
@@ -148,12 +150,21 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                //还需支付
+                ll_should_pay.setVisibility(View.VISIBLE);
+                ll_paid.setVisibility(View.VISIBLE);
+                if (bmj.Data.MOrderDzb > 0) {
+                    txt_should_pay_l_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney - bmj.Data.MOrderDzb));
+                    txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
+                }
             } else if (bmj.Data.MorderStatus == MyApplication.PAID) {
+                ll_take.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                ll_should_pay.setVisibility(View.GONE);
             } else if (bmj.Data.MorderStatus == MyApplication.CANCEL) {
                 btn_canceled.setVisibility(View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
@@ -166,12 +177,14 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                ll_should_pay.setVisibility(View.GONE);
             } else if (bmj.Data.MorderStatus == MyApplication.CONFIRM) {
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                ll_should_pay.setVisibility(View.GONE);
             } else if (bmj.Data.MorderStatus == MyApplication.FINISH) {
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finished.setVisibility(View.VISIBLE);
@@ -179,7 +192,12 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
+                ll_should_pay.setVisibility(View.GONE);
             }
+            ll_shipping.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
+            ll_logistics.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
+
+
         }
     }
 

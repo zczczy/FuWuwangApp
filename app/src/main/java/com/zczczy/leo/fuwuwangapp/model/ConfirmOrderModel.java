@@ -23,6 +23,8 @@ public class ConfirmOrderModel implements Serializable {
 
     public UnionPay unionPay; //银联
 
+    public String GoodsType;
+
 
     public List<BuyCartInfoList> BuyCartInfoList;
 

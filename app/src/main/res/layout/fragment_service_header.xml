@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/img_food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/food" />
 
                 <TextView
@@ -53,8 +53,8 @@
 
                 <ImageView
                     android:id="@+id/img_longbi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/longbi" />
 
                 <TextView
@@ -76,8 +76,8 @@
 
                 <ImageView
                     android:id="@+id/img_yule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/yule" />
 
                 <TextView
@@ -108,8 +108,8 @@
 
                 <ImageView
                     android:id="@+id/img_hotel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/hotel" />
 
                 <TextView
@@ -131,8 +131,8 @@
 
                 <ImageView
                     android:id="@+id/img_liren"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/liren" />
 
                 <TextView
@@ -154,8 +154,8 @@
 
                 <ImageView
                     android:id="@+id/img_around"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:src="@drawable/around" />
 
                 <TextView

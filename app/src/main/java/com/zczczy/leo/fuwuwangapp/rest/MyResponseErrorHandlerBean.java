@@ -31,6 +31,10 @@ public class MyResponseErrorHandlerBean implements ResponseErrorHandler {
     private HttpStatus getHttpStatusCode(ClientHttpResponse response) throws IOException {
         HttpStatus statusCode;
         try {
+//            if(response ==null){
+//                statusCode = HttpStatus.GATEWAY_TIMEOUT;
+//            }else{
+//            }
             statusCode = response.getStatusCode();
         } catch (IllegalArgumentException ex) {
             throw new UnknownHttpStatusCodeException(response.getRawStatusCode(),
