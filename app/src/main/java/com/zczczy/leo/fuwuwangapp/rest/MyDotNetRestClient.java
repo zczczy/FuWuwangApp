@@ -775,12 +775,13 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 更新头像
+     * HttpHeaders.CONTENT_TYPE
      *
      * @param data
      * @return
      */
     @Post("api/Shop/UploadHeadImg")
-    @RequiresHeader(HttpHeaders.CONTENT_TYPE)
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<String> uploadAvatar(@Body MultiValueMap<String, Object> data);
 
 }
