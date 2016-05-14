@@ -1,7 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.zczczy.leo.fuwuwangapp"
-    >
+          package="com.zczczy.leo.fuwuwangapp" >
 
 
     <!-- Required  一些系统要求的权限，如访问网络等-->
