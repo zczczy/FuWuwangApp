@@ -113,6 +113,7 @@ public class CooperationMerchantActivity extends BaseActivity {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(CooperationMerchantActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
+                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
                 } else {
                     pageIndex++;
                     afterLoadMore();

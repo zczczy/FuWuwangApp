@@ -87,7 +87,7 @@ public class ActivityActivity extends BaseActivity {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(ActivityActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
-//                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
+                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();

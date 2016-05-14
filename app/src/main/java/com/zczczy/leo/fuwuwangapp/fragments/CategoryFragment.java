@@ -12,6 +12,7 @@ import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.FirstCategoryAdapter;
@@ -81,6 +82,8 @@ public class CategoryFragment extends BaseFragment {
             public void onClick(View v) {
                 if (checkUserIsLogin()) {
                     CartActivity_.intent(CategoryFragment.this).start();
+                }else{
+                    LoginActivity_.intent(CategoryFragment.this).start();
                 }
             }
         });

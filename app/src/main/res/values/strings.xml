@@ -24,6 +24,8 @@
     <string name="text_setting">设置</string>
     <string name="text_login">点击登录</string>
     <string name="text_location">当前位置:%1$s</string>
+    <!---->
+    <string name="text_due_payment">我的订单</string>
 
 
     <string name="home_rmb">￥%1$s</string>
@@ -349,6 +351,9 @@
 
     <!--搜索-->
     <string name="search">搜索</string>
+    <string name="search_summary">综合</string>
+    <string name="search_sell_count">销量</string>
+    <string name="search_price">价格</string>
 
 
     <!--商品列表页面-->
@@ -356,8 +361,6 @@
     <string name="text_review_pre">好评%1$s</string>
     <string name="text_review_lb">龙币:</string>
 
-    <!---->
-    <string name="text_due_payment">我的订单</string>
 
     <!--待评论-->
     <string name="text_review">待评论</string>
@@ -374,5 +377,9 @@
     <string name="around">周边游玩</string>
     <string name="suggest">精彩推荐</string>
 
+    <string name="empty_search">找不到您想要的结果</string>
+    <string name="empty_order">目前没有%1$s订单</string>
+    <string name="empty_review">暂时还没有评论</string>
+    <string name="empty_logistics">暂时还没有物流信息</string>
 
 </resources>

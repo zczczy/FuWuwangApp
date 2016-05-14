@@ -252,7 +252,7 @@ public class WithDrawActivity extends BaseActivity {
 
             if (!isCode){
 
-                dialogxia = new MyEidtViewDialog(WithDrawActivity.this,"二级密码:",listener);
+                dialogxia = new MyEidtViewDialog(WithDrawActivity.this,"支付密码:",listener);
                 dialogxia.show();
                 dialogxia.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 dialogxia.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);

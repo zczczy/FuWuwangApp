@@ -31,7 +31,7 @@
             android:drawableRight="@drawable/common_search_zong_he"
             android:gravity="center"
             android:padding="10dp"
-            android:text="综合"
+            android:text="@string/search_summary"
             android:textColor="@color/common_order_text" />
 
         <RadioButton
@@ -42,7 +42,7 @@
             android:button="@null"
             android:gravity="center"
             android:padding="10dp"
-            android:text="销量"
+            android:text="@string/search_sell_count"
             android:textColor="@color/common_order_text" />
 
         <RadioButton
@@ -54,7 +54,7 @@
             android:drawableRight="@drawable/common_search_price"
             android:gravity="center"
             android:padding="10dp"
-            android:text="价格"
+            android:text="@string/search_price"
             android:textColor="@color/common_order_text" />
     </RadioGroup>
 
@@ -66,8 +66,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/common_white_bg"
         app:recyclerviewEmptyView="@layout/empty_view"
-        app:theme="@style/AlertDialog.AppCompat.Light"
-        app:recyclerviewScrollbars="vertical" />
+        app:recyclerviewScrollbars="vertical"
+        app:theme="@style/AlertDialog.AppCompat.Light" />
 
 
 </LinearLayout>

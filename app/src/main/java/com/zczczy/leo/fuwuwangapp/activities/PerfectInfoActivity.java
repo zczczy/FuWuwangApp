@@ -59,7 +59,7 @@ public class PerfectInfoActivity extends BaseActivity {
 
     @ViewById
     EditText edt_real_name, edt_mobile_phone, edt_post_code, edt_delivery, edt_name, edt_bank_card, edt_bank, edt_bank_area,
-            edt_bank_city, edt_bank_region, edt_ejpass, edt_id_card, edt_id_card2, edit_mobile,edt_email;
+            edt_bank_city, edt_bank_region, edt_ejpass, edt_id_card, edt_id_card2, edit_mobile, edt_email;
 
     EditText edit_code;
 
@@ -79,15 +79,14 @@ public class PerfectInfoActivity extends BaseActivity {
     CountDownTimer countDownTimer;
 
 
-
     @ViewById
     RadioButton rb_user_info, rb_finance_info;
 
     @ViewById
-    LinearLayout ll_user_info, ll_finance_info, llejpass, layout_bank_region, ll_id_card, ll_id_card2,ll_email;
+    LinearLayout ll_user_info, ll_finance_info, llejpass, layout_bank_region, ll_id_card, ll_id_card2, ll_email;
 
     @StringRes
-    String txt_perfect_info_title,send_message;
+    String txt_perfect_info_title, send_message;
 
     MyAlertDialog dialog;
 
@@ -491,14 +490,16 @@ public class PerfectInfoActivity extends BaseActivity {
 
     @UiThread
     void AfterGetResult(BaseModelJson<String> bmj) {
-        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
+            AndroidTool.dismissLoadDialog();
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
+            AndroidTool.showLoadDialog(this);
             //验证码成功后
             saveBaseInfo();
 
         } else {
+            AndroidTool.dismissLoadDialog();
             AndroidTool.showToast(this, bmj.Error);
         }
 
@@ -554,7 +555,7 @@ public class PerfectInfoActivity extends BaseActivity {
                 if (bmj.Data.getEjpass() == null || bmj.Data.getEjpass() == "" || bmj.Data.getEjpass().isEmpty()) {
                     llejpass.setVisibility(View.VISIBLE);
                 }
-                if(StringUtils.isEmpty(bmj.Data.getM_Email())){
+                if (StringUtils.isEmpty(bmj.Data.getM_Email())) {
                     ll_email.setVisibility(View.VISIBLE);
                 }
             }
@@ -589,8 +590,8 @@ public class PerfectInfoActivity extends BaseActivity {
                     return;
                 }
 
-                String email= edt_email.getText().toString();
-                if(StringUtils.isEmpty(email) && ll_email.isShown()){
+                String email = edt_email.getText().toString();
+                if (StringUtils.isEmpty(email) && ll_email.isShown()) {
                     MyAlertDialog dialog = new MyAlertDialog(this, "邮箱不能为空！", null);
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
@@ -687,18 +688,19 @@ public class PerfectInfoActivity extends BaseActivity {
                         }
                     });
                 } else {
+                    AndroidTool.showLoadDialog(this);
                     saveBaseInfo();
                 }
             } else {
                 String realname = edt_name.getText().toString();
-                if (realname == null || realname == "" || realname.isEmpty()) {
+                if (realname == "" || realname.isEmpty()) {
                     MyAlertDialog dialog = new MyAlertDialog(this, "收款人不能为空！", null);
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
                     return;
                 }
                 String id_card = edt_id_card2.getText().toString();
-                if ((id_card == null || id_card == "" || id_card.isEmpty()) && ll_id_card2.isShown()) {
+                if ((id_card == "" || id_card.isEmpty()) && ll_id_card2.isShown()) {
                     MyAlertDialog dialog = new MyAlertDialog(this, "身份证号不能为空！", null);
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
@@ -706,7 +708,7 @@ public class PerfectInfoActivity extends BaseActivity {
                 }
 
                 String bank_card = edt_bank_card.getText().toString();
-                if (bank_card == null || bank_card == "" || bank_card.isEmpty()) {
+                if (bank_card == "" || bank_card.isEmpty()) {
                     MyAlertDialog dialog = new MyAlertDialog(this, "银行卡号不能为空！", null);
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
@@ -761,7 +763,6 @@ public class PerfectInfoActivity extends BaseActivity {
                 MyAlertDialog dialog = new MyAlertDialog(PerfectInfoActivity.this, "请输入支付密码！", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
             }
         }
     };
@@ -774,7 +775,7 @@ public class PerfectInfoActivity extends BaseActivity {
         BaseModelJson<String> bm = myRestClient.SaveBaseInfo(edt_real_name.getText().toString(),
                 edt_mobile_phone.getText().toString(), edt_post_code.getText().toString(),
                 edt_delivery.getText().toString(), edt_ejpass.getText().toString(),
-                edt_id_card.getText().toString(),edt_email.getText().toString());
+                edt_id_card.getText().toString(), edt_email.getText().toString());
         showsuccess(bm);
     }
 
@@ -840,8 +841,8 @@ public class PerfectInfoActivity extends BaseActivity {
 
     }
 
-    public void setCode(String code){
-        if(edit_code!=null){
+    public void setCode(String code) {
+        if (edit_code != null) {
             edit_code.setText(code);
         }
     }

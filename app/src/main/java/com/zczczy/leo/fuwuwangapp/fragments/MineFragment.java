@@ -50,7 +50,7 @@ public class MineFragment extends BaseFragment {
     ImageView img_avatar;
 
     @StringRes
-    String text_location, text_login;
+    String text_location, text_login, text_no_pay, text_paid, text_send, text_all_order;
 
     @AfterViews
     void afterView() {
@@ -69,7 +69,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_already_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.SEND).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.SEND).title(text_send).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -78,7 +78,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_waiting_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).title(text_no_pay).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -87,7 +87,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_paid_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.PAID).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.PAID).title(text_paid).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -96,7 +96,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_whole() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.ALL_ORDER).start();
+            MemberOrderActivity_.intent(this).orderState(MyApplication.ALL_ORDER).title(text_all_order).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -169,6 +169,14 @@ public class MineFragment extends BaseFragment {
     void rl_vip() {
         if (checkUserIsLogin()) {
             VipActivity_.intent(this).start();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            setData();
         }
     }
 }

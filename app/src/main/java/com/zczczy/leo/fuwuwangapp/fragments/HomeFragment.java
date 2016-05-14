@@ -17,6 +17,7 @@ import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
@@ -121,6 +122,7 @@ public class HomeFragment extends BaseFragment {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(HomeFragment.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
+                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();
@@ -209,7 +211,7 @@ public class HomeFragment extends BaseFragment {
                 if (checkUserIsLogin()) {
                     CartActivity_.intent(HomeFragment.this).start();
                 } else {
-                    AndroidTool.showToast(HomeFragment.this, "请先登录");
+                    LoginActivity_.intent(HomeFragment.this).start();
                 }
             }
         });
@@ -252,8 +254,8 @@ public class HomeFragment extends BaseFragment {
             public void onRefreshBegin(PtrFrameLayout frame) {
                 isRefresh = true;
                 pageIndex = 1;
-                myBackgroundTask.getHomeBanner();
-                myBackgroundTask.getAdvertByKbn();
+//                myBackgroundTask.getHomeBanner();
+//                myBackgroundTask.getAdvertByKbn();
                 afterLoadMore();
             }
         });

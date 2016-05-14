@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -44,6 +45,9 @@ public class ReviewActivity extends BaseActivity {
     @Bean
     OttoBus bus;
 
+    @ViewById
+    TextView emptyView;
+
     int pageIndex = 1;
 
     MaterialHeader materialHeader;
@@ -56,6 +60,7 @@ public class ReviewActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        emptyView.setText(empty_review);
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -70,6 +75,7 @@ public class ReviewActivity extends BaseActivity {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(ReviewActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
+                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();

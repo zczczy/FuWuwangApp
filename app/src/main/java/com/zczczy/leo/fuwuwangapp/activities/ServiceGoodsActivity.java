@@ -126,7 +126,7 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(ServiceGoodsActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
-//                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
+                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();

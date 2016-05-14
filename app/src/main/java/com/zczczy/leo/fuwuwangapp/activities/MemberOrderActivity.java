@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -18,6 +19,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -37,6 +39,9 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
 public class MemberOrderActivity extends BaseActivity {
 
     @ViewById
+    MyTitleBar myTitleBar;
+
+    @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 
     @Bean(MemberOrderAdapter.class)
@@ -44,6 +49,12 @@ public class MemberOrderActivity extends BaseActivity {
 
     @Bean
     OttoBus bus;
+
+    @Extra
+    String title;
+
+    @ViewById
+    TextView empty_view;
 
     LinearLayoutManager linearLayoutManager;
 
@@ -58,6 +69,8 @@ public class MemberOrderActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        myTitleBar.setTitle(title);
+        empty_view.setText(String.format(empty_order,title));
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(false);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -72,7 +85,7 @@ public class MemberOrderActivity extends BaseActivity {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(MemberOrderActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
-//                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
+                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();
@@ -90,7 +103,6 @@ public class MemberOrderActivity extends BaseActivity {
             }
         }).paint(paint).build());
         refreshingMaterial();
-
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<MAppOrder>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, MAppOrder obj, int position) {
@@ -102,7 +114,6 @@ public class MemberOrderActivity extends BaseActivity {
 
             }
         });
-
     }
 
     void refreshingMaterial() {

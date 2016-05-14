@@ -46,6 +46,9 @@ public class CommonSearchResultActivity extends BaseActivity {
     @Bean(GoodsAdapters.class)
     BaseUltimateRecyclerViewAdapter myAdapter;
 
+    @ViewById
+    TextView empty_view;
+
     @Bean
     OttoBus bus;
 
@@ -87,6 +90,7 @@ public class CommonSearchResultActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        empty_view.setText(empty_search);
         bus.register(this);
         isSelected = true;
         txt_title_search = (TextView) myTitleBar.getmCustomView().findViewById(R.id.txt_title_search);
@@ -115,6 +119,7 @@ public class CommonSearchResultActivity extends BaseActivity {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
                     AndroidTool.showToast(CommonSearchResultActivity.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
+                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {
                     pageIndex++;
                     afterLoadMore();
