@@ -17,6 +17,8 @@ apt {
     arguments {
         androidManifestFile variant.outputs[0]?.processResources?.manifestFile
         resourcePackageName 'com.zczczy.leo.fuwuwangapp'
+        logLevel 'TRACE'
+        logAppenderConsole 'true'
     }
 }
 

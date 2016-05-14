@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
 import com.zczczy.leo.fuwuwangapp.items.CartDetailItemView_;
 import com.zczczy.leo.fuwuwangapp.items.CartItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -20,6 +21,7 @@ import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -48,6 +50,9 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
 
     @Bean
     MyErrorHandler myErrorHandler;
+
+    @RootContext
+    CartActivity mCartActivity;
 
     @AfterInject
     void afterInject() {
@@ -97,6 +102,7 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
                 }
             }
             insertAll(list, getItemCount());
+            mCartActivity.notifyChanged();
         }
     }
 
@@ -111,7 +117,6 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
 
     @Override
     public int getItemViewType(int position) {
-
         return getItemData(position).level;
     }
 
