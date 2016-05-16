@@ -37,8 +37,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            minifyEnabled false
+            // 显示Log
+            buildConfigField "boolean", "LEO_DEBUG", "true"
         }
     }
     packagingOptions {
