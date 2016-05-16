@@ -222,6 +222,13 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader("Token")
     BaseModelJson<List<YpdRecord>> GetCurrYpdInfo(@Path String date, @Path String flag);
 
+    //查询商家坐标信息
+    @Get("api/Member/GetCompanyZb")
+    @RequiresHeader("Token")
+    BaseModelJson<String> GetCompanyZb();
+
+
+
     /**
      * 功能：订阅安全信使
      * <p/>

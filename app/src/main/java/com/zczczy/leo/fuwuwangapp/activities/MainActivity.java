@@ -83,9 +83,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     @Bean
     MyErrorHandler myErrorHandler;
 
-    @App
-    MyApplication myApp;
-
     //导航
     Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class, NewsFragment_.class, MineFragment_.class};
 
@@ -130,7 +127,7 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         drawables[3] = news_selector;
         drawables[4] = mine_selector;
         myRestClient.setRestErrorHandler(myErrorHandler);
-        locationService = myApp.locationService;
+        locationService = app.locationService;
     }
 
     @AfterViews

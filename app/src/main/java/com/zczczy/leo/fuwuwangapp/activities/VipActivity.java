@@ -173,6 +173,11 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
         }
     }
 
+    @Click
+    void ll_address() {
+        MyAddressActivity_.intent(this).start();
+    }
+
     void scan() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File f1 = new File(fileName);
