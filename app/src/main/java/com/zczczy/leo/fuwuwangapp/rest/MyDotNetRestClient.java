@@ -90,7 +90,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Content/AppUpdCheck?kbn={kbn}")
     BaseModelJson<UpdateApp> AppUpdCheck(@Path int kbn);
 
-
     /**
      * 获取通知
      *
@@ -172,12 +171,10 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader("Token")
     BaseModelJson<UserBaseInfo> GetZcUserById();
 
-
     //获取会员财务信息
     @Get("api/Member/GetFinancialById")
     @RequiresHeader("Token")
     BaseModelJson<UserFinanceInfo> GetFinancialById();
-
 
     //电子钱包交易明细
     @Get("api/Member/WalletTransaction?PageIndex={PageIndex}&PageSize={PageSize}")
@@ -226,8 +223,6 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Member/GetCompanyZb")
     @RequiresHeader("Token")
     BaseModelJson<String> GetCompanyZb();
-
-
 
     /**
      * 功能：订阅安全信使

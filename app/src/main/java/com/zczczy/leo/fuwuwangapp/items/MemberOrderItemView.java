@@ -212,8 +212,8 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_cancel_order.setVisibility(GONE);
             btn_pay.setVisibility(GONE);
         } else if (_data.MorderStatus == MyApplication.SEND) {
-            txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("卖家已发货");
+            txt_do_message.setVisibility(VISIBLE);
             btn_logistics.setVisibility(VISIBLE);
             btn_finish.setVisibility(VISIBLE);
             btn_cancel_order.setVisibility(GONE);

@@ -30,14 +30,8 @@ public class MyInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] data,
-                                        ClientHttpRequestExecution execution) {
-        ClientHttpResponse clientHttpResponse = null;
-        try {
-            clientHttpResponse = execution.execute(request, data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return clientHttpResponse;
+                                        ClientHttpRequestExecution execution) throws IOException {
+        return execution.execute(request, data);
     }
 
     @Background
@@ -47,7 +41,7 @@ public class MyInterceptor implements ClientHttpRequestInterceptor {
 
     @UiThread
     void afterCheck() {
-        AndroidTool.showLoadDialog(context);
-        //AndroidTool.showToast(context, no_net);
+//        AndroidTool.showLoadDialog(context);
+        AndroidTool.showToast(context, no_net);
     }
 }

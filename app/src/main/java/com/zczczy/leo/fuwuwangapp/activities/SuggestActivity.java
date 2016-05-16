@@ -96,8 +96,6 @@ public class SuggestActivity extends BaseActivity {
 
     @Background
     void getHttp() {
-//        String token = pre.token().get();
-//        myRestClient.setHeader("Token",token);
         FwwUser fwwUser = new FwwUser(username, pass, confirm_pass, pre.token().get(), "1", null);
         BaseModelJson<String> bmj = myRestClient.RegisterNew(fwwUser);
         showsuccess(bmj);
@@ -106,21 +104,21 @@ public class SuggestActivity extends BaseActivity {
     @UiThread
     void showsuccess(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj != null) {
-            if (bmj.Successful) {
-                dialog = new MyAlertDialog(this, "注册成功", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.close();
-                        finish();
-                    }
-                });
-                dialog.setCancelable(false);
-                dialog.show();
-            } else {
-                MyAlertDialog dialog = new MyAlertDialog(this, bmj.Error, null);
-                dialog.show();
-            }
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (bmj.Successful) {
+            dialog = new MyAlertDialog(this, "注册成功", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.close();
+                    finish();
+                }
+            });
+            dialog.setCancelable(false);
+            dialog.show();
+        } else {
+            MyAlertDialog dialog = new MyAlertDialog(this, bmj.Error, null);
+            dialog.show();
         }
     }
 

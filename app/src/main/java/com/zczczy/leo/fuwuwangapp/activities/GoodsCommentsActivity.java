@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -41,6 +42,9 @@ public class GoodsCommentsActivity extends BaseActivity {
     @Bean(GoodsCommentsAdapter.class)
     BaseUltimateRecyclerViewAdapter myAdapter;
 
+    @ViewById
+    TextView emptyView;
+
     @Bean
     OttoBus bus;
 
@@ -58,6 +62,7 @@ public class GoodsCommentsActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         bus.register(this);
+        emptyView.setText(empty_review);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
