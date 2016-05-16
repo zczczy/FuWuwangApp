@@ -16,8 +16,8 @@ import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
-import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsImgListModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -130,7 +130,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     }
 
     @UiThread
-    void afterGetGoodsDetailById(BaseModelJson<GoodsDetailModel> bmj) {
+    void afterGetGoodsDetailById(BaseModelJson<Goods> bmj) {
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {

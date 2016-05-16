@@ -13,7 +13,6 @@ import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.CityChooseActivity;
 import com.zczczy.leo.fuwuwangapp.activities.CityChooseActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
@@ -24,7 +23,6 @@ import com.zczczy.leo.fuwuwangapp.items.ServiceHeaderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
@@ -39,7 +37,6 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.OnActivityResult;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
@@ -116,7 +113,7 @@ public class ServiceFragment extends BaseFragment {
         myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchActivity_.intent(ServiceFragment.this).start();
+                SearchActivity_.intent(ServiceFragment.this).isService(true).start();
             }
         });
         ultimateRecyclerView.setNormalHeader(ServiceHeaderItemView_.build(getActivity()));

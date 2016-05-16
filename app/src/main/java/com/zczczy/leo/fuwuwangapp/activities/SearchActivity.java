@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
@@ -23,6 +22,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 
@@ -43,6 +43,9 @@ public class SearchActivity extends BaseActivity {
 
     @Bean
     SearchHistoryDao searchHistoryDao;
+
+    @Extra
+    boolean isService;
 
     EditText text_search;
 
@@ -66,7 +69,11 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, SearchHistory obj, int position) {
                 searchHistoryDao.update(obj);
-                CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
+                if (isService) {
+                    StoreSearchActivity_.intent(SearchActivity.this).searchName(obj.getSearchContent()).startForResult(1000);
+                } else {
+                    CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
+                }
             }
         });
         View view = myTitleBar.getmCustomView();
@@ -79,7 +86,11 @@ public class SearchActivity extends BaseActivity {
                     searchHistory.setSearchContent(text_search.getText().toString());
                     searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
                     searchHistoryDao.insert(searchHistory);
-                    CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                    if (isService) {
+                        StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
+                    } else {
+                        CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                    }
                 }
                 return true;
             }
@@ -92,7 +103,11 @@ public class SearchActivity extends BaseActivity {
                     searchHistory.setSearchContent(text_search.getText().toString());
                     searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
                     searchHistoryDao.insert(searchHistory);
-                    CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                    if (isService) {
+                        StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
+                    } else {
+                        CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                    }
                 }
             }
         });

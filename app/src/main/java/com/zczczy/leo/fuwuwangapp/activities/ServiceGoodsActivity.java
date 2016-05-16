@@ -98,7 +98,6 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
 
     MaterialHeader materialHeader;
 
-
     PopupWindow areaPopWin, categoryPopWin;
 
     int pageIndex = 1;
@@ -149,6 +148,12 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
             @Override
             public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
 
+            }
+        });
+        myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchActivity_.intent(ServiceGoodsActivity.this).isService(true).start();
             }
         });
     }
@@ -203,7 +208,7 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
                 TwoGoodsTypeId = app.getSecondCategory().GoodsTypeId;
             }
         }
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, StreetInfoId, GoodsTypeId, TwoGoodsTypeId, CityId, AreaId);
+        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, 1, StreetInfoId, GoodsTypeId, TwoGoodsTypeId, CityId, AreaId);
     }
 
     @Click
@@ -246,7 +251,7 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
 
 
     @Subscribe
-    public void notifyUIi(BaseModel bm) {
+    public void notifyUI(BaseModel bm) {
         if (isRefresh) {
             linearLayoutManager.scrollToPosition(0);
             ultimateRecyclerView.mPtrFrameLayout.refreshComplete();

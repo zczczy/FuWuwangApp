@@ -1,6 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Leo on 2015/12/21.
@@ -68,5 +69,14 @@ public class Goods implements Serializable {
     public String PJBfb;
     public String ISCommend;
 
+    public String TempDisp;
+    /**
+     * GoodsImgId : 1
+     * GoodsInfoId : sample string 2
+     * GoodsImgUrl : sample string 3
+     * GoodsImgStatus : 4
+     * GodosName : sample string 5
+     */
 
+    public List<GoodsImgListModel> GoodsImgList;
 }

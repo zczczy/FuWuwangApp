@@ -17,8 +17,10 @@ apt {
     arguments {
         androidManifestFile variant.outputs[0]?.processResources?.manifestFile
         resourcePackageName 'com.zczczy.leo.fuwuwangapp'
-        logLevel 'TRACE'
+        logLevel 'ERROR'
         logAppenderConsole 'true'
+        classSuffix '_'   //classSuffix is used to change the suffix of enhanced classes like Activities with @EActivity. The default value is _.
+        generateFinalClasses 'true'  //generateFinalClasses is used to set if generated classes should be final or not. The default value is true.
     }
 }
 

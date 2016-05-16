@@ -16,7 +16,6 @@ import com.zczczy.leo.fuwuwangapp.model.Experience;
 import com.zczczy.leo.fuwuwangapp.model.FwwUser;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
-import com.zczczy.leo.fuwuwangapp.model.GoodsDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.Information;
 import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
@@ -59,7 +58,6 @@ import org.androidannotations.rest.spring.api.RestClientErrorHandling;
 import org.androidannotations.rest.spring.api.RestClientHeaders;
 import org.androidannotations.rest.spring.api.RestClientRootUrl;
 import org.androidannotations.rest.spring.api.RestClientSupport;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -388,7 +386,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/ShopContent/GetGoodsDetailById?GoodsInfoId={GoodsInfoId}")
-    BaseModelJson<GoodsDetailModel> getGoodsDetailById(@Path String GoodsInfoId);
+    BaseModelJson<Goods> getGoodsDetailById(@Path String GoodsInfoId);
 
     /**
      * 根据商品ID查询评论信息

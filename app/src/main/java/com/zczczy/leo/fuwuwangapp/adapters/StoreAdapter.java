@@ -64,13 +64,19 @@ public class StoreAdapter extends BaseUltimateRecyclerViewAdapter<StoreDetailMod
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
         BaseModelJson<PagerResult<StoreDetailModel>> bmj = null;
-        bmj = myRestClient.getStoreInfo(
-                objects[0]==null?0:Integer.valueOf(objects[0].toString()),
-                objects[1]==null?0:Integer.valueOf(objects[1].toString()),
-                objects[2]==null?0:Integer.valueOf(objects[2].toString()),
-                objects[3]==null?"":objects[3].toString(),
-                objects[4]==null?"":objects[4].toString(),
-                pageIndex, pageSize);
+        switch (Integer.valueOf(objects[0].toString())) {
+            case 1:
+                bmj = myRestClient.getStoreInfo(
+                        objects[1] == null ? 0 : Integer.valueOf(objects[1].toString()),
+                        objects[2] == null ? 0 : Integer.valueOf(objects[2].toString()),
+                        objects[3] == null ? 0 : Integer.valueOf(objects[3].toString()),
+                        objects[4] == null ? "" : objects[4].toString(),
+                        objects[5] == null ? "" : objects[5].toString(),
+                        pageIndex, pageSize);
+                break;
+            case 2:
+                break;
+        }
         afterGetData(bmj);
     }
 
