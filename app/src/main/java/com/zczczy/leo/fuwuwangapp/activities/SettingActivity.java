@@ -31,7 +31,7 @@ public class SettingActivity extends BaseActivity {
 
     @Click
     void rl_change_pass() {
-        if (StringUtils.isEmpty(pre.token().get())) {
+        if (checkUserIsLogin()) {
             AndroidTool.showToast(this, "请先登录");
         } else {
             ChangePasswordActivity_.intent(this).startForResult(1000);
