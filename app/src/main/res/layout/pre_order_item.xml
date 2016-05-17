@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_root"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:id="@+id/ll_root"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="5dp"
+              android:background="@color/main_tab_color"
+              android:orientation="vertical"
+              android:padding="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +23,7 @@
                 android:id="@+id/img_cart_goods_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/goods_default" />
+                android:src="@drawable/goods_default"/>
         </LinearLayout>
 
         <LinearLayout
@@ -37,7 +40,7 @@
                 android:ems="30"
                 android:lines="2"
                 android:maxLines="2"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,13 +56,13 @@
                     <TextView
                         android:id="@+id/txt_cart_goods_price"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/txt_cart_goods_lb_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp" />
+                        android:layout_marginTop="5dp"/>
                 </LinearLayout>
 
                 <TextView
@@ -69,7 +72,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.5"
                     android:gravity="right"
-                    android:text="X1" />
+                    android:text="X1"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -82,7 +85,5 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="@string/text_ticket_no"
-        android:visibility="gone" />
-
-    <include layout="@layout/horizontal_line" />
+        android:visibility="gone"/>
 </LinearLayout>

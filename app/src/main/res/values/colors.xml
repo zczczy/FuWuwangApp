@@ -28,6 +28,7 @@
     <color name="major_text_color">#525252</color>
     <color name="sub_text_color">#888888</color>
     <color name="sub_color">#878787</color>
+    <color name="register_color">#a6a6a6</color>
     <color name="price_color">#ff6633</color>
     <color name="buy_button">#ff9900</color>
     <color name="search">#e59f00</color>

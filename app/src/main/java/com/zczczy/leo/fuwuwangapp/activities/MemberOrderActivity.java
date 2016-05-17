@@ -1,6 +1,5 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,8 +7,6 @@ import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
@@ -70,7 +67,7 @@ public class MemberOrderActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         myTitleBar.setTitle(title);
-        empty_view.setText(String.format(empty_order,title));
+        empty_view.setText(String.format(empty_order, title));
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(false);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -93,15 +90,6 @@ public class MemberOrderActivity extends BaseActivity {
             }
         });
         ultimateRecyclerView.setCustomSwipeToRefresh();
-        Paint paint = new Paint();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
-            @Override
-            public boolean shouldHideDivider(int position, RecyclerView parent) {
-                return false;
-            }
-        }).paint(paint).build());
         refreshingMaterial();
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<MAppOrder>() {
             @Override

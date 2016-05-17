@@ -306,6 +306,10 @@
     <string name="buy">立即抢购</string>
     <string name="rebate">支持返券</string>
     <string name="goods_detail">商品详情</string>
+    <string name="goods_by">快递：</string>
+    <string name="goods_kun_cun">库存：</string>
+    <string name="goods_store">店铺详情</string>
+    <string name="goods_buy_tip">购买须知</string>
 
     <string name="txt_review">商品评论</string>
     <string name="txt_all_review">查看全部评论</string>
@@ -327,6 +331,16 @@
     <string name="text_order_detail">订单详情</string>
     <string name="text_give">赠 送:(兑现券)</string>
     <string name="text_ticket_no">消 费 码:%1$s</string>
+    <string name="text_express_charges">支付配送</string>
+    <string name="text_take">提交订单</string>
+
+    <!--订单列表-->
+    <string name="text_canceled">已取消</string>
+    <string name="text_cancel_order">取消订单</string>
+    <string name="text_logistics">物流信息</string>
+    <string name="text_finished">已完成</string>
+    <string name="text_pay">付款</string>
+    <string name="text_finish">确认收货</string>
 
 
     <!--收货地址-->
@@ -367,7 +381,6 @@
     <string name="text_review">待评论</string>
     <string name="text_comment">评论</string>
 
-    <string name="text_logistics">物流信息</string>
 
     <!--service 服务-->
     <string name="food">美食</string>

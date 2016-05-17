@@ -22,7 +22,6 @@ import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -157,7 +156,7 @@ public class MineFragment extends BaseFragment {
             }
         } else {
             img_vip_icon.setVisibility(View.GONE);
-            rl_vip.setVisibility(View.INVISIBLE);
+            rl_vip.setVisibility(View.GONE);
             img_avatar.setImageResource(R.drawable.default_header);
             rl_setting.setVisibility(View.VISIBLE);
             txt_name.setText(text_login);

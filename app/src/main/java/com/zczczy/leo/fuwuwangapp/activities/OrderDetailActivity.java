@@ -50,7 +50,7 @@ public class OrderDetailActivity extends BaseActivity {
             txt_should_pay_l_rmb, txt_paid_rmb;
 
     @ViewById
-    LinearLayout ll_take, ll_logistics, ll_store, ll_pre_order_item, ll_shipping;
+    LinearLayout ll_take, ll_logistics, ll_store, ll_pre_order_item, ll_shipping,ll_next;
 
     @ViewById
     RelativeLayout ll_lb, ll_pay, ll_should_pay, ll_paid, rl_express_charges;
@@ -80,6 +80,7 @@ public class OrderDetailActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
+        ll_next.setVisibility(View.GONE);
         getOrderDetailById();
     }
 
@@ -100,7 +101,7 @@ public class OrderDetailActivity extends BaseActivity {
             AndroidTool.showToast(this, bmj.Error);
         } else {
             mAppOrder = bmj.Data;
-            txt_order_no.setText(String.format(text_order_no, bmj.Data.MOrderNo));
+            txt_order_no.setText(String.format(text_order_no, "  " + bmj.Data.MOrderNo));
             tv_shipping.setText(String.format(txt_shipping, bmj.Data.ShrName));
             txt_phone.setText(bmj.Data.Lxdh);
             tv_shipping_address.setText(String.format(txt_shipping_address, bmj.Data.DetailAddress));
