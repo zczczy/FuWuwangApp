@@ -180,7 +180,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
             buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
             buyCartInfoList.GodosName = orderDetailModel.ProductName;
-            buyCartInfoList.GoodsPrice = Double.valueOf(orderDetailModel.MOrderDetailPrice);
+            buyCartInfoList.GoodsPrice = Double.valueOf(orderDetailModel.ProductPrice);
             buyCartInfoList.GoodsLBPrice = Integer.valueOf(orderDetailModel.MOrderDetailLbCount == null ? "0" : orderDetailModel.MOrderDetailLbCount);
             buyCartInfoList.ProductCount = Integer.valueOf(orderDetailModel.ProductNum);
             PreOrderItemView preOrderItemView = PreOrderItemView_.build(context);
@@ -196,13 +196,14 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_finish.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
         } else if (_data.MorderStatus == MyApplication.PAID) {
-            txt_do_message.setVisibility(VISIBLE);
-            txt_do_message.setText("商家处理量中");
-            btn_logistics.setVisibility(VISIBLE);
+            txt_do_message.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
+            txt_do_message.setText("商家处理中");
+            btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
             btn_finish.setVisibility(GONE);
             btn_cancel_order.setVisibility(GONE);
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
+
         } else if (_data.MorderStatus == MyApplication.CANCEL) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("订单已取消");
@@ -221,7 +222,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_canceled.setVisibility(GONE);
         } else if (_data.MorderStatus == MyApplication.CONFIRM) {
             txt_do_message.setVisibility(VISIBLE);
-            txt_do_message.setText("等待买家确认");
+            txt_do_message.setText("买家已确认");
             btn_logistics.setVisibility(View.VISIBLE);
             btn_finish.setVisibility(View.GONE);
             btn_cancel_order.setVisibility(View.GONE);
@@ -230,14 +231,13 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
         } else if (_data.MorderStatus == MyApplication.FINISH) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("已完成");
-            btn_logistics.setVisibility(View.VISIBLE);
+            btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
             btn_finished.setVisibility(View.VISIBLE);
             btn_finish.setVisibility(View.GONE);
             btn_cancel_order.setVisibility(View.GONE);
             btn_pay.setVisibility(View.GONE);
             btn_canceled.setVisibility(View.GONE);
         }
-
 
     }
 

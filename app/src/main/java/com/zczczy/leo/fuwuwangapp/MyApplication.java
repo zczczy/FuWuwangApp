@@ -74,6 +74,13 @@ public class MyApplication extends Application {
     public static final int LONGBI_UMSPAY = 6; //6龙币+网银
     public static final int LONGBI_UMSPAY_DZB = 7; //7电子币+龙币+网银
 
+    public static final String STORE_STATE_NORMAL = "1"; //1.待审核 2.锁定 3.审核成功，活跃，解锁状态
+    public static final String STORE_STATE_LOCK = "2"; //1.待审核 2.锁定 3.审核成功，活跃，解锁状态
+    public static final String STORE_STATE_ACTIVITY = "3"; //1.待审核 2.锁定 3.审核成功，活跃，解锁状态
+
+    public static final String GOODS_STATE_UP = "0"; //0.上架
+    public static final String GOODS_STATE_DOWN = "-1"; //-1.下架
+
 
     //服务商品类型
     private List<AdvertModel> serviceAdvertModelList;

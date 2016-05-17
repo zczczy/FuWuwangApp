@@ -53,7 +53,7 @@ public class OrderDetailActivity extends BaseActivity {
     LinearLayout ll_take, ll_logistics, ll_store, ll_pre_order_item, ll_shipping;
 
     @ViewById
-    RelativeLayout ll_lb, ll_pay, ll_should_pay, ll_paid;
+    RelativeLayout ll_lb, ll_pay, ll_should_pay, ll_paid, rl_express_charges;
 
     @ViewById
     Button btn_canceled, btn_cancel_order, btn_logistics, btn_pay, btn_finish, btn_finished;
@@ -107,18 +107,24 @@ public class OrderDetailActivity extends BaseActivity {
             txt_store.setText(bmj.Data.StoreName);
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
-
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
             int i = 0;
             for (OrderDetailModel orderDetailModel : bmj.Data.MOrderDetailList) {
-                BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
+                final BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
                 buyCartInfoList.GoodsLBPrice = orderDetailModel.MOrderDetailLbCount == null ? 0 : Integer.valueOf(orderDetailModel.MOrderDetailLbCount);
                 buyCartInfoList.GoodsPrice = orderDetailModel.MOrderDetailPrice == null ? 0.00 : Double.valueOf(orderDetailModel.MOrderDetailPrice);
                 buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
                 buyCartInfoList.GodosName = orderDetailModel.ProductName;
                 buyCartInfoList.ProductCount = orderDetailModel.ProductNum == null ? 0 : Integer.valueOf(orderDetailModel.ProductNum);
                 buyCartInfoList.XfNo = orderDetailModel.XfNo;
+                buyCartInfoList.GoodsInfoId = orderDetailModel.GoodsInfoId;
                 PreOrderItemView preOrderItemView = PreOrderItemView_.build(this);
+                preOrderItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        GoodsDetailInfoActivity_.intent(OrderDetailActivity.this).goodsId(buyCartInfoList.GoodsInfoId).start();
+                    }
+                });
                 preOrderItemView.init(buyCartInfoList);
                 ll_pre_order_item.addView(preOrderItemView, i);
             }
@@ -153,7 +159,7 @@ public class OrderDetailActivity extends BaseActivity {
                 //还需支付
                 ll_should_pay.setVisibility(View.VISIBLE);
                 ll_paid.setVisibility(View.VISIBLE);
-                if (bmj.Data.MOrderDzb > 0) {
+                if (bmj.Data.MOrderDzb >= 0) {
                     txt_should_pay_l_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney - bmj.Data.MOrderDzb));
                     txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
                 }
@@ -196,8 +202,7 @@ public class OrderDetailActivity extends BaseActivity {
             }
             ll_shipping.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
             ll_logistics.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
-
-
+            rl_express_charges.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
         }
     }
 

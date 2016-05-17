@@ -25,16 +25,12 @@ public class SettingActivity extends BaseActivity {
     @ViewById
     RelativeLayout rl_change_pass;
 
-    @Pref
-    MyPrefs_ pre;
-
-
     @Click
     void rl_change_pass() {
         if (checkUserIsLogin()) {
-            AndroidTool.showToast(this, "请先登录");
-        } else {
             ChangePasswordActivity_.intent(this).startForResult(1000);
+        } else {
+            AndroidTool.showToast(this, "请先登录");
         }
     }
 

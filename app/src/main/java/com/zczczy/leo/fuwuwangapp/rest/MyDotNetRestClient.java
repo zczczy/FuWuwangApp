@@ -441,6 +441,19 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetStoreDetailById?StoreInfoId={StoreInfoId}")
     BaseModelJson<StoreDetailModel> getStoreDetailById(@Path String StoreInfoId);
 
+
+    /**
+     * 查询服务类店铺
+     *
+     * @param StoreName 名称
+     * @param PageIndex 当前页数
+     * @param PageSize  页面大小
+     * @return
+     */
+    @Get("api/ShopContent/GetStoreInfoByGoodsType?StoreName={StoreName}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<StoreDetailModel>> getStoreInfoByGoodsType(@Path String StoreName, @Path int PageIndex, @Path int PageSize);
+
+
     /**
      * 查询省下拉数据
      *

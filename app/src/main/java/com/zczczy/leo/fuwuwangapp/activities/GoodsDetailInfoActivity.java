@@ -134,35 +134,40 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            goods_name.setText(bmj.Data.GodosName);
-            goods_describe.setText(bmj.Data.GoodsDesc);
-            goods_by.setText(bmj.Data.GoodsIsBy);
-            goods_kucun.setText(bmj.Data.GoodsStock);
-            goods_knows.setText(bmj.Data.GoodsPurchaseNotes);
-            txt_rebate.setText(bmj.Data.TempDisp);
-            if (Float.valueOf(bmj.Data.GoodsPrice) > 0 && Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
-                txt_rmb.setVisibility(View.VISIBLE);
-                txt_plus.setVisibility(View.VISIBLE);
-                txt_rmb.setText(String.format(home_rmb, bmj.Data.GoodsPrice));
-                txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
-            } else if (Float.valueOf(bmj.Data.GoodsPrice) > 0) {
-                txt_rmb.setVisibility(View.VISIBLE);
-                txt_plus.setVisibility(View.GONE);
-                txt_home_lb.setVisibility(View.GONE);
-                txt_rmb.setText(String.format(home_rmb, bmj.Data.GoodsPrice));
-            } else if (Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
-                txt_rmb.setVisibility(View.GONE);
-                txt_plus.setVisibility(View.GONE);
-                txt_home_lb.setVisibility(View.VISIBLE);
-                txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
+            if ("0".equals(MyApplication.GOODS_STATE_UP)) {
+                goods_name.setText(bmj.Data.GodosName);
+                goods_describe.setText(bmj.Data.GoodsDesc);
+                goods_by.setText(bmj.Data.GoodsIsBy);
+                goods_kucun.setText(bmj.Data.GoodsStock);
+                goods_knows.setText(bmj.Data.GoodsPurchaseNotes);
+                txt_rebate.setText(bmj.Data.TempDisp);
+                if (Float.valueOf(bmj.Data.GoodsPrice) > 0 && Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
+                    txt_rmb.setVisibility(View.VISIBLE);
+                    txt_plus.setVisibility(View.VISIBLE);
+                    txt_rmb.setText(String.format(home_rmb, bmj.Data.GoodsPrice));
+                    txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
+                } else if (Float.valueOf(bmj.Data.GoodsPrice) > 0) {
+                    txt_rmb.setVisibility(View.VISIBLE);
+                    txt_plus.setVisibility(View.GONE);
+                    txt_home_lb.setVisibility(View.GONE);
+                    txt_rmb.setText(String.format(home_rmb, bmj.Data.GoodsPrice));
+                } else if (Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
+                    txt_rmb.setVisibility(View.GONE);
+                    txt_plus.setVisibility(View.GONE);
+                    txt_home_lb.setVisibility(View.VISIBLE);
+                    txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
+                }
+                for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
+                    TextSliderView textSliderView = new TextSliderView(this);
+                    textSliderView.image(nb.GoodsImgUrl);
+                    textSliderView.setOnSliderClickListener(this);
+                    sliderLayout.addSlider(textSliderView);
+                }
+                storeId = bmj.Data.StoreInfoId;
+            } else {
+                AndroidTool.showToast(this, "该商品已下架");
+                finish();
             }
-            for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
-                TextSliderView textSliderView = new TextSliderView(this);
-                textSliderView.image(nb.GoodsImgUrl);
-                textSliderView.setOnSliderClickListener(this);
-                sliderLayout.addSlider(textSliderView);
-            }
-            storeId = bmj.Data.StoreInfoId;
 
         } else {
             AndroidTool.showToast(this, bmj.Error);

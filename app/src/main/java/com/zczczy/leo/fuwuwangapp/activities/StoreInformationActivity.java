@@ -109,8 +109,13 @@ public class StoreInformationActivity extends BaseActivity {
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
         } else {
-            myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, false, 0, bmj.Data.GoodsList);
-            storeInformationHeaderItemView.init(bmj.Data);
+            if (MyApplication.STORE_STATE_ACTIVITY.equals(bmj.Data.StoreStatus)) {
+                myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, false, 0, bmj.Data.GoodsList);
+                storeInformationHeaderItemView.init(bmj.Data);
+            } else {
+                AndroidTool.showToast(this, "该店铺已锁定");
+                finish();
+            }
         }
     }
 

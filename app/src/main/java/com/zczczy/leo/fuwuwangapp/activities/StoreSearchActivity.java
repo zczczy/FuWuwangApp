@@ -10,6 +10,7 @@ import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.StoreAdapter;
@@ -142,6 +143,7 @@ public class StoreSearchActivity extends BaseActivity {
     }
 
     void afterLoadMore() {
+        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, 2, searchName);
     }
 
     @Subscribe

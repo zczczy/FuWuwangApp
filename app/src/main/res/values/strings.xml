@@ -254,6 +254,7 @@
     <string name="text_all_select">全选</string>
     <string name="text_edit">编辑</string>
     <string name="text_delete">删除</string>
+    <string name="cart_no_goods">您还没有选择商品哦!</string>
 
 
     <string name="timer">%1$sS</string>
@@ -325,7 +326,7 @@
     <string name="text_order_logistics">感谢您的购买，点击查看物流信息！</string>
     <string name="text_order_detail">订单详情</string>
     <string name="text_give">赠 送:(兑现券)</string>
-    <string name="text_ticket_no">消费码:%1$s</string>
+    <string name="text_ticket_no">消 费 码:%1$s</string>
 
 
     <!--收货地址-->

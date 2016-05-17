@@ -38,15 +38,13 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="2.5dp"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:text="asdad发发s发呆发阿萨德法撒旦法阿斯蒂芬发短发" />
+            android:maxLines="1" />
 
         <include
             layout="@layout/rebuilt_rmb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="2.5dp" />
-
 
     </LinearLayout>
 

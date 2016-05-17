@@ -2,12 +2,16 @@ package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -18,7 +22,6 @@ import org.springframework.util.StringUtils;
  */
 @EViewGroup(R.layout.pre_order_item)
 public class PreOrderItemView extends ItemView<BuyCartInfoList> {
-
 
     @ViewById
     ImageView img_cart_goods_img;
@@ -62,6 +65,7 @@ public class PreOrderItemView extends ItemView<BuyCartInfoList> {
             txt_ticket.setVisibility(GONE);
         }
     }
+
 
     @Override
     public void onItemSelected() {

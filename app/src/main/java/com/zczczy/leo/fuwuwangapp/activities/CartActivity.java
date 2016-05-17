@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
 import com.zczczy.leo.fuwuwangapp.items.CartBuyPopup;
 import com.zczczy.leo.fuwuwangapp.items.CartBuyPopup_;
@@ -70,7 +71,7 @@ public class CartActivity extends BaseActivity {
     TextView txt_total_rmb, txt_total_lb;
 
     @StringRes
-    String home_lb, he_ji;
+    String home_lb, he_ji, cart_no_goods;
 
     @ViewById
     CheckBox cb_all;
@@ -114,6 +115,17 @@ public class CartActivity extends BaseActivity {
             }
         });
         setTotalMoney();
+
+        myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<CartModel>() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, CartModel obj, int position) {
+                if (obj.level == 0) {
+                    StoreInformationActivity_.intent(CartActivity.this).storeId(obj.StoreInfoId).start();
+                } else {
+                    GoodsDetailInfoActivity_.intent(CartActivity.this).goodsId(obj.GoodsInfoId).start();
+                }
+            }
+        });
     }
 
     @Click
@@ -123,7 +135,7 @@ public class CartActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 calc();
-                if(list.size()>0){
+                if (list.size() > 0) {
                     deleteShopping();
                 }
             }
@@ -138,9 +150,13 @@ public class CartActivity extends BaseActivity {
         Map<String, String> map = new HashMap<>(1);
         String temp = "";
         for (int i = 0; i < list.size(); i++) {
-            temp += list.get(i).BuyCartInfoIds;
+            if (i == list.size() - 1) {
+                temp += list.get(i).BuyCartInfoIds;
+            } else {
+                temp += list.get(i).BuyCartInfoIds + ",";
+            }
         }
-        map.put("BuyCartInfoIds", temp.substring(0, temp.lastIndexOf(',')));
+        map.put("BuyCartInfoIds", temp);
         afterDeleteShopping(myRestClient.deleteShoppingCartById(map));
     }
 
@@ -173,6 +189,8 @@ public class CartActivity extends BaseActivity {
             //设置SelectPicPopupWindow弹出窗体的背景
             popupWindow.setBackgroundDrawable(dw);
             popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, DisplayUtil.dip2px(this, 50));
+        } else {
+            AndroidTool.showToast(this, cart_no_goods);
         }
     }
 
@@ -208,6 +226,8 @@ public class CartActivity extends BaseActivity {
         //取出有商品的店铺
         for (CheckOutModel com : tempList) {
             if (com.ProductCount > 0) {
+                //去掉最后一个","
+                com.BuyCartInfoIds = com.BuyCartInfoIds.substring(0, com.BuyCartInfoIds.lastIndexOf(','));
                 list.add(com);
             }
         }
@@ -245,10 +265,10 @@ public class CartActivity extends BaseActivity {
         } else {
             myAdapter.unCheckAll();
         }
-
+        setTotalMoney();
     }
 
-    public void notifyChanged(){
+    public void notifyChanged() {
         cb_all.setChecked(false);
         setTotalMoney();
     }

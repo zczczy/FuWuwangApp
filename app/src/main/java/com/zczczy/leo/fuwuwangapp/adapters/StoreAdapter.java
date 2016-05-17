@@ -75,6 +75,7 @@ public class StoreAdapter extends BaseUltimateRecyclerViewAdapter<StoreDetailMod
                         pageIndex, pageSize);
                 break;
             case 2:
+                bmj = myRestClient.getStoreInfoByGoodsType(objects[1] == null ? "" : objects[1].toString(), pageIndex, pageSize);
                 break;
         }
         afterGetData(bmj);

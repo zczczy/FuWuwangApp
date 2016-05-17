@@ -30,7 +30,7 @@ public class StoreDetailModel implements Serializable {
     public String StoreName;
     public String StoreDesc;
     public String StoreImgSl;
-    public String StoreStatus;
+    public String StoreStatus; //1.待审核 2.锁定 3.审核成功，活跃，解锁状态
     public String CreateTime;
     public String LinkTel;
     public String StoreAddress;
