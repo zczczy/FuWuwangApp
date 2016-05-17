@@ -42,7 +42,7 @@ public class ShippingAddressActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<MReceiptAddressModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, MReceiptAddressModel obj, int position) {
-                if(isFinish){
+                if (isFinish) {
                     Intent intent = new Intent();
                     intent.putExtra("model", obj);
                     setResult(1001, intent);
@@ -50,21 +50,13 @@ public class ShippingAddressActivity extends BaseActivity {
                 }
             }
         });
-//        myAdapter.getMoreData();
     }
 
     @Click
     void btn_add_shipping_address() {
-//        AddShippingAddressActivity_.intent(this).startForResult(1000);
         AddShippingAddressActivity_.intent(this).start();
     }
 
-//    @OnActivityResult(1000)
-//    void afterAdd(int resultCode) {
-//        if (resultCode == RESULT_OK) {
-//            myAdapter.getMoreData();
-//        }
-//    }
 
     public void onResume() {
         super.onResume();

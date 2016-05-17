@@ -378,7 +378,6 @@ public class PreOrderActivity extends BaseActivity {
 //        });
 //    }
 
-
     //设置 收货地址
     void setShipping(MReceiptAddressModel model) {
         if (model != null) {

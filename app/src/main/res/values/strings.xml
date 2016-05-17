@@ -344,6 +344,7 @@
 
 
     <!--收货地址-->
+    <string name="text_shipping_address">收货地址</string>
     <string name="txt_add_shipping_address">新增地址</string>
     <string name="txt_edit_shipping_address">编辑</string>
     <string name="txt_delete_shipping_address">删除</string>

@@ -15,7 +15,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/txt_add_shipping_address" />
+        app:mTitle="@string/text_shipping_address" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
