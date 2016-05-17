@@ -52,7 +52,7 @@ public class PreOrderActivity extends BaseActivity {
     LinearLayout ll_shipping, ll_store, ll_pre_order_item;
 
     @ViewById
-    RelativeLayout rl_dian, ll_lb, ll_pay;
+    RelativeLayout rl_dian, ll_lb, ll_pay, rl_express_charges, rl_postal;
 
     @ViewById
     TextView tv_shipping, txt_phone, tv_shipping_address, txt_store, txt_express_charges,
@@ -213,6 +213,8 @@ public class PreOrderActivity extends BaseActivity {
             longBi = bmj.Data.MOrderLbCount;
             //1:服务类，2：邮寄类
             ll_shipping.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
+            rl_express_charges.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
+            rl_postal.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }

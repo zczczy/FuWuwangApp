@@ -1,6 +1,5 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.RegexUtils;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -92,13 +92,13 @@ public class MemberInfoActivity extends BaseActivity {
     }
 
     @UiThread
-    void afterUploadAvatar(BaseModelJson<String> bmj){
+    void afterUploadAvatar(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
-        if(bmj==null){
-            AndroidTool.showToast(this,no_net);
-        }else if(!bmj.Successful){
-            AndroidTool.showToast(this,bmj.Error);
-        }else{
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bmj.Successful) {
+            AndroidTool.showToast(this, bmj.Error);
+        } else {
             Picasso.with(this).load(bmj.Data).placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
         }
     }
@@ -139,17 +139,11 @@ public class MemberInfoActivity extends BaseActivity {
     //保存
     @Click
     void btn_save() {
-//        if (AndroidTool.checkIsNull(edt_blog)) {
-//            AndroidTool.showToast(this, "微博不能为空");
-//        } else if (AndroidTool.checkIsNull(edt_qq)) {
-//            AndroidTool.showToast(this, "qq不能为空");
-//        } else if (AndroidTool.checkIsNull(edt_email)) {
-//            AndroidTool.showToast(this, "邮箱不能为空");
-//        } else if (AndroidTool.checkEmail(edt_email)) {
-//            AndroidTool.showToast(this, "邮箱格式不正确");
-//        } else {
-//        }
-        changeInfo(edt_email.getText().toString().trim(), edt_qq.getText().toString().trim(), edt_blog.getText().toString().trim());
+        if (!AndroidTool.checkIsNull(edt_email) && RegexUtils.isEmail(edt_email.getText().toString().trim())) {
+            AndroidTool.showToast(this, "邮箱格式不正确");
+        } else {
+            changeInfo(edt_email.getText().toString().trim(), edt_qq.getText().toString().trim(), edt_blog.getText().toString().trim());
+        }
     }
 
     @Click

@@ -1,6 +1,5 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,8 +9,6 @@ import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.ObservableScrollState;
 import com.marshalchen.ultimaterecyclerview.ObservableScrollViewCallbacks;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
@@ -73,8 +70,6 @@ public class HomeFragment extends BaseFragment {
 
     Drawable title_search, title_search_scrolled;
 
-    Paint paint = new Paint();
-
     View view;
 
     TextView textView;
@@ -99,14 +94,13 @@ public class HomeFragment extends BaseFragment {
     @AfterViews
     void afterView() {
         //初始化控件
-        myTitleBar.getBackground().setAlpha(0);
+        myTitleBar.getBackground().mutate().setAlpha(0);
         view = myTitleBar.getmCustomView();
         textView = (TextView) view.findViewById(R.id.txt_title_search);
         title_search = getResources().getDrawable(R.drawable.title_search);
         title_search_scrolled = getResources().getDrawable(R.drawable.title_search_scrolled);
         title_search.setBounds(0, 0, title_search.getMinimumWidth(), title_search.getMinimumHeight());
         title_search_scrolled.setBounds(0, 0, title_search_scrolled.getMinimumWidth(), title_search_scrolled.getMinimumHeight());
-
         bus.register(this);
         setListener();
         ultimateRecyclerView.setHasFixedSize(true);
@@ -145,7 +139,7 @@ public class HomeFragment extends BaseFragment {
                     myTitleBar.getBackground().setAlpha(0);
                 } else if (scrollY < 500) {
                     progress = (scrollY / 2);//255
-                    myTitleBar.getBackground().setAlpha(progress);
+                    myTitleBar.getBackground().mutate().setAlpha(progress);
                     if (scrollY < 250) {
                         myTitleBar.setNavigationIcon(R.drawable.title_category);
                         myTitleBar.setRightButtonIcon(R.drawable.title_cart);
@@ -160,7 +154,7 @@ public class HomeFragment extends BaseFragment {
                         textView.setCompoundDrawables(title_search_scrolled, null, null, null);
                     }
                 } else {
-                    myTitleBar.getBackground().setAlpha(250);
+                    myTitleBar.getBackground().mutate().setAlpha(250);
                 }
             }
 
@@ -175,14 +169,6 @@ public class HomeFragment extends BaseFragment {
         });
         ultimateRecyclerView.setNormalHeader(HomeAdvertisementItemView_.build(getActivity()));
         ultimateRecyclerView.setCustomSwipeToRefresh();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
-            @Override
-            public boolean shouldHideDivider(int position, RecyclerView parent) {
-                return position == 0;
-            }
-        }).paint(paint).build());
         refreshingMaterial();
     }
 
@@ -282,13 +268,11 @@ public class HomeFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            myTitleBar.getBackground().setAlpha(250);
             bus.unregister(this);
             if (itemView != null) {
                 itemView.stopAutoCycle();
             }
         } else {
-            myTitleBar.getBackground().setAlpha(progress);
             bus.register(this);
             if (itemView != null) {
                 itemView.startAutoCycle();

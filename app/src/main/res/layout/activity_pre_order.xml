@@ -43,6 +43,7 @@
             <include layout="@layout/horizontal_line"/>
 
             <RelativeLayout
+                android:id="@+id/rl_express_charges"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
@@ -157,6 +158,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:id="@+id/rl_postal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
