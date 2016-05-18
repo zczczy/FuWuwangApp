@@ -58,6 +58,7 @@ import org.androidannotations.rest.spring.api.RestClientErrorHandling;
 import org.androidannotations.rest.spring.api.RestClientHeaders;
 import org.androidannotations.rest.spring.api.RestClientRootUrl;
 import org.androidannotations.rest.spring.api.RestClientSupport;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -793,8 +794,17 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param data
      * @return
      */
-    @Post("api/Shop/UploadHeadImg")
+    @Post("http://updimage.86fuwuwang.com/FileHandler.ashx?type=&folder=Shop")
+    @RequiresHeader(value = {HttpHeaders.CONTENT_TYPE})
+    String uploadAvatar(@Body MultiValueMap<String, Object> data);
+
+    /**
+     *
+     * @param map HeadImg
+     * @return
+     */
+    @Post("api/Shop/UpdateMemberInfoImg")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<String> uploadAvatar(@Body MultiValueMap<String, Object> data);
+    BaseModelJson<String> updateMemberInfoImg(@Body Map map);
 
 }

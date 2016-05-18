@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/main_tab_color"
-                tools:context=".activities.OrderDetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_tab_color"
+    tools:context=".activities.OrderDetailActivity">
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -15,7 +15,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/text_order_detail"/>
+        app:mTitle="@string/text_order_detail" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,10 +42,10 @@
                     android:ems="20"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
             <LinearLayout
                 android:id="@+id/ll_logistics"
@@ -58,51 +58,67 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/car"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="20dp"
                     android:drawableRight="@drawable/next_icon"
                     android:ellipsize="end"
                     android:ems="21"
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:text="@string/text_order_logistics"
-                    android:textColor="@color/major_color"/>
+                    android:textColor="@color/major_color" />
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
-            <include layout="@layout/order_shipping_address"/>
+            <include layout="@layout/order_shipping_address" />
 
-            <include layout="@layout/horizontal_line"/>
-
-            <include
-                layout="@layout/horizontal_line"
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginTop="15dp"/>
-
-            <include layout="@layout/common_order_item"/>
+            <include layout="@layout/horizontal_line" />
 
             <include
                 layout="@layout/horizontal_line"
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
-                android:layout_marginTop="-5dp"/>
+                android:layout_marginTop="15dp" />
+
+            <include layout="@layout/common_order_item" />
+
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="-5dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:ems="5"
-                    android:gravity="center"
-                    android:lines="2"
-                    android:padding="15dp"
-                    android:text="@string/text_give"/>
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/text_give" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/text_give_coupon" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/txt_coupon"
@@ -111,16 +127,16 @@
                     android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:lines="2"
-                    android:padding="15dp"/>
+                    android:padding="15dp" />
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
             <include
                 layout="@layout/horizontal_line"
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,14 +154,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/text_postal"/>
+                        android:text="@string/text_postal" />
 
                     <TextView
                         android:id="@+id/txt_sub_express_charges"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -158,14 +174,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/txt_bi"/>
+                        android:text="@string/txt_bi" />
 
                     <TextView
                         android:id="@+id/txt_total_lb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -179,14 +195,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/text_order_paid"/>
+                        android:text="@string/text_order_paid" />
 
                     <TextView
                         android:id="@+id/txt_paid_rmb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -200,14 +216,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/text_should_pay"/>
+                        android:text="@string/text_should_pay" />
 
                     <TextView
                         android:id="@+id/txt_should_pay_l_rmb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -220,20 +236,20 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/text_total"/>
+                        android:text="@string/text_total" />
 
                     <TextView
                         android:id="@+id/txt_pay_total_rmb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
         </LinearLayout>
     </ScrollView>
@@ -245,8 +261,9 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="vertical">
-        <include layout="@layout/horizontal_line"/>
 
-        <include layout="@layout/order_status"/>
+        <include layout="@layout/horizontal_line" />
+
+        <include layout="@layout/order_status" />
     </LinearLayout>
 </RelativeLayout>

@@ -53,7 +53,7 @@ public class MineFragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
-        setData();
+//        setData();
     }
 
     @Click

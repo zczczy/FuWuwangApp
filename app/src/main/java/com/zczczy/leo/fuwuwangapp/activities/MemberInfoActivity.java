@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
+import org.androidannotations.annotations.Trace;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -30,9 +32,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.utils.PhotoPickerIntent;
@@ -80,28 +84,52 @@ public class MemberInfoActivity extends BaseActivity {
     }
 
     @Background
+    @Trace()
     void uploadAvatar(String avatarUrl) {
         MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
         FileSystemResource image = new FileSystemResource(avatarUrl);
         data.set("image", image);
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
         myRestClient.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.MULTIPART_FORM_DATA_VALUE);
         afterUploadAvatar(myRestClient.uploadAvatar(data));
     }
 
     @UiThread
-    void afterUploadAvatar(BaseModelJson<String> bmj) {
+    void afterUploadAvatar(String bmj) {
+        if (bmj == null) {
+            AndroidTool.dismissLoadDialog();
+            AndroidTool.showToast(this, no_net);
+        } else if (bmj.equals("0")) {
+            AndroidTool.dismissLoadDialog();
+            AndroidTool.showToast(this, "上传失败");
+        } else {
+            Log.e("img", bmj);
+            updateMemberInfoImg(bmj);
+        }
+    }
+
+    @Background
+    void updateMemberInfoImg(String img) {
+        Map<String, String> map = new HashMap<>(1);
+        map.put("HeadImg", img);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        afterUpdateMemberInfoImg(myRestClient.updateMemberInfoImg(map));
+    }
+
+    @UiThread
+    void afterUpdateMemberInfoImg(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bmj.Successful) {
-            AndroidTool.showToast(this, bmj.Error);
+            AndroidTool.showToast(this, "上传失败");
         } else {
+            pre.avatar().put(bmj.Data);
             Picasso.with(this).load(bmj.Data).placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
         }
     }
+
 
     @OnActivityResult(1000)
     void onSelectPicture(int resultCode, @OnActivityResult.Extra(value = PhotoPickerActivity.KEY_SELECTED_PHOTOS) ArrayList<String> photos) {
@@ -132,6 +160,10 @@ public class MemberInfoActivity extends BaseActivity {
             edt_email.setText(bmj.Data.MemberEmail);
             edt_qq.setText(bmj.Data.MemberQQ);
             edt_blog.setText(bmj.Data.MemberBlog);
+            if (!StringUtils.isEmpty(bmj.Data.HeadImg)) {
+                Picasso.with(this).load(bmj.Data.HeadImg).placeholder(R.drawable.default_header).error(R.drawable.default_header).into(img_avatar);
+            }
+            pre.avatar().put(bmj.Data.HeadImg);
         }
     }
 
@@ -139,11 +171,7 @@ public class MemberInfoActivity extends BaseActivity {
     //保存
     @Click
     void btn_save() {
-        if (!AndroidTool.checkIsNull(edt_email) && RegexUtils.isEmail(edt_email.getText().toString().trim())) {
-            AndroidTool.showToast(this, "邮箱格式不正确");
-        } else {
-            changeInfo(edt_email.getText().toString().trim(), edt_qq.getText().toString().trim(), edt_blog.getText().toString().trim());
-        }
+        changeInfo(edt_email.getText().toString().trim(), edt_qq.getText().toString().trim(), edt_blog.getText().toString().trim());
     }
 
     @Click

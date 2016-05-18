@@ -50,7 +50,7 @@ public class OrderDetailActivity extends BaseActivity {
             txt_should_pay_l_rmb, txt_paid_rmb;
 
     @ViewById
-    LinearLayout ll_take, ll_logistics, ll_store, ll_pre_order_item, ll_shipping,ll_next;
+    LinearLayout ll_take, ll_logistics, ll_store, ll_pre_order_item, ll_shipping, ll_next;
 
     @ViewById
     RelativeLayout ll_lb, ll_pay, ll_should_pay, ll_paid, rl_express_charges;
@@ -164,6 +164,7 @@ public class OrderDetailActivity extends BaseActivity {
                     txt_should_pay_l_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney - bmj.Data.MOrderDzb));
                     txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
                 }
+                rl_express_charges.setVisibility(View.GONE);
             } else if (bmj.Data.MorderStatus == MyApplication.PAID) {
                 ll_take.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(View.VISIBLE);
