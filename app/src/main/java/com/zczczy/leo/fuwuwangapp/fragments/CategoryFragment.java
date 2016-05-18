@@ -82,7 +82,7 @@ public class CategoryFragment extends BaseFragment {
             public void onClick(View v) {
                 if (checkUserIsLogin()) {
                     CartActivity_.intent(CategoryFragment.this).start();
-                }else{
+                } else {
                     LoginActivity_.intent(CategoryFragment.this).start();
                 }
             }
