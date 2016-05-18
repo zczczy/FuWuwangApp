@@ -151,7 +151,6 @@ public class MyBackgroundTask {
         bus.post(bmj);
     }
 
-
     /**
      * 获取服务类别
      */
