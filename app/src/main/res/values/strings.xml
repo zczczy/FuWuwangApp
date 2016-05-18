@@ -325,7 +325,7 @@
     <string name="txt_shipping_address">收货地址:%1$s</string>
     <string name="use_dian">使用电子币</string>
     <string name="dian_balance">可用%1$s电子币</string>
-    <string name="text_count">共%1$s件商品</string>
+    <string name="text_count">共%1$s件,</string>
     <string name="text_total">合计:</string>
     <string name="text_order_paid">已支付:</string>
     <string name="text_should_pay">还需支付:</string>

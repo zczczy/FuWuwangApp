@@ -5,10 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.PreOrderActivity;
 import com.zczczy.leo.fuwuwangapp.activities.PreOrderActivity_;
 import com.zczczy.leo.fuwuwangapp.model.CheckOutModel;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;

@@ -306,6 +306,7 @@ public class PreOrderActivity extends BaseActivity {
                     }
                 });
             } else {
+                AndroidTool.showLoadDialog(PreOrderActivity.this);
                 payOrder();
             }
         }
@@ -345,6 +346,7 @@ public class PreOrderActivity extends BaseActivity {
                     UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
                 }
             }
+            AndroidTool.showToast(this, "付款成功");
             finish();
         } else {
             AndroidTool.showToast(this, bmj.Error);
@@ -404,4 +406,14 @@ public class PreOrderActivity extends BaseActivity {
         StoreInformationActivity_.intent(this).storeId(storeId).start();
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("提示").setMessage("确定要放弃该订单吗？").setPositiveButton("放弃", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();
+    }
 }

@@ -121,6 +121,8 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
         } else {
             btn_finish.setVisibility(GONE);
             btn_finished.setVisibility(VISIBLE);
+            baseUltimateRecyclerViewAdapter.getItems().remove(_data);
+            baseUltimateRecyclerViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
         }
     }
 
@@ -200,7 +202,8 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
         } else if (_data.MorderStatus == MyApplication.PAID) {
             txt_do_message.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
             txt_do_message.setText("商家处理中");
-            btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
+//            btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE)
+            btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);
             btn_cancel_order.setVisibility(GONE);
             btn_finished.setVisibility(View.GONE);

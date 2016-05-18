@@ -7,7 +7,6 @@ import android.widget.Toast;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Wealth;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -18,10 +17,10 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 /**
@@ -84,13 +83,13 @@ public class WealthActivity extends BaseActivity {
     //转账
     @Click
     void txt_transfer() {
-        TransferActivity_.intent(this).start();
+        TransferActivity_.intent(this).startForResult(1000);
     }
 
     //提现
     @Click
     void txt_withdraw() {
-        WithDrawActivity_.intent(this).start();
+        WithDrawActivity_.intent(this).startForResult(1000);
     }
 
     //账单
@@ -100,6 +99,14 @@ public class WealthActivity extends BaseActivity {
             TransactionRecordActivity_.intent(this).start();
         } else {
             Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @OnActivityResult(1000)
+    void onResult(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            AndroidTool.showLoadDialog(this);
+            getHttp();
         }
     }
 

@@ -91,11 +91,6 @@ public class UmspayActivity extends BaseActivity {
     //如果希望浏览的网页后退而不是退出浏览器，需要WebView覆盖URL加载，让它自动生成历史访问记录，那样就可以通过前进或后退访问已访问过的站点。
     @Override
     public void onBackPressed() {
-        if (wv_web.canGoBack()) {
-            wv_web.goBack();//返回上一页面
-        } else {
-            // System.exit(0);//退出程序
-            finish();
-        }
+        finish();
     }
 }

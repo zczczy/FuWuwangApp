@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
@@ -28,8 +27,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -42,13 +41,13 @@ import java.util.Map;
 public class WithDrawActivity extends BaseActivity {
 
     @ViewById
-    EditText edt_withdraw_money,edt_common,edit_code,edit_mobile;
+    EditText edt_withdraw_money, edt_common, edit_code, edit_mobile;
 
     @ViewById
     TextView text_send;
 
     @ViewById
-    LinearLayout ll_mobile,ll_code;
+    LinearLayout ll_mobile, ll_code;
 
     @ViewById
     Button btn_withdraw;
@@ -68,14 +67,14 @@ public class WithDrawActivity extends BaseActivity {
     MyDotNetRestClient newMyRestClient;
 
     @StringRes
-    String timer,txt_ejpass,send_message;
+    String timer, txt_ejpass, send_message;
 
     CountDownTimer countDownTimer;
 
-    boolean isCode=false;
+    boolean isCode = false;
 
     @AfterInject
-    void afterInject(){
+    void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
         newMyRestClient.setRestErrorHandler(myErrorHandler);
     }
@@ -85,19 +84,20 @@ public class WithDrawActivity extends BaseActivity {
         edit_code.setEnabled(false);
         GetSafeMessage();
         getCountDownTimer();
-        if(AndroidTool.getCodeTime(pre.timerWithDraw().get())<120000L){
+        if (AndroidTool.getCodeTime(pre.timerWithDraw().get()) < 120000L) {
             countDownTimer.start();
         }
     }
 
-    void getCountDownTimer(){
-        countDownTimer = new CountDownTimer(AndroidTool.getCodeTime(pre.timerWithDraw().get()),1000) {
+    void getCountDownTimer() {
+        countDownTimer = new CountDownTimer(AndroidTool.getCodeTime(pre.timerWithDraw().get()), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                pre.timerWithDraw().put(System.currentTimeMillis()+millisUntilFinished);
+                pre.timerWithDraw().put(System.currentTimeMillis() + millisUntilFinished);
                 text_send.setPressed(true);
                 text_send.setText(String.format(timer, millisUntilFinished / 1000));
             }
+
             @Override
             public void onFinish() {
                 pre.timerWithDraw().put(0L);
@@ -109,41 +109,41 @@ public class WithDrawActivity extends BaseActivity {
 
     //验证订阅
     @Background
-    void GetSafeMessage(){
-        BaseModelJson<String> bmj=newMyRestClient.SubscriptionExist(pre.username().get());
+    void GetSafeMessage() {
+        BaseModelJson<String> bmj = newMyRestClient.SubscriptionExist(pre.username().get());
         AfterGetSafe(bmj);
 
     }
+
     @UiThread
-    void AfterGetSafe(BaseModelJson<String> bmj){
+    void AfterGetSafe(BaseModelJson<String> bmj) {
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
             getBind();
-            isCode=true;
+            isCode = true;
         } else {
             //   AndroidTool.showToast(this, bmj.Error);
             ll_code.setVisibility(View.GONE);
             ll_mobile.setVisibility(View.GONE);
-            isCode=false;
+            isCode = false;
         }
 
     }
 
 
-
-
     //获取手机号码
     @Background
-    void getBind(){
+    void getBind() {
 
-        BaseModelJson<String> bmj= newMyRestClient.GetMobile(pre.username().get());
+        BaseModelJson<String> bmj = newMyRestClient.GetMobile(pre.username().get());
         setBind(bmj);
     }
+
     @UiThread
-    void setBind(BaseModelJson<String> bmj){
+    void setBind(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj!=null) {
+        if (bmj != null) {
             if (bmj.Successful) {
                 //获取手机号码
                 edit_mobile.setText(bmj.Data);
@@ -156,7 +156,7 @@ public class WithDrawActivity extends BaseActivity {
     @Background
     void sendCode() {
         Map<String, String> map = new HashMap<>();
-        map.put("UserName",pre.username().get());
+        map.put("UserName", pre.username().get());
         map.put("SendType", "0");
         map.put("mobile", edit_mobile.getText().toString());
         afterSendCode(newMyRestClient.SendVerificationCode(map));
@@ -193,22 +193,23 @@ public class WithDrawActivity extends BaseActivity {
             sendCode();
         }
     }
+
     //验证验证码
     @Background
-    void GetResult(){
-        BaseModelJson<String>bmj=newMyRestClient.VerifyExite(pre.username().get(),edit_code.getText().toString(),"0");
+    void GetResult() {
+        BaseModelJson<String> bmj = newMyRestClient.VerifyExite(pre.username().get(), edit_code.getText().toString(), "0");
         AfterGetResult(bmj);
 
     }
 
     @UiThread
-    void AfterGetResult(BaseModelJson<String> bmj){
+    void AfterGetResult(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
 
-            dialogxia = new MyEidtViewDialog(WithDrawActivity.this,txt_ejpass,listener);
+            dialogxia = new MyEidtViewDialog(WithDrawActivity.this, txt_ejpass, listener);
             dialogxia.show();
             dialogxia.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             dialogxia.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -219,48 +220,39 @@ public class WithDrawActivity extends BaseActivity {
     }
 
 
-
     //提现按钮点击事件
     @Click
-    void btn_withdraw(){
-        if(isNetworkAvailable(this)){
-            String money=edt_withdraw_money.getText().toString();
-            String str=edt_common.getText().toString();
-            String code=edit_code.getText().toString();
-
-            if(money==null||money==""||money.isEmpty())
-            {
-                MyAlertDialog dialog = new MyAlertDialog(this,"提现金额不能为空！",null);
+    void btn_withdraw() {
+        if (isNetworkAvailable(this)) {
+            String money = edt_withdraw_money.getText().toString();
+            String str = edt_common.getText().toString();
+            String code = edit_code.getText().toString();
+            if (StringUtils.isEmpty(money)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "提现金额不能为空！", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
                 return;
             }
-            if(Float.parseFloat(money)<100)
-            {
-                MyAlertDialog dialog = new MyAlertDialog(this,"提现金额不能小于100元！",null);
+            if (Float.parseFloat(money) < 100) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "提现金额不能小于100元！", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
                 return;
             }
-            if(str==null||str==""||str.isEmpty())
-            {
-                MyAlertDialog dialog = new MyAlertDialog(this,"提现说明不能为空！",null);
+            if (StringUtils.isEmpty(str)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "提现说明不能为空！", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
                 return;
             }
-
-            if (!isCode){
-
-                dialogxia = new MyEidtViewDialog(WithDrawActivity.this,"支付密码:",listener);
+            if (!isCode) {
+                dialogxia = new MyEidtViewDialog(WithDrawActivity.this, "支付密码:", listener);
                 dialogxia.show();
                 dialogxia.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 dialogxia.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-            }else {
-                if(code==null||code==""||code.isEmpty())
-                {
-                    MyAlertDialog dialog = new MyAlertDialog(this,"验证码不能为空！",null);
+            } else {
+                if (StringUtils.isEmpty(code)) {
+                    MyAlertDialog dialog = new MyAlertDialog(this, "验证码不能为空！", null);
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
                     return;
@@ -268,73 +260,65 @@ public class WithDrawActivity extends BaseActivity {
                 GetResult();
             }
 
-        }
-        else{
+        } else {
             Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
         }
     }
 
 
     MyEidtViewDialog dialogxia;
-    View.OnClickListener listener =new View.OnClickListener()
-    {
+    View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String str=dialogxia.getEditTextValue();
-            if(str!=null&&str!=""&&!str.isEmpty()) {
+            String str = dialogxia.getEditTextValue();
+            if (str != null && str != "" && !str.isEmpty()) {
                 AndroidTool.showCancelabledialog(WithDrawActivity.this);
+                dialogxia.dismiss();
                 savetxsq();
-            }
-            else
-            {
-                MyAlertDialog dialog = new MyAlertDialog(WithDrawActivity.this,"请输入支付密码！",null);
+            } else {
+                MyAlertDialog dialog = new MyAlertDialog(WithDrawActivity.this, "请输入支付密码！", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
             }
         }
     };
 
     @Background
-    void savetxsq()
-    {
-        String money=edt_withdraw_money.getText().toString();
-        BigDecimal bd=new BigDecimal(money);
+    void savetxsq() {
+        String money = edt_withdraw_money.getText().toString();
+        BigDecimal bd = new BigDecimal(money);
         //设置小数位数，第一个变量是小数位数，第二个变量是取舍方法(四舍五入)
-        bd=bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+        bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
         String token = pre.token().get();
-        myRestClient.setHeader("Token",token);
-        BaseModelJson<String> bmj= myRestClient.WithdrawalsApply(bd, edt_common.getText().toString(), dialogxia.getEditTextValue());
+        myRestClient.setHeader("Token", token);
+        BaseModelJson<String> bmj = myRestClient.WithdrawalsApply(bd, edt_common.getText().toString(), dialogxia.getEditTextValue());
         getmesagess(bmj);
     }
 
     @UiThread
-    void getmesagess(BaseModelJson<String> bmj)
-    {
+    void getmesagess(BaseModelJson<String> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj!=null) {
+        if (bmj != null) {
             if (bmj.Successful) {
                 dialog = new MyAlertDialog(this, "提现申请成功！", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        WealthActivity_.intent(WithDrawActivity.this).start();
                         dialog.close();
+                        setResult(RESULT_OK);
                         finish();
                     }
                 });
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
             } else {
                 MyAlertDialog dialog = new MyAlertDialog(this, bmj.Error, null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
             }
         }
     }
 
-    public void setCode(String code){
+    public void setCode(String code) {
         edit_code.setText(code);
 
     }

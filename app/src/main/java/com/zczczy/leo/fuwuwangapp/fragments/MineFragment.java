@@ -129,7 +129,11 @@ public class MineFragment extends BaseFragment {
             adb.setTitle("提示").setMessage("确定要注销吗？").setPositiveButton("注销", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    String temp1 = pre.locationAddress().get();
+                    String temp2 = pre.cityId().get();
                     pre.clear();
+                    pre.locationAddress().put(temp1);
+                    pre.cityId().put(temp2);
                     setData();
                 }
             }).setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();

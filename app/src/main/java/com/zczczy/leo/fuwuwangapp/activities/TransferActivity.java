@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
@@ -28,7 +27,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
@@ -63,7 +61,7 @@ public class TransferActivity extends BaseActivity {
     MyDotNetRestClient newMyRestClient;
 
     @StringRes
-    String timer, txt_ejpass,send_message;
+    String timer, txt_ejpass, send_message;
 
     CountDownTimer countDownTimer;
 
@@ -327,6 +325,7 @@ public class TransferActivity extends BaseActivity {
             String str = dialogxia.getEditTextValue();
             if (str != null && str != "" && !str.isEmpty()) {
                 AndroidTool.showCancelabledialog(TransferActivity.this);
+                dialogxia.dismiss();
                 savetxsq();
             } else {
                 MyAlertDialog dialog = new MyAlertDialog(TransferActivity.this, "请输入支付密码！", null);
@@ -356,8 +355,8 @@ public class TransferActivity extends BaseActivity {
                 dialog = new MyAlertDialog(this, "转账成功！", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        WealthActivity_.intent(TransferActivity.this).start();
                         dialog.close();
+                        setResult(RESULT_OK);
                         finish();
                     }
                 });

@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.zczczy.leo.fuwuwangapp.activities.LogisticsInfoActivity;
 import com.zczczy.leo.fuwuwangapp.items.LogisticsInfoItemView_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
@@ -15,6 +16,7 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -41,6 +43,9 @@ public class LogisticsInfoAdapter extends BaseRecyclerViewAdapter<LogisticsInfo>
     @Bean
     MyErrorHandler myErrorHandler;
 
+    @RootContext
+    LogisticsInfoActivity mLogisticsInfoActivity;
+
 
     @AfterInject
     void afterInject() {
@@ -64,7 +69,11 @@ public class LogisticsInfoAdapter extends BaseRecyclerViewAdapter<LogisticsInfo>
             if (bmj.Data.size() > 0) {
                 bmj.Data.get(0).isLast = true;
                 insertAll(bmj.Data, getItems().size());
+            } else {
+                mLogisticsInfoActivity.notifyUI();
             }
+        } else {
+            mLogisticsInfoActivity.notifyUI();
         }
     }
 

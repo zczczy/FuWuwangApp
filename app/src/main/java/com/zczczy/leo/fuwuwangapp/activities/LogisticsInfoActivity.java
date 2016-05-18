@@ -3,6 +3,8 @@ package com.zczczy.leo.fuwuwangapp.activities;
 import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
@@ -28,6 +30,9 @@ public class LogisticsInfoActivity extends BaseActivity {
     @ViewById
     RecyclerView recyclerView;
 
+    @ViewById
+    TextView empty_view;
+
     LinearLayoutManager linearLayoutManager;
 
     Paint paint = new Paint();
@@ -41,11 +46,14 @@ public class LogisticsInfoActivity extends BaseActivity {
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAdapter);
-        //"fab253f8f1534a8f819eb0730a091805"
         myAdapter.getMoreData(MOrderId);
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(DisplayUtil.dip2px(this, 60), DisplayUtil.dip2px(this, 10)).paint(paint).build());
     }
 
+    public void notifyUI() {
+        empty_view.setVisibility(View.VISIBLE);
+        empty_view.setText(empty_logistics);
+    }
 }
