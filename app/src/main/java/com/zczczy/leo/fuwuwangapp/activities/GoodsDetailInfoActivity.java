@@ -59,7 +59,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     View mBuyLayout;
 
     @ViewById
-    LinearLayout parent, ll_rebate, ll_store, ll_review;
+    LinearLayout parent, ll_rebate, ll_store, ll_review,ll_goods_by;
 
     @ViewById
     TextView goods_name, goods_describe, goods_by, goods_kucun, goods_knows, txt_rebate, txt_rmb, txt_plus, txt_home_lb;
@@ -80,7 +80,9 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     SliderLayout sliderLayout;
 
     @StringRes
-    String home_rmb, home_lb;
+    String home_rmb, home_lb, goods_no_store;
+
+    boolean isCanBuy;
 
     String storeId;
 
@@ -137,8 +139,11 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
             if ("0".equals(MyApplication.GOODS_STATE_UP)) {
                 goods_name.setText(bmj.Data.GodosName);
                 goods_describe.setText(bmj.Data.GoodsDesc);
+                ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
                 goods_by.setText(bmj.Data.GoodsIsBy);
-                goods_kucun.setText(bmj.Data.GoodsStock);
+                //判断库存是否大于0
+                isCanBuy = Integer.valueOf(bmj.Data.GoodsStock) > 0;
+                goods_kucun.setText(isCanBuy ? bmj.Data.GoodsStock : "0");
                 goods_knows.setText(bmj.Data.GoodsPurchaseNotes);
                 txt_rebate.setText(bmj.Data.TempDisp);
                 if (Float.valueOf(bmj.Data.GoodsPrice) > 0 && Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
@@ -186,20 +191,29 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @Click
     void txt_buy() {
-        if (!checkUserIsLogin()) {
-            LoginActivity_.intent(this).start();
+        if (isCanBuy) {
+            if (!checkUserIsLogin()) {
+                LoginActivity_.intent(this).start();
+            } else {
+                PreOrderActivity_.intent(this).goodsInfoId(goodsId).orderCount(1).start();
+            }
         } else {
-            PreOrderActivity_.intent(this).goodsInfoId(goodsId).orderCount(1).start();
+            AndroidTool.showToast(this, goods_no_store);
         }
+
     }
 
     @Click
     void img_cart() {
-        if (!checkUserIsLogin()) {
-            LoginActivity_.intent(this).start();
+        if (isCanBuy) {
+            if (!checkUserIsLogin()) {
+                LoginActivity_.intent(this).start();
+            } else {
+                AndroidTool.showLoadDialog(this);
+                addShoppingCart(goodsId);
+            }
         } else {
-            AndroidTool.showLoadDialog(this);
-            addShoppingCart(goodsId);
+            AndroidTool.showToast(this, goods_no_store);
         }
     }
 

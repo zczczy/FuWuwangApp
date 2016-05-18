@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/parent"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/home_background"
-              android:orientation="vertical"
-              tools:context=".activities.GoodsDetailInfoActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/home_background"
+    android:orientation="vertical"
+    tools:context=".activities.GoodsDetailInfoActivity">
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -16,17 +16,15 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/goods_detail"/>
+        app:mTitle="@string/goods_detail" />
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyScrollView
         android:id="@+id/myScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@drawable/goods_default"
-                    app:pager_animation="Accordion"/>
+                    app:pager_animation="Accordion" />
 
                 <TextView
                     android:id="@+id/goods_name"
@@ -46,7 +44,7 @@
                     android:background="@color/white"
                     android:padding="10dp"
                     android:textColor="@color/gray"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/goods_describe"
@@ -55,15 +53,15 @@
                     android:background="@color/white"
                     android:minLines="1"
                     android:padding="10dp"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
-                <include layout="@layout/horizontal_line"/>
+                <include layout="@layout/horizontal_line" />
 
                 <View
                     android:id="@+id/mBuyLayout"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@color/white"/>
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/ll_store"
@@ -74,6 +72,7 @@
                     android:padding="10dp">
 
                     <LinearLayout
+                        android:id="@+id/ll_goods_by"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -82,13 +81,13 @@
                         <TextView
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/goods_by"/>
+                            android:text="@string/goods_by" />
 
                         <TextView
                             android:id="@+id/goods_by"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -99,13 +98,13 @@
                         <TextView
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/goods_kun_cun"/>
+                            android:text="@string/goods_kun_cun" />
 
                         <TextView
                             android:id="@+id/goods_kucun"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -122,9 +121,12 @@
                             android:drawableRight="@drawable/next_icon"
                             android:gravity="right"
                             android:text="@string/goods_store"
-                            android:textColor="@color/major_color"/>
+                            android:textColor="@color/major_color" />
                     </LinearLayout>
+
                 </LinearLayout>
+
+                <include layout="@layout/horizontal_line" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -133,9 +135,9 @@
                     android:padding="10dp"
                     android:text="@string/goods_buy_tip"
                     android:textColor="@color/gray"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
-                <include layout="@layout/horizontal_line"/>
+                <include layout="@layout/horizontal_line" />
 
                 <TextView
                     android:id="@+id/goods_knows"
@@ -144,15 +146,15 @@
                     android:background="@color/white"
                     android:minLines="1"
                     android:padding="10dp"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
-                <include layout="@layout/horizontal_line"/>
+                <include layout="@layout/horizontal_line" />
 
                 <include
                     layout="@layout/horizontal_line"
                     android:layout_width="match_parent"
                     android:layout_height="0.1dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp" />
 
                 <LinearLayout
                     android:id="@+id/ll_rebate"
@@ -167,9 +169,9 @@
                         android:padding="10dp"
                         android:text="@string/rebate"
                         android:textColor="@color/gray"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
-                    <include layout="@layout/horizontal_line"/>
+                    <include layout="@layout/horizontal_line" />
 
                     <TextView
                         android:id="@+id/txt_rebate"
@@ -179,9 +181,9 @@
                         android:lineSpacingExtra="12sp"
                         android:minLines="1"
                         android:padding="10dp"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
-                    <include layout="@layout/horizontal_line"/>
+                    <include layout="@layout/horizontal_line" />
 
                 </LinearLayout>
 
@@ -198,14 +200,14 @@
                         android:padding="10dp"
                         android:text="@string/txt_review"
                         android:textColor="@color/gray"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
-                    <include layout="@layout/horizontal_line"/>
+                    <include layout="@layout/horizontal_line" />
 
 
                 </LinearLayout>
 
-                <include layout="@layout/horizontal_line"/>
+                <include layout="@layout/horizontal_line" />
 
                 <LinearLayout
                     android:id="@+id/ll_all_review"
@@ -222,14 +224,14 @@
                         android:padding="10dp"
                         android:text="@string/txt_all_review"
                         android:textColor="@color/major_color"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
-                    <include layout="@layout/horizontal_line"/>
+                    <include layout="@layout/horizontal_line" />
                 </LinearLayout>
             </LinearLayout>
             <include
                 android:id="@+id/the_view_stay"
-                layout="@layout/buy_view"/>
+                layout="@layout/buy_view" />
         </FrameLayout>
     </com.zczczy.leo.fuwuwangapp.viewgroup.MyScrollView>
 </LinearLayout>

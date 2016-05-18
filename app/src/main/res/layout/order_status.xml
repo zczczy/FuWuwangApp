@@ -1,63 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="right"
-              android:orientation="horizontal"
-              android:padding="10dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <Button
         android:id="@+id/btn_canceled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/order_gray"
         android:text="@string/text_canceled"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_cancel_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/order_gray"
         android:text="@string/text_cancel_order"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_logistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/order_gray"
         android:text="@string/text_logistics"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_finished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/order_gray"
         android:text="@string/text_finished"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/order_orange"
         android:text="@string/text_pay"
         android:textColor="@color/major_color"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/order_orange"
         android:text="@string/text_finish"
         android:textColor="@color/major_color"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>
 

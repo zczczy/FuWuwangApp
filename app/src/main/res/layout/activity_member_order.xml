@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/home_background"
     android:orientation="vertical"
-    tools:context=".activities.GoodsCommentsActivity">
+    tools:context=".activities.MemberOrderActivity">
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"

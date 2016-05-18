@@ -33,6 +33,7 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
 
@@ -249,7 +250,6 @@ public class HomeFragment extends BaseFragment {
 
     @Subscribe
     public void notifyUI(BaseModel bm) {
-        myTitleBar.setVisibility(View.VISIBLE);
         if (isRefresh) {
             gridLayoutManager.scrollToPosition(0);
             ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
@@ -262,6 +262,12 @@ public class HomeFragment extends BaseFragment {
         } else if (pageIndex == 1) {
             gridLayoutManager.scrollToPosition(0);
         }
+        showTitleBar();
+    }
+
+    @UiThread(delay = 1000)
+    void showTitleBar(){
+        myTitleBar.setVisibility(View.VISIBLE);
     }
 
     @Override

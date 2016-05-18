@@ -1,6 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -140,16 +141,28 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
 
     @Override
     public void onQuantityChanged(int newQuantity, boolean programmatically) {
+
         if (!programmatically) {
+            AndroidTool.showLoadDialog(context);
             if (newQuantity > preCount) {
                 addShoppingCart();
             } else {
                 subShoppingCart();
             }
         }
+        if (newQuantity == quantityView.getMinQuantity()) {
+            quantityView.getChildAt(0).setEnabled(false);
+            quantityView.getChildAt(2).setEnabled(true);
+        } else if (newQuantity == quantityView.getMaxQuantity()) {
+            quantityView.getChildAt(0).setEnabled(true);
+            quantityView.getChildAt(2).setEnabled(false);
+        } else {
+            quantityView.getChildAt(0).setEnabled(true);
+            quantityView.getChildAt(2).setEnabled(true);
+        }
     }
 
-    @Background
+    @Background(serial = "addShopping")
     void addShoppingCart() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
@@ -161,6 +174,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
 
     @UiThread
     void afterAddShoppingCart(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
         if (bm == null) {
             AndroidTool.showToast(context, "商品添加失败");
         } else if (!bm.Successful) {
@@ -172,7 +186,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
         }
     }
 
-    @Background
+    @Background(serial = "subShopping")
     void subShoppingCart() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
@@ -184,6 +198,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
 
     @UiThread
     void afterAubShoppingCart(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
         if (bm == null) {
             AndroidTool.showToast(context, "修改失败");
         } else if (!bm.Successful) {
@@ -198,7 +213,13 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
 
     @Override
     public void onLimitReached() {
-        AndroidTool.showToast(context, "1~100");
+//        if (preCount == quantityView.getMaxQuantity()) {
+//            quantityView.setEnabled(false);
+//
+//        } else {
+//
+//        }
+
     }
 
 

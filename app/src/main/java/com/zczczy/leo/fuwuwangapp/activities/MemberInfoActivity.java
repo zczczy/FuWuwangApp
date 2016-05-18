@@ -71,6 +71,10 @@ public class MemberInfoActivity extends BaseActivity {
     void afterView() {
         AndroidTool.showLoadDialog(this);
         getMemberInfo();
+        if (MyApplication.VIP.equals(pre.userType().toString())) {
+            txt_name.setEnabled(false);
+            edt_email.setEnabled(false);
+        }
     }
 
 

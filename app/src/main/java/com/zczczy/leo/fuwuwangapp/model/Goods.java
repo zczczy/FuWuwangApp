@@ -68,8 +68,8 @@ public class Goods implements Serializable {
     public String PjNum;
     public String PJBfb;
     public String ISCommend;
-
     public String TempDisp;
+    public int GoodsXl; //销量
     /**
      * GoodsImgId : 1
      * GoodsInfoId : sample string 2

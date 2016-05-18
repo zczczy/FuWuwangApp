@@ -71,7 +71,7 @@ public class CartActivity extends BaseActivity {
     TextView txt_total_rmb, txt_total_lb;
 
     @StringRes
-    String home_lb, he_ji, cart_no_goods;
+    String home_lb, he_ji, cart_no_goods, text_edit, text_delete, text_cancel, text_tip, text_tip_confirm;
 
     @ViewById
     CheckBox cb_all;
@@ -105,10 +105,10 @@ public class CartActivity extends BaseActivity {
             public void onClick(View v) {
                 if (ll_delete.isShown()) {
                     ll_delete.setVisibility(View.GONE);
-                    myTitleBar.setRightText("编辑");
+                    myTitleBar.setRightText(text_edit);
                     ll_checkout.setVisibility(View.VISIBLE);
                 } else {
-                    myTitleBar.setRightText("取消");
+                    myTitleBar.setRightText(text_cancel);
                     ll_delete.setVisibility(View.VISIBLE);
                     ll_checkout.setVisibility(View.GONE);
                 }
@@ -131,7 +131,7 @@ public class CartActivity extends BaseActivity {
     @Click
     void ll_delete() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
-        adb.setTitle("提示").setMessage("确定要删除吗？").setPositiveButton("删除", new DialogInterface.OnClickListener() {
+        adb.setTitle(text_tip).setMessage(text_tip_confirm).setPositiveButton(text_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 calc();
@@ -139,7 +139,7 @@ public class CartActivity extends BaseActivity {
                     deleteShopping();
                 }
             }
-        }).setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();
+        }).setNegativeButton(text_cancel, null).setIcon(R.mipmap.logo).create().show();
     }
 
     @Background
@@ -169,7 +169,7 @@ public class CartActivity extends BaseActivity {
         } else {
             myAdapter.getMoreData();
             ll_delete.setVisibility(View.GONE);
-            myTitleBar.setRightText("编辑");
+            myTitleBar.setRightText(text_edit);
             ll_checkout.setVisibility(View.VISIBLE);
         }
     }

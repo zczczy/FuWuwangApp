@@ -298,7 +298,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         }
     }
 
-
     /**
      * 百度定位回调
      *
@@ -348,7 +347,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
             }
         }
     }
-
 
     @Override
     public void onBackPressed() {

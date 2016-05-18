@@ -25,6 +25,7 @@ public class GoodsCommentsModel implements Serializable {
 
     public int GoodsCommentsId;
     public String GoodsInfoId;
+    public String HeadImg;
     public String MOrderDetailId;
     public String UserInfoId;
     public String UserLogin;
@@ -35,4 +36,5 @@ public class GoodsCommentsModel implements Serializable {
     public String GodosName;
     public String GoodsImgSl;
     public String MOrderNo;
+    public int GoodsXl; //销量
 }

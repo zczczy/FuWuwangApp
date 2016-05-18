@@ -254,6 +254,9 @@
     <string name="text_all_select">全选</string>
     <string name="text_edit">编辑</string>
     <string name="text_delete">删除</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_tip">提示</string>
+    <string name="text_tip_confirm">确定要删除吗?</string>
     <string name="cart_no_goods">您还没有选择商品哦!</string>
 
 
@@ -310,6 +313,8 @@
     <string name="goods_kun_cun">库存：</string>
     <string name="goods_store">店铺详情</string>
     <string name="goods_buy_tip">购买须知</string>
+    <string name="goods_no_store">商品库存不足</string>
+
 
     <string name="txt_review">商品评论</string>
     <string name="txt_all_review">查看全部评论</string>

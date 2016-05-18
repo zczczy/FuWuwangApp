@@ -161,4 +161,11 @@ public class StoreSearchActivity extends BaseActivity {
             linearLayoutManager.scrollToPosition(0);
         }
     }
+
+    @Override
+    public void finish() {
+        bus.unregister(this);
+        setResult(RESULT_OK);
+        super.finish();
+    }
 }

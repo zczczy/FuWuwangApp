@@ -159,6 +159,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
         if (_data.MOrderMoney > 0 && _data.MOrderLbCount > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
             txt_plus.setVisibility(View.VISIBLE);
+            txt_home_lb.setVisibility(VISIBLE);
             //设置商品总价
             txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney));
             //设置龙币数
@@ -194,6 +195,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_pay.setVisibility(VISIBLE);
             btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);
+            btn_finished.setVisibility(View.GONE);
             btn_canceled.setVisibility(GONE);
         } else if (_data.MorderStatus == MyApplication.PAID) {
             txt_do_message.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
@@ -201,9 +203,9 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
             btn_finish.setVisibility(GONE);
             btn_cancel_order.setVisibility(GONE);
+            btn_finished.setVisibility(View.GONE);
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
-
         } else if (_data.MorderStatus == MyApplication.CANCEL) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("订单已取消");
@@ -212,6 +214,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_finish.setVisibility(GONE);
             btn_cancel_order.setVisibility(GONE);
             btn_pay.setVisibility(GONE);
+            btn_finished.setVisibility(View.GONE);
         } else if (_data.MorderStatus == MyApplication.SEND) {
             txt_do_message.setText("卖家已发货");
             txt_do_message.setVisibility(VISIBLE);
@@ -219,6 +222,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_finish.setVisibility(VISIBLE);
             btn_cancel_order.setVisibility(GONE);
             btn_pay.setVisibility(GONE);
+            btn_finished.setVisibility(View.GONE);
             btn_canceled.setVisibility(GONE);
         } else if (_data.MorderStatus == MyApplication.CONFIRM) {
             txt_do_message.setVisibility(VISIBLE);
@@ -227,6 +231,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_finish.setVisibility(View.GONE);
             btn_cancel_order.setVisibility(View.GONE);
             btn_pay.setVisibility(View.GONE);
+            btn_finished.setVisibility(View.GONE);
             btn_canceled.setVisibility(View.GONE);
         } else if (_data.MorderStatus == MyApplication.FINISH) {
             txt_do_message.setVisibility(VISIBLE);
