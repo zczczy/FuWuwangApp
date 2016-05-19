@@ -4,17 +4,13 @@ package com.zczczy.leo.fuwuwangapp.rest;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CardInfo;
-import com.zczczy.leo.fuwuwangapp.model.Notice;
 import com.zczczy.leo.fuwuwangapp.model.PaperFace;
 
 import org.androidannotations.rest.spring.annotations.Accept;
 import org.androidannotations.rest.spring.annotations.Body;
-import org.androidannotations.rest.spring.annotations.Delete;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Post;
-import org.androidannotations.rest.spring.annotations.Put;
-import org.androidannotations.rest.spring.annotations.RequiresAuthentication;
 import org.androidannotations.rest.spring.annotations.RequiresHeader;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.androidannotations.rest.spring.api.RestClientErrorHandling;
