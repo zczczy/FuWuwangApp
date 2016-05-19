@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
@@ -60,7 +61,7 @@ public class ReviewActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-        emptyView.setText(empty_review);
+        emptyView.setText(empty_no_review);
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);

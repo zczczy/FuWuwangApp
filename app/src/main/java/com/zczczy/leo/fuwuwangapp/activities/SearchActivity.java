@@ -22,9 +22,11 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 
 /**
  * Created by leo on 2016/5/5.
@@ -47,6 +49,10 @@ public class SearchActivity extends BaseActivity {
     @Extra
     boolean isService;
 
+    @StringRes
+    String search_service_hint;
+
+    @ViewById
     EditText text_search;
 
     LinearLayoutManager linearLayoutManager;
@@ -64,7 +70,9 @@ public class SearchActivity extends BaseActivity {
         paint.setStrokeWidth(1);
         paint.setColor(line_color);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
-
+        if (isService) {
+            text_search.setHint(search_service_hint);
+        }
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, SearchHistory obj, int position) {
@@ -74,25 +82,6 @@ public class SearchActivity extends BaseActivity {
                 } else {
                     CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
                 }
-            }
-        });
-        View view = myTitleBar.getmCustomView();
-        text_search = (EditText) view.findViewById(R.id.text_search);
-        text_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (!AndroidTool.checkIsNull(text_search) && actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    searchHistory = new SearchHistory();
-                    searchHistory.setSearchContent(text_search.getText().toString());
-                    searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
-                    searchHistoryDao.insert(searchHistory);
-                    if (isService) {
-                        StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
-                    } else {
-                        CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
-                    }
-                }
-                return true;
             }
         });
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
@@ -112,6 +101,22 @@ public class SearchActivity extends BaseActivity {
             }
         });
     }
+
+    @EditorAction
+    void text_search(int actionId) {
+        if (!AndroidTool.checkIsNull(text_search) && actionId == EditorInfo.IME_ACTION_SEARCH) {
+            searchHistory = new SearchHistory();
+            searchHistory.setSearchContent(text_search.getText().toString());
+            searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
+            searchHistoryDao.insert(searchHistory);
+            if (isService) {
+                StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
+            } else {
+                CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+            }
+        }
+    }
+
 
     @Click
     void btn_clear() {

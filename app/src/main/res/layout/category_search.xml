@@ -14,11 +14,11 @@
         android:drawableLeft="@drawable/title_search_scrolled"
         android:drawablePadding="15dp"
         android:ellipsize="marquee"
+        android:ems="14"
         android:gravity="center_vertical"
-        android:hint="@string/search_hint"
+        android:hint="@string/search_service_hint"
         android:maxLines="1"
         android:maxWidth="240dp"
-        android:paddingRight="30dp"
         android:textColorHint="@color/home_search_text_scrolled"
         android:textSize="13sp" />
 </LinearLayout>

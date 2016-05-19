@@ -42,7 +42,7 @@ public class MAppOrder implements Serializable {
     public String transId; //银联编号
     public String merSign;//银联签名
     public int GoodsAllCount;//商品数量
-    public String GoodsType;
+    public String GoodsType; //1.服务类  2. 邮寄类
     public List<OrderDetailModel> MOrderDetailList;
 
     public CouponModel FanQuan;

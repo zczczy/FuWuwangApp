@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -38,6 +39,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.List;
@@ -71,6 +73,12 @@ public class ServiceFragment extends BaseFragment {
     @Bean
     OttoBus bus;
 
+    @ViewById
+    TextView txt_title_search;
+
+    @StringRes
+    String search_hint;
+
     BasicGridLayoutManager gridLayoutManager;
 
     Paint paint = new Paint();
@@ -89,6 +97,8 @@ public class ServiceFragment extends BaseFragment {
     @AfterViews
     void afterView() {
 
+        txt_title_search.setHint(search_hint);
+
         ultimateRecyclerView.setHasFixedSize(true);
         gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, myAdapter);
         ultimateRecyclerView.setLayoutManager(gridLayoutManager);
@@ -100,7 +110,7 @@ public class ServiceFragment extends BaseFragment {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(ServiceFragment.this, "没有更多的数据了！~");
+//                    AndroidTool.showToast(ServiceFragment.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
                     myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {

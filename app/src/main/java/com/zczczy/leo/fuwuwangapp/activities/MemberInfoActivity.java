@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,7 +15,7 @@ import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
-import com.zczczy.leo.fuwuwangapp.tools.RegexUtils;
+import com.zczczy.leo.fuwuwangapp.tools.ImageUtil;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -62,6 +63,8 @@ public class MemberInfoActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    String image;
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -87,8 +90,12 @@ public class MemberInfoActivity extends BaseActivity {
         startActivityForResult(intent, 1000);
     }
 
+    /**
+     * 上传图片
+     *
+     * @param avatarUrl
+     */
     @Background
-    @Trace()
     void uploadAvatar(String avatarUrl) {
         MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
         FileSystemResource image = new FileSystemResource(avatarUrl);
@@ -97,6 +104,11 @@ public class MemberInfoActivity extends BaseActivity {
         afterUploadAvatar(myRestClient.uploadAvatar(data));
     }
 
+    /**
+     * 上传成功后 上传地址
+     *
+     * @param bmj
+     */
     @UiThread
     void afterUploadAvatar(String bmj) {
         if (bmj == null) {
@@ -111,6 +123,11 @@ public class MemberInfoActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 更新头像图片地址
+     *
+     * @param img
+     */
     @Background
     void updateMemberInfoImg(String img) {
         Map<String, String> map = new HashMap<>(1);
@@ -134,15 +151,26 @@ public class MemberInfoActivity extends BaseActivity {
         }
     }
 
-
+    /**
+     * 选择图片
+     *
+     * @param resultCode 请求code
+     * @param photos     返回
+     */
     @OnActivityResult(1000)
     void onSelectPicture(int resultCode, @OnActivityResult.Extra(value = PhotoPickerActivity.KEY_SELECTED_PHOTOS) ArrayList<String> photos) {
         if (resultCode == RESULT_OK) {
-            AndroidTool.showLoadDialog(this);
-            uploadAvatar(photos.get(0));
+            image = photos.get(0);
+            ImageUtil.corpIntent(this, AndroidTool.getUri(photos.get(0)), AndroidTool.getUri(photos.get(0)));
         }
     }
 
+    @OnActivityResult(ImageUtil.IMAGE_CROP)
+    void onCodeResult() {
+        AndroidTool.showLoadDialog(this);
+        ImageUtil.resetPhotp(image);
+        uploadAvatar(image);
+    }
 
     @Background
     void getMemberInfo() {

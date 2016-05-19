@@ -43,7 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     int line_color;
 
     @StringRes
-    String no_net, empty_search, empty_order, empty_review, empty_logistics;
+    String no_net, empty_search, empty_order, empty_review, empty_logistics,empty_no_review;
 
     String rootUrl = "http://appapia.86fuwuwang.com/";
 

@@ -112,6 +112,9 @@ public class NewsFragment extends BaseFragment implements BaseSliderView.OnSlide
                     textSliderView.setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
                 }
+                if (bmj.Data.size() <= 1) {
+                    sliderLayout.stopAutoCycle();
+                }
             }
         }
     }

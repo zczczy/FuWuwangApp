@@ -799,6 +799,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     String uploadAvatar(@Body MultiValueMap<String, Object> data);
 
     /**
+     * 更新头像
      *
      * @param map HeadImg
      * @return
