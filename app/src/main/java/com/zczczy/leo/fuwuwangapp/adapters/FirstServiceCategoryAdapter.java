@@ -3,7 +3,6 @@ package com.zczczy.leo.fuwuwangapp.adapters;
 import android.content.Context;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
-import com.zczczy.leo.fuwuwangapp.items.FirstCategoryItemView;
 import com.zczczy.leo.fuwuwangapp.items.FirstServiceCategoryItemView;
 import com.zczczy.leo.fuwuwangapp.items.FirstServiceCategoryItemView_;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;

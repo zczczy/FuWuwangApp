@@ -480,7 +480,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/address"
+                        android:drawableLeft="@drawable/vip_address"
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical"
                         android:text="@string/txt_address"

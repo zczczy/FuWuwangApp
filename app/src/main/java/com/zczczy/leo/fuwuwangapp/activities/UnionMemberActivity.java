@@ -3,6 +3,7 @@ package com.zczczy.leo.fuwuwangapp.activities;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -65,6 +66,9 @@ public class UnionMemberActivity extends BaseActivity {
     @Extra
     int userId;
 
+    @ViewById
+    TextView empty_view;
+
     LinearLayoutManager linearLayoutManager;
 
     MaterialHeader materialHeader;
@@ -81,6 +85,7 @@ public class UnionMemberActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         bus.register(this);
+        empty_view.setText("还没有联盟会员");
         myTitleBar.setTitle(String.format(txt_unionmember_title, username));
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);

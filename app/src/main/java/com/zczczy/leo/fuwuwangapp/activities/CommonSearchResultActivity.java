@@ -148,6 +148,7 @@ public class CommonSearchResultActivity extends BaseActivity {
     void rb_others(boolean isChecked) {
         if (isChecked) {
             sort = MyApplication.DEFAULT_SORT;
+            desc = MyApplication.DESC;
             isRefresh = true;
             afterLoadMore();
         }
@@ -157,6 +158,7 @@ public class CommonSearchResultActivity extends BaseActivity {
     void rb_sell_count(boolean isChecked) {
         if (isChecked) {
             sort = MyApplication.COUNT_SORT;
+            desc = MyApplication.DESC;
             isRefresh = true;
             afterLoadMore();
         }

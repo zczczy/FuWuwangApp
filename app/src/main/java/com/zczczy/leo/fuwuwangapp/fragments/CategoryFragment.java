@@ -105,11 +105,23 @@ public class CategoryFragment extends BaseFragment {
 
     void changeFragment(GoodsTypeModel model) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        for (GoodsTypeModel goodsTypeModel : myAdapter.getItems()) {
-            goodsTypeModel.isSelected = false;
+        int firstPosition = 0;
+        int lastPosition = 0;
+        for (int i = 0; i < myAdapter.getItems().size(); i++) {
+            GoodsTypeModel tempModel = myAdapter.getItems().get(i);
+            if (tempModel.GoodsTypeId == model.GoodsTypeId) {
+                firstPosition = i;
+            }
+            if (tempModel.isSelected) {
+                lastPosition = i;
+                tempModel.isSelected = false;
+            }
         }
         model.isSelected = true;
-        myAdapter.notifyDataSetChanged();
+        myAdapter.notifyItemChanged(firstPosition);
+        myAdapter.notifyItemChanged(lastPosition);
+//        AndroidTool.showToast(this, firstPosition + "=====" + lastPosition);
+        linearLayoutManager.scrollToPosition(firstPosition);
         commonCategoryFragment = CommonCategoryFragment_.builder().mGoodsTypeModel(model).build();
         transaction.replace(R.id.common_fragment, commonCategoryFragment);
         transaction.commit();

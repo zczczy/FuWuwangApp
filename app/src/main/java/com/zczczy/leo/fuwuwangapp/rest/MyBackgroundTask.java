@@ -24,6 +24,7 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -163,6 +164,16 @@ public class MyBackgroundTask {
     void afterGetServiceGoodsTypeList(BaseModelJson<List<GoodsTypeModel>> bmj) {
         if (bmj != null && bmj.Successful) {
             app.setServiceGoodsTypeModelList(bmj.Data);
+            for (GoodsTypeModel firstCategory : app.getServiceGoodsTypeModelList()) {
+                if (firstCategory.ChildGoodsType == null) {
+                    firstCategory.ChildGoodsType = new ArrayList<>();
+                }
+                GoodsTypeModel secondCategory = new GoodsTypeModel();
+                secondCategory.GoodsTypeName = "全部";
+                secondCategory.GoodsTypeId = firstCategory.GoodsTypeId;
+                secondCategory.GoodsTypePid = firstCategory.GoodsTypeId + "";
+                firstCategory.ChildGoodsType.add(0, secondCategory);
+            }
         } else {
             bmj = new BaseModelJson<>();
         }
