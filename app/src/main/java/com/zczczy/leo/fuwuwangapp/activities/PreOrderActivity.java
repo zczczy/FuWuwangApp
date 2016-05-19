@@ -216,6 +216,7 @@ public class PreOrderActivity extends BaseActivity {
             rl_express_charges.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
             rl_postal.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
         } else {
+            finish();
             AndroidTool.showToast(this, bmj.Error);
         }
     }
@@ -341,13 +342,16 @@ public class PreOrderActivity extends BaseActivity {
         } else if (bmj.Successful) {
             if (bmj.Data.MPaymentType == MyApplication.DZB || bmj.Data.MPaymentType == MyApplication.LONG_BI || bmj.Data.MPaymentType == MyApplication.DZB_LONGBI) {
                 OrderDetailActivity_.intent(this).orderId(bmj.Data.MOrderId).start();
+                finish();
             } else {
                 if (bmj.Data.unionPay != null) {
                     UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
+                    AndroidTool.showToast(this, "付款成功");
+                    finish();
+                } else {
+                    AndroidTool.showToast(this, "服务器繁忙");
                 }
             }
-            AndroidTool.showToast(this, "付款成功");
-            finish();
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }

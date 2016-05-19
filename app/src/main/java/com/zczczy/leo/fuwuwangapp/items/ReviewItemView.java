@@ -25,9 +25,6 @@ public class ReviewItemView extends ItemView<OrderDetailModel> {
     @ViewById
     TextView txt_name, txt_des;
 
-    @StringRes
-    String text_order_no;
-
     Context context;
 
     public ReviewItemView(Context context) {
@@ -41,7 +38,7 @@ public class ReviewItemView extends ItemView<OrderDetailModel> {
             Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_avatar);
         }
         txt_name.setText(_data.ProductName);
-        txt_des.setText(String.format(text_order_no, _data.GoodsDesc));
+        txt_des.setText(_data.GoodsDesc);
     }
 
     @Override

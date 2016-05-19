@@ -87,12 +87,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/order_gray"
-            android:ems="199"
             android:gravity="top"
             android:hint="添加商品评论"
-            android:paddingBottom="125dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
+            android:lines="9"
+            android:maxLength="100"
+            android:padding="10dp"
             android:textColorHint="#cccccc"
             android:textSize="14sp" />
 

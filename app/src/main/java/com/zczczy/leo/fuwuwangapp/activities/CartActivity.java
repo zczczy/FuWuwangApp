@@ -137,6 +137,8 @@ public class CartActivity extends BaseActivity {
                 calc();
                 if (list.size() > 0) {
                     deleteShopping();
+                } else {
+                    AndroidTool.showToast(CartActivity.this, "购物车为空");
                 }
             }
         }).setNegativeButton(text_cancel, null).setIcon(R.mipmap.logo).create().show();
