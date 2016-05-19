@@ -14,7 +14,8 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/category_search"
         app:mLeftText="全国"
-        app:mLeftTextMarginLeft="10dp"
+        app:mLeftTextDrawablePadding="2dp"
+        app:mLeftTextMarginLeft="5dp"
         app:mLeftTextRightDrawable="@drawable/home_address"
         app:mRightButtonIcon="@drawable/title_cart" />
 

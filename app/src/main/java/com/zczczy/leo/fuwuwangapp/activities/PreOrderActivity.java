@@ -278,7 +278,7 @@ public class PreOrderActivity extends BaseActivity {
         if (!isService && AndroidTool.checkTextViewIsNull(tv_shipping, txt_phone, tv_shipping_address)) {
             AndroidTool.showToast(this, "请选择收货地址");
         } else {
-            if (useDianZiBi > 0 || longBi > 0) {
+            if ((use_dian.isChecked() && useDianZiBi > 0) || longBi > 0) {
                 final View view = layoutInflater.inflate(R.layout.pay_pass, null);
                 adb = new AlertDialog.Builder(this);
                 ad = adb.setView(view).create();
@@ -322,13 +322,13 @@ public class PreOrderActivity extends BaseActivity {
         if (isCart) {
             map.put("BuyCartInfoIds", BuyCartInfoIds);
             map.put("StoreInfoId", StoreInfoId);
-            map.put("DZB", useDianZiBi + "");
+            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
             map.put("TwoPass", password);
             afterPayOrder(myRestClient.createOrderInfo(map));
         } else {
             map.put("GoodsInfoId", goodsInfoId);
             map.put("number", orderCount + "");
-            map.put("DZB", useDianZiBi + "");
+            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
             map.put("TwoPass", password);
             afterPayOrder(myRestClient.createGoodsOrderInfo(map));
         }
