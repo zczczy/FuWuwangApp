@@ -411,9 +411,6 @@
             android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:theme="@style/myTheme" />
 
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/myTheme.actionBar" />
     </application>
 
 </manifest>

@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         locationService.registerListener(this);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
-        getUpdateApp();
+        getannouncement();
     }
 
     protected void initTab() {
@@ -181,8 +181,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
             if (bmj.Data.getVersioncode() > versionCode) {
                 //升级
                 updateNotice();
-            } else {
-                getannouncement();
             }
         } else {
             AndroidTool.showToast(this, bmj.Error);
@@ -292,9 +290,19 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     @UiThread
     void Getannouncement(int AppConfigId, String AppConfigTitle, String AppConfigContent, String IsCloseBtn, String IsShow) {
         if ("1".equals(IsShow)) {
-            homedialog = new MyHomedialog(this, AppConfigTitle, AppConfigContent, IsCloseBtn, null);
+            homedialog = new MyHomedialog(this, AppConfigTitle, AppConfigContent, IsCloseBtn, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    homedialog.dismiss();
+                    getUpdateApp();
+                }
+            });
             homedialog.show();
             homedialog.setCancelable(false);
+
+
+        } else {
+            getUpdateApp();
         }
     }
 

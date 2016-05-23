@@ -59,7 +59,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     View mBuyLayout;
 
     @ViewById
-    LinearLayout parent, ll_rebate, ll_store, ll_review,ll_goods_by;
+    LinearLayout parent, ll_rebate, ll_store, ll_review, ll_goods_by;
 
     @ViewById
     TextView goods_name, goods_describe, goods_by, goods_kucun, goods_knows, txt_rebate, txt_rmb, txt_plus, txt_home_lb;
@@ -136,7 +136,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            if ("0".equals(MyApplication.GOODS_STATE_UP)) {
+            if (MyApplication.GOODS_STATE_UP.equals(bmj.Data.GoodsDelStatus)) {
                 goods_name.setText(bmj.Data.GodosName);
                 goods_describe.setText(bmj.Data.GoodsDesc);
                 ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
