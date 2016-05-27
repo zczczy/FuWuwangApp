@@ -94,7 +94,9 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
         cartAdapter = (CartAdapter) objects[0];
         baseViewHolder = (BaseViewHolder) objects[1];
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
+            Picasso.with(context).load(_data.GoodsImgSl)
+                    .resize(200, 200)
+                    .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
         txt_cart_goods_product.setText(_data.GodosName);
         if (_data.GoodsPrice > 0) {
