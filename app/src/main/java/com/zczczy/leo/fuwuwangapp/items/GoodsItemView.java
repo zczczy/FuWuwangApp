@@ -44,9 +44,7 @@ public class GoodsItemView extends ItemView<Goods> {
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Picasso.with(context).
-                    load(_data.GoodsImgSl).
-                    resize(200, 200).
-                    centerCrop().
+                    load(_data.GoodsImgSl).resize(200, 200).
                     placeholder(R.drawable.goods_default).
                     error(R.drawable.goods_default).into(pic);
         }
