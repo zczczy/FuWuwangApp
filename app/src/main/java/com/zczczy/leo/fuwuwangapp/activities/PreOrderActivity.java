@@ -113,6 +113,8 @@ public class PreOrderActivity extends BaseActivity {
 
     EditText pass;
 
+    int MReceiptAddressId;
+
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -143,6 +145,7 @@ public class PreOrderActivity extends BaseActivity {
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
+            MReceiptAddressId = bmj.Data.MReceiptAddressId;
             setShipping(bmj.Data.MReceiptAddress);
             txt_store.setText(bmj.Data.StoreName);
             storeId = bmj.Data.StoreInfoId;
@@ -324,10 +327,12 @@ public class PreOrderActivity extends BaseActivity {
             map.put("StoreInfoId", StoreInfoId);
             map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
             map.put("TwoPass", password);
+            map.put("MReceiptAddressId", MReceiptAddressId + "");
             afterPayOrder(myRestClient.createOrderInfo(map));
         } else {
             map.put("GoodsInfoId", goodsInfoId);
             map.put("number", orderCount + "");
+            map.put("MReceiptAddressId", MReceiptAddressId + "");
             map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
             map.put("TwoPass", password);
             afterPayOrder(myRestClient.createGoodsOrderInfo(map));
@@ -387,6 +392,7 @@ public class PreOrderActivity extends BaseActivity {
     //设置 收货地址
     void setShipping(MReceiptAddressModel model) {
         if (model != null) {
+            MReceiptAddressId = model.MReceiptAddressId;
             tv_shipping.setText(String.format(txt_shipping, model.ReceiptName));
             txt_phone.setText(model.Mobile);
             tv_shipping_address.setText(String.format(txt_shipping_address, model.ProvinceName + model.CityName + model.AreaName + model.DetailAddress));

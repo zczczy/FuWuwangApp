@@ -20,6 +20,7 @@ public class ConfirmOrderModel implements Serializable {
     public double MaxDzb; //用户能使用的电子币数
     public int SellerType; //1:服务网商家，2：普通商家，3：商城会员申请商家)
     public int MPaymentType;//1网银，2电子币，3龙币，4电子币+龙币,5电子币+网银，6龙币+网银，7电子币+龙币+网银
+    public int MReceiptAddressId;
 
     public UnionPay unionPay; //银联
 

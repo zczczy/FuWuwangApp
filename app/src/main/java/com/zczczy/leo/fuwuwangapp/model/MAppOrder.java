@@ -44,6 +44,7 @@ public class MAppOrder implements Serializable {
     public int GoodsAllCount;//商品数量
     public String GoodsType; //1.服务类  2. 邮寄类
     public List<OrderDetailModel> MOrderDetailList;
+    public int MReceiptAddressId;
 
     public CouponModel FanQuan;
 }
