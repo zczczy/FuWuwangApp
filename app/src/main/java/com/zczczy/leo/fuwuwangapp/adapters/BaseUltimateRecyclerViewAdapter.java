@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,7 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
             ViewHelper.clear(viewHolder.itemView);
         }
     }
+
     abstract void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder);
 
     /**
@@ -124,6 +126,9 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
     @Override
     public BaseUltimateViewHolder onCreateViewHolder(ViewGroup parent) {
         final View view = onCreateItemView(parent);
+        // //修正 item不充满
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(params);
         final BaseUltimateViewHolder baseViewHolder = getViewHolder(view);
         SwipeLayout swipeLayout = baseViewHolder.swipeLayout;
         if (swipeLayout != null) {

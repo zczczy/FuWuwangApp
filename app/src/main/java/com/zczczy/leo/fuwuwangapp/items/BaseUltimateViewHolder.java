@@ -12,6 +12,5 @@ public class BaseUltimateViewHolder extends UltimateRecyclerviewViewHolder {
 
     public BaseUltimateViewHolder(View itemView) {
         super(itemView);
-
     }
 }

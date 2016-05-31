@@ -27,7 +27,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BaseViewHolder(onCreateItemView(parent, viewType));
+        View view = onCreateItemView(parent, viewType);
+        //修正 item不充满
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(params);
+        return new BaseViewHolder(view);
     }
 
     /**
