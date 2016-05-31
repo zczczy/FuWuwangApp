@@ -80,6 +80,7 @@ public class MyApplication extends Application {
 
     public static final String GOODS_STATE_UP = "0"; //0.上架
     public static final String GOODS_STATE_DOWN = "-1"; //-1.下架
+    public static final String GOODS_STATE_PASS = "1"; //1.审核通过
 
 
     //服务商品类型

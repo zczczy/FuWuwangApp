@@ -185,16 +185,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="131dp"
+        android:layout_height="127dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="4.5dp">
 
         <ImageView
             android:id="@+id/ad_one"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="2dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
@@ -203,9 +202,9 @@
         <ImageView
             android:id="@+id/ad_two"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_height="118dp"
+            android:layout_marginLeft="4.5dp"
+            android:layout_marginRight="4.5dp"
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
@@ -214,8 +213,7 @@
         <ImageView
             android:id="@+id/ad_three"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_height="118dp"
             android:layout_weight="1"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
@@ -242,17 +240,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="185dp"
+            android:layout_height="168dp"
             android:orientation="horizontal"
-            android:paddingBottom="4dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="5dp">
+            android:padding="4.5dp">
 
             <ImageView
                 android:id="@+id/ad_four"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="159dp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -261,7 +256,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="159dp"
                 android:layout_marginLeft="2dp"
                 android:layout_weight="1"
                 android:orientation="vertical">

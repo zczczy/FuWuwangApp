@@ -55,7 +55,7 @@ public class Goods implements Serializable {
     public String GoodsCreateTime;
     public String GoodsUpdTime;
     public String IsLbProduct;
-    public String GoodsCheckStatus;
+    public String GoodsCheckStatus; //1.审核通过
     public String GoodsDelStatus;
     public String GoodsCheckTime;
     public String GoodsCheckUser;

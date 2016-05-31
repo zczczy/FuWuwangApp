@@ -11,7 +11,7 @@
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/new_slider_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="175dp"
         app:pager_animation="Accordion" />
 
     <LinearLayout
@@ -279,7 +279,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="131dp"
+        android:layout_height="103dp"
         android:background="@color/home_background"
         android:orientation="horizontal"
         android:paddingBottom="2dp">
@@ -287,7 +287,7 @@
         <ImageView
             android:id="@+id/ad_one"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -298,7 +298,7 @@
         <ImageView
             android:id="@+id/ad_two"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -310,7 +310,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="131dp"
+        android:layout_height="103dp"
         android:background="@color/home_background"
         android:orientation="horizontal"
         android:paddingBottom="2dp">
@@ -318,7 +318,7 @@
         <ImageView
             android:id="@+id/ad_three"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -329,7 +329,7 @@
         <ImageView
             android:id="@+id/ad_four"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -341,14 +341,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="131dp"
+        android:layout_height="101dp"
         android:background="@color/home_background"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/ad_five"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -359,7 +359,7 @@
         <ImageView
             android:id="@+id/ad_six"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -370,7 +370,7 @@
         <ImageView
             android:id="@+id/ad_seven"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -381,7 +381,7 @@
         <ImageView
             android:id="@+id/ad_eight"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="101dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
             android:background="@color/white"
@@ -394,10 +394,11 @@
     <ImageView
         android:id="@+id/ad_nine"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="78dp"
+        android:layout_margin="1.5dp"
         android:background="@color/home_background"
         android:foreground="?android:attr/selectableItemBackground"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:src="@drawable/goods_default" />
 
 

@@ -136,7 +136,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            if (MyApplication.GOODS_STATE_UP.equals(bmj.Data.GoodsDelStatus)) {
+            if (MyApplication.GOODS_STATE_UP.equals(bmj.Data.GoodsDelStatus) && MyApplication.GOODS_STATE_PASS.equals(bmj.Data.GoodsCheckStatus)) {
                 goods_name.setText(bmj.Data.GodosName);
                 goods_describe.setText(bmj.Data.GoodsDesc);
                 ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
