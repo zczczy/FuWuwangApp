@@ -51,8 +51,9 @@ public class SafeMessengerActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-        GetSafeMessage();
         newMyRestClient.setRestErrorHandler(myErrorHandler);
+        AndroidTool.showLoadDialog(this);
+        GetSafeMessage();
 
     }
 
@@ -66,6 +67,7 @@ public class SafeMessengerActivity extends BaseActivity {
 
     @UiThread
     void AfterGetSafe(BaseModelJson<String> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
         } else if (bmj.Successful) {
             btn_subscribe.setVisibility(View.GONE);
@@ -124,7 +126,7 @@ public class SafeMessengerActivity extends BaseActivity {
     //订阅
     @Click
     void btn_subscribe() {
-
+        AndroidTool.showLoadDialog(this);
         getBind();
 
     }
