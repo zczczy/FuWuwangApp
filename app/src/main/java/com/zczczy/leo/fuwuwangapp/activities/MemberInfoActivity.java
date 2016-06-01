@@ -1,6 +1,5 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -24,7 +24,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
-import org.androidannotations.annotations.Trace;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
@@ -68,11 +67,15 @@ public class MemberInfoActivity extends BaseActivity {
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
     }
 
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
+        getUserDefaultAddress();
         getMemberInfo();
         if (MyApplication.VIP.equals(pre.userType().toString())) {
             txt_name.setEnabled(false);
@@ -80,6 +83,17 @@ public class MemberInfoActivity extends BaseActivity {
         }
     }
 
+    @Background
+    void getUserDefaultAddress() {
+        afterGetUserDefaultAddress(myRestClient.getUserDefaultAddress());
+    }
+
+    @UiThread
+    void afterGetUserDefaultAddress(BaseModelJson<MReceiptAddressModel> result) {
+        if (result != null && result.Successful) {
+            txt_change.setText(result.Data.ProvinceName + result.Data.CityName + result.Data.AreaName + result.Data.DetailAddress);
+        }
+    }
 
     @Click
     void img_avatar() {
@@ -132,9 +146,7 @@ public class MemberInfoActivity extends BaseActivity {
     void updateMemberInfoImg(String img) {
         Map<String, String> map = new HashMap<>(1);
         map.put("HeadImg", img);
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+
         afterUpdateMemberInfoImg(myRestClient.updateMemberInfoImg(map));
     }
 
@@ -174,9 +186,6 @@ public class MemberInfoActivity extends BaseActivity {
 
     @Background
     void getMemberInfo() {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
         afterGetMemberInfo(myRestClient.getMemberInfo());
     }
 
@@ -213,9 +222,6 @@ public class MemberInfoActivity extends BaseActivity {
 
     @Background
     void changeInfo(String MemberEmail, String MemberQQ, String MemberBlog) {
-        myRestClient.setHeader("Token", pre.token().get());
-        myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("kbn", MyApplication.ANDROID);
         HashMap<String, String> map = new HashMap<>();
         map.put("MemberBlog", MemberBlog);
         map.put("MemberQQ", MemberQQ);

@@ -48,7 +48,7 @@ public class RegisterActivity extends BaseActivity {
     RadioButton gar_id_normal, gar_id_vip;
 
     @ViewById
-    LinearLayout ll_email, gar_service_man_layout;
+    LinearLayout ll_email, gar_service_man_layout, ll_confirm;
 
     @RestService
     MyDotNetRestClient myDotNetRestClient;
@@ -71,9 +71,9 @@ public class RegisterActivity extends BaseActivity {
                 AndroidTool.showToast(this, "用户名不能为空");
             } else if (AndroidTool.checkIsNull(edt_suggest_pass)) {
                 AndroidTool.showToast(this, "密码不能为空");
-            } else if (AndroidTool.checkIsNull(edt_confirm_pass)) {
+            } else if (ll_confirm.isShown() && AndroidTool.checkIsNull(edt_confirm_pass)) {
                 AndroidTool.showToast(this, "确认密码不能为空");
-            } else if (!edt_suggest_pass.getText().toString().equals(edt_confirm_pass.getText().toString())) {
+            } else if (ll_confirm.isShown() && !edt_suggest_pass.getText().toString().equals(edt_confirm_pass.getText().toString())) {
                 AndroidTool.showToast(this, "两次密码输入不一致");
             } else if (gar_id_normal.isChecked() && AndroidTool.checkIsNull(text_email)) {
                 AndroidTool.showToast(this, "邮箱不能为空");
@@ -84,7 +84,7 @@ public class RegisterActivity extends BaseActivity {
             } else {
                 map.put("userLogin", edt_suggest_username.getText().toString().trim());
                 map.put("passWord", edt_suggest_pass.getText().toString().trim());
-                map.put("passWordConfirm", edt_confirm_pass.getText().toString().trim());
+                map.put("passWordConfirm", ll_confirm.isShown() ? edt_confirm_pass.getText().toString().trim() : edt_suggest_pass.getText().toString().trim());
                 map.put("zy", service_man.getText().toString().trim());
                 map.put("MemberEmail", text_email.getText().toString().trim());
                 map.put("MemberRealName", null);
@@ -134,9 +134,11 @@ public class RegisterActivity extends BaseActivity {
     void cb_isShow(boolean isChecked) {
 
         if (isChecked) {
+            ll_confirm.setVisibility(View.GONE);
             edt_suggest_pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             edt_confirm_pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         } else {
+            ll_confirm.setVisibility(View.VISIBLE);
             edt_suggest_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             edt_confirm_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }

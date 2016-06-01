@@ -808,4 +808,14 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<String> updateMemberInfoImg(@Body Map map);
 
+    /**
+     * 获取默认收货地址
+     *
+     * @return
+     * @see MReceiptAddressModel
+     */
+    @Get("api/Shop/GetUserDefaultAddress")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<MReceiptAddressModel> getUserDefaultAddress();
+
 }

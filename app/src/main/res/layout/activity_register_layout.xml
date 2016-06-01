@@ -78,12 +78,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:maxLength="50"
                     android:inputType="textPassword"
+                    android:maxLength="50"
                     android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
