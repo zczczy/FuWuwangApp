@@ -33,7 +33,7 @@ public class GoodsItemView extends ItemView<Goods> {
     Context context;
 
     @StringRes
-    String home_rmb, home_lb, text_review_count, text_review_pre;
+    String home_rmb, home_lb, text_review_count, text_review_pre,add_money;
 
     public GoodsItemView(Context context) {
         super(context);
@@ -62,7 +62,7 @@ public class GoodsItemView extends ItemView<Goods> {
             txt_longbi.setText(_data.GoodsLBPrice);
             txt_add_price.setText("");
             if (_data.GoodsPrice != null) {
-                txt_add_price.setText(String.format(home_rmb, _data.GoodsPrice));
+                txt_add_price.setText(String.format(add_money, _data.GoodsPrice));
             }
         }
         txt_review_count.setText(String.format(text_review_count, _data.PjNum));

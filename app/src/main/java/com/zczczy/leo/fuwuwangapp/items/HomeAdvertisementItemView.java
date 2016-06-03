@@ -70,7 +70,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
     @Override
     protected void init(Object... objects) {
-        new_slider_Layout.removeAllViews();
+        new_slider_Layout.removeAllSliders();
         for (NewBanner nb : app.getNewBannerList()) {
             TextSliderView textSliderView = new TextSliderView(context);
             textSliderView.image(nb.BannerImgUrl);

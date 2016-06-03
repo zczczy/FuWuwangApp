@@ -71,7 +71,7 @@
                     android:drawablePadding="5dp"
                     android:gravity="center"
                     android:textColor="@color/price_color"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:visibility="visible" />
 
                 <LinearLayout
@@ -93,7 +93,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:textColor="@color/price_color"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/txt_add_price"
@@ -102,7 +102,7 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
                         android:textColor="@color/price_color"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
             </LinearLayout>

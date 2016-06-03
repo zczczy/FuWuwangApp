@@ -36,5 +36,7 @@ public class GoodsCommentsModel implements Serializable {
     public String GodosName;
     public String GoodsImgSl;
     public String MOrderNo;
+    public String DispStatus;
+    public String DispStatusStr;
     public int GoodsXl; //销量
 }
