@@ -26,7 +26,7 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
     ZBarView zbarView;
 
     @AfterViews
-    void afterView(){
+    void afterView() {
         zbarView.setResultHandler(this);
         zbarView.startSpot();
     }
@@ -55,7 +55,7 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
         Bundle bundle = new Bundle();
         bundle.putString("result", result);
         resultIntent.putExtras(bundle);
-        setResult(RESULT_OK,resultIntent);
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 

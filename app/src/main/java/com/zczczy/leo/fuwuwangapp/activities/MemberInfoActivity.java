@@ -1,5 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -97,10 +100,50 @@ public class MemberInfoActivity extends BaseActivity {
 
     @Click
     void img_avatar() {
-        PhotoPickerIntent intent = new PhotoPickerIntent(MemberInfoActivity.this);
+        getPermissions();
+    }
+
+
+    private void getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ArrayList<String> permissions = new ArrayList<>();
+            /***
+             * 定位权限为必须权限，用户如果禁止，则每次进入都会申请
+             */
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.CAMERA);
+            }
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+            if (permissions.size() > 0) {
+                requestPermissions(permissions.toArray(new String[permissions.size()]), 127);
+            } else {
+                takePhoto();
+            }
+        } else {
+            takePhoto();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // TODO Auto-generated method stub
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (int grantResult : grantResults) {
+            if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                AndroidTool.showToast(this, "您拒绝授权，该功能不可用");
+                return;
+            }
+        }
+        takePhoto();
+    }
+
+    void takePhoto() {
+        PhotoPickerIntent intent = new PhotoPickerIntent(this);
         intent.setPhotoCount(1);
         intent.setShowCamera(true);
-        intent.setShowGif(true);
+        intent.setShowGif(false);
         startActivityForResult(intent, 1000);
     }
 
