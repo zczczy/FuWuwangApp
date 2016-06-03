@@ -1,6 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LotteryInfoRecordActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
@@ -68,14 +70,16 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
     @Override
     protected void init(Object... objects) {
-        if (!app.isFirst()) {
-            for (NewBanner nb : app.getNewBannerList()) {
-                TextSliderView textSliderView = new TextSliderView(context);
-                textSliderView.image(nb.BannerImgUrl);
-                textSliderView.setOnSliderClickListener(this);
-                new_slider_Layout.addSlider(textSliderView);
-            }
-            app.setFirst(true);
+        new_slider_Layout.removeAllViews();
+        for (NewBanner nb : app.getNewBannerList()) {
+            TextSliderView textSliderView = new TextSliderView(context);
+            textSliderView.image(nb.BannerImgUrl);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("bannerModel", nb);
+            textSliderView.bundle(bundle);
+            textSliderView.setScaleType(BaseSliderView.ScaleType.Fit);
+            textSliderView.setOnSliderClickListener(this);
+            new_slider_Layout.addSlider(textSliderView);
         }
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
             img_winners_order.setVisibility(VISIBLE);
@@ -186,6 +190,16 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-
+        if (slider.getBundle() != null && slider.getBundle().get("bannerModel") != null) {
+            NewBanner bannerModel = (NewBanner) slider.getBundle().get("bannerModel");
+            if (bannerModel != null) {
+                //链接分类(1:商品详细，2：网页WebView)
+                if (bannerModel.LinkType == 1) {
+                    GoodsDetailInfoActivity_.intent(context).goodsId(bannerModel.LinkUrl).start();
+                } else if (bannerModel.LinkType == 2) {
+                    CommonWebViewActivity_.intent(context).title(bannerModel.BannerName).methodName(bannerModel.LinkUrl).start();
+                }
+            }
+        }
     }
 }

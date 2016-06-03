@@ -37,7 +37,7 @@ public class CommonWebViewActivity extends BaseActivity {
         settings = web_common.getSettings();
         settings.setJavaScriptEnabled(true);
         web_common.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
-        web_common.loadUrl(MyApplication.URL + methodName);
+        web_common.loadUrl((methodName.contains("http://") || methodName.contains("https://")) ? methodName : MyApplication.URL + methodName);
 
         //判断页面加载过程
         web_common.setWebChromeClient(new WebChromeClient() {
