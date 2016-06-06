@@ -238,7 +238,8 @@
                 android:layout_marginRight="20dp"
                 android:button="@drawable/check_box_selector"
                 android:text="@string/txt_is_show"
-                android:textColor="@color/major_text_color" />
+                android:textColor="@color/major_text_color"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

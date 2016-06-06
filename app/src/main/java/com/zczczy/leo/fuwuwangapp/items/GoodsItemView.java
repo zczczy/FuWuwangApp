@@ -33,7 +33,7 @@ public class GoodsItemView extends ItemView<Goods> {
     Context context;
 
     @StringRes
-    String home_rmb, home_lb, text_review_count, text_review_pre,add_money;
+    String home_rmb, home_lb, text_review_count, text_review_pre, add_money;
 
     public GoodsItemView(Context context) {
         super(context);
