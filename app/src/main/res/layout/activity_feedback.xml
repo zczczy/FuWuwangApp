@@ -42,6 +42,7 @@
                     android:background="@drawable/edit_prd_background"
                     android:gravity="top"
                     android:hint="您遇到什么系统问题啦,或有什么功能建议吗?欢迎您提给我们,谢谢!"
+                    android:maxLength="100"
                     android:textColor="#cccccc"
                     android:textColorHint="#ececec"
                     android:textSize="15dp" />

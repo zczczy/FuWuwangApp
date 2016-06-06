@@ -29,7 +29,7 @@ public class RebuiltRecommendedGoods implements Serializable{
     public String GoodsInfoId;
     public String GodosName;
     public String GoodsDesc;
-    public double GoodsPrice;
+    public String GoodsPrice;
     public int GoodsLBPrice;
     public String GoodsPurchaseNotes;
     public int GoodsReturnTicket;

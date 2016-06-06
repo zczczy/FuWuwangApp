@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
  * Created by Leo on 2016/4/27.
  */
 @EViewGroup(R.layout.fragment_home_item)
-public class RecommendedGoodsItemView  extends ItemView<RebuiltRecommendedGoods> {
+public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> {
 
     @ViewById
     ImageView img_pic;
@@ -38,11 +38,11 @@ public class RecommendedGoodsItemView  extends ItemView<RebuiltRecommendedGoods>
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl). resize(200, 200).
+            Picasso.with(context).load(_data.GoodsImgSl).resize(200, 200).
                     centerCrop().error(R.drawable.goods_default).into(img_pic);
         }
         txt_product_name.setText(_data.GodosName);
-        if (_data.GoodsLBPrice > 0 && _data.GoodsPrice> 0) {
+        if (_data.GoodsLBPrice > 0 && Double.valueOf(_data.GoodsPrice) > 0) {
             txt_rmb.setVisibility(VISIBLE);
             txt_plus.setVisibility(VISIBLE);
             txt_home_lb.setVisibility(VISIBLE);
@@ -53,7 +53,7 @@ public class RecommendedGoodsItemView  extends ItemView<RebuiltRecommendedGoods>
             txt_plus.setVisibility(GONE);
             txt_home_lb.setVisibility(VISIBLE);
             txt_home_lb.setText(String.format(home_lb, _data.GoodsLBPrice));
-        } else if (_data.GoodsPrice > 0) {
+        } else if (Double.valueOf(_data.GoodsPrice) > 0) {
             txt_rmb.setVisibility(VISIBLE);
             txt_plus.setVisibility(GONE);
             txt_home_lb.setVisibility(GONE);

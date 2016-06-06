@@ -154,6 +154,7 @@ public class PreOrderActivity extends BaseActivity {
             balance = bmj.Data.MaxDzb;
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
+            payYuan = bmj.Data.MOrderMoney;
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
             int i = 0;
             for (BuyCartInfoList buyCartInfoList : bmj.Data.BuyCartInfoList) {
@@ -232,6 +233,7 @@ public class PreOrderActivity extends BaseActivity {
         } else {
             txt_dian_quantity.setClickable(checked);
             txt_dian_quantity.setText(checked ? useDianZiBi + "" : "0.0");
+            txt_pay_total_rmb.setText(String.format(home_rmb, checked ? payYuan : yuan));
         }
     }
 
