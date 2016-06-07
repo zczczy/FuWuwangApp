@@ -21,7 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.util.MultiValueMap;
 
 import java.math.BigDecimal;
@@ -35,7 +35,7 @@ import java.math.BigDecimal;
 //http://appapia.86fuwuwang.com/
 
 @Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyRequestFactory.class, interceptors = {MyInterceptor.class},
-        converters = {StringHttpMessageConverter.class, MappingJackson2HttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
+        converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
 

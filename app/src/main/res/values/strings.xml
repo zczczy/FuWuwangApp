@@ -339,7 +339,7 @@
     <string name="text_give">赠 送:</string>
     <string name="text_give_coupon">(兑现券)</string>
 
-    <string name="text_ticket_no">消 费 码:%1$s</string>
+    <string name="text_ticket_no">消 费 码: %1$s</string>
     <string name="text_express_charges">支付配送</string>
     <string name="text_take">提交订单</string>
 

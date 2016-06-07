@@ -27,7 +27,7 @@ public class PreOrderItemView extends ItemView<BuyCartInfoList> {
     ImageView img_cart_goods_img;
 
     @ViewById
-    TextView txt_cart_goods_product, txt_cart_goods_price, txt_cart_goods_lb_price, txt_num, txt_ticket;
+    TextView txt_cart_goods_product, txt_cart_goods_price, txt_cart_goods_lb_price, txt_num, txt_ticket, txt_status;
 
     Context context;
 
@@ -59,15 +59,17 @@ public class PreOrderItemView extends ItemView<BuyCartInfoList> {
         } else {
             txt_cart_goods_lb_price.setVisibility(GONE);
         }
-        txt_num.setText("x" + _data.ProductCount);
+        txt_num.setText("x".concat(String.valueOf(_data.ProductCount)));
         if (!StringUtils.isEmpty(_data.XfNo)) {
             txt_ticket.setVisibility(VISIBLE);
+            txt_status.setVisibility(VISIBLE);
             txt_ticket.setText(String.format(text_ticket_no, _data.XfNo.replaceAll("([\\d]{4})", "$1 ")));
+            txt_status.setText(_data.XfStatusDisp);
         } else {
             txt_ticket.setVisibility(GONE);
+            txt_status.setVisibility(GONE);
         }
     }
-
 
     @Override
     public void onItemSelected() {

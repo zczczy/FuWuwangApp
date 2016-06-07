@@ -30,4 +30,5 @@ public class BuyCartInfoList implements Serializable {
     public String GodosName;
     public String XfNo;
     public String GoodsType; //1:服务类，2：邮寄类
+    public String XfStatusDisp; //消费状态描述
 }

@@ -30,5 +30,6 @@ public class OrderDetailModel implements Serializable {
     public int GoodsReturnTicket; //返券数量
     public String MOrderNo; //订单号
     public String GoodsDesc;//商品描述
+    public String XfStatusDisp;//消费码消费状态描述
 
 }

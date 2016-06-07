@@ -119,6 +119,7 @@ public class OrderDetailActivity extends BaseActivity {
                 buyCartInfoList.ProductCount = orderDetailModel.ProductNum == null ? 0 : Integer.valueOf(orderDetailModel.ProductNum);
                 buyCartInfoList.XfNo = orderDetailModel.XfNo;
                 buyCartInfoList.GoodsInfoId = orderDetailModel.GoodsInfoId;
+                buyCartInfoList.XfStatusDisp = orderDetailModel.XfStatusDisp;
                 PreOrderItemView preOrderItemView = PreOrderItemView_.build(this);
                 preOrderItemView.setOnClickListener(new View.OnClickListener() {
                     @Override
