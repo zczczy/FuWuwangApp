@@ -5,10 +5,12 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
+import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -22,6 +24,7 @@ import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/5/1.
@@ -96,11 +99,33 @@ public class LoginActivity extends BaseActivity {
             pre.shopToken().put(bmj.Data.ShopToken);
             pre.userType().put(bmj.Data.LoginType);
             pre.username().put(username.getText().toString());
-            finish();
+            getMemberInfo();
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }
     }
+
+    @Background
+    void getMemberInfo() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        afterGetMemberInfo(myRestClient.getMemberInfo());
+    }
+
+    @UiThread
+    void afterGetMemberInfo(BaseModelJson<MemberInfo> bmj) {
+        AndroidTool.dismissLoadDialog();
+        if (bmj == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bmj.Successful) {
+            AndroidTool.showToast(this, bmj.Error);
+        } else {
+            pre.avatar().put(bmj.Data.HeadImg);
+        }
+        finish();
+    }
+
 
     public void finish() {
         if (checkUserIsLogin()) {

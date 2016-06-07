@@ -57,7 +57,6 @@ public class ShippingAddressActivity extends BaseActivity {
         AddShippingAddressActivity_.intent(this).start();
     }
 
-
     public void onResume() {
         super.onResume();
         myAdapter.getMoreData();

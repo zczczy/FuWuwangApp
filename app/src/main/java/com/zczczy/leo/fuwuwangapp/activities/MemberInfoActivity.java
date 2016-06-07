@@ -95,6 +95,8 @@ public class MemberInfoActivity extends BaseActivity {
     void afterGetUserDefaultAddress(BaseModelJson<MReceiptAddressModel> result) {
         if (result != null && result.Successful) {
             txt_change.setText(result.Data.ProvinceName + result.Data.CityName + result.Data.AreaName + result.Data.DetailAddress);
+        } else {
+            txt_change.setText("");
         }
     }
 
@@ -260,7 +262,12 @@ public class MemberInfoActivity extends BaseActivity {
 
     @Click
     void ll_shipping() {
-        ShippingAddressActivity_.intent(this).start();
+        ShippingAddressActivity_.intent(this).startForResult(1000);
+    }
+
+    @OnActivityResult(1000)
+    void afterSetDefault() {
+        getUserDefaultAddress();
     }
 
     @Background
