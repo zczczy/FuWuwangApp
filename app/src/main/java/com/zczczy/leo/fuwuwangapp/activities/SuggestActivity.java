@@ -5,6 +5,7 @@ import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.zczczy.leo.fuwuwangapp.R;
@@ -24,6 +25,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/4/29.
@@ -38,6 +40,9 @@ public class SuggestActivity extends BaseActivity {
 
     @Bean
     MyErrorHandler myErrorHandler;
+
+    @ViewById
+    LinearLayout ll_confirm;
 
     @RestService
     MyDotNetRestClient myRestClient;
@@ -75,13 +80,13 @@ public class SuggestActivity extends BaseActivity {
                 dialog.setCanceledOnTouchOutside(false);
                 return;
             }
-            if (confirm_pass == "" || confirm_pass == null || confirm_pass.isEmpty()) {
+            if (ll_confirm.isShown() && StringUtils.isEmpty(confirm_pass)) {
                 MyAlertDialog dialog = new MyAlertDialog(this, "确认密码不能为空", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
                 return;
             }
-            if (!pass.equals(confirm_pass)) {
+            if (ll_confirm.isShown() && !pass.equals(confirm_pass)) {
                 MyAlertDialog dialog = new MyAlertDialog(this, "两次密码输入不一致", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
@@ -96,7 +101,7 @@ public class SuggestActivity extends BaseActivity {
 
     @Background
     void getHttp() {
-        FwwUser fwwUser = new FwwUser(username, pass, confirm_pass, pre.token().get(), "1", null);
+        FwwUser fwwUser = new FwwUser(username, pass, ll_confirm.isShown() ? confirm_pass : pass, pre.token().get(), "1", null);
         BaseModelJson<String> bmj = myRestClient.RegisterNew(fwwUser);
         showsuccess(bmj);
     }
