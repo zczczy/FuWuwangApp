@@ -31,6 +31,11 @@ public class DisplayUtil {
         return (int) (dipValue * scale + 0.5f);
     }
 
+    public static float getDensityDpi(Context context) {
+        return context.getResources().getDisplayMetrics().densityDpi;
+    }
+
+
     /**
      * 将px值转换为sp值，保证文字大小不变
      *

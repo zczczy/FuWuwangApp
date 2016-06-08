@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/major_color"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/welcome_one">
+
 
     <ImageView
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:src="@mipmap/logo" />
+        android:id="@+id/img_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/welcome_two" />
 
     <ImageView
-        android:layout_width="210dp"
-        android:layout_height="100dp"
-        android:src="@drawable/index_word" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_two"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/welcome_three" />
 
-</LinearLayout>
+</RelativeLayout>

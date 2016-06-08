@@ -69,7 +69,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements BDLocationListener {
 
     @ViewById
-    FragmentTabHost tabHost;
+    public FragmentTabHost tabHost;
 
     @StringArrayRes
     String[] tabTag, tabTitle;

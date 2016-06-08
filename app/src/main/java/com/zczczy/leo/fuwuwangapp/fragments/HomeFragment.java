@@ -1,6 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -9,12 +11,15 @@ import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.ObservableScrollState;
 import com.marshalchen.ultimaterecyclerview.ObservableScrollViewCallbacks;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
+import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.MainActivity;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
@@ -69,6 +74,8 @@ public class HomeFragment extends BaseFragment {
     @ColorRes
     int white_color, home_search_text_scrolled;
 
+    Paint paint = new Paint();
+
     Drawable title_search, title_search_scrolled;
 
     View view;
@@ -105,7 +112,7 @@ public class HomeFragment extends BaseFragment {
         bus.register(this);
         setListener();
         ultimateRecyclerView.setHasFixedSize(true);
-        gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, myAdapter);
+        gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, OrientationHelper.VERTICAL, false, myAdapter);
         ultimateRecyclerView.setLayoutManager(gridLayoutManager);
         ultimateRecyclerView.setAdapter(myAdapter);
         ultimateRecyclerView.enableLoadmore();
@@ -171,6 +178,14 @@ public class HomeFragment extends BaseFragment {
         ultimateRecyclerView.setNormalHeader(HomeAdvertisementItemView_.build(getActivity()));
         ultimateRecyclerView.setCustomSwipeToRefresh();
         refreshingMaterial();
+//        paint.setStrokeWidth(1);
+//        paint.setColor(line_color);
+//        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+//            @Override
+//            public boolean shouldHideDivider(int position, RecyclerView parent) {
+//                return position == 0;
+//            }
+//        }).paint(paint).build());
     }
 
     void setListener() {
@@ -206,7 +221,7 @@ public class HomeFragment extends BaseFragment {
         myTitleBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((MainActivity) getActivity()).tabHost.setCurrentTab(1);
             }
         });
     }
@@ -266,7 +281,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @UiThread(delay = 1000)
-    void showTitleBar(){
+    void showTitleBar() {
         myTitleBar.setVisibility(View.VISIBLE);
     }
 

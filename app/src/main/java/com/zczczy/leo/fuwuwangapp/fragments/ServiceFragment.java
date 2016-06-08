@@ -25,6 +25,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
+import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -41,6 +42,7 @@ import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -79,6 +81,8 @@ public class ServiceFragment extends BaseFragment {
     @StringRes
     String search_hint;
 
+    String cityId;
+
     BasicGridLayoutManager gridLayoutManager;
 
     Paint paint = new Paint();
@@ -98,8 +102,8 @@ public class ServiceFragment extends BaseFragment {
     void afterView() {
 
         txt_title_search.setHint(search_hint);
-
         ultimateRecyclerView.setHasFixedSize(true);
+        cityId = pre.cityId().get();
         gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, myAdapter);
         ultimateRecyclerView.setLayoutManager(gridLayoutManager);
         ultimateRecyclerView.setAdapter(myAdapter);
@@ -128,14 +132,14 @@ public class ServiceFragment extends BaseFragment {
         });
         ultimateRecyclerView.setNormalHeader(ServiceHeaderItemView_.build(getActivity()));
         ultimateRecyclerView.setCustomSwipeToRefresh();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
-            @Override
-            public boolean shouldHideDivider(int position, RecyclerView parent) {
-                return position == 0;
-            }
-        }).paint(paint).build());
+//        paint.setStrokeWidth(1);
+//        paint.setColor(line_color);
+//        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+//            @Override
+//            public boolean shouldHideDivider(int position, RecyclerView parent) {
+//                return position == 0;
+//            }
+//        }).paint(paint).build());
         refreshingMaterial();
         setListener();
     }
@@ -173,7 +177,7 @@ public class ServiceFragment extends BaseFragment {
 
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, 10, isRefresh, 2, "");
+        myAdapter.getMoreData(pageIndex, 10, isRefresh, 2, cityId);
     }
 
     void refreshingMaterial() {
@@ -207,7 +211,9 @@ public class ServiceFragment extends BaseFragment {
             pre.locationAddress().put(ncity);
             myTitleBar.setLeftText(ncity);
             pre.cityId().put(ncitycode);
-//            newHomeFragment.afterCityChanged();
+            cityId = ncitycode;
+            isRefresh = true;
+            afterLoadMore();
             getArea(ncitycode);
         }
     }
@@ -236,7 +242,7 @@ public class ServiceFragment extends BaseFragment {
     }
 
     @Subscribe
-    public void notifyUI(BaseModel bm) {
+    public void notifyUI(BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bm) {
         if (isRefresh) {
             gridLayoutManager.scrollToPosition(0);
             ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
@@ -248,6 +254,13 @@ public class ServiceFragment extends BaseFragment {
             }
         } else if (pageIndex == 1) {
             gridLayoutManager.scrollToPosition(0);
+        }
+        if (bm != null && bm.Successful && bm.Data != null && bm.Data.ListData.size() == 0 && !StringUtils.isEmpty(cityId)) {
+            cityId = "";
+            myTitleBar.setLeftText("全国");
+            afterLoadMore();
+        } else {
+            myTitleBar.setLeftText(pre.locationAddress().get());
         }
     }
 

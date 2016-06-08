@@ -1,12 +1,16 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -23,6 +27,9 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
     ImageView img_pic;
 
     @ViewById
+    LinearLayout ll_root;
+
+    @ViewById
     TextView txt_product_name, txt_rmb, txt_plus, txt_home_lb;
 
     @StringRes
@@ -37,6 +44,20 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
 
     @Override
     protected void init(Object... objects) {
+
+        if (viewHolder.getAdapterPosition() % 2 == 0) {
+            ll_root.setPadding(DisplayUtil.dip2px(context, 3), DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 6));
+        } else {
+            ll_root.setPadding(DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 3), DisplayUtil.dip2px(context, 6));
+        }
+
+        int temp = DisplayUtil.dip2px(context, 166);
+
+        if (DisplayUtil.getDensityDpi(context) >= 400 && DisplayUtil.getDensityDpi(context) < 480) {
+            temp = DisplayUtil.dip2px(context, 166*480/DisplayUtil.getDensityDpi(context));
+        }
+
+        img_pic.setLayoutParams(new LinearLayout.LayoutParams(temp, temp));
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Picasso.with(context).load(_data.GoodsImgSl).resize(200, 200).
                     centerCrop().error(R.drawable.goods_default).into(img_pic);
