@@ -26,6 +26,7 @@
     <color name="home_background">#f0f0f0</color>
 
     <color name="major_color">#f6ab00</color>
+    <color name="tab_text">#ff7800</color>
     <color name="major_text_color">#525252</color>
     <color name="sub_text_color">#888888</color>
     <color name="sub_color">#878787</color>
