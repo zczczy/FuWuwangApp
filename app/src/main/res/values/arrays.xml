@@ -5,7 +5,7 @@
         <item>@string/home</item>
         <item>@string/category</item>
         <item>@string/service</item>
-        <item>@string/news</item>
+        <!--<item>@string/news</item>-->
         <item>@string/mine</item>
 
     </string-array>
@@ -15,7 +15,7 @@
         <item>home</item>
         <item>category</item>
         <item>service</item>
-        <item>news</item>
+        <!--<item>news</item>-->
         <item>mine</item>
     </string-array>
 

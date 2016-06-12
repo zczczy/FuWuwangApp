@@ -84,12 +84,15 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     MyErrorHandler myErrorHandler;
 
     //导航
-    Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class, NewsFragment_.class, MineFragment_.class};
+//    Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class, NewsFragment_.class, MineFragment_.class};
+    Class[] classTab = {HomeFragment_.class, CategoryFragment_.class, ServiceFragment_.class, MineFragment_.class};
 
     @DrawableRes
-    Drawable home_selector, news_selector, mine_selector, category_selector, service_selector;
+    Drawable home_selector, mine_selector, category_selector, service_selector;
+//    Drawable home_selector, news_selector, mine_selector, category_selector, service_selector;
 
-    Drawable[] drawables = new Drawable[5];
+//    Drawable[] drawables = new Drawable[5];
+    Drawable[] drawables = new Drawable[4];
 
     @StringRes
     String progress_de;
@@ -124,8 +127,8 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         drawables[0] = home_selector;
         drawables[1] = category_selector;
         drawables[2] = service_selector;
-        drawables[3] = news_selector;
-        drawables[4] = mine_selector;
+//        drawables[3] = news_selector;
+        drawables[3] = mine_selector;
         myRestClient.setRestErrorHandler(myErrorHandler);
         locationService = app.locationService;
     }

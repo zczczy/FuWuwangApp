@@ -122,7 +122,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void loadMore(int itemsCount, int maxLastVisiblePosition) {
                 if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(HomeFragment.this, "没有更多的数据了！~");
+//                    AndroidTool.showToast(HomeFragment.this, "没有更多的数据了！~");
                     ultimateRecyclerView.disableLoadmore();
                     myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
                 } else {

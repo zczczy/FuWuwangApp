@@ -15,6 +15,7 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.NewsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ReviewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SettingActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
@@ -181,5 +182,10 @@ public class MineFragment extends BaseFragment {
         if (!hidden) {
             setData();
         }
+    }
+
+    @Click
+    void rl_news() {
+        NewsActivity_.intent(this).start();
     }
 }

@@ -174,10 +174,35 @@
     <include layout="@layout/horizontal_line" />
 
     <RelativeLayout
+        android:id="@+id/rl_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/common_shadow_selector"
+        android:clickable="true"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@drawable/news"
+            android:drawablePadding="10dp"
+            android:text="@string/news" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/next_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/rl_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/common_shadow_selector"
         android:clickable="true"
         android:padding="15dp">
@@ -202,7 +227,7 @@
         android:id="@+id/rl_vip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/common_shadow_selector"
         android:clickable="true"
         android:padding="15dp"
