@@ -213,6 +213,7 @@ public class ServiceFragment extends BaseFragment {
             pre.cityId().put(ncitycode);
             cityId = ncitycode;
             isRefresh = true;
+            pageIndex = 1;
             afterLoadMore();
             getArea(ncitycode);
         }
@@ -257,7 +258,9 @@ public class ServiceFragment extends BaseFragment {
         }
         if (bm != null && bm.Successful && bm.Data != null && bm.Data.ListData.size() == 0 && !StringUtils.isEmpty(cityId)) {
             cityId = "";
-            myTitleBar.setLeftText("全国");
+            isRefresh = true;
+            pageIndex = 1;
+//            myTitleBar.setLeftText("全国");
             afterLoadMore();
         } else {
             myTitleBar.setLeftText(pre.locationAddress().get());
