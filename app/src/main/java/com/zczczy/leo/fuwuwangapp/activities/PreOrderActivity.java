@@ -208,10 +208,10 @@ public class PreOrderActivity extends BaseActivity {
                     temp += bmj.Data.FanQuan.RetMianZhi9Str + "*" + bmj.Data.FanQuan.RetMianZhi9 + "+";
                 }
                 if (StringUtils.isEmpty(temp)) {
-                    temp = "不返券+";
+                    temp = "不赠券+";
                 }
             } else {
-                temp = "不返券+";
+                temp = "不赠券+";
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
             longBi = bmj.Data.MOrderLbCount;

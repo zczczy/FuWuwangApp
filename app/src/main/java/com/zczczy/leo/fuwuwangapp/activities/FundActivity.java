@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Notice;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -32,6 +33,9 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  */
 @EActivity(R.layout.activity_notice)
 public class FundActivity extends BaseActivity {
+
+    @ViewById
+    MyTitleBar myTitleBar;
 
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
@@ -55,6 +59,7 @@ public class FundActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         bus.register(this);
+        myTitleBar.setTitle("麻团基金");
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
@@ -98,7 +103,7 @@ public class FundActivity extends BaseActivity {
 
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, 10, isRefresh,1);
+        myAdapter.getMoreData(pageIndex, 10, isRefresh, 1);
     }
 
     void refreshingMaterial() {

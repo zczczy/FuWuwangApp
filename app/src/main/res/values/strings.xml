@@ -308,7 +308,7 @@
 
     <!--商品详情-->
     <string name="buy">立即抢购</string>
-    <string name="rebate">支持返券</string>
+    <string name="rebate">支持赠券</string>
     <string name="goods_detail">商品详情</string>
     <string name="goods_by">快递：</string>
     <string name="goods_kun_cun">库存：</string>

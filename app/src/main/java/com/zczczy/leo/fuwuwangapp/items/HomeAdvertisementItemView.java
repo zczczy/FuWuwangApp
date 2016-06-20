@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
@@ -72,7 +73,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     protected void init(Object... objects) {
         new_slider_Layout.removeAllSliders();
         for (NewBanner nb : app.getNewBannerList()) {
-            TextSliderView textSliderView = new TextSliderView(context);
+            DefaultSliderView textSliderView = new DefaultSliderView(context);
             textSliderView.image(nb.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", nb);

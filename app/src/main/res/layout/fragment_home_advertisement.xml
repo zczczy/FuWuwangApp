@@ -12,16 +12,24 @@
         android:id="@+id/new_slider_layout"
         android:layout_width="match_parent"
         android:layout_height="175dp"
-        android:background="@drawable/goods_default"
         app:pager_animation="Accordion" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:background="@color/home_background"
         android:orientation="vertical"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/img_winners_order"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@color/home_background"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:scaleType="fitCenter" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/trendw" />
+                    android:text="@string/trendw"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -71,7 +80,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/trendm" />
+                    android:text="@string/trendm"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -94,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/huazhuang" />
+                    android:text="@string/huazhuang"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -117,7 +128,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/digital" />
+                    android:text="@string/digital"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -140,7 +152,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/baby" />
+                    android:text="@string/baby"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -172,7 +185,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/xxxb" />
+                    android:text="@string/xxxb"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -194,7 +208,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/life" />
+                    android:text="@string/life"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -217,7 +232,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/home_service" />
+                    android:text="@string/home_service"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -240,7 +256,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/healthcare" />
+                    android:text="@string/healthcare"
+                    android:textSize="12sp" />
             </LinearLayout>
 
 
@@ -263,20 +280,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:text="@string/lbdh" />
+                    android:text="@string/lbdh"
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_winners_order"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="@color/home_background"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:layout_width="match_parent"

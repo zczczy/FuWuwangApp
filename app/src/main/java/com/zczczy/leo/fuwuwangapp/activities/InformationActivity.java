@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Information;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -32,6 +33,10 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  */
 @EActivity(R.layout.activity_notice)
 public class InformationActivity  extends BaseActivity {
+
+    @ViewById
+    MyTitleBar myTitleBar;
+
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 
@@ -54,6 +59,7 @@ public class InformationActivity  extends BaseActivity {
     @AfterViews
     void afterView() {
         bus.register(this);
+        myTitleBar.setTitle("新闻资讯");
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);

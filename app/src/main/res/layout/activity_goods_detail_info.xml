@@ -36,7 +36,6 @@
                     android:id="@+id/slider_layout"
                     android:layout_width="match_parent"
                     android:layout_height="226dp"
-                    android:background="@drawable/goods_default"
                     app:pager_animation="Accordion" />
 
                 <TextView

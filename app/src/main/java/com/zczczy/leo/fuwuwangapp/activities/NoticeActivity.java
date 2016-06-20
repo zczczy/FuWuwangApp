@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Notice;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -32,6 +33,9 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  */
 @EActivity(R.layout.activity_notice)
 public class NoticeActivity extends BaseActivity {
+
+    @ViewById
+    MyTitleBar myTitleBar;
 
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
@@ -98,7 +102,7 @@ public class NoticeActivity extends BaseActivity {
 
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, 10, isRefresh,0);
+        myAdapter.getMoreData(pageIndex, 10, isRefresh, 0);
     }
 
     void refreshingMaterial() {

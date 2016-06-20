@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
@@ -163,10 +163,15 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
                     txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
                 }
                 for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
-                    TextSliderView textSliderView = new TextSliderView(this);
+                    DefaultSliderView textSliderView = new DefaultSliderView(this);
                     textSliderView.image(nb.GoodsImgUrl);
                     textSliderView.setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
+                }
+                if (bmj.Data.GoodsImgList == null || bmj.Data.GoodsImgList.size() <= 1) {
+                    sliderLayout.stopAutoCycle();
+                } else {
+                    sliderLayout.startAutoCycle();
                 }
                 storeId = bmj.Data.StoreInfoId;
             } else {
