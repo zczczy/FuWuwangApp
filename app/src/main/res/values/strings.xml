@@ -2,8 +2,8 @@
     <string name="app_name">消费服务网</string>
     <string name="no_net">网络连接失败</string>
 
-    <string name="search_hint">请输入商品名称...</string>
-    <string name="search_service_hint">请输入商家名称...</string>
+    <string name="search_hint">请输入商品名称&#8230;</string>
+    <string name="search_service_hint">请输入商家名称&#8230;</string>
 
 
     <string name="home">首页</string>
@@ -338,6 +338,10 @@
     <string name="text_order_detail">订单详情</string>
     <string name="text_give">赠 送:</string>
     <string name="text_give_coupon">(兑现券)</string>
+
+    <string name="text_bao_pay">支付宝</string>
+    <string name="text_wechat_pay">微信</string>
+    <string name="text_umpay">银联</string>
 
     <string name="text_ticket_no">消 费 码: %1$s</string>
     <string name="text_express_charges">支付配送</string>

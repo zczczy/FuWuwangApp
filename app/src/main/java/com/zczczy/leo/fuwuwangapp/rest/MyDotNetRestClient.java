@@ -74,7 +74,7 @@ import java.util.Map;
  * http://192.168.0.198:8002/
  * http://appapib.86fuwuwang.com/
  */
-@Rest(rootUrl = "http://appapib.86fuwuwang.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class
 )
@@ -691,6 +691,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      *            number 数量
      *            DZB 电子币
      *            TwoPass 支付密码
+     *            PayType 支付方式  1 支付宝 2 微信 3 银联
      * @return
      */
     @Post("api/Shop/CreateGoodsOrderInfo")
@@ -704,6 +705,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      *            StoreInfoId 数量
      *            DZB 电子币
      *            TwoPass 支付密码
+     *            PayType 支付方式  1 支付宝 2 微信 3 银联
      * @return
      */
     @Post("api/Shop/CreateOrderInfo")

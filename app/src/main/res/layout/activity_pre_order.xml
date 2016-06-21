@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/main_tab_color"
-                tools:context=".activities.PreOrderActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_tab_color"
+    tools:context=".activities.PreOrderActivity">
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar
         android:id="@+id/my_title_bar"
@@ -15,7 +15,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/txt_pre_order"/>
+        app:mTitle="@string/txt_pre_order" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,19 +28,50 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/order_shipping_address"/>
+            <include layout="@layout/order_shipping_address" />
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
             <include
                 layout="@layout/horizontal_line"
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp" />
 
-            <include layout="@layout/common_order_item"/>
+            <include layout="@layout/common_order_item" />
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/rb_bao_pay"
+                    style="@style/PayCheckboxTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/text_bao_pay" />
+
+                <RadioButton
+                    android:id="@+id/rb_wechat_pay"
+                    style="@style/PayCheckboxTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_wechat_pay" />
+
+                <RadioButton
+                    android:id="@+id/rb_umpay"
+                    style="@style/PayCheckboxTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_umpay" />
+
+            </RadioGroup>
+
+            <include layout="@layout/horizontal_line" />
 
             <RelativeLayout
                 android:id="@+id/rl_express_charges"
@@ -53,18 +84,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:padding="15dp"
-                    android:text="@string/text_express_charges"/>
+                    android:text="@string/text_express_charges" />
 
                 <TextView
                     android:id="@+id/txt_express_charges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:padding="15dp"/>
+                    android:padding="15dp" />
 
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
             <RelativeLayout
                 android:id="@+id/rl_dian"
@@ -79,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +120,7 @@
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="@string/use_dian"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -106,7 +137,7 @@
                         android:clickable="false"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txt_dian_balance"
@@ -114,11 +145,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dian_balance"
                         android:textColor="@color/sub_text_color"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -134,7 +165,7 @@
                     android:gravity="center"
                     android:lines="2"
                     android:padding="15dp"
-                    android:text="赠 送:(兑现券)"/>
+                    android:text="赠 送:(兑现券)" />
 
                 <TextView
                     android:id="@+id/txt_coupon"
@@ -143,12 +174,12 @@
                     android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:lines="2"
-                    android:padding="15dp"/>
+                    android:padding="15dp" />
             </RelativeLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -167,14 +198,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/text_postal"/>
+                        android:text="@string/text_postal" />
 
                     <TextView
                         android:id="@+id/txt_sub_express_charges"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -187,14 +218,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/txt_bi"/>
+                        android:text="@string/txt_bi" />
 
                     <TextView
                         android:id="@+id/txt_total_lb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -207,20 +238,20 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:padding="15dp"
-                        android:text="@string/text_pay_total_rmb"/>
+                        android:text="@string/text_pay_total_rmb" />
 
                     <TextView
                         android:id="@+id/txt_pay_total_rmb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:padding="15dp"/>
+                        android:padding="15dp" />
                 </RelativeLayout>
 
 
             </LinearLayout>
 
-            <include layout="@layout/horizontal_line"/>
+            <include layout="@layout/horizontal_line" />
 
         </LinearLayout>
     </ScrollView>
@@ -244,21 +275,21 @@
             <TextView
                 android:id="@+id/txt_count"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txt_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/text_total"/>
+                android:text="@string/text_total" />
 
             <TextView
                 android:id="@+id/txt_rmb"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/price_color"/>
+                android:textColor="@color/price_color" />
 
             <TextView
                 android:id="@+id/txt_plus"
@@ -266,7 +297,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="+"
-                android:textColor="@color/price_color"/>
+                android:textColor="@color/price_color" />
 
             <TextView
                 android:id="@+id/txt_home_lb"
@@ -274,7 +305,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="15dp"
                 android:gravity="center"
-                android:textColor="@color/price_color"/>
+                android:textColor="@color/price_color" />
 
         </LinearLayout>
 
@@ -287,7 +318,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_take"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

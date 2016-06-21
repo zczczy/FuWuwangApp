@@ -253,7 +253,8 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
 
     @AfterPermissionGranted(1)
     private void requestCodeQrcodePermissions() {
-        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.FLASHLIGHT};
+        //, Manifest.permission.FLASHLIGHT
+        String[] perms = {Manifest.permission.CAMERA};
         if (!EasyPermissions.hasPermissions(this, perms)) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", 1, perms);
         } else {

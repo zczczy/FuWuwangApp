@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
+import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -71,11 +73,17 @@ public class PreOrderActivity extends BaseActivity {
     @ViewById
     CheckBox use_dian;
 
+    @ViewById
+    RadioButton rb_bao_pay, rb_wechat_pay, rb_umpay;
+
     @Extra
     String goodsInfoId, BuyCartInfoIds, StoreInfoId;
 
     @Extra
     int orderCount;
+
+    @Bean
+    MyBackgroundTask mMyBackgroundTask;
 
     @Extra
     boolean isCart;
@@ -320,7 +328,7 @@ public class PreOrderActivity extends BaseActivity {
 
     @Background
     void payOrder() {
-        Map<String, String> map = new HashMap<>(4);
+        Map<String, String> map = new HashMap<>(5);
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("kbn", MyApplication.ANDROID);
@@ -330,12 +338,14 @@ public class PreOrderActivity extends BaseActivity {
             map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
             map.put("TwoPass", password);
             map.put("MReceiptAddressId", MReceiptAddressId + "");
+            map.put("PayType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
             afterPayOrder(myRestClient.createOrderInfo(map));
         } else {
             map.put("GoodsInfoId", goodsInfoId);
             map.put("number", orderCount + "");
             map.put("MReceiptAddressId", MReceiptAddressId + "");
             map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
+            map.put("PayType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
             map.put("TwoPass", password);
             afterPayOrder(myRestClient.createGoodsOrderInfo(map));
         }

@@ -79,13 +79,11 @@ public class ServiceFragment extends BaseFragment {
     TextView txt_title_search;
 
     @StringRes
-    String search_hint;
+    String search_service_hint;
 
     String cityId;
 
     BasicGridLayoutManager gridLayoutManager;
-
-    Paint paint = new Paint();
 
     MaterialHeader materialHeader;
 
@@ -101,7 +99,7 @@ public class ServiceFragment extends BaseFragment {
     @AfterViews
     void afterView() {
 
-        txt_title_search.setHint(search_hint);
+        txt_title_search.setHint(search_service_hint);
         ultimateRecyclerView.setHasFixedSize(true);
         cityId = pre.cityId().get();
         gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, myAdapter);
