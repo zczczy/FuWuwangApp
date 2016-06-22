@@ -10,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -51,7 +52,7 @@ public class ShippingAddressAdapter extends BaseRecyclerViewAdapter<MReceiptAddr
     public void getMoreData(Object... objects) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterGetData(myRestClient.getMReceiptAddressListByUserInfoId());
     }
 

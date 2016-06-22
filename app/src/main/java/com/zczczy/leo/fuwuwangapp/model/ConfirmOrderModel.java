@@ -24,8 +24,11 @@ public class ConfirmOrderModel implements Serializable {
 
     public UnionPay unionPay; //银联
 
+    public String AlipayInfo;//支付宝
+
     public String GoodsType;
 
+    public com.tencent.mm.sdk.modelpay.PayReq WxPayData;
 
     public List<BuyCartInfoList> BuyCartInfoList;
 

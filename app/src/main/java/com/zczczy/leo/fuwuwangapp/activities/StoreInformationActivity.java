@@ -20,6 +20,7 @@ import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -109,8 +110,8 @@ public class StoreInformationActivity extends BaseActivity {
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
         } else {
-            if (MyApplication.STORE_STATE_ACTIVITY.equals(bmj.Data.StoreStatus)) {
-                myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, false, 0, bmj.Data.GoodsList);
+            if (Constants.STORE_STATE_ACTIVITY.equals(bmj.Data.StoreStatus)) {
+                myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, false, 0, bmj.Data.GoodsList);
                 storeInformationHeaderItemView.init(bmj.Data);
             } else {
                 AndroidTool.showToast(this, "该店铺已锁定");

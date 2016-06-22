@@ -18,6 +18,7 @@ import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.tools.ImageUtil;
 
 import org.androidannotations.annotations.AfterInject;
@@ -72,7 +73,7 @@ public class MemberInfoActivity extends BaseActivity {
         myRestClient.setRestErrorHandler(myErrorHandler);
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
     }
 
     @AfterViews
@@ -80,7 +81,7 @@ public class MemberInfoActivity extends BaseActivity {
         AndroidTool.showLoadDialog(this);
         getUserDefaultAddress();
         getMemberInfo();
-        if (MyApplication.VIP.equals(pre.userType().toString())) {
+        if (Constants.VIP.equals(pre.userType().toString())) {
             txt_name.setEnabled(false);
             edt_email.setEnabled(false);
         }

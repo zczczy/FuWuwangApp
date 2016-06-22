@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.LogisticsInfoActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity;
 import com.zczczy.leo.fuwuwangapp.activities.OrderDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.UmspayActivity_;
@@ -20,11 +22,14 @@ import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.UnionPay;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -63,8 +68,14 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    @Bean
+    MyBackgroundTask mMyBackgroundTask;
+
     @Pref
     MyPrefs_ pre;
+
+    @App
+    MyApplication app;
 
     @StringRes
     String no_net;
@@ -72,9 +83,12 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
 
     Context context;
 
+    MemberOrderActivity memberOrderActivity;
+
     public MemberOrderItemView(Context context) {
         super(context);
         this.context = context;
+        this.memberOrderActivity = (MemberOrderActivity) context;
     }
 
 
@@ -105,7 +119,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
     void confirmReceipt() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         Map<String, String> map = new HashMap<>(1);
         map.put("MOrderId", _data.MOrderId);
         afterConfirm(myRestClient.confirmReceipt(map));
@@ -139,11 +153,34 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
 
     @Click
     void btn_pay() {
-        UnionPay order = new UnionPay();
-        order.ChrCode = _data.chrCode;
-        order.MerSign = _data.merSign;
-        order.TransId = _data.transId;
-        UmspayActivity_.intent(context).MOrderId(_data.MOrderId).order(order).start();
+        switch (_data.MPaymentType) {
+            case Constants.ALI_PAY:
+            case Constants.ALI_DZB:
+            case Constants.ALI_DZB_LONGBI:
+            case Constants.ALI_LONGBI:
+                mMyBackgroundTask.aliPay(_data.AlipayInfo, (Activity) context, _data.MOrderId);
+                break;
+            case Constants.WX_DZB:
+            case Constants.WX_LONGBI:
+            case Constants.WX_PAY:
+            case Constants.WX_DZB_LONGBI:
+                if (_data.WxPayData != null) {
+                    _data.WxPayData.extData = _data.MOrderId;
+                    app.iWXApi.sendReq(_data.WxPayData);
+                }
+                break;
+            case Constants.UMSPAY:
+            case Constants.DZB_UMSPAY:
+            case Constants.LONGBI_UMSPAY:
+            case Constants.LONGBI_UMSPAY_DZB:
+                UnionPay order = new UnionPay();
+                order.ChrCode = _data.chrCode;
+                order.MerSign = _data.merSign;
+                order.TransId = _data.transId;
+                UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(order).start();
+            default:
+                OrderDetailActivity_.intent(context).orderId(_data.MOrderId).start();
+        }
     }
 
     @Click
@@ -190,7 +227,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             preOrderItemView.init(buyCartInfoList);
             ll_pre_order_item.addView(preOrderItemView);
         }
-        if (_data.MorderStatus == MyApplication.DUEPAYMENT) {
+        if (_data.MorderStatus == Constants.DUEPAYMENT) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("等待买家付款");
             btn_cancel_order.setVisibility(GONE);
@@ -199,7 +236,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_finish.setVisibility(GONE);
             btn_finished.setVisibility(View.GONE);
             btn_canceled.setVisibility(GONE);
-        } else if (_data.MorderStatus == MyApplication.PAID) {
+        } else if (_data.MorderStatus == Constants.PAID) {
             txt_do_message.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);
             txt_do_message.setText("商家处理中");
 //            btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE)
@@ -209,7 +246,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_finished.setVisibility(View.GONE);
             btn_pay.setVisibility(GONE);
             btn_canceled.setVisibility(GONE);
-        } else if (_data.MorderStatus == MyApplication.CANCEL) {
+        } else if (_data.MorderStatus == Constants.CANCEL) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("订单已取消");
             btn_canceled.setVisibility(VISIBLE);
@@ -218,7 +255,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_cancel_order.setVisibility(GONE);
             btn_pay.setVisibility(GONE);
             btn_finished.setVisibility(View.GONE);
-        } else if (_data.MorderStatus == MyApplication.SEND) {
+        } else if (_data.MorderStatus == Constants.SEND) {
             txt_do_message.setText("卖家已发货");
             txt_do_message.setVisibility(VISIBLE);
             btn_logistics.setVisibility(VISIBLE);
@@ -227,7 +264,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_pay.setVisibility(GONE);
             btn_finished.setVisibility(View.GONE);
             btn_canceled.setVisibility(GONE);
-        } else if (_data.MorderStatus == MyApplication.CONFIRM) {
+        } else if (_data.MorderStatus == Constants.CONFIRM) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("买家已确认");
             btn_logistics.setVisibility(View.VISIBLE);
@@ -236,7 +273,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             btn_pay.setVisibility(View.GONE);
             btn_finished.setVisibility(View.GONE);
             btn_canceled.setVisibility(View.GONE);
-        } else if (_data.MorderStatus == MyApplication.FINISH) {
+        } else if (_data.MorderStatus == Constants.FINISH) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("已完成");
             btn_logistics.setVisibility("1".equals(_data.GoodsType) ? View.GONE : View.VISIBLE);

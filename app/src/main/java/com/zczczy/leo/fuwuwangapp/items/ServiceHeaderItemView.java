@@ -17,6 +17,7 @@ import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -80,7 +81,7 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
 
     @Background
     public void getServiceAd() {
-        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVICE_CATEGORY));
+        afterGetServiceAd(myRestClient.getAdvertByKbn(Constants.SERVICE_CATEGORY));
     }
 
     @UiThread

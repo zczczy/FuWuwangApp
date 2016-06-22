@@ -17,6 +17,7 @@ import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.LuckDialog;
 import com.zczczy.leo.fuwuwangapp.viewgroup.RotateView;
 
@@ -211,7 +212,7 @@ public class WheelActivity extends BaseActivity implements Runnable {
     @Click
     void txt_lottery_introduction() {
         CommonWebViewActivity_.intent(this).title(lottery_introduce)
-                .methodName(MyApplication.DETAILPAGE + MyApplication.LOTTERYDIST).start();
+                .methodName(Constants.DETAILPAGE + Constants.LOTTERYDIST).start();
     }
 
     @Override

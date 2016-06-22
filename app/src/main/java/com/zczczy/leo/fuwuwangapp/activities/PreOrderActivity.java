@@ -13,18 +13,23 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView;
 import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView_;
+import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
+import com.zczczy.leo.fuwuwangapp.model.PayResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -88,6 +93,9 @@ public class PreOrderActivity extends BaseActivity {
     @Extra
     boolean isCart;
 
+    @Bean
+    OttoBus bus;
+
     boolean isService;
 
     //商品总价
@@ -130,6 +138,7 @@ public class PreOrderActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        bus.register(this);
         AndroidTool.showLoadDialog(this);
         txt_dian_quantity.setClickable(false);
         createTempOrderInfo();
@@ -139,7 +148,7 @@ public class PreOrderActivity extends BaseActivity {
     void createTempOrderInfo() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         if (isCart) {
             afterCreateTempOrderInfo(myRestClient.createTempOrderInfo(BuyCartInfoIds, StoreInfoId));
         } else {
@@ -331,7 +340,7 @@ public class PreOrderActivity extends BaseActivity {
         Map<String, String> map = new HashMap<>(5);
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("kbn", Constants.ANDROID);
         if (isCart) {
             map.put("BuyCartInfoIds", BuyCartInfoIds);
             map.put("StoreInfoId", StoreInfoId);
@@ -357,21 +366,90 @@ public class PreOrderActivity extends BaseActivity {
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            if (bmj.Data.MPaymentType == MyApplication.DZB || bmj.Data.MPaymentType == MyApplication.LONG_BI || bmj.Data.MPaymentType == MyApplication.DZB_LONGBI) {
-                AndroidTool.showToast(this, "付款成功");
-                OrderDetailActivity_.intent(this).orderId(bmj.Data.MOrderId).start();
-                finish();
-            } else {
-                if (bmj.Data.unionPay != null) {
-                    UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
+            switch (bmj.Data.MPaymentType) {
+                case Constants.ALI_PAY:
+                case Constants.ALI_DZB:
+                case Constants.ALI_DZB_LONGBI:
+                case Constants.ALI_LONGBI:
+                    mMyBackgroundTask.aliPay(bmj.Data.AlipayInfo, this, bmj.Data.MOrderId);
+                    break;
+                case Constants.WX_DZB:
+                case Constants.WX_LONGBI:
+                case Constants.WX_PAY:
+                case Constants.WX_DZB_LONGBI:
+                    if (bmj.Data.WxPayData != null) {
+                        bmj.Data.WxPayData.extData = bmj.Data.MOrderId;
+                        app.iWXApi.sendReq(bmj.Data.WxPayData);
+                    }
+                    break;
+                case Constants.UMSPAY:
+                case Constants.DZB_UMSPAY:
+                case Constants.LONGBI_UMSPAY:
+                case Constants.LONGBI_UMSPAY_DZB:
+                    if (bmj.Data.unionPay != null) {
+                        UmspayActivity_.intent(this).MOrderId(bmj.Data.MOrderId).order(bmj.Data.unionPay).start();
+                        finish();
+                    } else {
+                        AndroidTool.showToast(this, "服务器繁忙");
+                    }
+                default:
+                    AndroidTool.showToast(this, "付款成功");
+                    OrderDetailActivity_.intent(this).orderId(bmj.Data.MOrderId).start();
                     finish();
-                } else {
-                    AndroidTool.showToast(this, "服务器繁忙");
-                }
             }
+
         } else {
             AndroidTool.showToast(this, bmj.Error);
         }
+    }
+
+
+    @Subscribe
+    public void NotifyUI(PayResp resp) {
+        switch (resp.errCode) {
+            case 0:
+                break;
+            case -1:
+                AndroidTool.showToast(this, "支付异常");
+                break;
+            case -2:
+                AndroidTool.showToast(this, "您取消了支付");
+                break;
+        }
+        OrderDetailActivity_.intent(this).orderId(resp.extData).start();
+        finish();
+    }
+
+    @Subscribe
+    public void NotifyUI(PayResult payResult) {
+        switch (payResult.getResultStatus()) {
+            case "9000":
+                AndroidTool.showToast(this, "支付成功");
+                break;
+            case "8000":
+                AndroidTool.showToast(this, "支付结果确认中");
+                break;
+            case "4000":
+                AndroidTool.showToast(this, "订单支付失败");
+                break;
+            case "6001":
+                AndroidTool.showToast(this, "用户中途取消");
+                break;
+            case "6002":
+                AndroidTool.showToast(this, "网络连接出错");
+                break;
+            default: {
+                AndroidTool.showToast(this, "网络连接出错");
+            }
+        }
+        OrderDetailActivity_.intent(this).orderId(payResult.getOrderId()).start();
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        bus.unregister(this);
     }
 
 //    void showVoucher(String str) {

@@ -18,6 +18,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -143,7 +144,7 @@ public class StoreSearchActivity extends BaseActivity {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, 2, searchName);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 2, searchName);
     }
 
     @Subscribe

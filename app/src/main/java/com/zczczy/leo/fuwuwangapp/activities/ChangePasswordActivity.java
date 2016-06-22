@@ -12,6 +12,7 @@ import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -71,7 +72,7 @@ public class ChangePasswordActivity extends BaseActivity {
         Map<String, String> map = new HashMap<>();
         myDotNetRestClient.setHeader("Token", pre.token().get());
         myDotNetRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myDotNetRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myDotNetRestClient.setHeader("Kbn", Constants.ANDROID);
         map.put("UserPw", gar_old.getText().toString());
         map.put("NewUserPw", gar_password.getText().toString());
         map.put("QNewUserPw", gar_password_confirm.getText().toString());

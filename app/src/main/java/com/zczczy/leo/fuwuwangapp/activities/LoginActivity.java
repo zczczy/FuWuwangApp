@@ -14,6 +14,7 @@ import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -85,7 +86,7 @@ public class LoginActivity extends BaseActivity {
     @Background
     void login() {
         BaseModelJson<LoginInfo> bmj = myRestClient.login(username.getText().toString().trim(),
-                psd.getText().toString().trim(), gal_id_normal.isChecked() ? MyApplication.NORMAL : MyApplication.VIP, MyApplication.ANDROID);
+                psd.getText().toString().trim(), gal_id_normal.isChecked() ? Constants.NORMAL : Constants.VIP, Constants.ANDROID);
         afterLogin(bmj);
     }
 
@@ -109,7 +110,7 @@ public class LoginActivity extends BaseActivity {
     void getMemberInfo() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterGetMemberInfo(myRestClient.getMemberInfo());
     }
 

@@ -30,6 +30,7 @@ import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -208,7 +209,7 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
                 TwoGoodsTypeId = app.getSecondCategory().GoodsTypeId;
             }
         }
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, 1, StreetInfoId, GoodsTypeId, TwoGoodsTypeId, CityId, AreaId);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 1, StreetInfoId, GoodsTypeId, TwoGoodsTypeId, CityId, AreaId);
     }
 
     @Click

@@ -19,6 +19,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -104,8 +105,8 @@ public class CommonSearchResultActivity extends BaseActivity {
                 finish();
             }
         });
-        sort = MyApplication.DEFAULT_SORT;
-        desc = MyApplication.DESC;
+        sort = Constants.DEFAULT_SORT;
+        desc = Constants.DESC;
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
@@ -147,8 +148,8 @@ public class CommonSearchResultActivity extends BaseActivity {
     @CheckedChange
     void rb_others(boolean isChecked) {
         if (isChecked) {
-            sort = MyApplication.DEFAULT_SORT;
-            desc = MyApplication.DESC;
+            sort = Constants.DEFAULT_SORT;
+            desc = Constants.DESC;
             isRefresh = true;
             afterLoadMore();
         }
@@ -157,8 +158,8 @@ public class CommonSearchResultActivity extends BaseActivity {
     @CheckedChange
     void rb_sell_count(boolean isChecked) {
         if (isChecked) {
-            sort = MyApplication.COUNT_SORT;
-            desc = MyApplication.DESC;
+            sort = Constants.COUNT_SORT;
+            desc = Constants.DESC;
             isRefresh = true;
             afterLoadMore();
         }
@@ -170,22 +171,22 @@ public class CommonSearchResultActivity extends BaseActivity {
             isRefresh = true;
             isSelected = false;
             rb_price.setSelected(isSelected);
-            sort = MyApplication.PRICE_SORT;
-            desc = MyApplication.ASC;
+            sort = Constants.PRICE_SORT;
+            desc = Constants.ASC;
             afterLoadMore();
 
         } else if (rb_price.isChecked() && !isSelected) {
             isRefresh = true;
             isSelected = true;
             rb_price.setSelected(isSelected);
-            sort = MyApplication.PRICE_SORT;
-            desc = MyApplication.DESC;
+            sort = Constants.PRICE_SORT;
+            desc = Constants.DESC;
             afterLoadMore();
         }
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, MyApplication.SEARCH_GOODS, goodsTypeId, goodsType, searchContent, sort, desc);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, Constants.SEARCH_GOODS, goodsTypeId, goodsType, searchContent, sort, desc);
     }
 
     void refreshingMaterial() {

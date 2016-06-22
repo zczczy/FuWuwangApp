@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -37,7 +38,7 @@ public class CommonWebViewActivity extends BaseActivity {
         settings = web_common.getSettings();
         settings.setJavaScriptEnabled(true);
         web_common.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
-        web_common.loadUrl((methodName.contains("http://") || methodName.contains("https://")) ? methodName : MyApplication.URL + methodName);
+        web_common.loadUrl((methodName.contains("http://") || methodName.contains("https://")) ? methodName : Constants.URL + methodName);
 
         //判断页面加载过程
         web_common.setWebChromeClient(new WebChromeClient() {

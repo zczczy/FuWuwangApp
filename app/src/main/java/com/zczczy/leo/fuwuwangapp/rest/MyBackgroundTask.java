@@ -1,8 +1,10 @@
 package com.zczczy.leo.fuwuwangapp.rest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
+import com.alipay.sdk.app.PayTask;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
@@ -10,7 +12,10 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
+import com.zczczy.leo.fuwuwangapp.model.PayResult;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
@@ -85,7 +90,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getAdvertByKbn() {
-        afterGetAdvertByKbn(myRestClient.getAdvertByKbn(MyApplication.NORMAL_CATEGORY));
+        afterGetAdvertByKbn(myRestClient.getAdvertByKbn(Constants.NORMAL_CATEGORY));
     }
 
     @UiThread
@@ -121,7 +126,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getHomeGoodsTypeList() {
-        afterGetHomeGoodsTypeList(myRestClient.getGoodsType(MyApplication.NORMAL_CATEGORY));
+        afterGetHomeGoodsTypeList(myRestClient.getGoodsType(Constants.NORMAL_CATEGORY));
     }
 
     @UiThread
@@ -139,7 +144,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getServiceAd() {
-        afterGetServiceAd(myRestClient.getAdvertByKbn(MyApplication.SERVICE_CATEGORY));
+        afterGetServiceAd(myRestClient.getAdvertByKbn(Constants.SERVICE_CATEGORY));
     }
 
     @UiThread
@@ -157,7 +162,7 @@ public class MyBackgroundTask {
      */
     @Background
     public void getServiceGoodsTypeList() {
-        afterGetServiceGoodsTypeList(myRestClient.getGoodsType(MyApplication.SERVICE_CATEGORY));
+        afterGetServiceGoodsTypeList(myRestClient.getGoodsType(Constants.SERVICE_CATEGORY));
     }
 
     @UiThread
@@ -179,4 +184,29 @@ public class MyBackgroundTask {
         }
         bus.post(bmj);
     }
+
+
+    @Background
+    public void aliPay(String payInfo, Activity activity, String orderId) {
+        PayTask aliPay = new PayTask(activity);
+        afterAliPay(aliPay.pay(payInfo, true), activity, orderId);
+    }
+
+    @UiThread
+    void afterAliPay(String result, Activity activity, String orderId) {
+        AndroidTool.dismissLoadDialog();
+        PayResult payResult = new PayResult(result);
+        payResult.setOrderId(orderId);
+
+
+        /**
+         * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
+         * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
+         * docType=1) 建议商户依赖异步通知
+         */
+        String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+        String resultStatus = payResult.getResultStatus();
+        bus.post(payResult);
+    }
+
 }

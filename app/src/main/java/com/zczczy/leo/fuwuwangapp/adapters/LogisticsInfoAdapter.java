@@ -11,6 +11,7 @@ import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -58,7 +59,7 @@ public class LogisticsInfoAdapter extends BaseRecyclerViewAdapter<LogisticsInfo>
     public void getMoreData(Object... objects) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         BaseModelJson<List<LogisticsInfo>> bmj = myRestClient.getLogistics(objects[0].toString());
         afterGetData(bmj);
     }

@@ -27,6 +27,7 @@ import com.zczczy.leo.fuwuwangapp.model.CheckOutModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
@@ -148,7 +149,7 @@ public class CartActivity extends BaseActivity {
     void deleteShopping() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         Map<String, String> map = new HashMap<>(1);
         String temp = "";
         for (int i = 0; i < list.size(); i++) {

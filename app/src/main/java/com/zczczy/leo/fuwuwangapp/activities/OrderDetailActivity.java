@@ -8,19 +8,24 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.squareup.otto.Subscribe;
+import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView;
 import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView_;
+import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
+import com.zczczy.leo.fuwuwangapp.model.PayResult;
 import com.zczczy.leo.fuwuwangapp.model.UnionPay;
+import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -29,6 +34,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -67,6 +73,12 @@ public class OrderDetailActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    @Bean
+    MyBackgroundTask myBackgroundTask;
+
+    @Bean
+    OttoBus bus;
+
     @Extra
     String orderId;
 
@@ -79,6 +91,7 @@ public class OrderDetailActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        bus.register(this);
         AndroidTool.showLoadDialog(this);
         ll_next.setVisibility(View.GONE);
         getOrderDetailById();
@@ -88,7 +101,7 @@ public class OrderDetailActivity extends BaseActivity {
     void getOrderDetailById() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterGetOrderDetailById(myRestClient.getOrderDetailById(orderId));
     }
 
@@ -152,7 +165,7 @@ public class OrderDetailActivity extends BaseActivity {
                 temp = "不赠券+";
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
-            if (bmj.Data.MorderStatus == MyApplication.DUEPAYMENT) {
+            if (bmj.Data.MorderStatus == Constants.DUEPAYMENT) {
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
@@ -166,7 +179,7 @@ public class OrderDetailActivity extends BaseActivity {
                     txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
                 }
                 rl_express_charges.setVisibility(View.GONE);
-            } else if (bmj.Data.MorderStatus == MyApplication.PAID) {
+            } else if (bmj.Data.MorderStatus == Constants.PAID) {
                 ll_take.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finish.setVisibility(View.GONE);
@@ -174,27 +187,27 @@ public class OrderDetailActivity extends BaseActivity {
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
                 ll_should_pay.setVisibility(View.GONE);
-            } else if (bmj.Data.MorderStatus == MyApplication.CANCEL) {
+            } else if (bmj.Data.MorderStatus == Constants.CANCEL) {
                 btn_canceled.setVisibility(View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
-            } else if (bmj.Data.MorderStatus == MyApplication.SEND) {
+            } else if (bmj.Data.MorderStatus == Constants.SEND) {
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finish.setVisibility(View.VISIBLE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
                 ll_should_pay.setVisibility(View.GONE);
-            } else if (bmj.Data.MorderStatus == MyApplication.CONFIRM) {
+            } else if (bmj.Data.MorderStatus == Constants.CONFIRM) {
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
                 btn_canceled.setVisibility(View.GONE);
                 ll_should_pay.setVisibility(View.GONE);
-            } else if (bmj.Data.MorderStatus == MyApplication.FINISH) {
+            } else if (bmj.Data.MorderStatus == Constants.FINISH) {
                 btn_logistics.setVisibility(View.VISIBLE);
                 btn_finished.setVisibility(View.VISIBLE);
                 btn_finish.setVisibility(View.GONE);
@@ -225,7 +238,7 @@ public class OrderDetailActivity extends BaseActivity {
     void confirmReceipt() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         Map<String, String> map = new HashMap<>(1);
         map.put("MOrderId", orderId);
         afterConfirm(myRestClient.confirmReceipt(map));
@@ -256,13 +269,95 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Click
     void btn_pay() {
-        UnionPay order = new UnionPay();
-        order.ChrCode = mAppOrder.chrCode;
-        order.MerSign = mAppOrder.merSign;
-        order.TransId = mAppOrder.transId;
-        UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).start();
         finish();
+
+        switch (mAppOrder.MPaymentType) {
+            case Constants.ALI_PAY:
+            case Constants.ALI_DZB:
+            case Constants.ALI_DZB_LONGBI:
+            case Constants.ALI_LONGBI:
+                myBackgroundTask.aliPay(mAppOrder.AlipayInfo, this, mAppOrder.MOrderId);
+                break;
+            case Constants.WX_DZB:
+            case Constants.WX_LONGBI:
+            case Constants.WX_PAY:
+            case Constants.WX_DZB_LONGBI:
+                if (mAppOrder.WxPayData != null) {
+                    mAppOrder.WxPayData.extData = mAppOrder.MOrderId;
+                    app.iWXApi.sendReq(mAppOrder.WxPayData);
+                }
+                break;
+            case Constants.UMSPAY:
+            case Constants.DZB_UMSPAY:
+            case Constants.LONGBI_UMSPAY:
+            case Constants.LONGBI_UMSPAY_DZB:
+                UnionPay order = new UnionPay();
+                order.ChrCode = mAppOrder.chrCode;
+                order.MerSign = mAppOrder.merSign;
+                order.TransId = mAppOrder.transId;
+                UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).startForResult(1000);
+                finish();
+            default:
+                AndroidTool.showToast(this, "该订单已支付");
+        }
     }
 
+    @Subscribe
+    public void NotifyUI(PayResp resp) {
+        switch (resp.errCode) {
+            case 0:
+                AndroidTool.showToast(this, "支付成功");
+                AndroidTool.showLoadDialog(this);
+                getOrderDetailById();
+                break;
+            case -1:
+                AndroidTool.showToast(this, "支付异常");
+                break;
+            case -2:
+                AndroidTool.showToast(this, "您取消了支付");
+                break;
+        }
+    }
 
+    @Subscribe
+    public void NotifyUI(PayResult payResult) {
+        switch (payResult.getResultStatus()) {
+            case "9000":
+                AndroidTool.showToast(this, "支付成功");
+                AndroidTool.showLoadDialog(this);
+                getOrderDetailById();
+                break;
+            case "8000":
+                AndroidTool.showToast(this, "支付结果确认中");
+                break;
+            case "4000":
+                AndroidTool.showToast(this, "订单支付失败");
+                break;
+            case "6001":
+                AndroidTool.showToast(this, "用户中途取消");
+                break;
+            case "6002":
+                AndroidTool.showToast(this, "网络连接出错");
+                break;
+            default: {
+                AndroidTool.showToast(this, "网络连接出错");
+            }
+        }
+
+    }
+
+    @OnActivityResult(1000)
+    void onPay(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            AndroidTool.showLoadDialog(this);
+            getOrderDetailById();
+        }
+    }
+
+    @Override
+    public void finish() {
+        setResult(RESULT_OK);
+        super.finish();
+        bus.unregister(this);
+    }
 }

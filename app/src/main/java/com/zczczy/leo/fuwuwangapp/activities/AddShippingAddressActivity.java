@@ -13,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -76,7 +77,7 @@ public class AddShippingAddressActivity extends BaseActivity {
     void getMReceiptAddressById() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         afterGetMReceiptAddressById(myRestClient.getMReceiptAddressById(receiptAddressId));
     }
 
@@ -129,7 +130,7 @@ public class AddShippingAddressActivity extends BaseActivity {
     void addShippingAddress() {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         MReceiptAddressModel model = new MReceiptAddressModel();
         model.DetailAddress = txt_detail_address.getText().toString().trim();
         model.AreaId = areaId;

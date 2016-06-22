@@ -17,6 +17,7 @@ import com.zczczy.leo.fuwuwangapp.adapters.LotteryInfoAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -99,7 +100,7 @@ public class LotteryInfoRecordActivity extends BaseActivity {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh, method);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, method);
     }
 
     void refreshingMaterial() {

@@ -19,6 +19,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -104,7 +105,7 @@ public class ReviewActivity extends BaseActivity {
     }
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, MyApplication.PAGE_COUNT, isRefresh);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh);
     }
 
     void refreshingMaterial() {

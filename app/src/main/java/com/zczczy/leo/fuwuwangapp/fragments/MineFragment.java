@@ -19,6 +19,7 @@ import com.zczczy.leo.fuwuwangapp.activities.NewsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ReviewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SettingActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -69,7 +70,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_already_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.SEND).title(text_send).start();
+            MemberOrderActivity_.intent(this).orderState(Constants.SEND).title(text_send).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -78,7 +79,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_waiting_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.DUEPAYMENT).title(text_no_pay).start();
+            MemberOrderActivity_.intent(this).orderState(Constants.DUEPAYMENT).title(text_no_pay).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -87,7 +88,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void txt_paid_order() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.PAID).title(text_paid).start();
+            MemberOrderActivity_.intent(this).orderState(Constants.PAID).title(text_paid).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -96,7 +97,7 @@ public class MineFragment extends BaseFragment {
     @Click
     void rl_whole() {
         if (checkUserIsLogin()) {
-            MemberOrderActivity_.intent(this).orderState(MyApplication.ALL_ORDER).title(text_all_order).start();
+            MemberOrderActivity_.intent(this).orderState(Constants.ALL_ORDER).title(text_all_order).start();
         } else {
             LoginActivity_.intent(this).startForResult(1000);
         }
@@ -148,7 +149,7 @@ public class MineFragment extends BaseFragment {
                 Picasso.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable
                         .default_header).error(R.drawable.default_header).into(img_avatar);
             }
-            if (MyApplication.VIP.equals(pre.userType().get())) {
+            if (Constants.VIP.equals(pre.userType().get())) {
                 rl_vip.setVisibility(View.VISIBLE);
                 img_vip_icon.setVisibility(View.VISIBLE);
                 rl_setting.setVisibility(View.GONE);

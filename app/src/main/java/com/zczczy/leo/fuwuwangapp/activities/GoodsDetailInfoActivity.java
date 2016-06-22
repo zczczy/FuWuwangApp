@@ -23,6 +23,7 @@ import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyScrollView;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
@@ -136,7 +137,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            if (MyApplication.GOODS_STATE_UP.equals(bmj.Data.GoodsDelStatus) && MyApplication.GOODS_STATE_PASS.equals(bmj.Data.GoodsCheckStatus)) {
+            if (Constants.GOODS_STATE_UP.equals(bmj.Data.GoodsDelStatus) && Constants.GOODS_STATE_PASS.equals(bmj.Data.GoodsCheckStatus)) {
                 goods_name.setText(bmj.Data.GodosName);
                 goods_describe.setText(bmj.Data.GoodsDesc);
                 ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
@@ -231,7 +232,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
     void addShoppingCart(String goodsId) {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
-        myRestClient.setHeader("Kbn", MyApplication.ANDROID);
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
         HashMap<String, String> map = new HashMap<>();
         map.put("GoodsInfoId", goodsId);
         afterAddShoppingCart(myRestClient.addShoppingCart(map));

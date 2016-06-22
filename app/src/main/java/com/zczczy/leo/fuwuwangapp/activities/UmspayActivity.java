@@ -13,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.UnionPay;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -53,7 +54,7 @@ public class UmspayActivity extends BaseActivity {
                 "&mchantUserCode=1234567890123456" +
                 "&url=http://www.zczczy.com" +
                 "&bankName=&cardType=";
-        wv_web.postUrl(MyApplication.PAY_URL, postData.getBytes());
+        wv_web.postUrl(Constants.PAY_URL, postData.getBytes());
         wv_web.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -92,5 +93,10 @@ public class UmspayActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public void finish() {
+        setResult(RESULT_OK);
     }
 }

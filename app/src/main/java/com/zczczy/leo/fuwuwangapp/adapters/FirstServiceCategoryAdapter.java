@@ -11,6 +11,7 @@ import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
@@ -61,7 +62,7 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
     @Override
     @Background
     public void getMoreData(int pageIndex, int pageSize, Object... objects) {
-        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType(MyApplication.SERVICE_CATEGORY);
+        BaseModelJson<List<GoodsTypeModel>> bmj = myRestClient.getGoodsType(Constants.SERVICE_CATEGORY);
         afterGetData(bmj);
 
     }

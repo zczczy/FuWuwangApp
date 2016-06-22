@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -88,7 +89,7 @@ public class RegisterActivity extends BaseActivity {
                 map.put("zy", service_man.getText().toString().trim());
                 map.put("MemberEmail", text_email.getText().toString().trim());
                 map.put("MemberRealName", null);
-                map.put("UserType", gar_id_normal.isChecked() ? MyApplication.NORMAL : MyApplication.VIP);
+                map.put("UserType", gar_id_normal.isChecked() ? Constants.NORMAL : Constants.VIP);
                 AndroidTool.showLoadDialog(this);
                 register();
             }

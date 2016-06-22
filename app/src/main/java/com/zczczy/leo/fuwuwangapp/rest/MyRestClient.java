@@ -34,7 +34,7 @@ import java.math.BigDecimal;
 //http://218.61.203.50:8002/
 //http://appapib.86fuwuwang.com/
 
-@Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://192.168.0.198:8002/", requestFactory = MyRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
