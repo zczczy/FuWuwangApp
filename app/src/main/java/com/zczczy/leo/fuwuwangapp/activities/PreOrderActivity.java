@@ -347,14 +347,14 @@ public class PreOrderActivity extends BaseActivity {
             map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
             map.put("TwoPass", password);
             map.put("MReceiptAddressId", MReceiptAddressId + "");
-            map.put("PayType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
+            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
             afterPayOrder(myRestClient.createOrderInfo(map));
         } else {
             map.put("GoodsInfoId", goodsInfoId);
             map.put("number", orderCount + "");
             map.put("MReceiptAddressId", MReceiptAddressId + "");
             map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
-            map.put("PayType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
+            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
             map.put("TwoPass", password);
             afterPayOrder(myRestClient.createGoodsOrderInfo(map));
         }

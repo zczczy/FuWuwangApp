@@ -269,8 +269,6 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Click
     void btn_pay() {
-        finish();
-
         switch (mAppOrder.MPaymentType) {
             case Constants.ALI_PAY:
             case Constants.ALI_DZB:
