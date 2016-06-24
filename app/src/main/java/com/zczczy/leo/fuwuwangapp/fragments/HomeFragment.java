@@ -101,7 +101,7 @@ public class HomeFragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
-//        AndroidTool.showLoadDialog(getActivity());
+        AndroidTool.showLoadDialog(getActivity());
         //初始化控件
         myTitleBar.getBackground().mutate().setAlpha(0);
         view = myTitleBar.getmCustomView();
