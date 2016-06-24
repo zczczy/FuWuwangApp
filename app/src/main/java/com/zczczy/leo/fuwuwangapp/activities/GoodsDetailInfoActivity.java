@@ -94,6 +94,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myScrollView.setOnScrollListener(this);
         // 当布局的状态或者控件的可见性发生改变回调的接口
         parent.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -104,6 +105,16 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
                         onScroll(myScrollView.getScrollY());
                     }
                 });
+        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkUserIsLogin()) {
+                    CartActivity_.intent(GoodsDetailInfoActivity.this).start();
+                } else {
+                    LoginActivity_.intent(GoodsDetailInfoActivity.this).start();
+                }
+            }
+        });
         getGoodsDetailById(goodsId);
         getGoodsComments(goodsId);
 
@@ -134,6 +145,7 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @UiThread
     void afterGetGoodsDetailById(BaseModelJson<Goods> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
@@ -165,8 +177,10 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
                 }
                 for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
                     DefaultSliderView textSliderView = new DefaultSliderView(this);
-                    textSliderView.image(nb.GoodsImgUrl);
-                    textSliderView.setOnSliderClickListener(this);
+                    textSliderView.image(nb.GoodsImgUrl).
+                            empty(R.drawable.goods_default).
+                            error(R.drawable.goods_default).
+                            setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
                 }
                 if (bmj.Data.GoodsImgList == null || bmj.Data.GoodsImgList.size() <= 1) {

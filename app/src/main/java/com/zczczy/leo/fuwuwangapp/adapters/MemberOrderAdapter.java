@@ -90,7 +90,7 @@ public class MemberOrderAdapter extends BaseUltimateRecyclerViewAdapter<MAppOrde
 
     @Override
     protected View onCreateItemView(ViewGroup parent) {
-        return MemberOrderItemView_.build(parent.getContext());
+        return MemberOrderItemView_.build(context);
     }
 
     @Override

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="15dp"
-        android:text="输入支付密码" />
+        android:text="@string/dialog_tip" />
 
     <View
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/cancel_button"
-            android:text="取消" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/btn_confirm"
@@ -58,7 +58,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:text="付款"
+            android:text="@string/config"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

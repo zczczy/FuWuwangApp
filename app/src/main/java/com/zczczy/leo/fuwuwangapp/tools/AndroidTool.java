@@ -101,21 +101,6 @@ public class AndroidTool {
     public static void showLoadDialog(final Context context) {
         if (cpdialog == null) {
             cpdialog = CustomProgressDialog.createDialog(context);
-//            cpdialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//                @Override
-//                public void onDismiss(DialogInterface dialogInterface) {
-//                    Activity activity = (Activity) context;
-//                    activity.finish();
-//                }
-//            });
-//            cpdialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                @Override
-//                public void onCancel(DialogInterface dialogInterface) {
-//                    Activity activity = (Activity) context;
-//                    activity.finish();
-//                }
-//            });
-//            cpdialog.setCanceledOnTouchOutside(false);
             cpdialog.setCancelable(false);
             cpdialog.show();
         } else if (!cpdialog.isShowing() && cpdialog.getContext() == context) {
@@ -125,6 +110,27 @@ public class AndroidTool {
             cpdialog = CustomProgressDialog.createDialog(context);
 //            cpdialog.setCanceledOnTouchOutside(false);
             cpdialog.setCancelable(false);
+            cpdialog.show();
+        }
+    }
+
+    /**
+     * 显示等待对话框
+     *
+     * @param context
+     */
+    public static void showLoadDialog(final Fragment context) {
+        if (cpdialog == null) {
+            cpdialog = CustomProgressDialog.createDialog(context.getActivity());
+//            cpdialog.setCancelable(false);
+            cpdialog.show();
+        } else if (!cpdialog.isShowing() && cpdialog.getContext() == context.getActivity()) {
+            cpdialog.setCanceledOnTouchOutside(false);
+            cpdialog.show();
+        } else if (!cpdialog.isShowing() && cpdialog.getContext() != context.getActivity()) {
+            cpdialog = CustomProgressDialog.createDialog(context.getActivity());
+//            cpdialog.setCanceledOnTouchOutside(false);
+//            cpdialog.setCancelable(false);
             cpdialog.show();
         }
     }

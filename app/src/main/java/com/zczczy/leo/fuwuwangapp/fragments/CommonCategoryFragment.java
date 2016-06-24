@@ -8,6 +8,7 @@ import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CommonCategoryAdapter;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -38,6 +39,7 @@ public class CommonCategoryFragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         recyclerView.setHasFixedSize(false);
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);

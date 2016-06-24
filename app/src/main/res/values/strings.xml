@@ -52,6 +52,7 @@
     <!--dialog-->
     <string name="config">确定</string>
     <string name="cancel">取消</string>
+    <string name="dialog_tip">输入服务网支付密码</string>
 
     <!--资讯-->
     <string name="txt_notice">最新公告</string>

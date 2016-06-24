@@ -16,6 +16,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
+        app:mRightButtonIcon="@drawable/title_cart"
         app:mTitle="@string/goods_detail" />
 
     <com.zczczy.leo.fuwuwangapp.viewgroup.MyScrollView

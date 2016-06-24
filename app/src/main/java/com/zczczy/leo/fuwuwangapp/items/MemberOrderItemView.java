@@ -88,7 +88,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
     public MemberOrderItemView(Context context) {
         super(context);
         this.context = context;
-        this.memberOrderActivity = (MemberOrderActivity) context;
+        this.memberOrderActivity = (MemberOrderActivity) this.context;
     }
 
 

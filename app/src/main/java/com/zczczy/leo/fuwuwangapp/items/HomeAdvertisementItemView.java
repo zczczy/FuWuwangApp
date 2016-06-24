@@ -77,9 +77,10 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
             textSliderView.image(nb.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", nb);
-            textSliderView.bundle(bundle);
-            textSliderView.setScaleType(BaseSliderView.ScaleType.Fit);
-            textSliderView.setOnSliderClickListener(this);
+            textSliderView.bundle(bundle).empty(R.drawable.goods_default).
+                    error(R.drawable.goods_default).
+                    setScaleType(BaseSliderView.ScaleType.Fit).
+                    setOnSliderClickListener(this);
             new_slider_Layout.addSlider(textSliderView);
         }
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
