@@ -72,6 +72,7 @@ public class MyAddressActivity extends BaseActivity implements BDLocationListene
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         mBaiduMap = mMapView.getMap();
         locationService.registerListener(this);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
@@ -87,6 +88,7 @@ public class MyAddressActivity extends BaseActivity implements BDLocationListene
 
     @UiThread
     void afterGetBind(BaseModelJson<String> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj != null && bmj.Successful) {
             String[] str = bmj.Data.split(",");
             if (str.length >= 2) {

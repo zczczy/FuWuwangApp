@@ -92,6 +92,7 @@ public class CommonSearchResultActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         empty_view.setText(empty_search);
         bus.register(this);
         isSelected = true;

@@ -69,6 +69,7 @@ public class StoreSearchActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         emptyView.setText(empty_search);
         txt_title_search.setText(searchName);

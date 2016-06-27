@@ -70,7 +70,7 @@ import java.util.Map;
 
 /**
  * Created by Leo on 2016/3/2.
- * http://192.168.0.198:8002/
+ * http://218.61.203.50:8002/
  * http://appapib.86fuwuwang.com/
  */
 @Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},

@@ -58,6 +58,7 @@ public class NoticeActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);

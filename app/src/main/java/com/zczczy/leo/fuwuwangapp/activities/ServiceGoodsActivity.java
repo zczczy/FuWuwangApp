@@ -112,6 +112,7 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         txt_category.setText(typeName);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);

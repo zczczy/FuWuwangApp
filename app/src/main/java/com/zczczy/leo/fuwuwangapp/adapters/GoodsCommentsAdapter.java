@@ -56,6 +56,7 @@ public class GoodsCommentsAdapter extends BaseUltimateRecyclerViewAdapter<GoodsC
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

@@ -67,6 +67,7 @@ public class StoreInformationActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setAdapter(myAdapter);

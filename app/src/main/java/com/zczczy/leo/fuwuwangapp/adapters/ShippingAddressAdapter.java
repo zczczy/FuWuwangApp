@@ -10,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
@@ -58,6 +59,7 @@ public class ShippingAddressAdapter extends BaseRecyclerViewAdapter<MReceiptAddr
 
     @UiThread
     void afterGetData(BaseModelJson<List<MReceiptAddressModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

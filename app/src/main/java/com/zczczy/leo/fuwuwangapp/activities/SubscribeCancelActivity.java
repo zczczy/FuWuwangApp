@@ -60,6 +60,7 @@ public class SubscribeCancelActivity extends  BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         edit_code.setEnabled(false);
         newMyRestClient.setRestErrorHandler(myErrorHandler);
         getBind();

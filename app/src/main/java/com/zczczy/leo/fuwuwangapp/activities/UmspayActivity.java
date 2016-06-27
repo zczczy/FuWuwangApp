@@ -42,6 +42,7 @@ public class UmspayActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         WebSettings settings = wv_web.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);//设定支持viewport
@@ -51,7 +52,7 @@ public class UmspayActivity extends BaseActivity {
         String postData = "merSign=" + order.MerSign +
                 "&chrCode=" + order.ChrCode +
                 "&tranId=" + order.TransId +
-                "&mchantUserCode=1234567890123456" +
+                "&mchantUserCode=" + pre.shopToken().get() +
                 "&url=http://www.zczczy.com" +
                 "&bankName=&cardType=";
         wv_web.postUrl(Constants.PAY_URL, postData.getBytes());
@@ -69,8 +70,6 @@ public class UmspayActivity extends BaseActivity {
                 if (url.contains("http://www.zczczy.com")) {
                     OrderDetailActivity_.intent(UmspayActivity.this).orderId(MOrderId).start();
                     finish();
-                } else {
-                    AndroidTool.showLoadDialog(UmspayActivity.this);
                 }
             }
         });

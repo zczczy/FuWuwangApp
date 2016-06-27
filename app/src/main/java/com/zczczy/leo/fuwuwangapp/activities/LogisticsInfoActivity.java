@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.LogisticsInfoAdapter;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -42,6 +43,7 @@ public class LogisticsInfoActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(linearLayoutManager);

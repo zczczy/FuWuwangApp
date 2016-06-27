@@ -11,6 +11,7 @@ import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
@@ -66,6 +67,7 @@ public class LogisticsInfoAdapter extends BaseRecyclerViewAdapter<LogisticsInfo>
 
     @UiThread
     void afterGetData(BaseModelJson<List<LogisticsInfo>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj != null && bmj.Successful) {
             if (bmj.Data.size() > 0) {
                 bmj.Data.get(0).isLast = true;

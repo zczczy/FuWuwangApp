@@ -14,6 +14,7 @@ import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
 import org.androidannotations.annotations.AfterInject;
@@ -65,6 +66,7 @@ public class ReviewAdapter extends BaseUltimateRecyclerViewAdapter<OrderDetailMo
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<OrderDetailModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

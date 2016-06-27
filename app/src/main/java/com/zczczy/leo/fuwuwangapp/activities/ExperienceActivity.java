@@ -92,6 +92,7 @@ public class ExperienceActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle("体验中心");
         city = "全国";
         bus.register(this);

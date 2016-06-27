@@ -70,6 +70,7 @@ public class MemberOrderActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle(title);
         empty_view.setText(String.format(empty_order, title));
         bus.register(this);

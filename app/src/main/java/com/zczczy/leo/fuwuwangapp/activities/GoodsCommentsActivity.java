@@ -62,6 +62,7 @@ public class GoodsCommentsActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         emptyView.setText(empty_review);
         ultimateRecyclerView.setHasFixedSize(true);

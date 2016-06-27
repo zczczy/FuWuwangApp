@@ -10,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.ProvinceAdapter;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -35,6 +36,7 @@ public class ProvinceActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(linearLayoutManager);

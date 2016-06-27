@@ -84,6 +84,7 @@ public class UnionMemberActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         empty_view.setText("还没有联盟会员");
         myTitleBar.setTitle(String.format(txt_unionmember_title, username));

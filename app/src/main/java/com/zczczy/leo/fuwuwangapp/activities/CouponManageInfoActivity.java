@@ -62,6 +62,7 @@ public class CouponManageInfoActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         volume_txt.setText(mianzhi);
         volume_duilie.setText(duilie);
         getHttp();

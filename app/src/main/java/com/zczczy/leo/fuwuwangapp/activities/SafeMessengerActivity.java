@@ -49,6 +49,7 @@ public class SafeMessengerActivity extends BaseActivity {
     @FromHtml(R.string.subscribe_notice)
     TextView txt_subscribe_notice;
 
+
     @AfterViews
     void afterView() {
         newMyRestClient.setRestErrorHandler(myErrorHandler);

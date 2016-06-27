@@ -63,6 +63,7 @@ public class TransactionRecordAdapter extends BaseUltimateRecyclerViewAdapter<Pu
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<Purse>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

@@ -71,6 +71,7 @@ public class LotteryInfoAdapter extends BaseUltimateRecyclerViewAdapter<LotteryI
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<LotteryInfo>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
         } else if (bmj.Successful) {

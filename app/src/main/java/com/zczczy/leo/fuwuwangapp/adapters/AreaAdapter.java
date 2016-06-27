@@ -10,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -53,6 +54,7 @@ public class AreaAdapter extends BaseRecyclerViewAdapter<NewArea> {
 
     @UiThread
     void afterGetData(BaseModelJson<List<NewArea>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

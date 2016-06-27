@@ -77,63 +77,74 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
             textSliderView.image(nb.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", nb);
-            textSliderView.bundle(bundle).empty(R.drawable.goods_default).
-                    error(R.drawable.goods_default).
-                    setScaleType(BaseSliderView.ScaleType.Fit).
-                    setOnSliderClickListener(this);
+            textSliderView.bundle(bundle).empty(R.drawable.home_banner).
+                    error(R.drawable.home_banner).
+                    setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                    .setOnSliderClickListener(this);
             new_slider_Layout.addSlider(textSliderView);
         }
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
             img_winners_order.setVisibility(VISIBLE);
-            Picasso.with(context).load(app.getLotteryConfig().AppLotteryImgUrl).into(img_winners_order);
+            Picasso.with(context).load(app.getLotteryConfig().AppLotteryImgUrl).placeholder(R.drawable.home_winners_order).
+                    error(R.drawable.home_winners_order).into(img_winners_order);
         } else {
             img_winners_order.setVisibility(GONE);
         }
 
         for (AdvertModel am : app.getAdvertModelList()) {
             if (!StringUtils.isEmpty(am.AdvertImg)) {
+                RequestCreator rc = Picasso.with(context).load(am.AdvertImg).fit();
                 if (am.AdsenseTypeId == 3) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_one.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_one);
+                    rc.error(R.drawable.home_ad_one)
+                            .placeholder(R.drawable.home_ad_one)
+                            .into(ad_one);
                 } else if (am.AdsenseTypeId == 4) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_two.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_two);
+                    rc.error(R.drawable.home_ad_one)
+                            .placeholder(R.drawable.home_ad_one)
+                            .into(ad_two);
                 } else if (am.AdsenseTypeId == 5) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_three.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_three);
+                    rc.error(R.drawable.home_ad_one)
+                            .placeholder(R.drawable.home_ad_one)
+                            .into(ad_three);
                 } else if (am.AdsenseTypeId == 6) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_four.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_four);
+                    rc.error(R.drawable.home_ad_one)
+                            .placeholder(R.drawable.home_ad_one)
+                            .into(ad_four);
                 } else if (am.AdsenseTypeId == 7) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_five.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_five);
+                    rc.error(R.drawable.home_ad_five)
+                            .placeholder(R.drawable.home_ad_five)
+                            .into(ad_five);
                 } else if (am.AdsenseTypeId == 8) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_six.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_six);
+                    rc.error(R.drawable.home_ad_five)
+                            .placeholder(R.drawable.home_ad_five)
+                            .into(ad_six);
                 } else if (am.AdsenseTypeId == 9) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_seven.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_seven);
+                    rc.error(R.drawable.home_ad_five)
+                            .placeholder(R.drawable.home_ad_five)
+                            .into(ad_seven);
                 } else if (am.AdsenseTypeId == 10) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_eight.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_eight);
+                    rc.error(R.drawable.home_ad_five)
+                            .placeholder(R.drawable.home_ad_five)
+                            .into(ad_eight);
                 } else if (am.AdsenseTypeId == 11) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_nine.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.into(ad_nine);
+                    rc.error(R.drawable.home_winners_order)
+                            .placeholder(R.drawable.home_winners_order)
+                            .into(ad_nine);
                 }
             }
         }
         int i = 0;
         for (GoodsTypeModel gtm : app.getGoodsTypeModelList()) {
-            RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon);
+            RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon).fit();
             //.error(R.drawable.goods_default).placeholder(R.drawable.goods_default)
             rc.into(imageViews.get(i));
             imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "");

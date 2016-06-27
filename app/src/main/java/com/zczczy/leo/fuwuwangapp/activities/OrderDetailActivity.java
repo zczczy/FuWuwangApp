@@ -91,8 +91,8 @@ public class OrderDetailActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-        bus.register(this);
         AndroidTool.showLoadDialog(this);
+        bus.register(this);
         ll_next.setVisibility(View.GONE);
         getOrderDetailById();
     }

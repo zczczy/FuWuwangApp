@@ -39,6 +39,7 @@ public class WebViewActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle(header);
         settings = wv_web.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -54,8 +55,6 @@ public class WebViewActivity extends BaseActivity {
                 if (newProgress == 100) {
                     // 网页加载完成
                     AndroidTool.dismissLoadDialog();
-                } else {
-                    AndroidTool.showLoadDialog(WebViewActivity.this);
                 }
             }
         });

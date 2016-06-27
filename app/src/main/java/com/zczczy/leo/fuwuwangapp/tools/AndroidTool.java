@@ -101,15 +101,16 @@ public class AndroidTool {
     public static void showLoadDialog(final Context context) {
         if (cpdialog == null) {
             cpdialog = CustomProgressDialog.createDialog(context);
-            cpdialog.setCancelable(false);
+            cpdialog.setCanceledOnTouchOutside(false);
+//            cpdialog.setCancelable(false);
             cpdialog.show();
         } else if (!cpdialog.isShowing() && cpdialog.getContext() == context) {
             cpdialog.setCanceledOnTouchOutside(false);
             cpdialog.show();
         } else if (!cpdialog.isShowing() && cpdialog.getContext() != context) {
             cpdialog = CustomProgressDialog.createDialog(context);
-//            cpdialog.setCanceledOnTouchOutside(false);
-            cpdialog.setCancelable(false);
+            cpdialog.setCanceledOnTouchOutside(false);
+//            cpdialog.setCancelable(false);
             cpdialog.show();
         }
     }
@@ -122,6 +123,7 @@ public class AndroidTool {
     public static void showLoadDialog(final Fragment context) {
         if (cpdialog == null) {
             cpdialog = CustomProgressDialog.createDialog(context.getActivity());
+            cpdialog.setCanceledOnTouchOutside(false);
 //            cpdialog.setCancelable(false);
             cpdialog.show();
         } else if (!cpdialog.isShowing() && cpdialog.getContext() == context.getActivity()) {
@@ -129,7 +131,7 @@ public class AndroidTool {
             cpdialog.show();
         } else if (!cpdialog.isShowing() && cpdialog.getContext() != context.getActivity()) {
             cpdialog = CustomProgressDialog.createDialog(context.getActivity());
-//            cpdialog.setCanceledOnTouchOutside(false);
+            cpdialog.setCanceledOnTouchOutside(false);
 //            cpdialog.setCancelable(false);
             cpdialog.show();
         }

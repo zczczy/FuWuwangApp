@@ -58,6 +58,7 @@ public class FundActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         myTitleBar.setTitle("麻团基金");
         ultimateRecyclerView.setHasFixedSize(true);

@@ -58,9 +58,9 @@ public class QueueSeeAdapter extends BaseUltimateRecyclerViewAdapter<YpdRecord> 
         myRestClient.setHeader("Token", token);
         BaseModelJson<List<YpdRecord>> bmj;
         if (!"0".equals(objects[0].toString())) {
-            if(getItems().size()>0){
+            if (getItems().size() > 0) {
                 bmj = myRestClient.GetCurrYpdInfo(getItems().get(0).getDateVal(), objects[0].toString());
-            }else {
+            } else {
                 bmj = myRestClient.GetCurrYpdInfo("", objects[0].toString());
             }
         } else {
@@ -72,6 +72,7 @@ public class QueueSeeAdapter extends BaseUltimateRecyclerViewAdapter<YpdRecord> 
 
     @UiThread
     void afterGetData(BaseModelJson<List<YpdRecord>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

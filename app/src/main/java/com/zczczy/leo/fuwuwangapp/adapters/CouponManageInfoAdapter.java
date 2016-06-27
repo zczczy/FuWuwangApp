@@ -62,6 +62,7 @@ public class CouponManageInfoAdapter extends BaseUltimateRecyclerViewAdapter<Que
 
     @UiThread
     void afterGetData(BaseModelJson<List<QueueCompanyDetail>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

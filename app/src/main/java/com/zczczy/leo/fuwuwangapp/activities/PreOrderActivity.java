@@ -138,8 +138,8 @@ public class PreOrderActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-        bus.register(this);
         AndroidTool.showLoadDialog(this);
+        bus.register(this);
         txt_dian_quantity.setClickable(false);
         createTempOrderInfo();
     }

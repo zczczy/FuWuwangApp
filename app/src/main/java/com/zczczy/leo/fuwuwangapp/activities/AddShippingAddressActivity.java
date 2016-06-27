@@ -67,6 +67,7 @@ public class AddShippingAddressActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         if (receiptAddressId != 0) {
             myTitleBar.setTitle("编辑收货地址");
             getMReceiptAddressById();
@@ -83,6 +84,7 @@ public class AddShippingAddressActivity extends BaseActivity {
 
     @UiThread
     void afterGetMReceiptAddressById(BaseModelJson<MReceiptAddressModel> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bmj.Successful) {

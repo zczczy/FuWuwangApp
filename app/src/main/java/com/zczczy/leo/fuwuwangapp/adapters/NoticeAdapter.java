@@ -65,6 +65,7 @@ public class NoticeAdapter extends BaseUltimateRecyclerViewAdapter<Notice> {
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<Notice>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

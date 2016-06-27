@@ -85,6 +85,8 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     boolean isCanBuy;
 
+    boolean isStart;
+
     String storeId;
 
     @AfterInject
@@ -178,14 +180,17 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
                 for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
                     DefaultSliderView textSliderView = new DefaultSliderView(this);
                     textSliderView.image(nb.GoodsImgUrl).
-                            empty(R.drawable.goods_default).
-                            error(R.drawable.goods_default).
+                            empty(R.drawable.goods_detail_banner).
+                            error(R.drawable.goods_detail_banner).
+                            setScaleType(BaseSliderView.ScaleType.CenterInside).
                             setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
                 }
                 if (bmj.Data.GoodsImgList == null || bmj.Data.GoodsImgList.size() <= 1) {
+                    isStart = false;
                     sliderLayout.stopAutoCycle();
                 } else {
+                    isStart = true;
                     sliderLayout.startAutoCycle();
                 }
                 storeId = bmj.Data.StoreInfoId;
@@ -196,6 +201,20 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
         } else {
             AndroidTool.showToast(this, bmj.Error);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sliderLayout.stopAutoCycle();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isStart && sliderLayout != null) {
+            sliderLayout.startAutoCycle();
         }
     }
 

@@ -28,6 +28,7 @@ public class ServiceActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle("增值服务");
         settings = wv_web.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -41,8 +42,6 @@ public class ServiceActivity extends BaseActivity {
                 if (newProgress == 100) {
                     // 网页加载完成
                     AndroidTool.dismissLoadDialog();
-                } else {
-                    AndroidTool.showLoadDialog(ServiceActivity.this);
                 }
             }
         });

@@ -58,13 +58,14 @@ public class UnionMemberAdapter extends BaseUltimateRecyclerViewAdapter<Purse> {
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
         String token = pre.token().get();
-        myRestClient.setHeader("Token",token);
-        BaseModelJson<PagerResult<Purse>> bmj =myRestClient.GetUnionMember(pageIndex, pageSize,objects==null?0:Integer.parseInt(objects[0].toString()));
+        myRestClient.setHeader("Token", token);
+        BaseModelJson<PagerResult<Purse>> bmj = myRestClient.GetUnionMember(pageIndex, pageSize, objects == null ? 0 : Integer.parseInt(objects[0].toString()));
         afterGetData(bmj);
     }
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<Purse>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

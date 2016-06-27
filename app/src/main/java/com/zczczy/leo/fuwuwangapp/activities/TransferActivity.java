@@ -75,6 +75,7 @@ public class TransferActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         edit_code.setEnabled(false);
         GetSafeMessage();
         getCountDownTimer();
@@ -116,6 +117,7 @@ public class TransferActivity extends BaseActivity {
 
     @UiThread
     void AfterGetSafe(BaseModelJson<String> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {

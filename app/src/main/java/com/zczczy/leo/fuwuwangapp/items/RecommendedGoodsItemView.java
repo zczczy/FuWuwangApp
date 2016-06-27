@@ -1,6 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,13 +55,17 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
         int temp = DisplayUtil.dip2px(context, 166);
 
         if (DisplayUtil.getDensityDpi(context) >= 400 && DisplayUtil.getDensityDpi(context) < 480) {
-            temp = DisplayUtil.dip2px(context, 166*480/DisplayUtil.getDensityDpi(context));
+            temp = DisplayUtil.dip2px(context, 166 * 480 / DisplayUtil.getDensityDpi(context));
         }
 
         img_pic.setLayoutParams(new LinearLayout.LayoutParams(temp, temp));
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl).resize(200, 200).
-                    centerCrop().error(R.drawable.goods_default).into(img_pic);
+            Picasso.with(context).load(_data.GoodsImgSl)
+                    .fit()
+                    .centerCrop()
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .into(img_pic);
         }
         txt_product_name.setText(_data.GodosName);
         if (_data.GoodsLBPrice > 0 && Double.valueOf(_data.GoodsPrice) > 0) {

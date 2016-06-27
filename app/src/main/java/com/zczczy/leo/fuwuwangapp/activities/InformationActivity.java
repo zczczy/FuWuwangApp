@@ -58,6 +58,7 @@ public class InformationActivity  extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         myTitleBar.setTitle("新闻资讯");
         ultimateRecyclerView.setHasFixedSize(true);

@@ -52,7 +52,6 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     @StringRes
     String my_lottery_record;
 
-
     @RestService
     MyDotNetRestClient newMyRestClient;
 

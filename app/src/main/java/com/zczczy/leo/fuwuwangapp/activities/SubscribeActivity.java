@@ -63,6 +63,7 @@ public class SubscribeActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         getCountDownTimer();
         if (AndroidTool.getCodeTime(pre.timerCode().get()) < 120000L) {
             countDownTimer.start();

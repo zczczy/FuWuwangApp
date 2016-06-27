@@ -83,6 +83,7 @@ public class StoreAdapter extends BaseUltimateRecyclerViewAdapter<StoreDetailMod
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<StoreDetailModel>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(context, no_net);
             bmj = new BaseModelJson<>();

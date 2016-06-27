@@ -57,6 +57,7 @@ public class ExperienceAdapter extends BaseUltimateRecyclerViewAdapter<Experienc
 
     @UiThread
     void afterGetData(BaseModelJson<PagerResult<Experience>> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
 //            AndroidTool.showToast(context, no_net);

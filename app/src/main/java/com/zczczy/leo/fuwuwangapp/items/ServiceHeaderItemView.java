@@ -119,41 +119,52 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
     void setAd() {
         for (AdvertModel am : app.getServiceAdvertModelList()) {
             if (!StringUtils.isEmpty(am.AdvertImg)) {
+                RequestCreator rc = Picasso.with(context)
+                        .load(am.AdvertImg);
                 if (am.AdsenseTypeId == 12) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_one.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_one)
+                            .placeholder(R.drawable.service_ad_one);
                     rc.into(ad_one);
                 } else if (am.AdsenseTypeId == 13) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_two.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_one)
+                            .placeholder(R.drawable.service_ad_one);
                     rc.into(ad_two);
                 } else if (am.AdsenseTypeId == 14) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_three.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_one)
+                            .placeholder(R.drawable.service_ad_one);
                     rc.into(ad_three);
                 } else if (am.AdsenseTypeId == 15) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_four.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_four)
+                            .placeholder(R.drawable.service_ad_four);
                     rc.into(ad_four);
                 } else if (am.AdsenseTypeId == 16) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_five.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_five)
+                            .placeholder(R.drawable.service_ad_five);
                     rc.into(ad_five);
                 } else if (am.AdsenseTypeId == 17) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_six.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_five)
+                            .placeholder(R.drawable.service_ad_five);
                     rc.into(ad_six);
                 } else if (am.AdsenseTypeId == 18) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_seven.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_five)
+                            .placeholder(R.drawable.service_ad_seven);
                     rc.into(ad_seven);
                 } else if (am.AdsenseTypeId == 19) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_eight.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_eight)
+                            .placeholder(R.drawable.service_ad_eight);
                     rc.into(ad_eight);
                 } else if (am.AdsenseTypeId == 20) {
-                    RequestCreator rc = Picasso.with(context).load(am.AdvertImg).error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
                     ad_nine.setContentDescription(am.JumpType + "," + am.InfoId);
+                    rc.error(R.drawable.service_ad_eight)
+                            .placeholder(R.drawable.service_ad_eight);
                     rc.into(ad_nine);
                 }
             }

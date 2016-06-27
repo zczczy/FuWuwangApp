@@ -98,6 +98,7 @@ public class CooperationMerchantActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         city = "北京";
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(true);

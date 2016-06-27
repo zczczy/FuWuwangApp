@@ -39,7 +39,6 @@ public class TransactionRecordActivity extends BaseActivity {
     @ViewById
     MyTitleBar myTitleBar;
 
-
     @ViewById
     CustomUltimateRecyclerview ultimateRecyclerView;
 
@@ -72,6 +71,7 @@ public class TransactionRecordActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         bus.register(this);
         ultimateRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);

@@ -34,6 +34,7 @@ public class CommonWebViewActivity extends BaseActivity {
 
     @AfterViews
     void setListener() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle(title);
         settings = web_common.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -48,8 +49,6 @@ public class CommonWebViewActivity extends BaseActivity {
                 if (newProgress == 100) {
                     // 网页加载完成
                     AndroidTool.dismissLoadDialog();
-                } else {
-                    AndroidTool.showLoadDialog(CommonWebViewActivity.this);
                 }
             }
         });

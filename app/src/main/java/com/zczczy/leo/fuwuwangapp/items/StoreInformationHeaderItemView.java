@@ -7,7 +7,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.StoreImg;
@@ -42,14 +43,17 @@ public class StoreInformationHeaderItemView extends ItemView<StoreDetailModel> {
 
     @Override
     protected void init(Object... objects) {
-
         ratingBar.setRating(_data.StorePX);
         txt_store.setText(_data.StoreName);
         txt_detail_address.setText(_data.StoreAddress);
         txt_store_describe.setText(_data.StoreDesc);
         for (StoreImg nb : _data.StoreImgList) {
-            TextSliderView textSliderView = new TextSliderView(context);
-            textSliderView.image(nb.StoreImgUrl);
+            DefaultSliderView textSliderView = new DefaultSliderView(context);
+            textSliderView.image(nb.StoreImgUrl)
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
+                    .error(R.drawable.goods_detail_banner)
+                    .empty(R.drawable.goods_detail_banner)
+            ;
             sliderLayout.addSlider(textSliderView);
         }
     }

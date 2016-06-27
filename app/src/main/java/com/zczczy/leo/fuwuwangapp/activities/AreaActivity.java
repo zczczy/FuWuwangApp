@@ -12,6 +12,7 @@ import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -48,6 +49,7 @@ public class AreaActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle("区域");
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(false);

@@ -32,6 +32,7 @@ public class AgentActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(AgentActivity.this);
         settings = wv_web.getSettings();
         settings.setJavaScriptEnabled(true);
         wv_web.getSettings().setAllowFileAccess(true);
@@ -45,8 +46,6 @@ public class AgentActivity extends BaseActivity {
                 if (newProgress == 100) {
                     // 网页加载完成
                     AndroidTool.dismissLoadDialog();
-                } else {
-                    AndroidTool.showLoadDialog(AgentActivity.this);
                 }
             }
         });

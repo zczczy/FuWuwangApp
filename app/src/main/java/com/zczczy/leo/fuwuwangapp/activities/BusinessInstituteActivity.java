@@ -29,6 +29,7 @@ public class BusinessInstituteActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle("商学院");
         settings = wv_web.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -42,8 +43,6 @@ public class BusinessInstituteActivity extends BaseActivity {
                 if (newProgress == 100) {
                     // 网页加载完成
                     AndroidTool.dismissLoadDialog();
-                } else {
-                    AndroidTool.showLoadDialog(BusinessInstituteActivity.this);
                 }
             }
         });

@@ -29,7 +29,8 @@
             android:layout_height="75dp"
             android:background="@color/home_background"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/home_winners_order" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -305,7 +306,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_one" />
 
         <ImageView
             android:id="@+id/ad_two"
@@ -316,7 +317,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_one" />
 
     </LinearLayout>
 
@@ -336,7 +337,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_one" />
 
         <ImageView
             android:id="@+id/ad_four"
@@ -347,7 +348,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_one" />
 
     </LinearLayout>
 
@@ -366,7 +367,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_five" />
 
         <ImageView
             android:id="@+id/ad_six"
@@ -377,7 +378,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_five" />
 
         <ImageView
             android:id="@+id/ad_seven"
@@ -388,7 +389,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_five" />
 
         <ImageView
             android:id="@+id/ad_eight"
@@ -399,7 +400,7 @@
             android:background="@color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods_default" />
+            android:src="@drawable/home_ad_five" />
 
     </LinearLayout>
 
@@ -411,7 +412,7 @@
         android:background="@color/home_background"
         android:foreground="?android:attr/selectableItemBackground"
         android:scaleType="centerCrop"
-        android:src="@drawable/goods_default" />
+        android:src="@drawable/home_winners_order" />
 
 
     <View
