@@ -27,7 +27,7 @@ public class CustomProgressDialog extends Dialog {
 
     public static CustomProgressDialog createDialog(Context context){
         customProgressDialog = new CustomProgressDialog(context, R.style.CustomProgressDialog);
-        customProgressDialog.setContentView(R.layout.testloading);
+        customProgressDialog.setContentView(R.layout.loading);
         customProgressDialog.getWindow().getAttributes().gravity = Gravity.CENTER;
 
         return customProgressDialog;

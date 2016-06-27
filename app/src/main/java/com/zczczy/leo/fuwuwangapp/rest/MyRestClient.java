@@ -38,11 +38,6 @@ import java.math.BigDecimal;
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class})
 public interface MyRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
-
-    @Post("/Post/{id}")
-    @RequiresHeader(value = {"Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE, "Content-Disposition", "filename", "charset"})
-    String uploadAvatar(@Path int id, @Body MultiValueMap<String, Object> formData);
-
     //保存个人信息
     @Post("api/Member/SaveBaseInfo?RealName={RealName}&Mobile={Mobile}&ZipCode={ZipCode}&Address={Address}&EjPass={EjPass}&IdCard={IdCard}&Email={Email}")
     @RequiresHeader("Token")
@@ -52,7 +47,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     @Post("api/Member/FeedBack?Content={Content}")
     @RequiresHeader("Token")
     BaseModelJson<String> FeedbackInfo(@Path String Content);
-
 
     //保存会员财务信息
     @Post("api/Member/SaveFinancial?PayeeName={PayeeName}&BankCode={BankCode}&BankName={BankName}&Province={Province}&City={City}&BankNumber={BankNumber}&EjPass={EjPass}&IdCard={IdCard}")
