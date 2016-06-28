@@ -15,7 +15,6 @@
         app:mNavButtonIcon="@drawable/title_back_normal"
         app:mTitle="VIP专区" />
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -179,8 +178,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/common_shadow_selector"
                     android:clickable="true"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="0dp"
@@ -213,8 +212,8 @@
                     android:layout_height="0.3dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@color/sub_text_color" />
+                    android:background="@color/sub_text_color"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/ll_quan_record"
@@ -232,6 +231,50 @@
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical"
                         android:text="@string/txt_quan_record"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.2"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/next_icon" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_bind_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/common_shadow_selector"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/member_card"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_bind_card"
                         android:textSize="15sp" />
 
                     <LinearLayout
@@ -631,4 +674,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

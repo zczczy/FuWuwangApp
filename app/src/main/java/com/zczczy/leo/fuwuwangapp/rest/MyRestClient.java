@@ -125,4 +125,6 @@ public interface MyRestClient extends RestClientRootUrl, RestClientSupport, Rest
     //用户登录验证
     @Post("api/Content/SignIn?userLogin={userLogin}&userPass={userPass}")
     BaseModelJson<String> SignIn(@Path String userLogin, @Path String userPass);
+
+
 }

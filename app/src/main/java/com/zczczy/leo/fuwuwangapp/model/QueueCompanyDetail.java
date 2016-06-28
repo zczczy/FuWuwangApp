@@ -6,6 +6,8 @@ package com.zczczy.leo.fuwuwangapp.model;
  */
 public class QueueCompanyDetail {
 
+    public String CpId;
+
     public String CompanyName;
 
     public String Num;

@@ -21,6 +21,23 @@ public class QueueCount {
 
     public String m5_50;
 
+    public String m1_25_qrid;
+
+    public String m1_50_qrid;
+
+    public String m2_25_qrid;
+
+    public String m2_50_qrid;
+
+    public String m4_25_qrid;
+
+    public String m4_50_qrid;
+
+    public String m5_25_qrid;
+
+    public String m5_50_qrid;
+
+
     public String getM1_25() {
         return m1_25;
     }

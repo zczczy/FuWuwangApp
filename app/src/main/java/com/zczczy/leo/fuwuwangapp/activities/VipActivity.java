@@ -217,6 +217,15 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     }
 
     @Click
+    void ll_bind_card() {
+        if (isNetworkAvailable(this)) {
+            BindCardActivity_.intent(this).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    @Click
     void ll_safe() {
         if (isNetworkAvailable(this)) {
             SafeMessengerActivity_.intent(this).start();

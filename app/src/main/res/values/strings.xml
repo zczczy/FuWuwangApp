@@ -414,4 +414,8 @@
 
     <string name="crop_image_menu_crop">完成</string>
 
+
+    <string name="text_bind_card">绑定会员卡</string>
+    <string name="text_bind">绑定</string>
+
 </resources>

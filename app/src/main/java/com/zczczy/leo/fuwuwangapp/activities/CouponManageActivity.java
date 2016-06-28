@@ -29,7 +29,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 public class CouponManageActivity extends BaseActivity {
 
     @ViewById
-    TextView one_twenty_five,two_twenty_five,four_twenty_five,five_twenty_five,one_fifty,two_fifty,four_fifty,five_fifty;
+    TextView one_twenty_five, two_twenty_five, four_twenty_five, five_twenty_five, one_fifty, two_fifty, four_fifty, five_fifty;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -37,8 +37,10 @@ public class CouponManageActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient myRestClient;
 
+    QueueCount queueCount;
+
     @AfterInject
-    void afterInject(){
+    void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
     }
 
@@ -49,18 +51,19 @@ public class CouponManageActivity extends BaseActivity {
     }
 
     @Background
-    void getHttp(){
+    void getHttp() {
         String token = pre.token().get();
-        myRestClient.setHeader("Token",token);
+        myRestClient.setHeader("Token", token);
         BaseModelJson<QueueCount> bmj = myRestClient.QueueM();
         show(bmj);
     }
 
     @UiThread
-    void show(BaseModelJson<QueueCount> bmj){
+    void show(BaseModelJson<QueueCount> bmj) {
         AndroidTool.dismissLoadDialog();
-        if (bmj!=null) {
+        if (bmj != null) {
             if (bmj.Successful) {
+                queueCount = bmj.Data;
                 one_twenty_five.setText(bmj.Data.getM1_25());
                 one_fifty.setText(bmj.Data.getM1_50());
                 two_twenty_five.setText(bmj.Data.getM2_25());
@@ -75,45 +78,79 @@ public class CouponManageActivity extends BaseActivity {
 
     //面值100的50进1队列点击事件
     @Click
-    void ll_100_50(){
-        if(isNetworkAvailable(this)){
-            CouponManageInfoActivity_.intent(this).mianzhi("100").duilie("50进1队列").guize("2").start();
-        }
-        else{
-            Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
+    void ll_100_50() {
+        if (isNetworkAvailable(this)) {
+            CouponManageInfoActivity_.intent(this).mianzhi("100").duilie("50进1队列").guize(queueCount.m1_50_qrid).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
         }
     }
 
     //面值200的50进1队列点击事件
     @Click
-    void ll_200_50(){
-        if(isNetworkAvailable(this)){
-            CouponManageInfoActivity_.intent(this).mianzhi("200").duilie("50进1队列").guize("4").start();
-        }
-        else{
-            Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
+    void ll_200_50() {
+        if (isNetworkAvailable(this)) {
+            CouponManageInfoActivity_.intent(this).mianzhi("200").duilie("50进1队列").guize(queueCount.m2_50_qrid).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
         }
     }
 
     //面值400的50进1队列点击事件
     @Click
-    void ll_400_50(){
-        if(isNetworkAvailable(this)){
-            CouponManageInfoActivity_.intent(this).mianzhi("400").duilie("50进1队列").guize("8").start();
-        }
-        else{
-            Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
+    void ll_400_50() {
+        if (isNetworkAvailable(this)) {
+            CouponManageInfoActivity_.intent(this).mianzhi("400").duilie("50进1队列").guize(queueCount.m4_50_qrid).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
         }
     }
 
     //面值500的50进1队列点击事件
     @Click
-    void ll_500_50(){
-        if(isNetworkAvailable(this)){
-            CouponManageInfoActivity_.intent(this).mianzhi("500").duilie("50进1队列").guize("6").start();
-        }
-        else{
-            Toast.makeText(this,no_net,Toast.LENGTH_SHORT).show();
+    void ll_500_50() {
+        if (isNetworkAvailable(this)) {
+            CouponManageInfoActivity_.intent(this).mianzhi("500").duilie("50进1队列").guize(queueCount.m5_50_qrid).start();
+        } else {
+            AndroidTool.showToast(this, no_net);
         }
     }
+
+    @Click
+    void ll_100_25() {
+        if (isNetworkAvailable(this) && queueCount != null) {
+            ExchangeLongBiActivity_.intent(this).QueuesInRule(queueCount.m1_25_qrid).CpId("0").start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    @Click
+    void ll_200_25() {
+        if (isNetworkAvailable(this) && queueCount != null) {
+            ExchangeLongBiActivity_.intent(this).QueuesInRule(queueCount.m2_25_qrid).CpId("0").start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    @Click
+    void ll_400_25() {
+        if (isNetworkAvailable(this) && queueCount != null) {
+            ExchangeLongBiActivity_.intent(this).QueuesInRule(queueCount.m4_25_qrid).CpId("0").start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+    @Click
+    void ll_500_25() {
+        if (isNetworkAvailable(this) && queueCount != null) {
+            ExchangeLongBiActivity_.intent(this).QueuesInRule(queueCount.m5_25_qrid).CpId("0").start();
+        } else {
+            AndroidTool.showToast(this, no_net);
+        }
+    }
+
+
 }

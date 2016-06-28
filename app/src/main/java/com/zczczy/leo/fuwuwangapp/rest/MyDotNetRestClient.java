@@ -12,6 +12,7 @@ import com.zczczy.leo.fuwuwangapp.model.CartInfo;
 import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
+import com.zczczy.leo.fuwuwangapp.model.ExchangeLongBiModel;
 import com.zczczy.leo.fuwuwangapp.model.Experience;
 import com.zczczy.leo.fuwuwangapp.model.FwwUser;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
@@ -38,6 +39,7 @@ import com.zczczy.leo.fuwuwangapp.model.ProvinceModel;
 import com.zczczy.leo.fuwuwangapp.model.Purse;
 import com.zczczy.leo.fuwuwangapp.model.QueueCompanyDetail;
 import com.zczczy.leo.fuwuwangapp.model.QueueCount;
+import com.zczczy.leo.fuwuwangapp.model.QueueInfo;
 import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
@@ -50,6 +52,7 @@ import com.zczczy.leo.fuwuwangapp.model.YpdRecord;
 
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Get;
+import org.androidannotations.rest.spring.annotations.Header;
 import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Post;
 import org.androidannotations.rest.spring.annotations.RequiresHeader;
@@ -59,6 +62,7 @@ import org.androidannotations.rest.spring.api.RestClientHeaders;
 import org.androidannotations.rest.spring.api.RestClientRootUrl;
 import org.androidannotations.rest.spring.api.RestClientSupport;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -75,8 +79,7 @@ import java.util.Map;
  */
 @Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
-        responseErrorHandler = MyResponseErrorHandlerBean.class
-)
+        responseErrorHandler = MyResponseErrorHandlerBean.class)
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
 
     /**
@@ -221,6 +224,51 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Member/GetCompanyZb")
     @RequiresHeader("Token")
     BaseModelJson<String> GetCompanyZb();
+
+    /**
+     * 查询会员卡号信息
+     *
+     * @return
+     */
+    @Get("api/Member/GetMyCardNo")
+    @RequiresHeader("Token")
+    BaseModelJson<String> GetMyCardNo();
+
+    /**
+     * 绑定会员卡
+     *
+     * @param CardNo
+     * @return
+     */
+    @Post("api/Member/BindCardNo?CardNo={CardNo}")
+    @RequiresHeader("Token")
+    @Header(name = HttpHeaders.CONTENT_TYPE, value = MediaType.APPLICATION_JSON_VALUE)
+    BaseModel BindCardNo(@Path String CardNo);
+
+    /**
+     * 兑换龙币处理
+     *
+     * @param qi_loginKey
+     * @return
+     */
+    @Post("api/Member/Dhlb?qi_loginKey={qi_loginKey}")
+    @RequiresHeader("Token")
+    @Header(name = HttpHeaders.CONTENT_TYPE, value = MediaType.APPLICATION_JSON_VALUE)
+    BaseModel Dhlb(@Path String qi_loginKey);
+
+    /**
+     * 查询排队中的兑现券信息
+     *
+     * @param PageIndex    页码
+     * @param PageSize     每页条数
+     * @param QueuesInRule 队列ID
+     * @param CpId         公司ID
+     * @return
+     */
+    @Get("api/Member/GetMyQueueInfoList?PageIndex={PageIndex}&PageSize={PageSize}&QueuesInRule={QueuesInRule}&CpId={CpId}")
+    @RequiresHeader("Token")
+    BaseModelJson<PagerResult<ExchangeLongBiModel>> GetMyQueueInfoList(@Path int PageIndex, @Path int PageSize, @Path String QueuesInRule, @Path String CpId);
+
 
     /**
      * 功能：订阅安全信使

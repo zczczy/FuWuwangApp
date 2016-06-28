@@ -1,11 +1,13 @@
 package com.zczczy.leo.fuwuwangapp.model;
 
-/**
- * 已排队信息
- * Created by darkwh on 2015/7/22.
- */
-public class QueueInfo {
+import java.io.Serializable;
 
+/**
+ * @author Created by LuLeo on 2016/6/28.
+ *         you can contact me at :361769045@qq.com
+ * @since 2016/6/28.
+ */
+public class ExchangeLongBiModel implements Serializable {
 
     /**
      * qi_id : 1
@@ -18,4 +20,6 @@ public class QueueInfo {
     public String qi_queuesId;
     public String qi_loginKey;
     public String qi_beginTime;
+
+
 }
