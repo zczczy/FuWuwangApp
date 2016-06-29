@@ -120,7 +120,7 @@ public class ExchangeLongBiActivity extends BaseActivity {
             @Override
             public void onItemClick(final RecyclerView.ViewHolder viewHolder, final ExchangeLongBiModel obj, final int position) {
                 AlertDialog.Builder adb = new AlertDialog.Builder(ExchangeLongBiActivity.this);
-                adb.setTitle("提示").setMessage("确定兑换吗？").setPositiveButton("兑换", new DialogInterface.OnClickListener() {
+                adb.setTitle("提示").setMessage("将此张排队券兑换龙币，一经兑换即作为兑现处理并不可撤销，是否继续...").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         AndroidTool.showLoadDialog(ExchangeLongBiActivity.this);

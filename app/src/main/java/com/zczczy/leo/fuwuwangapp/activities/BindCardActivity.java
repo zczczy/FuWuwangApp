@@ -54,7 +54,7 @@ public class BindCardActivity extends BaseActivity {
             AndroidTool.showLoadDialog(this);
             getMyCardNo();
         } else {
-
+            AndroidTool.showToast(this, no_net);
         }
     }
 

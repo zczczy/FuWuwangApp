@@ -126,7 +126,7 @@ public class OrderDetailActivity extends BaseActivity {
             for (OrderDetailModel orderDetailModel : bmj.Data.MOrderDetailList) {
                 final BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
                 buyCartInfoList.GoodsLBPrice = orderDetailModel.MOrderDetailLbCount == null ? 0 : Integer.valueOf(orderDetailModel.MOrderDetailLbCount);
-                buyCartInfoList.GoodsPrice = orderDetailModel.ProductPrice == null ? 0.00 : Double.valueOf(orderDetailModel.ProductPrice);
+                buyCartInfoList.GoodsPrice = orderDetailModel.ProductPrice;
                 buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
                 buyCartInfoList.GodosName = orderDetailModel.ProductName;
                 buyCartInfoList.ProductCount = orderDetailModel.ProductNum == null ? 0 : Integer.valueOf(orderDetailModel.ProductNum);
@@ -295,6 +295,7 @@ public class OrderDetailActivity extends BaseActivity {
                 order.TransId = mAppOrder.transId;
                 UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).startForResult(1000);
                 finish();
+                break;
             default:
                 AndroidTool.showToast(this, "该订单已支付");
         }

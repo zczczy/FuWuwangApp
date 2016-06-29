@@ -11,9 +11,9 @@ public class ConfirmOrderModel implements Serializable {
     public String MOrderId;//订单id
     public String StoreInfoId;
     public String StoreName;
-    public double Postage; //邮费
+    public String Postage; //邮费
     public CouponModel FanQuan; //返券数量
-    public double MOrderMoney; //总金额
+    public String MOrderMoney; //总金额
     public int MOrderLbCount; //订单龙币数量
     public double MOrderDzb; //电子币
     public int GoodsAllCount; //商品总数

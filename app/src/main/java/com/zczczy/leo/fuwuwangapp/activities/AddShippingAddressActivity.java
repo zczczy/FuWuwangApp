@@ -67,9 +67,9 @@ public class AddShippingAddressActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
         if (receiptAddressId != 0) {
             myTitleBar.setTitle("编辑收货地址");
+            AndroidTool.showLoadDialog(this);
             getMReceiptAddressById();
         }
     }
@@ -92,7 +92,7 @@ public class AddShippingAddressActivity extends BaseActivity {
         } else {
             edt_shipping.setText(bmj.Data.ReceiptName);
             edt_phone.setText(bmj.Data.Mobile);
-            txt_p_c_a.setText(bmj.Data.ProvinceName + bmj.Data.CityName + bmj.Data.AreaName);
+            txt_p_c_a.setText(bmj.Data.ProvinceName.concat(bmj.Data.CityName + bmj.Data.AreaName));
             txt_detail_address.setText(bmj.Data.DetailAddress);
             areaId = bmj.Data.AreaId;
         }

@@ -18,7 +18,7 @@ public class CartModel implements Serializable {
     public String CreateTime;
     public int ProductCount;
     public String GoodsImgSl;
-    public double GoodsPrice;
+    public String GoodsPrice;
     public int GoodsLBPrice;
     public String GodosName;
     public int level;

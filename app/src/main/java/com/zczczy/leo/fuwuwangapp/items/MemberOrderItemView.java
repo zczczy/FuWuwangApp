@@ -177,7 +177,8 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
                 order.ChrCode = _data.chrCode;
                 order.MerSign = _data.merSign;
                 order.TransId = _data.transId;
-                UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(order).start();
+                UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(order).startForResult(1000);
+                break;
             default:
                 OrderDetailActivity_.intent(context).orderId(_data.MOrderId).start();
         }
@@ -220,7 +221,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
             BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
             buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
             buyCartInfoList.GodosName = orderDetailModel.ProductName;
-            buyCartInfoList.GoodsPrice = Double.valueOf(orderDetailModel.ProductPrice);
+            buyCartInfoList.GoodsPrice = orderDetailModel.ProductPrice;
             buyCartInfoList.GoodsLBPrice = Integer.valueOf(orderDetailModel.MOrderDetailLbCount == null ? "0" : orderDetailModel.MOrderDetailLbCount);
             buyCartInfoList.ProductCount = Integer.valueOf(orderDetailModel.ProductNum);
             PreOrderItemView preOrderItemView = PreOrderItemView_.build(context);

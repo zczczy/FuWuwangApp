@@ -14,7 +14,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="不知道是啥" />
+        app:mTitle="@string/text_exchange" />
 
     <include layout="@layout/activity_exchange_long_bi_item" />
 

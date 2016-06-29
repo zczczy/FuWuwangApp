@@ -97,5 +97,6 @@ public class UmspayActivity extends BaseActivity {
     @Override
     public void finish() {
         setResult(RESULT_OK);
+        super.finish();
     }
 }

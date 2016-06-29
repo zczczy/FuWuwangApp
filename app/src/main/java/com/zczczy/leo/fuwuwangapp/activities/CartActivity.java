@@ -220,7 +220,7 @@ public class CartActivity extends BaseActivity {
                     if (cm.StoreInfoId.equals(checkOutModel.StoreInfoId)) {
                         checkOutModel.BuyCartInfoIds += String.valueOf(cm.BuyCartInfoId + ",");
                         checkOutModel.ProductCount += cm.ProductCount;
-                        checkOutModel.rmbTotal += cm.GoodsPrice * cm.ProductCount;
+                        checkOutModel.rmbTotal += Double.valueOf(cm.GoodsPrice) * cm.ProductCount;
                         checkOutModel.lbTotal += cm.GoodsLBPrice * cm.ProductCount;
                     }
                 }

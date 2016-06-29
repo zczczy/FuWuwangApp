@@ -417,5 +417,8 @@
 
     <string name="text_bind_card">绑定会员卡</string>
     <string name="text_bind">绑定</string>
+    <string name="text_bind_title">会员卡号：</string>
+
+    <string name="text_exchange">兑换龙币</string>
 
 </resources>

@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="会员卡：" />
+            android:text="@string/text_bind_title" />
 
         <EditText
             android:id="@+id/edt_card_no"
@@ -48,10 +48,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:visibility="gone"
         android:layout_marginRight="30dp"
         android:background="@drawable/button_selector"
         android:text="@string/text_bind"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -46,6 +46,7 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,7 +106,7 @@ public class PreOrderActivity extends BaseActivity {
     double balance = 10;
 
     //输入的电子币数 使用的电子币
-    double useDianZiBi = 0.0;
+    double useDianZiBi = 0.00;
 
     //实际付款
     double payYuan;
@@ -166,12 +167,12 @@ public class PreOrderActivity extends BaseActivity {
             setShipping(bmj.Data.MReceiptAddress);
             txt_store.setText(bmj.Data.StoreName);
             storeId = bmj.Data.StoreInfoId;
-            txt_express_charges.setText(bmj.Data.Postage > 0 ? String.format(home_rmb, bmj.Data.Postage) : "包邮");
+            txt_express_charges.setText(Double.valueOf(bmj.Data.Postage) > 0 ? String.format(home_rmb, bmj.Data.Postage) : "包邮");
             txt_dian_balance.setText(String.format(dian_balance, bmj.Data.MaxDzb));
             balance = bmj.Data.MaxDzb;
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
-            payYuan = bmj.Data.MOrderMoney;
+            payYuan = Double.valueOf(bmj.Data.MOrderMoney);
             txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
             int i = 0;
             for (BuyCartInfoList buyCartInfoList : bmj.Data.BuyCartInfoList) {
@@ -181,9 +182,9 @@ public class PreOrderActivity extends BaseActivity {
             }
             sellerType = bmj.Data.SellerType;
             //设置商品总价（去除邮费）
-            yuan = bmj.Data.MOrderMoney - bmj.Data.Postage;
+            yuan = Double.valueOf(bmj.Data.MOrderMoney) - Double.valueOf(bmj.Data.Postage);
             //设置费用
-            if (bmj.Data.MOrderMoney > 0 && bmj.Data.MOrderLbCount > 0) {
+            if (Double.valueOf(bmj.Data.MOrderMoney) > 0 && bmj.Data.MOrderLbCount > 0) {
                 ll_lb.setVisibility(View.VISIBLE);
                 ll_pay.setVisibility(View.VISIBLE);
                 txt_rmb.setVisibility(View.VISIBLE);
@@ -192,7 +193,7 @@ public class PreOrderActivity extends BaseActivity {
                 txt_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
                 //设置龙币数
                 txt_home_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
-            } else if (bmj.Data.MOrderMoney > 0) {
+            } else if (Double.valueOf(bmj.Data.MOrderMoney) > 0) {
                 ll_lb.setVisibility(View.GONE);
                 ll_pay.setVisibility(View.VISIBLE);
                 txt_rmb.setVisibility(View.VISIBLE);
@@ -247,6 +248,8 @@ public class PreOrderActivity extends BaseActivity {
         if (sellerType != 1) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setTitle("提示").setMessage("该商家不支持电子币支付").setNegativeButton("取消", null).setIcon(R.mipmap.logo).create().show();
+        } else if (Constants.NORMAL.equals(pre.userType().get())) {
+            AndroidTool.showToast(this, "只有VIP用户才可以使用电子币");
         } else {
             txt_dian_quantity.setClickable(checked);
             txt_dian_quantity.setText(checked ? useDianZiBi + "" : "0.0");
@@ -281,7 +284,7 @@ public class PreOrderActivity extends BaseActivity {
                     useDianZiBi = Double.valueOf(AndroidTool.df.format(useDianZiBi));
                     txt_dian_quantity.setText(String.valueOf(useDianZiBi));
                     //设置实际付款金额 yuan（商品总价）-useDianZiBi（用的电子币数量） + postal邮费
-                    payYuan = yuan - useDianZiBi + postal;
+                    payYuan = (Math.round((yuan - useDianZiBi) * 100) / 100.0) + postal;
                     txt_pay_total_rmb.setText(String.format(home_rmb, payYuan));
                     inputMethodManager.hideSoftInputFromWindow(et.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
@@ -392,6 +395,7 @@ public class PreOrderActivity extends BaseActivity {
                     } else {
                         AndroidTool.showToast(this, "服务器繁忙");
                     }
+                    break;
                 default:
                     AndroidTool.showToast(this, "付款成功");
                     OrderDetailActivity_.intent(this).orderId(bmj.Data.MOrderId).start();

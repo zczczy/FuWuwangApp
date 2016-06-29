@@ -5,6 +5,7 @@ import android.app.Service;
 import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
@@ -85,6 +86,7 @@ public class MyApplication extends Application {
 
         iWXApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
         iWXApi.registerApp(Constants.APP_ID);
+        CrashReport.initCrashReport(getApplicationContext(), Constants.BUGLY_APP_ID, false);
     }
 
     public List<AdvertModel> getAdvertModelList() {

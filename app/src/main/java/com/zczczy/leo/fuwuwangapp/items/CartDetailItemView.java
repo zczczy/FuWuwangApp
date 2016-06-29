@@ -100,7 +100,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
                     .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
         txt_cart_goods_product.setText(_data.GodosName);
-        if (_data.GoodsPrice > 0) {
+        if (Double.valueOf(_data.GoodsPrice) > 0) {
             txt_cart_goods_price.setVisibility(VISIBLE);
             txt_cart_goods_price.setText(String.format(home_rmb, _data.GoodsPrice));
         } else {
