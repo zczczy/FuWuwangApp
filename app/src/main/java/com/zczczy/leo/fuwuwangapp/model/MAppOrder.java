@@ -46,6 +46,7 @@ public class MAppOrder implements Serializable {
     public List<OrderDetailModel> MOrderDetailList;
     public int MReceiptAddressId;
     public int MPaymentType;
+    public String DeverKbn;
 
     public com.tencent.mm.sdk.modelpay.PayReq WxPayData;
     public String AlipayInfo;//支付宝

@@ -168,6 +168,7 @@ public class PreOrderActivity extends BaseActivity {
             txt_store.setText(bmj.Data.StoreName);
             storeId = bmj.Data.StoreInfoId;
             txt_express_charges.setText(Double.valueOf(bmj.Data.Postage) > 0 ? String.format(home_rmb, bmj.Data.Postage) : "包邮");
+            postal = Double.valueOf(bmj.Data.Postage);
             txt_dian_balance.setText(String.format(dian_balance, bmj.Data.MaxDzb));
             balance = bmj.Data.MaxDzb;
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
@@ -253,7 +254,7 @@ public class PreOrderActivity extends BaseActivity {
         } else {
             txt_dian_quantity.setClickable(checked);
             txt_dian_quantity.setText(checked ? useDianZiBi + "" : "0.0");
-            txt_pay_total_rmb.setText(String.format(home_rmb, checked ? payYuan : yuan));
+            txt_pay_total_rmb.setText(String.format(home_rmb, checked ? payYuan : (yuan+postal)));
         }
     }
 

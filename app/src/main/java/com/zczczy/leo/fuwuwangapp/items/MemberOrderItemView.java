@@ -153,34 +153,38 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
 
     @Click
     void btn_pay() {
-        switch (_data.MPaymentType) {
-            case Constants.ALI_PAY:
-            case Constants.ALI_DZB:
-            case Constants.ALI_DZB_LONGBI:
-            case Constants.ALI_LONGBI:
-                mMyBackgroundTask.aliPay(_data.AlipayInfo, (Activity) context, _data.MOrderId);
-                break;
-            case Constants.WX_DZB:
-            case Constants.WX_LONGBI:
-            case Constants.WX_PAY:
-            case Constants.WX_DZB_LONGBI:
-                if (_data.WxPayData != null) {
-                    _data.WxPayData.extData = _data.MOrderId;
-                    app.iWXApi.sendReq(_data.WxPayData);
-                }
-                break;
-            case Constants.UMSPAY:
-            case Constants.DZB_UMSPAY:
-            case Constants.LONGBI_UMSPAY:
-            case Constants.LONGBI_UMSPAY_DZB:
-                UnionPay order = new UnionPay();
-                order.ChrCode = _data.chrCode;
-                order.MerSign = _data.merSign;
-                order.TransId = _data.transId;
-                UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(order).startForResult(1000);
-                break;
-            default:
-                OrderDetailActivity_.intent(context).orderId(_data.MOrderId).start();
+        if ("2".equals(_data.DeverKbn)) {
+            AndroidTool.showToast(context, "非当前手机下的订单，无法付款，请重新下单");
+        } else {
+            switch (_data.MPaymentType) {
+                case Constants.ALI_PAY:
+                case Constants.ALI_DZB:
+                case Constants.ALI_DZB_LONGBI:
+                case Constants.ALI_LONGBI:
+                    mMyBackgroundTask.aliPay(_data.AlipayInfo, (Activity) context, _data.MOrderId);
+                    break;
+                case Constants.WX_DZB:
+                case Constants.WX_LONGBI:
+                case Constants.WX_PAY:
+                case Constants.WX_DZB_LONGBI:
+                    if (_data.WxPayData != null) {
+                        _data.WxPayData.extData = _data.MOrderId;
+                        app.iWXApi.sendReq(_data.WxPayData);
+                    }
+                    break;
+                case Constants.UMSPAY:
+                case Constants.DZB_UMSPAY:
+                case Constants.LONGBI_UMSPAY:
+                case Constants.LONGBI_UMSPAY_DZB:
+                    UnionPay order = new UnionPay();
+                    order.ChrCode = _data.chrCode;
+                    order.MerSign = _data.merSign;
+                    order.TransId = _data.transId;
+                    UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(order).startForResult(1000);
+                    break;
+                default:
+                    OrderDetailActivity_.intent(context).orderId(_data.MOrderId).start();
+            }
         }
     }
 

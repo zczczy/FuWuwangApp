@@ -19,8 +19,10 @@ apt {
         resourcePackageName 'com.zczczy.leo.fuwuwangapp'
         logLevel 'ERROR'
         logAppenderConsole 'true'
-        classSuffix '_'   //classSuffix is used to change the suffix of enhanced classes like Activities with @EActivity. The default value is _.
-        generateFinalClasses 'true'  //generateFinalClasses is used to set if generated classes should be final or not. The default value is true.
+        classSuffix '_'
+        //classSuffix is used to change the suffix of enhanced classes like Activities with @EActivity. The default value is _.
+        generateFinalClasses 'true'
+        //generateFinalClasses is used to set if generated classes should be final or not. The default value is true.
     }
 }
 
@@ -32,15 +34,15 @@ android {
         applicationId "com.zczczy.leo.fuwuwangapp"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 14
-        versionName "1.6"
+        versionCode 15
+        versionName "1.7"
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             minifyEnabled false
             // 显示Log
             buildConfigField "boolean", "LEO_DEBUG", "true"

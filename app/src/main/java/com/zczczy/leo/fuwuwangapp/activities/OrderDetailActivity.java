@@ -175,7 +175,7 @@ public class OrderDetailActivity extends BaseActivity {
                 ll_should_pay.setVisibility(View.VISIBLE);
                 ll_paid.setVisibility(View.VISIBLE);
                 if (bmj.Data.MOrderDzb >= 0) {
-                    txt_should_pay_l_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney - bmj.Data.MOrderDzb));
+                    txt_should_pay_l_rmb.setText(String.format(home_rmb, (Math.round((bmj.Data.MOrderMoney - bmj.Data.MOrderDzb) * 100) / 100.0)));
                     txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
                 }
                 rl_express_charges.setVisibility(View.GONE);
@@ -269,35 +269,39 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Click
     void btn_pay() {
-        switch (mAppOrder.MPaymentType) {
-            case Constants.ALI_PAY:
-            case Constants.ALI_DZB:
-            case Constants.ALI_DZB_LONGBI:
-            case Constants.ALI_LONGBI:
-                myBackgroundTask.aliPay(mAppOrder.AlipayInfo, this, mAppOrder.MOrderId);
-                break;
-            case Constants.WX_DZB:
-            case Constants.WX_LONGBI:
-            case Constants.WX_PAY:
-            case Constants.WX_DZB_LONGBI:
-                if (mAppOrder.WxPayData != null) {
-                    mAppOrder.WxPayData.extData = mAppOrder.MOrderId;
-                    app.iWXApi.sendReq(mAppOrder.WxPayData);
-                }
-                break;
-            case Constants.UMSPAY:
-            case Constants.DZB_UMSPAY:
-            case Constants.LONGBI_UMSPAY:
-            case Constants.LONGBI_UMSPAY_DZB:
-                UnionPay order = new UnionPay();
-                order.ChrCode = mAppOrder.chrCode;
-                order.MerSign = mAppOrder.merSign;
-                order.TransId = mAppOrder.transId;
-                UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).startForResult(1000);
-                finish();
-                break;
-            default:
-                AndroidTool.showToast(this, "该订单已支付");
+        if ("2".equals(mAppOrder.DeverKbn)) {
+            AndroidTool.showToast(this, "非当前手机下的订单，无法付款，请重新下单");
+        } else {
+            switch (mAppOrder.MPaymentType) {
+                case Constants.ALI_PAY:
+                case Constants.ALI_DZB:
+                case Constants.ALI_DZB_LONGBI:
+                case Constants.ALI_LONGBI:
+                    myBackgroundTask.aliPay(mAppOrder.AlipayInfo, this, mAppOrder.MOrderId);
+                    break;
+                case Constants.WX_DZB:
+                case Constants.WX_LONGBI:
+                case Constants.WX_PAY:
+                case Constants.WX_DZB_LONGBI:
+                    if (mAppOrder.WxPayData != null) {
+                        mAppOrder.WxPayData.extData = mAppOrder.MOrderId;
+                        app.iWXApi.sendReq(mAppOrder.WxPayData);
+                    }
+                    break;
+                case Constants.UMSPAY:
+                case Constants.DZB_UMSPAY:
+                case Constants.LONGBI_UMSPAY:
+                case Constants.LONGBI_UMSPAY_DZB:
+                    UnionPay order = new UnionPay();
+                    order.ChrCode = mAppOrder.chrCode;
+                    order.MerSign = mAppOrder.merSign;
+                    order.TransId = mAppOrder.transId;
+                    UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).startForResult(1000);
+                    finish();
+                    break;
+                default:
+                    AndroidTool.showToast(this, "该订单已支付");
+            }
         }
     }
 
