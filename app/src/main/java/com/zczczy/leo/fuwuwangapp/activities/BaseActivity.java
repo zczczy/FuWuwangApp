@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @StringRes
     String no_net, empty_search, empty_order, empty_review, empty_logistics, empty_no_review;
 
-    String rootUrl = "http://appapib.86fuwuwang.com/";
+//    String rootUrl = "http://218.61.203.50:8002/";
 
 
     /**

@@ -18,6 +18,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -114,7 +115,7 @@ public class ActivityActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Activity>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Activity obj, int position) {
-                ActivityInfoActivity_.intent(ActivityActivity.this).url(rootUrl + "/DetailPage/ActivityDetail/" + obj.getAid()).status(obj.getStatus()).aid(obj.getAid()).start();
+                ActivityInfoActivity_.intent(ActivityActivity.this).url(Constants.URL + "/DetailPage/ActivityDetail/" + obj.getAid()).status(obj.getStatus()).aid(obj.getAid()).start();
             }
 
             @Override

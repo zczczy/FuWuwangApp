@@ -24,6 +24,7 @@ import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -141,7 +142,7 @@ public class CooperationMerchantActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<CooperationMerchant>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, CooperationMerchant obj, int position) {
-                WebViewActivity_.intent(CooperationMerchantActivity.this).header("联盟商家详细").url(rootUrl + "/DetailPage/CompanyDetail/" + obj.getCp_id()).start();
+                WebViewActivity_.intent(CooperationMerchantActivity.this).header("联盟商家详细").url(Constants.URL + "/DetailPage/CompanyDetail/" + obj.getCp_id()).start();
             }
 
             @Override

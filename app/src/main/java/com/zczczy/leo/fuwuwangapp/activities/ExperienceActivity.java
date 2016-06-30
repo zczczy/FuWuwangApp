@@ -22,6 +22,7 @@ import com.zczczy.leo.fuwuwangapp.model.Experience;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -70,7 +71,7 @@ public class ExperienceActivity extends BaseActivity {
     String city;
 
     //服务器返回的城市编码
-    String cityCode="";
+    String cityCode = "";
 
     //服务器返回的城市名称
     String cityName;
@@ -136,7 +137,7 @@ public class ExperienceActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Experience>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Experience obj, int position) {
-                WebViewActivity_.intent(ExperienceActivity.this).header("体验中心").url(rootUrl + "/DetailPage/CompanyDetail/" + obj.getUserid()).start();
+                WebViewActivity_.intent(ExperienceActivity.this).header("体验中心").url(Constants.URL + "/DetailPage/CompanyDetail/" + obj.getUserid()).start();
             }
 
             @Override

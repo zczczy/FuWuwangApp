@@ -6,6 +6,7 @@ import android.webkit.WebView;
 
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -34,7 +35,7 @@ public class BusinessInstituteActivity extends BaseActivity {
         settings = wv_web.getSettings();
         settings.setJavaScriptEnabled(true);
         wv_web.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
-        wv_web.loadUrl(rootUrl + "DetailPage/CollegeDetail");
+        wv_web.loadUrl(Constants.URL + "DetailPage/CollegeDetail");
         //判断页面加载过程
         wv_web.setWebChromeClient(new WebChromeClient() {
             @Override

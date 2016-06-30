@@ -8,12 +8,12 @@ package com.zczczy.leo.fuwuwangapp.tools;
 public class Constants {
 
     //    测试环境
-    public static final String URL = "http://218.61.203.50:8002/";
-    public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
+//    public static final String URL = "http://218.61.203.50:8002/";
+//    public static final String PAY_URL = "http://116.228.21.162:9127/umsFrontWebQmjf/umspay";
 
     //正式环境
-//    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
-//    public static final String URL = "http://appapib.86fuwuwang.com/";
+    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
+    public static final String URL = "http://appapia.86fuwuwang.com/";
 
     public static final String LOTTERYDIST = "LotteryDist";
 

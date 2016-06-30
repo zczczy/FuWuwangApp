@@ -21,6 +21,7 @@ public class WXAppRegisterReceiver extends AbstractBroadcastReceiver {
     @ReceiverAction(actions = "com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP")
     void onRefreshWXApp(Context context) {
         IWXAPI msgApi = WXAPIFactory.createWXAPI(context, null);
+        msgApi.unregisterApp();
         // 将该app注册到微信
         msgApi.registerApp(Constants.APP_ID);
     }

@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Information;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -93,7 +94,7 @@ public class InformationActivity  extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Information>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Information information, int position) {
-                WebViewActivity_.intent(InformationActivity.this).header("资讯详情").url(rootUrl + "DetailPage/NewsDetail/" + information.getNoticeId()).start();
+                WebViewActivity_.intent(InformationActivity.this).header("资讯详情").url(Constants.URL + "DetailPage/NewsDetail/" + information.getNoticeId()).start();
             }
 
             @Override

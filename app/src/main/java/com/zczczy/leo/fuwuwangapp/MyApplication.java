@@ -85,6 +85,7 @@ public class MyApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());
 
         iWXApi = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
+        iWXApi.unregisterApp();
         iWXApi.registerApp(Constants.APP_ID);
         CrashReport.initCrashReport(getApplicationContext(), Constants.BUGLY_APP_ID, false);
     }

@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Notice;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
@@ -92,7 +93,7 @@ public class NoticeActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Notice>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Notice notice, int position) {
-                WebViewActivity_.intent(NoticeActivity.this).header("公告详情").url(rootUrl + "DetailPage/NoticeDetail/" + notice.getNoticeId()).start();
+                WebViewActivity_.intent(NoticeActivity.this).header("公告详情").url(Constants.URL + "DetailPage/NoticeDetail/" + notice.getNoticeId()).start();
             }
 
             @Override
