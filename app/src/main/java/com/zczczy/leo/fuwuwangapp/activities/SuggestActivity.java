@@ -134,7 +134,9 @@ public class SuggestActivity extends BaseActivity {
         if (isChecked) {
             edt_suggest_pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             edt_confirm_pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            ll_confirm.setVisibility(View.GONE);
         } else {
+            ll_confirm.setVisibility(View.VISIBLE);
             edt_suggest_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             edt_confirm_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }

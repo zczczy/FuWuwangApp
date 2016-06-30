@@ -5,8 +5,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -63,7 +67,7 @@ public class CartActivity extends BaseActivity {
     CartAdapter myAdapter;
 
     @ViewById
-    LinearLayout ll_checkout, ll_delete;
+    LinearLayout ll_checkout, ll_delete, ll_cart_jiesuan;
 
     @ViewById
     RelativeLayout rl_root;
@@ -192,10 +196,23 @@ public class CartActivity extends BaseActivity {
             ColorDrawable dw = new ColorDrawable(0xb0000000);
             //设置SelectPicPopupWindow弹出窗体的背景
             popupWindow.setBackgroundDrawable(dw);
-            popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, DisplayUtil.dip2px(this, 50));
+            boolean hasSoftKey = ViewConfiguration.get(this).hasPermanentMenuKey();
+            if (hasSoftKey ||isNavigationBarAvailable()) {
+                popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, ll_cart_jiesuan.getHeight()*2 );
+            } else {
+                popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, ll_cart_jiesuan.getHeight() + 1);
+            }
         } else {
             AndroidTool.showToast(this, cart_no_goods);
         }
+    }
+
+    public boolean isNavigationBarAvailable(){
+
+        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+        boolean hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
+
+        return (!(hasBackKey && hasHomeKey));
     }
 
     void calc() {
