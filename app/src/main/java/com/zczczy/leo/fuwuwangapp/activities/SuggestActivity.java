@@ -34,7 +34,7 @@ import org.springframework.util.StringUtils;
 public class SuggestActivity extends BaseActivity {
 
     @ViewById
-    EditText edt_suggest_username, edt_suggest_pass, edt_confirm_pass;
+    EditText edt_suggest_username, edt_suggest_pass, edt_confirm_pass, edt_id_card, edt_realname, edt_mobile_phone;
 
     MyAlertDialog dialog;
 
@@ -47,9 +47,7 @@ public class SuggestActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient myRestClient;
 
-
     String username, pass, confirm_pass;
-
 
     @AfterInject
     void afterInject() {
@@ -68,32 +66,38 @@ public class SuggestActivity extends BaseActivity {
             this.username = edt_suggest_username.getText().toString();
             this.pass = edt_suggest_pass.getText().toString();
             this.confirm_pass = edt_confirm_pass.getText().toString();
-            if (username == "" || username == null || username.isEmpty()) {
+            if (AndroidTool.checkIsNull(edt_suggest_username)) {
                 MyAlertDialog dialog = new MyAlertDialog(this, "用户名不能为空", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
-            }
-            if (pass == "" || pass == null || pass.isEmpty()) {
+            } else if (AndroidTool.checkIsNull(edt_suggest_pass)) {
                 MyAlertDialog dialog = new MyAlertDialog(this, "密码不能为空", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
-            }
-            if (ll_confirm.isShown() && StringUtils.isEmpty(confirm_pass)) {
+            } else if (ll_confirm.isShown() && StringUtils.isEmpty(confirm_pass)) {
                 MyAlertDialog dialog = new MyAlertDialog(this, "确认密码不能为空", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
-            }
-            if (ll_confirm.isShown() && !pass.equals(confirm_pass)) {
+            } else if (ll_confirm.isShown() && !pass.equals(confirm_pass)) {
                 MyAlertDialog dialog = new MyAlertDialog(this, "两次密码输入不一致", null);
                 dialog.show();
                 dialog.setCanceledOnTouchOutside(false);
-                return;
+            } else if (AndroidTool.checkIsNull(edt_realname)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "真实姓名不能为空", null);
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
+            } else if (AndroidTool.checkIsNull(edt_id_card)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "身份证不能为空", null);
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
+            } else if (AndroidTool.checkIsNull(edt_mobile_phone)) {
+                MyAlertDialog dialog = new MyAlertDialog(this, "手机号不能为空", null);
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
+            } else {
+                AndroidTool.showLoadDialog(this);
+                getHttp();
             }
-            AndroidTool.showLoadDialog(this);
-            getHttp();
         } else {
             Toast.makeText(this, no_net, Toast.LENGTH_SHORT).show();
         }
@@ -101,7 +105,14 @@ public class SuggestActivity extends BaseActivity {
 
     @Background
     void getHttp() {
-        FwwUser fwwUser = new FwwUser(username, pass, ll_confirm.isShown() ? confirm_pass : pass, pre.token().get(), "1", null);
+        FwwUser fwwUser = new FwwUser(username, pass,
+                ll_confirm.isShown() ? confirm_pass : pass,
+                pre.token().get(),
+                "1",
+                edt_realname.getText().toString().trim(),
+                edt_id_card.getText().toString().trim(),
+                edt_mobile_phone.getText().toString().trim(),
+                null);
         BaseModelJson<String> bmj = myRestClient.RegisterNew(fwwUser);
         showsuccess(bmj);
     }

@@ -52,6 +52,9 @@
     <color name="layout_gray">#d6d4d5</color>
 
 
+    <color name="goods_detail_bg">#faf8f9</color>
+    <color name="add_cart">#4d4d4d</color>
+
     <!--act-->
     <color name="yellow">#ffd800</color>
     <color name="font_gray">#757575</color>
