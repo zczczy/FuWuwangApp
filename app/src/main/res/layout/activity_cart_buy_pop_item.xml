@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
-              android:orientation="horizontal"
-              tools:context=".items.CartBuyPopItemView">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    tools:context=".items.CartBuyPopItemView">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -20,8 +20,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:ems="16"
-            android:singleLine="true"
-            android:text="红袖官方旗舰店"/>
+            android:singleLine="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,14 +33,14 @@
                 android:id="@+id/txt_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_count"/>
+                android:text="@string/text_count" />
 
             <TextView
                 android:id="@+id/txt_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="@string/text_total"/>
+                android:text="@string/text_total" />
 
             <TextView
                 android:id="@+id/txt_rmb"
@@ -49,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_rmb"
-                android:textColor="@color/price_color"/>
+                android:textColor="@color/price_color" />
 
             <TextView
                 android:id="@+id/txt_plus"
@@ -57,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="+"
-                android:textColor="@color/price_color"/>
+                android:textColor="@color/price_color" />
 
             <TextView
                 android:id="@+id/txt_home_lb"
@@ -66,7 +65,7 @@
                 android:layout_marginRight="15dp"
                 android:gravity="center"
                 android:text="@string/home_lb"
-                android:textColor="@color/price_color"/>
+                android:textColor="@color/price_color" />
 
         </LinearLayout>
 
@@ -86,7 +85,7 @@
             android:background="@drawable/order_orange"
             android:padding="10dp"
             android:text="@string/text_buy"
-            android:textColor="@color/major_color"/>
+            android:textColor="@color/major_color" />
 
     </LinearLayout>
 

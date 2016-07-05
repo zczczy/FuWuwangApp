@@ -83,7 +83,7 @@
                         <TextView
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/goods_by" />
+                            android:text="@string/text_goods_by" />
 
                         <TextView
                             android:id="@+id/goods_by"
@@ -100,7 +100,7 @@
                         <TextView
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/goods_kun_cun" />
+                            android:text="@string/text_store_count" />
 
                         <TextView
                             android:id="@+id/goods_kucun"

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.RecommendedGoodsItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
@@ -100,7 +101,9 @@ public class RecommendedGoodsAdapter extends BaseUltimateRecyclerViewAdapter<Reb
 
     @Override
     protected View onCreateItemView(ViewGroup parent) {
-        return RecommendedGoodsItemView_.build(parent.getContext());
+        View view = RecommendedGoodsItemView_.build(parent.getContext());
+        view.setBackgroundResource(R.color.home_background);
+        return view;
     }
 
     @Override

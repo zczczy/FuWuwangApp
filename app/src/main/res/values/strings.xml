@@ -311,9 +311,12 @@
     <string name="buy">立即抢购</string>
     <string name="rebate">支持赠券</string>
     <string name="goods_detail">商品详情</string>
-    <string name="goods_by">快递：</string>
-    <string name="goods_kun_cun">库存：</string>
+    <string name="text_goods_by">快递：</string>
+    <string name="text_sell_count">月销量:</string>
+    <string name="text_store_count">库存:</string>
     <string name="goods_store">店铺详情</string>
+    <string name="text_goods_review">商品评价</string>
+    <string name="text_goods_more_review">更多评价</string>
     <string name="add_money">(另支付:%1$s)</string>
     <string name="goods_buy_tip">购买须知</string>
     <string name="goods_no_store">商品库存不足</string>

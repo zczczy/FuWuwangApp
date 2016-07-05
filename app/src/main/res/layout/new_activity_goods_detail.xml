@@ -34,7 +34,7 @@
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/slider_layout"
                 android:layout_width="match_parent"
-                android:layout_height="288dp"
+                android:layout_height="226dp"
                 android:background="@drawable/goods_default"
                 app:pager_animation="Accordion" />
 
@@ -47,7 +47,7 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/goods_name"
+                    android:id="@+id/txt_goods_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
@@ -55,183 +55,239 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <!--<include layout="@layout/goods_price" />-->
+                <include layout="@layout/rmb_lb" />
 
             </LinearLayout>
 
-            <!--<LinearLayout-->
-
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/white"-->
-            <!--android:gravity="center"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:padding="10dp">-->
-
-            <!--<LinearLayout-->
-            <!--android:id="@+id/ll_goods_by"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/text_goods_by"-->
-            <!--android:textColor="@color/second_font_color" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/goods_by"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textColor="@color/second_font_color" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
 
-            <!--</LinearLayout>-->
+                <TextView
+                    android:id="@+id/txt_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/coupon" />
 
-            <!--<LinearLayout-->
-            <!--android:id="@+id/ll_sell_count"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="0.7">-->
+            </LinearLayout>
 
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/text_sell_count"-->
-            <!--android:textColor="@color/second_font_color" />-->
+            <LinearLayout
 
-            <!--<TextView-->
-            <!--android:id="@+id/goods_sell_count"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textColor="@color/second_font_color" />-->
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <!--</LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/ll_goods_by"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="0.6">-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_goods_by"
+                        android:textColor="@color/sub_text_color" />
 
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/text_store_count"-->
-            <!--android:textColor="@color/second_font_color" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/goods_count"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textColor="@color/second_font_color" />-->
-            <!--</LinearLayout>-->
-
-            <!--</LinearLayout>-->
+                    <TextView
+                        android:id="@+id/goods_by"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/sub_text_color" />
 
 
-            <!--<include layout="@layout/horizontal_line" />-->
+                </LinearLayout>
 
-            <!--<include-->
-            <!--layout="@layout/horizontal_line"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.1dp"-->
-            <!--android:layout_marginTop="5dp" />-->
+                <LinearLayout
+                    android:id="@+id/ll_sell_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_sell_count"
+                        android:textColor="@color/sub_text_color" />
+
+                    <TextView
+                        android:id="@+id/goods_sell_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/sub_text_color" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_store_count"
+                        android:textColor="@color/sub_text_color" />
+
+                    <TextView
+                        android:id="@+id/goods_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/sub_text_color" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/horizontal_line" />
+
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="5dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:id="@+id/txt_store_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/cart_store_icon"
+                    android:drawablePadding="5dp"
+                    android:text="86商城" />
+
+                <TextView
+                    android:id="@+id/txt_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/order_orange"
+                    android:padding="10dp"
+                    android:text="进店逛逛"
+                    android:textColor="@color/major_color" />
+
+            </RelativeLayout>
 
 
-            <!--<LinearLayout-->
-            <!--android:id="@+id/ll_review"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
+            <include layout="@layout/horizontal_line" />
 
-            <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/white">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="@string/text_goods_review"-->
-            <!--android:textColor="@color/gray"-->
-            <!--android:textSize="16sp" />-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:drawablePadding="10dp"-->
-            <!--android:drawableRight="@drawable/next"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="@string/text_all_review"-->
-            <!--android:textColor="@color/main_font_color" />-->
-            <!--</RelativeLayout>-->
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="5dp" />
 
 
-            <!--<include layout="@layout/horizontal_line" />-->
+            <LinearLayout
+                android:id="@+id/ll_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="10dp"
+                        android:text="@string/text_goods_review"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:drawablePadding="10dp"
+                        android:drawableRight="@drawable/next_icon"
+                        android:padding="10dp"
+                        android:text="@string/txt_all_review"
+                        android:textColor="@color/sub_text_color" />
+                </RelativeLayout>
 
 
-            <!--</LinearLayout>-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/txt_more_review"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/white"-->
-            <!--android:gravity="center"-->
-            <!--android:padding="15dp"-->
-            <!--android:text="@string/text_goods_more_review"-->
-            <!--android:textColor="@color/second_font_color" />-->
-
-            <!--<include layout="@layout/horizontal_line" />-->
-
-            <!--<include-->
-            <!--layout="@layout/horizontal_line"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.1dp"-->
-            <!--android:layout_marginTop="5dp" />-->
+                <include layout="@layout/horizontal_line" />
 
 
-            <!--<RadioGroup-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="2dp"-->
-            <!--android:orientation="horizontal">-->
+            </LinearLayout>
 
-            <!--<RadioButton-->
-            <!--android:id="@+id/rb_good_detail"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@drawable/goods_detail_left"-->
-            <!--android:button="@null"-->
-            <!--android:checked="true"-->
-            <!--android:gravity="center"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="@string/text_goods_detail" />-->
+            <TextView
+                android:id="@+id/txt_more_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/text_goods_more_review"
+                android:textColor="@color/sub_text_color" />
 
-            <!--<RadioButton-->
-            <!--android:id="@+id/rb_good_review"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@drawable/goods_detail_right"-->
-            <!--android:button="@null"-->
-            <!--android:gravity="center"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="@string/text_goods_more_review" />-->
-            <!--</RadioGroup>-->
+            <include layout="@layout/horizontal_line" />
 
-            <!--<fragment-->
-            <!--android:id="@+id/goods_detail_fragment"-->
-            <!--android:name="com.zczczy.leo.microwarehouse.fragments.UnuseFragment_"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--tools:layout="@layout/fragment_unuse" />-->
+            <include
+                layout="@layout/horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="5dp" />
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_good_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/goods_detail_left"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/goods_detail" />
+
+                <RadioButton
+                    android:id="@+id/rb_good_review"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/goods_detail_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/text_goods_more_review" />
+            </RadioGroup>
+
+            <fragment
+                android:id="@+id/goods_detail_fragment"
+                android:name="com.zczczy.leo.fuwuwangapp.fragments.UnuseFragment_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_unuse" />
 
             <include layout="@layout/horizontal_line" />
         </LinearLayout>

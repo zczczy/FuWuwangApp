@@ -47,8 +47,8 @@
 
                 <ImageView
                     android:id="@+id/img_trendw"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_nv" />
 
                 <TextView
@@ -56,9 +56,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/trendw"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -71,8 +72,8 @@
 
                 <ImageView
                     android:id="@+id/img_trendm"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_nz" />
 
                 <TextView
@@ -80,9 +81,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/trendm"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -95,8 +97,8 @@
 
                 <ImageView
                     android:id="@+id/img_huazhuang"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_hz" />
 
                 <TextView
@@ -104,9 +106,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/huazhuang"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -119,8 +122,8 @@
 
                 <ImageView
                     android:id="@+id/img_digital"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_sm" />
 
                 <TextView
@@ -128,9 +131,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/digital"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -143,8 +147,8 @@
 
                 <ImageView
                     android:id="@+id/img_baby"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_my" />
 
                 <TextView
@@ -152,9 +156,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/baby"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -176,8 +181,8 @@
 
                 <ImageView
                     android:id="@+id/img_xxxb"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_xx" />
 
                 <TextView
@@ -185,9 +190,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/xxxb"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -199,8 +205,8 @@
 
                 <ImageView
                     android:id="@+id/img_life"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_jj" />
 
                 <TextView
@@ -208,9 +214,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/life"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -223,8 +230,8 @@
 
                 <ImageView
                     android:id="@+id/img_food"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_sp" />
 
                 <TextView
@@ -232,9 +239,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/home_service"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -247,8 +255,8 @@
 
                 <ImageView
                     android:id="@+id/img_healthcare"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_bj" />
 
                 <TextView
@@ -256,9 +264,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/healthcare"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
             </LinearLayout>
 
 
@@ -271,8 +280,8 @@
 
                 <ImageView
                     android:id="@+id/img_lbdh"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/home_lb" />
 
                 <TextView
@@ -280,9 +289,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="6dp"
                     android:text="@string/lbdh"
-                    android:textSize="12sp" />
+                    android:textColor="@color/home_text_color"
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -415,8 +425,14 @@
         android:src="@drawable/home_winners_order" />
 
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/light_gray" />
+        android:layout_height="40dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_suggest" />
+    </LinearLayout>
 </LinearLayout>

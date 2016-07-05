@@ -16,6 +16,7 @@ import com.marshalchen.ultimaterecyclerview.animators.internal.ViewHelper;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerImpl;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerInterface;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeLayout;
+import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;
 

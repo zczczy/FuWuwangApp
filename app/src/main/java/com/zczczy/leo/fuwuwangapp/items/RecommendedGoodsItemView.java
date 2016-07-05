@@ -3,6 +3,7 @@ package com.zczczy.leo.fuwuwangapp.items;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,18 +47,18 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
     @Override
     protected void init(Object... objects) {
 
-        if (viewHolder.getAdapterPosition() % 2 == 0) {
-            ll_root.setPadding(DisplayUtil.dip2px(context, 3), DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 6));
-        } else {
-            ll_root.setPadding(DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 11), DisplayUtil.dip2px(context, 3), DisplayUtil.dip2px(context, 6));
-        }
-
-        int temp = DisplayUtil.dip2px(context, 166);
+        int temp = DisplayUtil.dip2px(context, 177);
 
         if (DisplayUtil.getDensityDpi(context) >= 400 && DisplayUtil.getDensityDpi(context) < 480) {
-            temp = DisplayUtil.dip2px(context, 166 * 480 / DisplayUtil.getDensityDpi(context));
+            temp = DisplayUtil.dip2px(context, 177 * 480 / DisplayUtil.getDensityDpi(context));
         }
-
+        LinearLayout.LayoutParams linearLayout = (LayoutParams) ll_root.getLayoutParams();
+        if (viewHolder.getAdapterPosition() % 2 == 0) {
+            linearLayout.setMargins(DisplayUtil.dip2px(context, 3.3f), 0, 0, DisplayUtil.dip2px(context, 6.6f));
+        } else {
+            linearLayout.setMargins(0, 0, DisplayUtil.dip2px(context, 3.3f), DisplayUtil.dip2px(context, 6.6f));
+        }
+        ll_root.setLayoutParams(linearLayout);
         img_pic.setLayoutParams(new LinearLayout.LayoutParams(temp, temp));
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
             Picasso.with(context).load(_data.GoodsImgSl)
