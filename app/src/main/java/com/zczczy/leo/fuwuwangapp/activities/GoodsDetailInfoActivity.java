@@ -1,19 +1,25 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
+import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup;
+import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
@@ -24,6 +30,7 @@ import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
+import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyScrollView;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
@@ -244,16 +251,27 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @Click
     void img_cart() {
-        if (isCanBuy) {
-            if (!checkUserIsLogin()) {
-                LoginActivity_.intent(this).start();
-            } else {
-                AndroidTool.showLoadDialog(this);
-                addShoppingCart(goodsId);
-            }
-        } else {
-            AndroidTool.showToast(this, goods_no_store);
-        }
+        PopupWindow popupWindow;
+        GoodsPropertiesPopup goodsPropertiesPopup = GoodsPropertiesPopup_.build(this);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        popupWindow = new PopupWindow(goodsPropertiesPopup, ViewGroup.LayoutParams.MATCH_PARENT, dm.heightPixels - DisplayUtil.dip2px(this, 50), true);
+        goodsPropertiesPopup.setData(popupWindow);
+        //实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        //设置SelectPicPopupWindow弹出窗体的背景
+        popupWindow.setBackgroundDrawable(dw);
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//        if (isCanBuy) {
+//            if (!checkUserIsLogin()) {
+//                LoginActivity_.intent(this).start();
+//            } else {
+//                AndroidTool.showLoadDialog(this);
+//                addShoppingCart(goodsId);
+//            }
+//        } else {
+//            AndroidTool.showToast(this, goods_no_store);
+//        }
     }
 
     /**

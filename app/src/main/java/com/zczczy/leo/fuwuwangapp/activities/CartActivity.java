@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -18,7 +17,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
@@ -32,7 +30,6 @@ import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
-import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
@@ -190,7 +187,7 @@ public class CartActivity extends BaseActivity {
             bmj.Successful = true;
             bmj.Data = list;
             CartBuyPopup cartBuyPopup = CartBuyPopup_.build(this);
-            popupWindow = new PopupWindow(cartBuyPopup, ViewGroup.LayoutParams.MATCH_PARENT, rl_root.getHeight() - DisplayUtil.dip2px(this, 50), true);
+            popupWindow = new PopupWindow(cartBuyPopup, ViewGroup.LayoutParams.MATCH_PARENT, rl_root.getHeight(), true);
             cartBuyPopup.setData(bmj, popupWindow);
             //实例化一个ColorDrawable颜色为半透明
             ColorDrawable dw = new ColorDrawable(0xb0000000);
