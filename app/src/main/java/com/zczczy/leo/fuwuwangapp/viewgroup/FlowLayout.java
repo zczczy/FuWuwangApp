@@ -44,7 +44,6 @@ public class FlowLayout extends RelativeLayout {
                 Log.i("MyLayout", "error");
             }
         }
-
     }
 
     public int getPosition(int IndexInRow, int childIndex) {

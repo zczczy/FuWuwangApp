@@ -136,7 +136,8 @@ public class CommonSearchResultActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
-                GoodsDetailInfoActivity_.intent(CommonSearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
+//                GoodsDetailInfoActivity_.intent(CommonSearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
+                GoodsDetailActivity_.intent(CommonSearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
             }
 
             @Override

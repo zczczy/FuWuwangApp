@@ -17,6 +17,7 @@ import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MainActivity;
@@ -201,7 +202,8 @@ public class HomeFragment extends BaseFragment {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
-                GoodsDetailInfoActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
+//                GoodsDetailInfoActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
+                GoodsDetailActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 
             @Override

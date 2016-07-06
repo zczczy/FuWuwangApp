@@ -77,7 +77,7 @@ import java.util.Map;
  * http://218.61.203.50:8002/
  * http://appapib.86fuwuwang.com/
  */
-@Rest(rootUrl = "http://appapia.86fuwuwang.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class)
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {
@@ -680,7 +680,8 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * 商品加入购物车
      * 购物车加1
      *
-     * @param map GoodsInfoId
+     * @param map GoodsInfoId 商品ID
+     *            GoodsAttributeId 属性规格ID
      * @return
      */
     @Post("api/Shop/AddShoppingCart")

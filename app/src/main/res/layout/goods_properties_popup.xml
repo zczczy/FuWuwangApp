@@ -1,122 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/root"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_alignParentBottom="true"
-              android:background="@color/pop_pu_bg"
-              android:gravity="center_horizontal|bottom"
-              android:orientation="vertical"
-              tools:context=".items.GoodsPropertiesPopup">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pop_pu_bg"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical"
+    tools:context=".items.GoodsPropertiesPopup">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/ll_child"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="-18dp"
-            android:src="@drawable/goods_default"/>
-
-        <LinearLayout
-            android:id="@+id/ll_price_storage"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:orientation="vertical"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/img_goods"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="left|top"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="-18dp"
+                android:src="@drawable/goods_default" />
+
+            <LinearLayout
+                android:id="@+id/ll_price_storage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:orientation="vertical">
+
+                <include layout="@layout/rmb_lb" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_store_count"
+                        android:textColor="@color/sub_text_color" />
+
+                    <TextView
+                        android:id="@+id/txt_store_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_close"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:src="@drawable/goods_properties_close" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:text="属性规格"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.zczczy.leo.fuwuwangapp.viewgroup.MyViewGroup
+                android:id="@+id/myViewGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="top">
+
+            </com.zczczy.leo.fuwuwangapp.viewgroup.MyViewGroup>
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
             android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="啊发生"/>
+                android:layout_centerVertical="true"
+                android:text="购买数量"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-            <TextView
+            <me.himanshusoni.quantityview.QuantityView
+                android:id="@+id/quantityView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="啊发生"/>
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                app:qv_addButtonBackground="@drawable/car_plus"
+                app:qv_addButtonText=""
+                app:qv_addButtonTextColor="@color/buy_button"
+                app:qv_maxQuantity="100"
+                app:qv_minQuantity="1"
+                app:qv_quantity="1"
+                app:qv_quantityBackground="@drawable/quantity_bg"
+                app:qv_quantityPadding="10dp"
+                app:qv_removeButtonBackground="@drawable/car_minus"
+                app:qv_removeButtonText=""
+                app:qv_removeButtonTextColor="@color/buy_button" />
 
-        <ImageView
-            android:id="@+id/img_close"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:src="@drawable/car_close"/>
-    </FrameLayout>
+        </RelativeLayout>
 
-    <include layout="@layout/horizontal_line"/>
-
-    <com.zczczy.leo.fuwuwangapp.viewgroup.FlowLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:padding="10dp"
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="发生的"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:padding="10dp"
-            android:layout_height="wrap_content"
-            android:text="发生的111"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="发生的222222222"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="发生的1111111111111111"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="发生的1111111111"/>
-
-    </com.zczczy.leo.fuwuwangapp.viewgroup.FlowLayout>
-
-    <!--<com.zczczy.leo.fuwuwangapp.viewgroup.MyViewGroup-->
-    <!--android:id="@+id/myViewGroup"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/white"-->
-    <!--android:gravity="top">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="发生的"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="发生的111"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="发生的222222222"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="发生的1111111111111111"/>-->
-
-    <!--</com.zczczy.leo.fuwuwangapp.viewgroup.MyViewGroup>-->
-
+            android:background="@color/tab_text"
+            android:text="@string/config"
+            android:textColor="@color/white" />
+    </LinearLayout>
 </LinearLayout>

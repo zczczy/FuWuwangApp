@@ -43,7 +43,7 @@ public class MyViewGroup extends ViewGroup {
 
         // report this final dimension
         setMeasuredDimension(resolveSize(wholeWidth, widthMeasureSpec), resolveSize(wholeHeight, heightMeasureSpec));
-//        setMeasuredDimension(wholeWidth, screenHeight-wholeHeight);
+//        setMeasuredDimension(wholeWidth, wholeHeight);
     }
 
     private int jiange = 10;//按钮之间的间隔
@@ -54,7 +54,7 @@ public class MyViewGroup extends ViewGroup {
         final int count = getChildCount();
         int row = 0;// which row lay you view relative to parent
         int lengthX = arg1;    // right position of child relative to parent
-        int lengthY = arg2;    // bottom position of child relative to parent
+        int lengthY ;    // bottom position of child relative to parent
         for (int i = 0; i < count; i++) {
 
             final View child = this.getChildAt(i);
@@ -66,12 +66,12 @@ public class MyViewGroup extends ViewGroup {
                 lengthX += width + VIEW_MARGIN + jiange;//按钮之间的间隔
             }
 
-            lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height + arg2;
+            lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height;
             //if it can't drawing on a same line , skip to next line
             if (lengthX > arg3) {
                 lengthX = width + VIEW_MARGIN + arg1;
                 row++;
-                lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height + arg2;
+                lengthY = row * (height + VIEW_MARGIN) + VIEW_MARGIN + height;
             }
             child.layout(lengthX - width, lengthY - height, lengthX, lengthY);
         }

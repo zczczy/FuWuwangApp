@@ -70,6 +70,10 @@ public class Goods implements Serializable {
     public String ISCommend;
     public String TempDisp;
     public int GoodsXl; //销量
+    public int IsUsing;
+    public String StaticHtmlUrl;
+    public List<GoodsAttribute> GoodsAttributeList;
+
     /**
      * GoodsImgId : 1
      * GoodsInfoId : sample string 2

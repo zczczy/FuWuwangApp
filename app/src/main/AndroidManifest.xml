@@ -278,6 +278,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
+            android:name=".activities.GoodsDetailActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
             android:name=".activities.GoodsCommentsActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

@@ -251,27 +251,16 @@ public class GoodsDetailInfoActivity extends BaseActivity implements MyScrollVie
 
     @Click
     void img_cart() {
-        PopupWindow popupWindow;
-        GoodsPropertiesPopup goodsPropertiesPopup = GoodsPropertiesPopup_.build(this);
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        popupWindow = new PopupWindow(goodsPropertiesPopup, ViewGroup.LayoutParams.MATCH_PARENT, dm.heightPixels - DisplayUtil.dip2px(this, 50), true);
-        goodsPropertiesPopup.setData(popupWindow);
-        //实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(0xb0000000);
-        //设置SelectPicPopupWindow弹出窗体的背景
-        popupWindow.setBackgroundDrawable(dw);
-        popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//        if (isCanBuy) {
-//            if (!checkUserIsLogin()) {
-//                LoginActivity_.intent(this).start();
-//            } else {
-//                AndroidTool.showLoadDialog(this);
-//                addShoppingCart(goodsId);
-//            }
-//        } else {
-//            AndroidTool.showToast(this, goods_no_store);
-//        }
+        if (isCanBuy) {
+            if (!checkUserIsLogin()) {
+                LoginActivity_.intent(this).start();
+            } else {
+                AndroidTool.showLoadDialog(this);
+                addShoppingCart(goodsId);
+            }
+        } else {
+            AndroidTool.showToast(this, goods_no_store);
+        }
     }
 
     /**
