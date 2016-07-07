@@ -52,6 +52,17 @@
             android:lines="2"
             android:maxLines="2" />
 
+
+        <TextView
+            android:id="@+id/txt_cart_goods_property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="30"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/sub_text_color" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

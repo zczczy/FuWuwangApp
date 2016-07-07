@@ -48,7 +48,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
     ImageView img_cart_goods_img;
 
     @ViewById
-    TextView txt_cart_goods_product, txt_cart_goods_price, txt_cart_goods_lb_price;
+    TextView txt_cart_goods_product, txt_cart_goods_price, txt_cart_goods_lb_price, txt_cart_goods_property;
 
     @ViewById
     QuantityView quantityView;
@@ -100,6 +100,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
                     .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
         txt_cart_goods_product.setText(_data.GodosName);
+        txt_cart_goods_property.setText(_data.GoodsAttributeName);
         if (Double.valueOf(_data.GoodsPrice) > 0) {
             txt_cart_goods_price.setVisibility(VISIBLE);
             txt_cart_goods_price.setText(String.format(home_rmb, _data.GoodsPrice));

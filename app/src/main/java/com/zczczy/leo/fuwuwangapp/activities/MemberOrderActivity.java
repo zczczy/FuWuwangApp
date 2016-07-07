@@ -9,13 +9,12 @@ import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.squareup.otto.Subscribe;
 import com.tencent.mm.sdk.modelpay.PayResp;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.MemberOrderAdapter;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.PayResult;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
@@ -96,9 +95,9 @@ public class MemberOrderActivity extends BaseActivity {
         });
         ultimateRecyclerView.setCustomSwipeToRefresh();
         refreshingMaterial();
-        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<MAppOrder>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<ShopOrder>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, MAppOrder obj, int position) {
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, ShopOrder obj, int position) {
                 OrderDetailActivity_.intent(MemberOrderActivity.this).orderId(obj.MOrderId).start();
             }
 

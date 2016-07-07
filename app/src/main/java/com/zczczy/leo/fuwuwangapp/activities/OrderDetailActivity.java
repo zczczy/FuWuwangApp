@@ -17,7 +17,7 @@ import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
-import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PayResult;
 import com.zczczy.leo.fuwuwangapp.model.UnionPay;
@@ -82,7 +82,7 @@ public class OrderDetailActivity extends BaseActivity {
     @Extra
     String orderId;
 
-    MAppOrder mAppOrder;
+    ShopOrder mAppOrder;
 
     @AfterInject
     void afterInject() {
@@ -106,7 +106,7 @@ public class OrderDetailActivity extends BaseActivity {
     }
 
     @UiThread
-    void afterGetOrderDetailById(BaseModelJson<MAppOrder> bmj) {
+    void afterGetOrderDetailById(BaseModelJson<ShopOrder> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
@@ -121,26 +121,17 @@ public class OrderDetailActivity extends BaseActivity {
             txt_store.setText(bmj.Data.StoreName);
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
-            txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
+            txt_total_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
             int i = 0;
-            for (OrderDetailModel orderDetailModel : bmj.Data.MOrderDetailList) {
-                final BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
-                buyCartInfoList.GoodsLBPrice = orderDetailModel.MOrderDetailLbCount == null ? 0 : Integer.valueOf(orderDetailModel.MOrderDetailLbCount);
-                buyCartInfoList.GoodsPrice = orderDetailModel.ProductPrice;
-                buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
-                buyCartInfoList.GodosName = orderDetailModel.ProductName;
-                buyCartInfoList.ProductCount = orderDetailModel.ProductNum == null ? 0 : Integer.valueOf(orderDetailModel.ProductNum);
-                buyCartInfoList.XfNo = orderDetailModel.XfNo;
-                buyCartInfoList.GoodsInfoId = orderDetailModel.GoodsInfoId;
-                buyCartInfoList.XfStatusDisp = orderDetailModel.XfStatusDisp;
+            for (final OrderDetailModel orderDetailModel : bmj.Data.OrderDetailList) {
                 PreOrderItemView preOrderItemView = PreOrderItemView_.build(this);
                 preOrderItemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        GoodsDetailInfoActivity_.intent(OrderDetailActivity.this).goodsId(buyCartInfoList.GoodsInfoId).start();
+                        GoodsDetailInfoActivity_.intent(OrderDetailActivity.this).goodsId(orderDetailModel.GoodsInfoId).start();
                     }
                 });
-                preOrderItemView.init(buyCartInfoList);
+                preOrderItemView.init(orderDetailModel);
                 ll_pre_order_item.addView(preOrderItemView, i);
             }
             //设置返券内容
@@ -292,11 +283,7 @@ public class OrderDetailActivity extends BaseActivity {
                 case Constants.DZB_UMSPAY:
                 case Constants.LONGBI_UMSPAY:
                 case Constants.LONGBI_UMSPAY_DZB:
-                    UnionPay order = new UnionPay();
-                    order.ChrCode = mAppOrder.chrCode;
-                    order.MerSign = mAppOrder.merSign;
-                    order.TransId = mAppOrder.transId;
-                    UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(order).startForResult(1000);
+                    UmspayActivity_.intent(this).MOrderId(mAppOrder.MOrderId).order(mAppOrder.unionPay).startForResult(1000);
                     finish();
                     break;
                 default:

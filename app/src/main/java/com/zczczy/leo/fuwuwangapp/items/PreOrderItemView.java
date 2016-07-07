@@ -10,6 +10,7 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
+import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
@@ -21,13 +22,14 @@ import org.springframework.util.StringUtils;
  * Created by Leo on 2016/5/5.
  */
 @EViewGroup(R.layout.pre_order_item)
-public class PreOrderItemView extends ItemView<BuyCartInfoList> {
+public class PreOrderItemView extends ItemView<OrderDetailModel> {
 
     @ViewById
     ImageView img_cart_goods_img;
 
     @ViewById
-    TextView txt_cart_goods_product, txt_cart_goods_price, txt_cart_goods_lb_price, txt_num, txt_ticket, txt_status;
+    TextView txt_cart_goods_product, txt_cart_goods_price, txt_cart_goods_property,
+            txt_cart_goods_lb_price, txt_num, txt_ticket, txt_status;
 
     Context context;
 
@@ -46,20 +48,21 @@ public class PreOrderItemView extends ItemView<BuyCartInfoList> {
                     .resize(200, 200)
                     .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
-        txt_cart_goods_product.setText(_data.GodosName);
-        if (Double.valueOf(_data.GoodsPrice) > 0) {
+        txt_cart_goods_product.setText(_data.ProductName);
+        if (Double.valueOf(_data.ProductPrice) > 0) {
             txt_cart_goods_price.setVisibility(VISIBLE);
-            txt_cart_goods_price.setText(String.format(home_rmb, _data.GoodsPrice));
+            txt_cart_goods_price.setText(String.format(home_rmb, _data.ProductPrice));
         } else {
             txt_cart_goods_price.setVisibility(GONE);
         }
-        if (_data.GoodsLBPrice > 0) {
+        if (_data.ProductLbCount > 0) {
             txt_cart_goods_lb_price.setVisibility(VISIBLE);
-            txt_cart_goods_lb_price.setText(String.format(home_lb, _data.GoodsLBPrice));
+            txt_cart_goods_lb_price.setText(String.format(home_lb, _data.ProductLbCount));
         } else {
             txt_cart_goods_lb_price.setVisibility(GONE);
         }
-        txt_num.setText("x".concat(String.valueOf(_data.ProductCount)));
+        txt_cart_goods_property.setText(_data.GoodsAttributeName);
+        txt_num.setText("x".concat(String.valueOf(_data.ProductNum)));
         if (!StringUtils.isEmpty(_data.XfNo)) {
             txt_ticket.setVisibility(VISIBLE);
             txt_status.setVisibility(VISIBLE);

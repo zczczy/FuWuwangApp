@@ -24,7 +24,7 @@ import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
-import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
@@ -39,7 +39,6 @@ import com.zczczy.leo.fuwuwangapp.model.ProvinceModel;
 import com.zczczy.leo.fuwuwangapp.model.Purse;
 import com.zczczy.leo.fuwuwangapp.model.QueueCompanyDetail;
 import com.zczczy.leo.fuwuwangapp.model.QueueCount;
-import com.zczczy.leo.fuwuwangapp.model.QueueInfo;
 import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
@@ -616,7 +615,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/Shop/CreateTempOrderInfo?BuyCartInfoIds={BuyCartInfoIds}&StoreInfoId={StoreInfoId}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<ConfirmOrderModel> createTempOrderInfo(@Path String BuyCartInfoIds, @Path String StoreInfoId);
+    BaseModelJson<ShopOrder> createTempOrderInfo(@Path String BuyCartInfoIds, @Path String StoreInfoId);
 
     /**
      * 查询收货地址
@@ -730,7 +729,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/Shop/GetAllOrderInfoList?PageIndex={PageIndex}&PageSize={PageSize}&MorderStatus={MorderStatus}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<PagerResult<MAppOrder>> getAllOrderInfoList(@Path int PageIndex, @Path int PageSize, @Path int MorderStatus);
+    BaseModelJson<PagerResult<ShopOrder>> getAllOrderInfoList(@Path int PageIndex, @Path int PageSize, @Path int MorderStatus);
 
     /**
      * 单个商品下单支付
@@ -768,7 +767,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/Shop/GetOrderDetailById?MOrderId={MOrderId}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<MAppOrder> getOrderDetailById(@Path String MOrderId);
+    BaseModelJson<ShopOrder> getOrderDetailById(@Path String MOrderId);
 
     /**
      * @param MOrderId 订单id

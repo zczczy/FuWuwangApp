@@ -21,6 +21,9 @@ public class CartModel implements Serializable {
     public String GoodsPrice;
     public int GoodsLBPrice;
     public String GodosName;
+    public int GoodsAttributeId;
+    public String GoodsAttributeName;
+
     public int level;
     public boolean isChecked;
 

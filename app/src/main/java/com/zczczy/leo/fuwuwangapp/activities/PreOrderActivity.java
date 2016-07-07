@@ -24,7 +24,9 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
+import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PayResult;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -130,7 +132,7 @@ public class PreOrderActivity extends BaseActivity {
 
     EditText pass;
 
-    int MReceiptAddressId;
+    ShopOrder shopOrder;
 
     @AfterInject
     void afterInject() {
@@ -153,17 +155,17 @@ public class PreOrderActivity extends BaseActivity {
         if (isCart) {
             afterCreateTempOrderInfo(myRestClient.createTempOrderInfo(BuyCartInfoIds, StoreInfoId));
         } else {
-            afterCreateTempOrderInfo(myRestClient.createTempGoodsOrderInfo(goodsInfoId, orderCount));
+//            afterCreateTempOrderInfo(myRestClient.createTempGoodsOrderInfo(goodsInfoId, orderCount));
         }
     }
 
     @UiThread
-    void afterCreateTempOrderInfo(BaseModelJson<ConfirmOrderModel> bmj) {
+    void afterCreateTempOrderInfo(BaseModelJson<ShopOrder> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (bmj.Successful) {
-            MReceiptAddressId = bmj.Data.MReceiptAddressId;
+            shopOrder = bmj.Data;
             setShipping(bmj.Data.MReceiptAddress);
             txt_store.setText(bmj.Data.StoreName);
             storeId = bmj.Data.StoreInfoId;
@@ -173,19 +175,19 @@ public class PreOrderActivity extends BaseActivity {
             balance = bmj.Data.MaxDzb;
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
             txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
-            payYuan = Double.valueOf(bmj.Data.MOrderMoney);
-            txt_total_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
+            payYuan = bmj.Data.MOrderMoney;
+            txt_total_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
             int i = 0;
-            for (BuyCartInfoList buyCartInfoList : bmj.Data.BuyCartInfoList) {
+            for (OrderDetailModel buyCartInfoList : bmj.Data.OrderDetailList) {
                 PreOrderItemView preOrderItemView = PreOrderItemView_.build(this);
                 preOrderItemView.init(buyCartInfoList);
                 ll_pre_order_item.addView(preOrderItemView, i);
             }
             sellerType = bmj.Data.SellerType;
             //设置商品总价（去除邮费）
-            yuan = Double.valueOf(bmj.Data.MOrderMoney) - Double.valueOf(bmj.Data.Postage);
+            yuan = bmj.Data.MOrderMoney - Double.valueOf(bmj.Data.Postage);
             //设置费用
-            if (Double.valueOf(bmj.Data.MOrderMoney) > 0 && bmj.Data.MOrderLbCount > 0) {
+            if (bmj.Data.MOrderMoney > 0 && bmj.Data.GoodsAllLbCount > 0) {
                 ll_lb.setVisibility(View.VISIBLE);
                 ll_pay.setVisibility(View.VISIBLE);
                 txt_rmb.setVisibility(View.VISIBLE);
@@ -193,21 +195,21 @@ public class PreOrderActivity extends BaseActivity {
                 //设置商品总价
                 txt_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
                 //设置龙币数
-                txt_home_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
-            } else if (Double.valueOf(bmj.Data.MOrderMoney) > 0) {
+                txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
+            } else if (bmj.Data.MOrderMoney > 0) {
                 ll_lb.setVisibility(View.GONE);
                 ll_pay.setVisibility(View.VISIBLE);
                 txt_rmb.setVisibility(View.VISIBLE);
                 txt_plus.setVisibility(View.GONE);
                 txt_home_lb.setVisibility(View.GONE);
                 txt_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
-            } else if (bmj.Data.MOrderLbCount > 0) {
+            } else if (bmj.Data.GoodsAllLbCount > 0) {
                 ll_pay.setVisibility(View.GONE);
                 ll_lb.setVisibility(View.VISIBLE);
                 txt_rmb.setVisibility(View.GONE);
                 txt_plus.setVisibility(View.GONE);
                 txt_home_lb.setVisibility(View.VISIBLE);
-                txt_home_lb.setText(String.format(home_lb, bmj.Data.MOrderLbCount));
+                txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
             }
             //设置商品总数
             txt_count.setText(String.format(text_count, bmj.Data.GoodsAllCount));
@@ -233,7 +235,7 @@ public class PreOrderActivity extends BaseActivity {
                 temp = "不赠券+";
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
-            longBi = bmj.Data.MOrderLbCount;
+            longBi = bmj.Data.GoodsAllLbCount;
             //1:服务类，2：邮寄类
             ll_shipping.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
             rl_express_charges.setVisibility((isService = "1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
@@ -254,7 +256,7 @@ public class PreOrderActivity extends BaseActivity {
         } else {
             txt_dian_quantity.setClickable(checked);
             txt_dian_quantity.setText(checked ? useDianZiBi + "" : "0.0");
-            txt_pay_total_rmb.setText(String.format(home_rmb, checked ? payYuan : (yuan+postal)));
+            txt_pay_total_rmb.setText(String.format(home_rmb, checked ? payYuan : (yuan + postal)));
         }
     }
 
@@ -346,20 +348,20 @@ public class PreOrderActivity extends BaseActivity {
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("kbn", Constants.ANDROID);
         if (isCart) {
-            map.put("BuyCartInfoIds", BuyCartInfoIds);
-            map.put("StoreInfoId", StoreInfoId);
-            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
-            map.put("TwoPass", password);
-            map.put("MReceiptAddressId", MReceiptAddressId + "");
-            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
+//            map.put("BuyCartInfoIds", BuyCartInfoIds);
+//            map.put("StoreInfoId", StoreInfoId);
+//            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
+//            map.put("TwoPass", password);
+//            map.put("MReceiptAddressId", MReceiptAddressId + "");
+//            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
             afterPayOrder(myRestClient.createOrderInfo(map));
         } else {
-            map.put("GoodsInfoId", goodsInfoId);
-            map.put("number", orderCount + "");
-            map.put("MReceiptAddressId", MReceiptAddressId + "");
-            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
-            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
-            map.put("TwoPass", password);
+//            map.put("GoodsInfoId", goodsInfoId);
+//            map.put("number", orderCount + "");
+//            map.put("MReceiptAddressId", MReceiptAddressId + "");
+//            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
+//            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
+//            map.put("TwoPass", password);
             afterPayOrder(myRestClient.createGoodsOrderInfo(map));
         }
     }
@@ -487,7 +489,7 @@ public class PreOrderActivity extends BaseActivity {
     //设置 收货地址
     void setShipping(MReceiptAddressModel model) {
         if (model != null) {
-            MReceiptAddressId = model.MReceiptAddressId;
+            shopOrder.MReceiptAddress = model;
             tv_shipping.setText(String.format(txt_shipping, model.ReceiptName));
             txt_phone.setText(model.Mobile);
             tv_shipping_address.setText(String.format(txt_shipping_address, model.ProvinceName + model.CityName + model.AreaName + model.DetailAddress));

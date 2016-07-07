@@ -2,16 +2,14 @@ package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -61,8 +59,15 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
         ll_root.setLayoutParams(linearLayout);
         img_pic.setLayoutParams(new LinearLayout.LayoutParams(temp, temp));
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl)
-                    .fit()
+//            Picasso.with(context).load(_data.GoodsImgSl)
+//                    .fit()
+//                    .tag("home")
+//                    .centerCrop()
+//                    .config(Bitmap.Config.RGB_565)
+//                    .placeholder(R.drawable.goods_default)
+//                    .error(R.drawable.goods_default)
+//                    .into(img_pic);
+            Glide.with(context).load(_data.GoodsImgSl)
                     .centerCrop()
                     .placeholder(R.drawable.goods_default)
                     .error(R.drawable.goods_default)

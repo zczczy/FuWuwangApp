@@ -14,9 +14,9 @@ public class UnionPay implements Serializable {
      * TransId : sample string 3
      * MerchantId : sample string 4
      */
-    public String MerSign;
-    public String ChrCode;
-    public String TransId;
+    public String MerSign; //银联签名
+    public String ChrCode; //特征码
+    public String TransId; //银联编号
     public String MerchantId;
 
 }

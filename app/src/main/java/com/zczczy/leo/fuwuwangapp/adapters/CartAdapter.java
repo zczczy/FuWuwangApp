@@ -97,6 +97,7 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
                     cm.ProductCount = bb.ProductCount;
                     cm.StoreInfoId = aa.StoreInfoId;
                     cm.StoreName = aa.StoreName;
+                    cm.GoodsAttributeName=bb.GoodsAttributeName;
                     cm.UserInfoId = bb.UserInfoId;
                     cm.level = 1;
                     list.add(cm);

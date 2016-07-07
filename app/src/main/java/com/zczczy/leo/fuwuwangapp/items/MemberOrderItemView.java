@@ -18,9 +18,8 @@ import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.UmspayActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
-import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
-import com.zczczy.leo.fuwuwangapp.model.UnionPay;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -47,7 +46,7 @@ import java.util.Map;
  * Created by leo on 2016/5/6.
  */
 @EViewGroup(R.layout.activity_member_order_item)
-public class MemberOrderItemView extends ItemView<MAppOrder> {
+public class MemberOrderItemView extends ItemView<ShopOrder> {
 
 
     @ViewById
@@ -176,11 +175,7 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
                 case Constants.DZB_UMSPAY:
                 case Constants.LONGBI_UMSPAY:
                 case Constants.LONGBI_UMSPAY_DZB:
-                    UnionPay order = new UnionPay();
-                    order.ChrCode = _data.chrCode;
-                    order.MerSign = _data.merSign;
-                    order.TransId = _data.transId;
-                    UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(order).startForResult(1000);
+                    UmspayActivity_.intent(memberOrderActivity).MOrderId(_data.MOrderId).order(_data.unionPay).startForResult(1000);
                     break;
                 default:
                     OrderDetailActivity_.intent(context).orderId(_data.MOrderId).start();
@@ -200,28 +195,28 @@ public class MemberOrderItemView extends ItemView<MAppOrder> {
         //设置商品总数
         txt_count.setText(String.format(text_count, _data.GoodsAllCount));
         //设置费用
-        if (_data.MOrderMoney > 0 && _data.MOrderLbCount > 0) {
+        if (_data.MOrderMoney > 0 && _data.GoodsAllLbCount > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
             txt_plus.setVisibility(View.VISIBLE);
             txt_home_lb.setVisibility(VISIBLE);
             //设置商品总价
             txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney));
             //设置龙币数
-            txt_home_lb.setText(String.format(home_lb, _data.MOrderLbCount));
+            txt_home_lb.setText(String.format(home_lb, _data.GoodsAllLbCount));
         } else if (_data.MOrderMoney > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
             txt_plus.setVisibility(View.GONE);
             txt_home_lb.setVisibility(View.GONE);
             txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney));
-        } else if (_data.MOrderLbCount > 0) {
+        } else if (_data.GoodsAllLbCount > 0) {
             txt_rmb.setVisibility(View.GONE);
             txt_plus.setVisibility(View.GONE);
             txt_home_lb.setVisibility(View.VISIBLE);
-            txt_home_lb.setText(String.format(home_lb, _data.MOrderLbCount));
+            txt_home_lb.setText(String.format(home_lb, _data.GoodsAllLbCount));
         }
         //先清空所以布局
         ll_pre_order_item.removeAllViews();
-        for (OrderDetailModel orderDetailModel : _data.MOrderDetailList) {
+        for (OrderDetailModel orderDetailModel : _data.OrderDetailList) {
             BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
             buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
             buyCartInfoList.GodosName = orderDetailModel.ProductName;

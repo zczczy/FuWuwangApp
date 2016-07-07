@@ -4,12 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.MemberOrderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.MAppOrder;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
@@ -30,7 +29,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by leo on 2016/5/7.
  */
 @EBean
-public class MemberOrderAdapter extends BaseUltimateRecyclerViewAdapter<MAppOrder> {
+public class MemberOrderAdapter extends BaseUltimateRecyclerViewAdapter<ShopOrder> {
 
     @Bean
     OttoBus bus;
@@ -65,7 +64,7 @@ public class MemberOrderAdapter extends BaseUltimateRecyclerViewAdapter<MAppOrde
     }
 
     @UiThread
-    void afterGetData(BaseModelJson<PagerResult<MAppOrder>> bmj) {
+    void afterGetData(BaseModelJson<PagerResult<ShopOrder>> bmj) {
         AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             bmj = new BaseModelJson<>();
