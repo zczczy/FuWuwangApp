@@ -1,7 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,9 +9,6 @@ import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
@@ -87,11 +83,6 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
             img_winners_order.setVisibility(VISIBLE);
-//            Picasso.with(context).load(app.getLotteryConfig().AppLotteryImgUrl)
-//                    .tag("home")
-//                    .fit().config(Bitmap.Config.RGB_565)
-//                    .placeholder(R.drawable.home_winners_order).
-//                    error(R.drawable.home_winners_order).into(img_winners_order);
             Glide.with(context).load(app.getLotteryConfig().AppLotteryImgUrl)
                     .placeholder(R.drawable.home_winners_order)
                     .centerCrop()
@@ -103,11 +94,6 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
         for (AdvertModel am : app.getAdvertModelList()) {
             if (!StringUtils.isEmpty(am.AdvertImg)) {
-//                RequestCreator rc = Picasso.with(context)
-//                        .load(am.AdvertImg).fit()
-//                        .tag("home")
-//                        .config(Bitmap.Config.RGB_565);
-                ;
                 if (am.AdsenseTypeId == 3) {
                     ad_one.setContentDescription(am.JumpType + "," + am.InfoId);
                     Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_one)
@@ -158,9 +144,6 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
         int i = 0;
         for (GoodsTypeModel gtm : app.getGoodsTypeModelList()) {
-//            RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon).fit()
-//                    .tag("home")
-//                    .config(Bitmap.Config.RGB_565).into(imageViews.get(i));
             Glide.with(context).load(gtm.GoodsTypeIcon)
                     .crossFade()
                     .centerCrop().into(imageViews.get(i));

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 
@@ -34,7 +34,10 @@ public class SecondCategoryItemView extends ItemView<GoodsTypeModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsTypeIcon)) {
-            Picasso.with(context).load(_data.GoodsTypeIcon).placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_second_url);
+            Glide.with(context).load(_data.GoodsTypeIcon)
+                    .centerCrop()
+                    .crossFade()
+                    .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_second_url);
         }
         txt_second.setText(_data.GoodsTypeName);
     }

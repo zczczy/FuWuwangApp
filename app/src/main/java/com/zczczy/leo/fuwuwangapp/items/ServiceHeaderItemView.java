@@ -4,8 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
@@ -103,9 +102,8 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
         //设置分类
         int i = 0;
         for (GoodsTypeModel gtm : app.getServiceGoodsTypeModelList()) {
-            RequestCreator rc = Picasso.with(context).load(gtm.GoodsTypeIcon);
-//                    .error(R.drawable.goods_default).placeholder(R.drawable.goods_default);
-            rc.into(imageViews.get(i));
+            Glide.with(context).load(gtm.GoodsTypeIcon)
+                    .crossFade().centerCrop().into(imageViews.get(i));
             imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "," + gtm.GoodsTypeName);
             textViews.get(i).setText(gtm.GoodsTypeName);
             i++;
@@ -119,53 +117,51 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
     void setAd() {
         for (AdvertModel am : app.getServiceAdvertModelList()) {
             if (!StringUtils.isEmpty(am.AdvertImg)) {
-                RequestCreator rc = Picasso.with(context)
-                        .load(am.AdvertImg);
                 if (am.AdsenseTypeId == 12) {
                     ad_one.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_one)
-                            .placeholder(R.drawable.service_ad_one);
-                    rc.into(ad_one);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_one)
+                            .placeholder(R.drawable.service_ad_one).into(ad_one);
                 } else if (am.AdsenseTypeId == 13) {
                     ad_two.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_one)
-                            .placeholder(R.drawable.service_ad_one);
-                    rc.into(ad_two);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_one)
+                            .placeholder(R.drawable.service_ad_one).into(ad_two);
                 } else if (am.AdsenseTypeId == 14) {
                     ad_three.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_one)
-                            .placeholder(R.drawable.service_ad_one);
-                    rc.into(ad_three);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_one)
+                            .placeholder(R.drawable.service_ad_one).into(ad_three);
                 } else if (am.AdsenseTypeId == 15) {
                     ad_four.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_four)
-                            .placeholder(R.drawable.service_ad_four);
-                    rc.into(ad_four);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_four)
+                            .placeholder(R.drawable.service_ad_four).into(ad_four);
                 } else if (am.AdsenseTypeId == 16) {
                     ad_five.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_five)
-                            .placeholder(R.drawable.service_ad_five);
-                    rc.into(ad_five);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_five)
+                            .placeholder(R.drawable.service_ad_five).into(ad_five);
                 } else if (am.AdsenseTypeId == 17) {
                     ad_six.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_five)
-                            .placeholder(R.drawable.service_ad_five);
-                    rc.into(ad_six);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_five)
+                            .placeholder(R.drawable.service_ad_five).into(ad_six);
                 } else if (am.AdsenseTypeId == 18) {
                     ad_seven.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_five)
-                            .placeholder(R.drawable.service_ad_seven);
-                    rc.into(ad_seven);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_five)
+                            .placeholder(R.drawable.service_ad_seven).into(ad_seven);
                 } else if (am.AdsenseTypeId == 19) {
                     ad_eight.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_eight)
-                            .placeholder(R.drawable.service_ad_eight);
-                    rc.into(ad_eight);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_eight)
+                            .placeholder(R.drawable.service_ad_eight).into(ad_eight);
                 } else if (am.AdsenseTypeId == 20) {
                     ad_nine.setContentDescription(am.JumpType + "," + am.InfoId);
-                    rc.error(R.drawable.service_ad_eight)
-                            .placeholder(R.drawable.service_ad_eight);
-                    rc.into(ad_nine);
+                    Glide.with(context)
+                            .load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.service_ad_eight)
+                            .placeholder(R.drawable.service_ad_eight).into(ad_nine);
                 }
             }
         }

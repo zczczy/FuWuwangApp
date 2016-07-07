@@ -4,10 +4,9 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.Information;
-import com.zczczy.leo.fuwuwangapp.model.Notice;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -36,7 +35,7 @@ public class InformationItemView extends ItemView<Information> {
     protected void init(Object... objects) {
 
         if (!StringUtils.isEmpty(_data.NimgUrl)) {
-            Picasso.with(context).load(_data.NimgUrl).resize(100, 100)
+            Glide.with(context).load(_data.NimgUrl).centerCrop().crossFade()
                     .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_nimg);
         }
 

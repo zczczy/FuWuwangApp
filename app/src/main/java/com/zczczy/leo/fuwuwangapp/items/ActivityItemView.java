@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.Activity;
 
@@ -57,7 +57,9 @@ public class ActivityItemView extends ItemView<Activity> {
 
         if (!"".equals(_data.getAimgurl()) && _data.getAimgurl() != null && !_data.getAimgurl().isEmpty()) {
 
-            Picasso.with(context).load(_data.getAimgurl()).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_act);
+            Glide.with(context).load(_data.getAimgurl()).centerCrop()
+                    .crossFade().error(R.drawable.goods_default)
+                    .placeholder(R.drawable.goods_default).into(img_act);
         }
 
     }

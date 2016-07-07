@@ -4,9 +4,8 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 import com.zczczy.leo.fuwuwangapp.model.Experience;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -42,7 +41,12 @@ public class ExperienceItemView extends ItemView<Experience> {
 
         if(!"".equals(_data.imgurl)&&!_data.imgurl.isEmpty()&&_data.imgurl!=null){
 
-            Picasso.with(context).load(_data.imgurl).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_company_logo);
+            Glide.with(context).load(_data.imgurl)
+                    .centerCrop()
+                    .crossFade()
+                    .error(R.drawable.goods_default)
+                    .placeholder(R.drawable.goods_default)
+                    .into(img_company_logo);
         }
 
     }

@@ -2,17 +2,12 @@ package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
-import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
@@ -44,8 +39,8 @@ public class PreOrderItemView extends ItemView<OrderDetailModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl)
-                    .resize(200, 200)
+            Glide.with(context).load(_data.GoodsImgSl)
+                    .centerCrop().crossFade()
                     .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
         }
         txt_cart_goods_product.setText(_data.ProductName);

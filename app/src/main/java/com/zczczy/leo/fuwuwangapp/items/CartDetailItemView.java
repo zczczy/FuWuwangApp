@@ -1,17 +1,14 @@
 package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CartAdapter;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.CartModel;
@@ -95,9 +92,12 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
         cartAdapter = (CartAdapter) objects[0];
         baseViewHolder = (BaseViewHolder) objects[1];
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context).load(_data.GoodsImgSl)
-                    .resize(200, 200)
-                    .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_cart_goods_img);
+            Glide.with(context).load(_data.GoodsImgSl)
+                    .centerCrop()
+                    .crossFade()
+                    .placeholder(R.drawable.goods_default)
+                    .error(R.drawable.goods_default)
+                    .into(img_cart_goods_img);
         }
         txt_cart_goods_product.setText(_data.GodosName);
         txt_cart_goods_property.setText(_data.GoodsAttributeName);

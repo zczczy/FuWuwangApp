@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
 
@@ -42,7 +42,12 @@ public class CooperationMerchantItemView extends ItemView<CooperationMerchant> {
 
         if (!"".equals(_data.cp_pic) && _data.cp_pic != null && !_data.cp_pic.isEmpty()) {
 
-            Picasso.with(context).load(_data.cp_pic).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_company_logo);
+            Glide.with(context).load(_data.cp_pic)
+                    .centerCrop()
+                    .crossFade()
+                    .error(R.drawable.goods_default)
+                    .placeholder(R.drawable.goods_default)
+                    .into(img_company_logo);
         }
 
     }

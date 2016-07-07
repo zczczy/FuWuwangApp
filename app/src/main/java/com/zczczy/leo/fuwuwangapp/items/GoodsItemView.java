@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 
@@ -43,13 +43,14 @@ public class GoodsItemView extends ItemView<Goods> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.GoodsImgSl)) {
-            Picasso.with(context)
+            Glide.with(context)
                     .load(_data.GoodsImgSl)
-                    .fit()
                     .centerCrop()
+                    .crossFade()
                     .placeholder(R.drawable.goods_default)
                     .error(R.drawable.goods_default)
                     .into(pic);
+
         }
 
         goods_name.setText(_data.GodosName);
