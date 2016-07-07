@@ -35,7 +35,6 @@
                 android:id="@+id/slider_layout"
                 android:layout_width="match_parent"
                 android:layout_height="226dp"
-                android:background="@drawable/goods_default"
                 app:pager_animation="Accordion" />
 
             <LinearLayout
@@ -43,8 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txt_goods_name"
@@ -52,6 +50,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -64,14 +65,20 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="10dp">
 
 
-                <TextView
+                <ImageView
                     android:id="@+id/txt_coupon"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/coupon" />
+                    android:src="@drawable/coupon" />
+
+                <TextView
+                    android:id="@+id/txt_rebate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -83,6 +90,44 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_sell_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_sell_count"
+                        android:textColor="@color/sub_text_color" />
+
+                    <TextView
+                        android:id="@+id/goods_sell_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/sub_text_color" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_store_count"
+                        android:textColor="@color/sub_text_color" />
+
+                    <TextView
+                        android:id="@+id/goods_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/sub_text_color" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_goods_by"
@@ -105,45 +150,6 @@
 
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_sell_count"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_sell_count"
-                        android:textColor="@color/sub_text_color" />
-
-                    <TextView
-                        android:id="@+id/goods_sell_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/sub_text_color" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_store_count"
-                        android:textColor="@color/sub_text_color" />
-
-                    <TextView
-                        android:id="@+id/goods_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/sub_text_color" />
-                </LinearLayout>
-
             </LinearLayout>
 
             <include layout="@layout/horizontal_line" />
@@ -158,10 +164,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:paddingBottom="20dp"
+                android:paddingBottom="15dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingTop="20dp">
+                android:paddingTop="15dp">
 
                 <TextView
                     android:id="@+id/txt_store_name"

@@ -96,6 +96,7 @@ dependencies {
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.18'
     compile 'com.belerweb:pinyin4j:2.5.1'
     compile 'me.iwf.photopicker:PhotoPicker:0.8.1@aar'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'com.tencent.bugly:crashreport:2.1.7'  //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.8
 
     //https://github.com/bingoogolapple/BGAQRCode-Android

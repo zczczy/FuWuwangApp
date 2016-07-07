@@ -13,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
@@ -39,6 +40,7 @@ public class DetailGoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCom
     }
 
     @Override
+    @Background
     public void getMoreData(Object... objects) {
         afterGetData(myRestClient.getGoodsCommentsByGoodsInfoId(objects[0].toString(), 1, 20));
     }

@@ -818,12 +818,13 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * 修改用户密码信息
      *
-     * @param map UserPw
-     *            NewUserPw
-     *            QNewUserPw
+     * @param map OldPw
+     *            NewPw
+     *            ConfirmPw
+     *            UserType
      * @return
      */
-    @Post("api/Shop/UpdateUserInfo")
+    @Post("api/Shop/UpdPwd")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel changePassword(@Body Map map);
 

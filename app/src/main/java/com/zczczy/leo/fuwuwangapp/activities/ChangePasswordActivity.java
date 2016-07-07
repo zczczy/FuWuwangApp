@@ -73,9 +73,10 @@ public class ChangePasswordActivity extends BaseActivity {
         myDotNetRestClient.setHeader("Token", pre.token().get());
         myDotNetRestClient.setHeader("ShopToken", pre.shopToken().get());
         myDotNetRestClient.setHeader("Kbn", Constants.ANDROID);
-        map.put("UserPw", gar_old.getText().toString());
-        map.put("NewUserPw", gar_password.getText().toString());
-        map.put("QNewUserPw", gar_password_confirm.getText().toString());
+        map.put("OldPw", gar_old.getText().toString());
+        map.put("NewPw", gar_password.getText().toString());
+        map.put("ConfirmPw", gar_password_confirm.getText().toString());
+        map.put("UserType", pre.userType().get());
         afterChangePassword(myDotNetRestClient.changePassword(map));
     }
 

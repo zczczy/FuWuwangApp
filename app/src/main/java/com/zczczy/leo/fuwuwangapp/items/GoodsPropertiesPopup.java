@@ -43,6 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import me.himanshusoni.quantityview.QuantityView;
 
 /**
@@ -119,6 +121,14 @@ public class GoodsPropertiesPopup extends LinearLayout {
         this.goods = goodss;
         textViews = new ArrayList<>();
         int i = 0;
+        if (!StringUtils.isEmpty(goods.GoodsImgSl)) {
+            Picasso.with(context).load(goods.GoodsImgSl)
+                    .fit().centerCrop()
+                    .error(R.drawable.goods_default)
+                    .transform(new RoundedCornersTransformation(15,0))
+                    .placeholder(R.drawable.goods_default)
+                    .into(img_goods);
+        }
         for (final GoodsAttribute g : goods.GoodsAttributeList) {
             final TextView textView = new TextView(context);
             textView.setText(g.GoodsAttributeName);
@@ -150,13 +160,6 @@ public class GoodsPropertiesPopup extends LinearLayout {
                         txt_plus.setVisibility(View.GONE);
                         txt_home_lb.setVisibility(View.VISIBLE);
                         txt_home_lb.setText(String.format(home_lb, g.GoodsAttributeLbPrice));
-                    }
-                    if (!StringUtils.isEmpty(goods.GoodsImgSl)) {
-                        Picasso.with(context).load(goods.GoodsImgSl)
-                                .fit().centerCrop()
-                                .error(R.drawable.goods_default)
-                                .placeholder(R.drawable.goods_default)
-                                .into(img_goods);
                     }
                     selectedId = g.GoodsAttributeId;
                 }

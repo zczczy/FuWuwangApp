@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -13,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment_;
@@ -24,6 +27,7 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsAttribute;
+import com.zczczy.leo.fuwuwangapp.model.GoodsImgListModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -53,16 +57,19 @@ import java.util.List;
  * @since 2016/7/4.
  */
 @EActivity(R.layout.new_activity_goods_detail)
-public class GoodsDetailActivity extends BaseActivity {
+public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener {
 
     @ViewById
     MyTitleBar myTitleBar;
 
     @ViewById
-    TextView txt_goods_name, txt_coupon,
+    TextView txt_goods_name, txt_rebate,
             txt_store_name, txt_rmb,
             txt_plus, txt_home_lb,
             goods_count, goods_sell_count, goods_by;
+
+    @ViewById
+    ImageView txt_coupon;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -90,9 +97,9 @@ public class GoodsDetailActivity extends BaseActivity {
 
     Goods goods;
 
-    List<TextView> textViews;
-
     boolean isCanBuy;
+
+    boolean isStart;
 
     FragmentManager fragmentManager;
 
@@ -114,6 +121,7 @@ public class GoodsDetailActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
+        AndroidTool.showLoadDialog(this);
         goodsPropertiesPopup = GoodsPropertiesPopup_.build(this);
         myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +162,6 @@ public class GoodsDetailActivity extends BaseActivity {
             }
         } else {
             if (goodsCommentsFragment == null) {
-//                goodsCommentsFragment = GoodsDetailFragment_.builder().linkUrl(parameter).build();
                 goodsCommentsFragment = GoodsCommentsFragment_.builder().goodsId(parameter).build();
                 transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
             } else {
@@ -176,7 +183,7 @@ public class GoodsDetailActivity extends BaseActivity {
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bmj.Successful) {
-
+            AndroidTool.showToast(this, bmj.Error);
         } else {
             goods = bmj.Data;
             if (Constants.GOODS_STATE_UP.equals(bmj.Data.GoodsDelStatus) && Constants.GOODS_STATE_PASS.equals(bmj.Data.GoodsCheckStatus)) {
@@ -187,6 +194,19 @@ public class GoodsDetailActivity extends BaseActivity {
                 goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
                 ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
                 goods_by.setText(bmj.Data.GoodsIsBy);
+                ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
+                goods_by.setText(bmj.Data.GoodsIsBy);
+
+                if ("0".equals(bmj.Data.GoodsReturnTicket)) {
+                    txt_rebate.setText(bmj.Data.TempDisp);
+                    txt_coupon.setSelected(true);
+                } else {
+                    txt_coupon.setSelected(false);
+                    txt_rebate.setText("");
+                }
+
+                PlUrl = goodsId;
+                changeFragment(bmj.Data.StaticHtmlUrl);
                 if (Float.valueOf(bmj.Data.GoodsPrice) > 0 && Integer.valueOf(bmj.Data.GoodsLBPrice) > 0) {
                     txt_rmb.setVisibility(View.VISIBLE);
                     txt_plus.setVisibility(View.VISIBLE);
@@ -203,6 +223,22 @@ public class GoodsDetailActivity extends BaseActivity {
                     txt_home_lb.setVisibility(View.VISIBLE);
                     txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
                 }
+                for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(this);
+                    textSliderView.image(nb.GoodsImgUrl).
+                            empty(R.drawable.goods_detail_banner).
+                            error(R.drawable.goods_detail_banner).
+                            setScaleType(BaseSliderView.ScaleType.CenterInside).
+                            setOnSliderClickListener(this);
+                    sliderLayout.addSlider(textSliderView);
+                }
+                if (bmj.Data.GoodsImgList == null || bmj.Data.GoodsImgList.size() <= 1) {
+                    isStart = false;
+                    sliderLayout.stopAutoCycle();
+                } else {
+                    isStart = true;
+                    sliderLayout.startAutoCycle();
+                }
             }
 
         }
@@ -213,14 +249,13 @@ public class GoodsDetailActivity extends BaseActivity {
         if (!checkUserIsLogin()) {
             LoginActivity_.intent(this).start();
         } else {
-            if (goods.IsUsing == 1) {
+            if (goods != null && goods.IsUsing == 1 && goods.GoodsAttributeList != null && goods.GoodsAttributeList.size() > 0) {
                 showProperties();
             } else {
                 AndroidTool.showLoadDialog(this);
                 addShoppingCart();
             }
         }
-
     }
 
     /**
@@ -257,7 +292,6 @@ public class GoodsDetailActivity extends BaseActivity {
         }
     }
 
-
     @Click
     void txt_buy() {
 
@@ -275,20 +309,39 @@ public class GoodsDetailActivity extends BaseActivity {
         popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
-
     @Click
     void ll_review() {
-
+        GoodsCommentsActivity_.intent(this).goodsId(goodsId).start();
     }
 
     @Click
     void txt_more_review() {
-
+        changeFragment(goodsId);
     }
 
     @Click
     void txt_store() {
-
+        if (goods != null) {
+            StoreInformationActivity_.intent(this).storeId(goods.StoreInfoId).start();
+        }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        sliderLayout.stopAutoCycle();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isStart && sliderLayout != null) {
+            sliderLayout.startAutoCycle();
+        }
+    }
+
+    @Override
+    public void onSliderClick(BaseSliderView slider) {
+
+    }
 }

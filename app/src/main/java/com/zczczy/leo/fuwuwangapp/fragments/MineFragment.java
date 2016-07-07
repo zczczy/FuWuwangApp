@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.ChangePasswordActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
@@ -45,7 +46,7 @@ public class MineFragment extends BaseFragment {
     LinearLayout ll_color_control;
 
     @ViewById
-    RelativeLayout rl_vip, rl_setting;
+    RelativeLayout rl_vip, rl_change_pass;
 
     @ViewById
     ImageView img_avatar;
@@ -120,8 +121,8 @@ public class MineFragment extends BaseFragment {
     }
 
     @Click
-    void rl_setting() {
-        SettingActivity_.intent(this).start();
+    void rl_change_pass() {
+        ChangePasswordActivity_.intent(this).start();
     }
 
     @Click
@@ -145,26 +146,25 @@ public class MineFragment extends BaseFragment {
     void setData() {
         if (checkUserIsLogin()) {
             txt_name.setText(pre.username().get());
+            rl_change_pass.setVisibility(View.VISIBLE);
             if (!StringUtils.isEmpty(pre.avatar().get())) {
-                Picasso.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable
+                Picasso.with(getActivity()).load(pre.avatar().get()).fit().placeholder(R.drawable
                         .default_header).error(R.drawable.default_header).into(img_avatar);
             }
             if (Constants.VIP.equals(pre.userType().get())) {
                 rl_vip.setVisibility(View.VISIBLE);
                 img_vip_icon.setVisibility(View.VISIBLE);
-                rl_setting.setVisibility(View.GONE);
                 txt_address.setText(String.format(text_location, pre.locationAddress().getOr("北京")));
             } else {
                 rl_vip.setVisibility(View.GONE);
                 img_vip_icon.setVisibility(View.INVISIBLE);
-                rl_setting.setVisibility(View.VISIBLE);
                 txt_address.setText(String.format(text_location, pre.locationAddress().getOr("北京")));
             }
         } else {
+            rl_change_pass.setVisibility(View.GONE);
             img_vip_icon.setVisibility(View.GONE);
             rl_vip.setVisibility(View.GONE);
             img_avatar.setImageResource(R.drawable.default_header);
-            rl_setting.setVisibility(View.VISIBLE);
             txt_name.setText(text_login);
             txt_address.setText(String.format(text_location, ""));
         }
