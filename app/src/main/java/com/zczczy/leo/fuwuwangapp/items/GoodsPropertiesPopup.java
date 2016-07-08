@@ -5,13 +5,12 @@ import android.content.res.ColorStateList;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
@@ -32,7 +31,6 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.Touch;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.ColorStateListRes;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
@@ -43,8 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.himanshusoni.quantityview.QuantityView;
 
 /**
@@ -122,10 +119,11 @@ public class GoodsPropertiesPopup extends LinearLayout {
         textViews = new ArrayList<>();
         int i = 0;
         if (!StringUtils.isEmpty(goods.GoodsImgSl)) {
-            Picasso.with(context).load(goods.GoodsImgSl)
-                    .fit().centerCrop()
+            Glide.with(context).load(goods.GoodsImgSl)
+                    .centerCrop()
+                    .crossFade()
                     .error(R.drawable.goods_default)
-                    .transform(new RoundedCornersTransformation(15,0))
+                    .bitmapTransform(new RoundedCornersTransformation(context, 10, 0))
                     .placeholder(R.drawable.goods_default)
                     .into(img_goods);
         }

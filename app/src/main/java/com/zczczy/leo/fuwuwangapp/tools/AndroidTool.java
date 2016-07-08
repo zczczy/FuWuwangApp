@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.zczczy.leo.fuwuwangapp.viewgroup.CustomProgressDialog;
 import com.zczczy.leo.fuwuwangapp.viewgroup.DateTimeDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -73,6 +75,23 @@ public class AndroidTool {
         cal_1.add(Calendar.MONTH, 1 - month);
         cal_1.set(Calendar.DAY_OF_MONTH, 1);//设置为1号,当前日期既为本月第一天
         return format.format(cal_1.getTime());
+    }
+
+    public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+        if (needRecycle) {
+            bmp.recycle();
+        }
+
+        byte[] result = output.toByteArray();
+        try {
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public static String getCurrentDay() {

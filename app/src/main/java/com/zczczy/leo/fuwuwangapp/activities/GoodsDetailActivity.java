@@ -21,18 +21,23 @@ import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsDetailFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsDetailFragment_;
+import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
+import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
 import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup;
 import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsAttribute;
+import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsImgListModel;
+import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
+import com.zczczy.leo.fuwuwangapp.views.GlideSliderView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -90,7 +95,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     RelativeLayout parent;
 
     @ViewById
-    LinearLayout ll_goods_by;
+    LinearLayout ll_goods_by, ll_review;
 
     @ViewById
     SliderLayout sliderLayout;
@@ -134,6 +139,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             }
         });
         getGoodsDetailById(goodsId);
+        getGoodsComments(goodsId);
     }
 
     @CheckedChange
@@ -143,6 +149,24 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         } else {
             changeFragment(goodsId);
         }
+    }
+
+    @Background
+    void getGoodsComments(String goodsId) {
+        afterGetGoodsComments(myRestClient.getGoodsCommentsByGoodsInfoId(goodsId, 1, 3));
+    }
+
+    @UiThread
+    void afterGetGoodsComments(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            for (GoodsCommentsModel gcm : bmj.Data.ListData) {
+                GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
+                goodsCommentsItemView.init(gcm);
+                ll_review.addView(goodsCommentsItemView);
+                ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
+            }
+        }
+
     }
 
     void changeFragment(String parameter) {
@@ -224,7 +248,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                     txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsLBPrice));
                 }
                 for (GoodsImgListModel nb : bmj.Data.GoodsImgList) {
-                    DefaultSliderView textSliderView = new DefaultSliderView(this);
+                    GlideSliderView textSliderView = new GlideSliderView(this);
                     textSliderView.image(nb.GoodsImgUrl).
                             empty(R.drawable.goods_detail_banner).
                             error(R.drawable.goods_detail_banner).
@@ -240,7 +264,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                     sliderLayout.startAutoCycle();
                 }
             }
-
         }
     }
 

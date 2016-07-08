@@ -7,13 +7,11 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -32,7 +30,6 @@ import org.androidannotations.annotations.FromHtml;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
@@ -101,10 +98,10 @@ public class WheelActivity extends BaseActivity implements Runnable {
         AndroidTool.dismissLoadDialog();
         if (bmj != null && bmj.Successful) {
             if (bmj.Data != null && !StringUtils.isEmpty(bmj.Data.BigImgUrl)) {
-                Picasso.with(this).load(bmj.Data.BigImgUrl).into(rotate_view);
+                Glide.with(this).load(bmj.Data.BigImgUrl).into(rotate_view);
             }
             if (bmj.Data != null && !StringUtils.isEmpty(bmj.Data.HandImgUrl)) {
-                Picasso.with(this).load(bmj.Data.HandImgUrl).into(id_start_btn);
+                Glide.with(this).load(bmj.Data.HandImgUrl).into(id_start_btn);
             }
         } else {
             finish();

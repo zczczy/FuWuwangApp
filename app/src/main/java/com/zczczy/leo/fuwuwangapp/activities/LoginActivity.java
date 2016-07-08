@@ -5,8 +5,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.squareup.picasso.Picasso;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.LoginInfo;
@@ -25,7 +23,6 @@ import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
-import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/5/1.

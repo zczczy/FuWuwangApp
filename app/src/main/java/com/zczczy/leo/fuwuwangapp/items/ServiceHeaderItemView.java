@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ServiceGoodsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
@@ -173,7 +174,6 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
             String[] temp = view.getContentDescription().toString().split(",");
             ServiceGoodsActivity_.intent(context).typeId(Integer.valueOf(temp[0])).typeName(temp[1]).start();
         }
-//        CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).start();
     }
 
     @Click(value = {R.id.ad_one, R.id.ad_two, R.id.ad_three, R.id.ad_four, R.id.ad_five, R.id.ad_six, R.id.ad_seven, R.id.ad_eight, R.id.ad_nine})
@@ -185,7 +185,7 @@ public class ServiceHeaderItemView extends ItemView<AdvertModel> {
                 if ("1".equals(temp[0])) {
                     StoreInformationActivity_.intent(context).storeId(temp[1]).start();
                 } else {
-                    GoodsDetailInfoActivity_.intent(context).goodsId(temp[1]).start();
+                    GoodsDetailActivity_.intent(context).goodsId(temp[1]).start();
                 }
             }
         }

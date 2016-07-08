@@ -89,7 +89,7 @@ public class StoreInformationActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
-                GoodsDetailInfoActivity_.intent(StoreInformationActivity.this).goodsId(obj.GoodsInfoId).start();
+                GoodsDetailActivity_.intent(StoreInformationActivity.this).goodsId(obj.GoodsInfoId).start();
             }
 
             @Override
@@ -98,6 +98,15 @@ public class StoreInformationActivity extends BaseActivity {
         });
     }
 
+    public void onPause() {
+        super.onPause();
+        storeInformationHeaderItemView.stopAutoCycle();
+    }
+
+    public void onResume() {
+        super.onResume();
+        storeInformationHeaderItemView.startAutoCycle();
+    }
 
     @Background
     void getStoreInfo() {

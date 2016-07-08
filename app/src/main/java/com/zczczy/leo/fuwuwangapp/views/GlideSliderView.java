@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
 import java.io.File;
@@ -15,7 +18,7 @@ import java.io.File;
 /**
  * Created by leo on 2016/7/8.
  */
-public class GlideSlederView extends BaseSliderView {
+public class GlideSliderView extends BaseSliderView {
 
     private RequestManager mGlide;
 
@@ -23,7 +26,10 @@ public class GlideSlederView extends BaseSliderView {
     private File mFile;
     private int mRes;
 
-    protected GlideSlederView(Context context) {
+    private ImageLoadListener mLoadListener;
+
+
+    public GlideSliderView(Context context) {
         super(context);
     }
 
@@ -41,9 +47,9 @@ public class GlideSlederView extends BaseSliderView {
         if (targetImageView == null)
             return;
 
-//        if (mLoadListener != null) {
-//            mLoadListener.onStart(me);
-//        }
+        if (mLoadListener != null) {
+            mLoadListener.onStart(me);
+        }
         RequestManager p = (mGlide != null) ? mGlide : Glide.with(mContext);
         DrawableTypeRequest rq = null;
         if (mUrl != null) {
@@ -64,9 +70,57 @@ public class GlideSlederView extends BaseSliderView {
         if (getError() != 0) {
             rq.error(getError());
         }
-        rq.crossFade().centerCrop().into(targetImageView);
+        v.findViewById(com.daimajia.slider.library.R.id.loading_bar).setVisibility(View.INVISIBLE);
+        rq.centerCrop().thumbnail(0.5f).into(targetImageView);
     }
 
+    /**
+     * set a url as a image that preparing to load
+     *
+     * @param url
+     * @return
+     */
+    public BaseSliderView image(String url) {
+        if (mFile != null || mRes != 0) {
+            throw new IllegalStateException("Call multi image function," +
+                    "you only have permission to call it once");
+        }
+        mUrl = url;
+        return this;
+    }
+
+    /**
+     * set a file as a image that will to load
+     *
+     * @param file
+     * @return
+     */
+    public BaseSliderView image(File file) {
+        if (mUrl != null || mRes != 0) {
+            throw new IllegalStateException("Call multi image function," +
+                    "you only have permission to call it once");
+        }
+        mFile = file;
+        return this;
+    }
+
+    public BaseSliderView image(int res) {
+        if (mUrl != null || mFile != null) {
+            throw new IllegalStateException("Call multi image function," +
+                    "you only have permission to call it once");
+        }
+        mRes = res;
+        return this;
+    }
+
+    /**
+     * set a listener to get a message , if load error.
+     *
+     * @param l
+     */
+    public void setOnImageLoadListener(ImageLoadListener l) {
+        mLoadListener = l;
+    }
 
     @Override
     public View getView() {
@@ -75,4 +129,10 @@ public class GlideSlederView extends BaseSliderView {
         bindEventAndShow(v, target);
         return v;
     }
+
+    public void setmGlide(RequestManager mGlide) {
+        this.mGlide = mGlide;
+    }
 }
+
+

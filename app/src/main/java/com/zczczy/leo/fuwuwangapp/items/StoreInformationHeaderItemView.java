@@ -13,6 +13,7 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.StoreImg;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.views.GlideSliderView;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
@@ -48,15 +49,30 @@ public class StoreInformationHeaderItemView extends ItemView<StoreDetailModel> {
         txt_detail_address.setText(_data.StoreAddress);
         txt_store_describe.setText(_data.StoreDesc);
         for (StoreImg nb : _data.StoreImgList) {
-            DefaultSliderView textSliderView = new DefaultSliderView(context);
+            GlideSliderView textSliderView = new GlideSliderView(context);
             textSliderView.image(nb.StoreImgUrl)
-                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
                     .error(R.drawable.goods_detail_banner)
                     .empty(R.drawable.goods_detail_banner)
             ;
             sliderLayout.addSlider(textSliderView);
         }
+        if (_data != null && _data.StoreImgList.size() > 1) {
+            sliderLayout.startAutoCycle();
+        } else {
+            sliderLayout.stopAutoCycle();
+        }
     }
+
+    public void stopAutoCycle() {
+        sliderLayout.stopAutoCycle();
+    }
+
+    public void startAutoCycle() {
+        if (_data != null && _data.StoreImgList.size() > 1) {
+            sliderLayout.startAutoCycle();
+        }
+    }
+
 
     @Click
     void img_phone() {

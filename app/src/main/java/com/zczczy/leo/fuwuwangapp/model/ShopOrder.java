@@ -46,6 +46,7 @@ public class ShopOrder implements Serializable {
     public int GoodsAllLbCount; //龙币金额
     public double MOrderDzb; //电子币金额
     public double MaxDzb; //电子币金额
+    public String TwoPass;//
 
     public CouponModel FanQuan;
     public UnionPay unionPay; //银联

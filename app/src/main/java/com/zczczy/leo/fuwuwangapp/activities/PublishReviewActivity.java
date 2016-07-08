@@ -4,12 +4,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import com.squareup.picasso.Picasso;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -24,7 +22,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
@@ -62,7 +59,7 @@ public class PublishReviewActivity extends BaseActivity {
     @AfterViews
     void afterView() {
         if (!StringUtils.isEmpty(model.GoodsImgSl)) {
-            Picasso.with(this).load(model.GoodsImgSl).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_store_pic);
+            Glide.with(this).load(model.GoodsImgSl).error(R.drawable.goods_default).placeholder(R.drawable.goods_default).into(img_store_pic);
         }
     }
 

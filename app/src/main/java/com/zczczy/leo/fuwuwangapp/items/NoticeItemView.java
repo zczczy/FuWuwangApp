@@ -29,6 +29,7 @@ public class NoticeItemView extends ItemView<Notice> {
 
     public NoticeItemView(Context context) {
         super(context);
+        this.context = context;
     }
 
     @Override

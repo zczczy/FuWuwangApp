@@ -106,6 +106,7 @@
 -keep class net.sourceforge.zbar.** { *; }
 -keep interface net.sourceforge.zbar.** { *; }
 
+
 # nineoldandroids
 -keep interface com.nineoldandroids.view.** { *; }
 -keep class com.nineoldandroids.** { *; }
@@ -181,7 +182,7 @@
     **[] $VALUES;
     public *;
 }
-
+-keep class com.bumptech.glide.integration.okhttp.OkHttpGlideModule
 
 
 

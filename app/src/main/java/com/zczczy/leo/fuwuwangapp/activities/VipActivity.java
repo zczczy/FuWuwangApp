@@ -1,14 +1,26 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
+import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -56,6 +68,9 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     MyDotNetRestClient newMyRestClient;
 
     @Bean
+    OttoBus bus;
+
+    @Bean
     MyErrorHandler myErrorHandler;
 
     //身份证扫描注册相关
@@ -72,11 +87,75 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
 
     @AfterViews
     void afterView() {
+
         fileName = AndroidTool.BaseFilePath() + System.currentTimeMillis() + ".jpg";
         AndroidTool.showLoadDialog(this);
         getBind();
+        myTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                share();
+            }
+        });
     }
 
+    void share() {
+
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                WXWebpageObject webpage = new WXWebpageObject();
+                webpage.webpageUrl = "http://www.baidu.com";
+                WXMediaMessage msg = new WXMediaMessage(webpage);
+                msg.title = "测试";
+                msg.description = "测试描述";
+                Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.yule);
+                msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = buildTransaction("webpage");
+                req.message = msg;
+                req.scene = SendMessageToWX.Req.WXSceneTimeline;
+                app.iWXApi.sendReq(req);
+            }
+        }).setNeutralButton("分享给我的好友", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                WXWebpageObject webpage = new WXWebpageObject();
+                webpage.webpageUrl = "http://www.baidu.com";
+                WXMediaMessage msg = new WXMediaMessage(webpage);
+                msg.title = "测试";
+                msg.description = "测试描述";
+                Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.yule);
+                msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = buildTransaction("webpage");
+                req.message = msg;
+                req.scene = SendMessageToWX.Req.WXSceneSession;
+                app.iWXApi.sendReq(req);
+            }
+        }).create().show();
+
+    }
+
+    @Subscribe
+    public void NotifyUI(PayResp resp) {
+        switch (resp.errCode) {
+            case BaseResp.ErrCode.ERR_OK:
+                AndroidTool.showToast(this, "分享成功");
+                break;
+            case BaseResp.ErrCode.ERR_COMM:
+                AndroidTool.showToast(this, "分享异常");
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                AndroidTool.showToast(this, "您取消了分享");
+                break;
+        }
+    }
+
+    private String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
 
     @Background
     void getBind() {
@@ -281,4 +360,15 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         AndroidTool.showToast(this, "你拒绝授权!请到设置里去重新授权");
     }
+
+    public void onPause() {
+        super.onPause();
+        bus.unregister(this);
+    }
+
+    public void onResume() {
+        super.onResume();
+        bus.register(this);
+    }
+
 }

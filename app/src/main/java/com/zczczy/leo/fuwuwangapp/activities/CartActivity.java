@@ -125,7 +125,7 @@ public class CartActivity extends BaseActivity {
                 if (obj.level == 0) {
                     StoreInformationActivity_.intent(CartActivity.this).storeId(obj.StoreInfoId).start();
                 } else {
-                    GoodsDetailInfoActivity_.intent(CartActivity.this).goodsId(obj.GoodsInfoId).start();
+                    GoodsDetailActivity_.intent(CartActivity.this).goodsId(obj.GoodsInfoId).start();
                 }
             }
         });
@@ -194,8 +194,8 @@ public class CartActivity extends BaseActivity {
             //设置SelectPicPopupWindow弹出窗体的背景
             popupWindow.setBackgroundDrawable(dw);
             boolean hasSoftKey = ViewConfiguration.get(this).hasPermanentMenuKey();
-            if (hasSoftKey ||isNavigationBarAvailable()) {
-                popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, ll_cart_jiesuan.getHeight()*2 );
+            if (hasSoftKey || isNavigationBarAvailable()) {
+                popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, ll_cart_jiesuan.getHeight() * 2);
             } else {
                 popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, ll_cart_jiesuan.getHeight() + 1);
             }
@@ -204,7 +204,7 @@ public class CartActivity extends BaseActivity {
         }
     }
 
-    public boolean isNavigationBarAvailable(){
+    public boolean isNavigationBarAvailable() {
 
         boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
         boolean hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);

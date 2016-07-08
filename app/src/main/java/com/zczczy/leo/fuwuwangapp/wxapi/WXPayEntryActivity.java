@@ -55,5 +55,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             bus.post(resp);
             finish();
         }
+        if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX) {
+            bus.post(resp);
+            finish();
+        }
     }
 }

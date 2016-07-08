@@ -19,6 +19,7 @@
             android:layout_gravity="center"
             android:background="@color/home_background"
             app:recyclerviewEmptyView="@layout/empty_view"
+            app:recyclerviewFloatingActionView="@layout/floating_button"
             app:recyclerviewScrollbars="vertical"
             app:theme="@style/AlertDialog.AppCompat.Light" />
 

@@ -748,16 +748,17 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * 购物车下单支付
      *
-     * @param map BuyCartInfoIds 商品id
-     *            StoreInfoId 数量
-     *            DZB 电子币
-     *            TwoPass 支付密码
-     *            PayType 支付方式  1 支付宝 2 微信 3 银联
+     * @param model BuyCartInfoIds 商品id
+     *              StoreInfoId 数量
+     *              DZB 电子币
+     *              TwoPass 支付密码
+     *              PayType 支付方式  1 支付宝 2 微信 3 银联
      * @return
+     * @see ShopOrder
      */
     @Post("api/Shop/CreateOrderInfo")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<ConfirmOrderModel> createOrderInfo(@Body Map map);
+    BaseModelJson<ShopOrder> createOrderInfo(@Body ShopOrder model);
 
     /**
      * 根据订单ID查询订单信息

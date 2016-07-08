@@ -9,8 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.ChangePasswordActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
@@ -18,7 +17,6 @@ import com.zczczy.leo.fuwuwangapp.activities.MemberInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.NewsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ReviewActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.SettingActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.VipActivity_;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
@@ -148,7 +146,7 @@ public class MineFragment extends BaseFragment {
             txt_name.setText(pre.username().get());
             rl_change_pass.setVisibility(View.VISIBLE);
             if (!StringUtils.isEmpty(pre.avatar().get())) {
-                Picasso.with(getActivity()).load(pre.avatar().get()).fit().placeholder(R.drawable
+                Glide.with(getActivity()).load(pre.avatar().get()).placeholder(R.drawable
                         .default_header).error(R.drawable.default_header).into(img_avatar);
             }
             if (Constants.VIP.equals(pre.userType().get())) {

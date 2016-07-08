@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
@@ -28,11 +29,13 @@ import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -183,6 +186,11 @@ public class HomeFragment extends BaseFragment {
 //        }).paint(paint).build());
     }
 
+    @Click
+    void img_shangjia() {
+        AndroidTool.showToast(this, "11");
+    }
+
     void setListener() {
         myAdapter.setBindHeaderViewHolder(new BaseUltimateRecyclerViewAdapter.BindHeaderViewHolder() {
             @Override
@@ -195,7 +203,6 @@ public class HomeFragment extends BaseFragment {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
-//                GoodsDetailInfoActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
                 GoodsDetailActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 

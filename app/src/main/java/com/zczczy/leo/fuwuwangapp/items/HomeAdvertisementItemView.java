@@ -8,17 +8,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LotteryInfoRecordActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
+import com.zczczy.leo.fuwuwangapp.views.GlideSliderView;
 
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Click;
@@ -71,7 +72,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     protected void init(Object... objects) {
         new_slider_Layout.removeAllSliders();
         for (NewBanner nb : app.getNewBannerList()) {
-            DefaultSliderView textSliderView = new DefaultSliderView(context);
+            GlideSliderView textSliderView = new GlideSliderView(context);
             textSliderView.image(nb.BannerImgUrl);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bannerModel", nb);
@@ -173,7 +174,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                 if ("1".equals(temp[0])) {
                     StoreInformationActivity_.intent(context).storeId(temp[1]).start();
                 } else {
-                    GoodsDetailInfoActivity_.intent(context).goodsId(temp[1]).start();
+                    GoodsDetailActivity_.intent(context).goodsId(temp[1]).start();
                 }
             }
         }
@@ -208,7 +209,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
             if (bannerModel != null) {
                 //链接分类(1:商品详细，2：网页WebView)
                 if (bannerModel.LinkType == 1) {
-                    GoodsDetailInfoActivity_.intent(context).goodsId(bannerModel.LinkUrl).start();
+                    GoodsDetailActivity_.intent(context).goodsId(bannerModel.LinkUrl).start();
                 } else if (bannerModel.LinkType == 2) {
                     CommonWebViewActivity_.intent(context).title(bannerModel.BannerName).methodName(bannerModel.LinkUrl).start();
                 }
