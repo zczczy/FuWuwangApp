@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment_;
@@ -28,7 +27,6 @@ import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
-import com.zczczy.leo.fuwuwangapp.model.GoodsAttribute;
 import com.zczczy.leo.fuwuwangapp.model.GoodsCommentsModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsImgListModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
@@ -52,9 +50,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author Created by LuLeo on 2016/7/4.
@@ -273,13 +269,28 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             LoginActivity_.intent(this).start();
         } else {
             if (goods != null && goods.IsUsing == 1 && goods.GoodsAttributeList != null && goods.GoodsAttributeList.size() > 0) {
-                showProperties();
+                showProperties(true);
             } else {
                 AndroidTool.showLoadDialog(this);
                 addShoppingCart();
             }
         }
     }
+
+    @Click
+    void txt_buy() {
+        if (!checkUserIsLogin()) {
+            LoginActivity_.intent(this).start();
+        } else {
+            if (goods != null && goods.IsUsing == 1 && goods.GoodsAttributeList != null && goods.GoodsAttributeList.size() > 0) {
+                showProperties(false);
+            } else {
+                AndroidTool.showLoadDialog(this);
+                PreOrderActivity_.intent(this).goodsInfoId(goodsId).StoreInfoId(goods.StoreInfoId).GoodsAttributeId(0).orderCount(1).start();
+            }
+        }
+    }
+
 
     /**
      * 添加商品
@@ -315,12 +326,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         }
     }
 
-    @Click
-    void txt_buy() {
-
-    }
-
-    void showProperties() {
+    void showProperties(boolean isCart) {
         if (popupWindow == null) {
             popupWindow = new PopupWindow(goodsPropertiesPopup, ViewGroup.LayoutParams.MATCH_PARENT, parent.getHeight(), true);
             goodsPropertiesPopup.setData(popupWindow, goods);
@@ -329,6 +335,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             //设置SelectPicPopupWindow弹出窗体的背景
             popupWindow.setBackgroundDrawable(dw);
         }
+        goodsPropertiesPopup.setCart(isCart);
         popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 

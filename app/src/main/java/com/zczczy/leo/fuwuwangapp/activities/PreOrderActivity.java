@@ -17,14 +17,11 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.squareup.otto.Subscribe;
 import com.tencent.mm.sdk.modelpay.PayResp;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView;
 import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
-import com.zczczy.leo.fuwuwangapp.model.ConfirmOrderModel;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PayResult;
@@ -49,10 +46,6 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
-
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Leo on 2016/5/4.
@@ -90,7 +83,7 @@ public class PreOrderActivity extends BaseActivity {
     String goodsInfoId, BuyCartInfoIds, StoreInfoId;
 
     @Extra
-    int orderCount;
+    int orderCount, GoodsAttributeId;
 
     @Bean
     MyBackgroundTask mMyBackgroundTask;
@@ -157,7 +150,7 @@ public class PreOrderActivity extends BaseActivity {
         if (isCart) {
             afterCreateTempOrderInfo(myRestClient.createTempOrderInfo(BuyCartInfoIds, StoreInfoId));
         } else {
-//            afterCreateTempOrderInfo(myRestClient.createTempGoodsOrderInfo(goodsInfoId, orderCount));
+            afterCreateTempOrderInfo(myRestClient.createTempGoodsOrderInfo(goodsInfoId, orderCount, StoreInfoId, GoodsAttributeId));
         }
     }
 
@@ -352,10 +345,10 @@ public class PreOrderActivity extends BaseActivity {
             shopOrder.TwoPass = password;
             shopOrder.MOrderDzb = use_dian.isChecked() ? useDianZiBi : 0;
             shopOrder.MPaymentType = rb_bao_pay.isChecked() ? 1 : (rb_wechat_pay.isChecked() ? 2 : 3);
-            Gson gson =new Gson();
-            Log.e("11111111111111111111",gson.toJson(shopOrder));
+            Gson gson = new Gson();
+            Log.e("11111111111111111111", gson.toJson(shopOrder));
             Log.e("22222222222222222222", pre.token().get());
-            Log.e("33333333333333333333",pre.shopToken().get());
+            Log.e("33333333333333333333", pre.shopToken().get());
             afterPayOrder(myRestClient.createOrderInfo(shopOrder));
         } else {
 //            map.put("GoodsInfoId", goodsInfoId);

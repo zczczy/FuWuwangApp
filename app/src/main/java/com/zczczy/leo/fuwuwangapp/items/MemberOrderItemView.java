@@ -17,7 +17,6 @@ import com.zczczy.leo.fuwuwangapp.activities.OrderDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.UmspayActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -217,14 +216,8 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
         //先清空所以布局
         ll_pre_order_item.removeAllViews();
         for (OrderDetailModel orderDetailModel : _data.OrderDetailList) {
-            BuyCartInfoList buyCartInfoList = new BuyCartInfoList();
-            buyCartInfoList.GoodsImgSl = orderDetailModel.GoodsImgSl;
-            buyCartInfoList.GodosName = orderDetailModel.ProductName;
-            buyCartInfoList.GoodsPrice = orderDetailModel.ProductPrice;
-            buyCartInfoList.GoodsLBPrice = Integer.valueOf(orderDetailModel.MOrderDetailLbCount == null ? "0" : orderDetailModel.MOrderDetailLbCount);
-            buyCartInfoList.ProductCount = Integer.valueOf(orderDetailModel.ProductNum);
             PreOrderItemView preOrderItemView = PreOrderItemView_.build(context);
-            preOrderItemView.init(buyCartInfoList);
+            preOrderItemView.init(orderDetailModel);
             ll_pre_order_item.addView(preOrderItemView);
         }
         if (_data.MorderStatus == Constants.DUEPAYMENT) {

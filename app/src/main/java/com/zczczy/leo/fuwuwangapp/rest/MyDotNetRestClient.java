@@ -602,9 +602,9 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param number
      * @return
      */
-    @Get("api/Shop/CreateTempGoodsOrderInfo?GoodsInfoId={GoodsInfoId}&number={number}")
+    @Get("api/Shop/CreateTempGoodsOrderInfo?GoodsInfoId={GoodsInfoId}&number={number}&StoreInfoId={StoreInfoId}&GoodsAttributeId={GoodsAttributeId}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<ConfirmOrderModel> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number);
+    BaseModelJson<ShopOrder> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number,@Path String StoreInfoId,@Path int GoodsAttributeId);
 
     /**
      * 购物车生成临时订单信息

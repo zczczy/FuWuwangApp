@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.PreOrderActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.GoodsAttribute;
@@ -91,6 +92,8 @@ public class GoodsPropertiesPopup extends LinearLayout {
 
     List<TextView> textViews;
 
+    boolean isCart;
+
     int selectedId;
 
     public GoodsPropertiesPopup(Context context) {
@@ -113,9 +116,13 @@ public class GoodsPropertiesPopup extends LinearLayout {
         });
     }
 
-    public void setData(PopupWindow popupWindow, Goods goodss) {
+    public void setCart(boolean cart) {
+        isCart = cart;
+    }
+
+    public void setData(PopupWindow popupWindow, Goods goods) {
         this.popupWindow = popupWindow;
-        this.goods = goodss;
+        this.goods = goods;
         textViews = new ArrayList<>();
         int i = 0;
         if (!StringUtils.isEmpty(goods.GoodsImgSl)) {
@@ -172,8 +179,13 @@ public class GoodsPropertiesPopup extends LinearLayout {
 
     @Click
     void btn_confirm() {
-        AndroidTool.showLoadDialog(context);
-        addShoppingCart();
+        if (isCart) {
+            AndroidTool.showLoadDialog(context);
+            addShoppingCart();
+        } else {
+            popupWindow.dismiss();
+            PreOrderActivity_.intent(context).goodsInfoId(goods.GoodsInfoId).StoreInfoId(goods.StoreInfoId).GoodsAttributeId(selectedId).orderCount(quantityView.getQuantity()).start();
+        }
     }
 
     /**
@@ -204,6 +216,7 @@ public class GoodsPropertiesPopup extends LinearLayout {
         if (bm == null) {
             AndroidTool.showToast(context, "商品添加失败");
         } else if (bm.Successful) {
+            popupWindow.dismiss();
             AndroidTool.showToast(context, "商品添加成功");
         } else {
             AndroidTool.showToast(context, bm.Error);
