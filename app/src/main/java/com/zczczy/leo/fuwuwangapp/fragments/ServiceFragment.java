@@ -1,29 +1,24 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
 import android.app.Activity;
-import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CityChooseActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.items.ServiceHeaderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
@@ -31,7 +26,6 @@ import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;

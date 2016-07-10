@@ -57,7 +57,7 @@ import java.util.HashMap;
  *         you can contact me at :361769045@qq.com
  * @since 2016/7/4.
  */
-@EActivity(R.layout.new_activity_goods_detail)
+@EActivity(R.layout.activity_goods_detail)
 public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener {
 
     @ViewById

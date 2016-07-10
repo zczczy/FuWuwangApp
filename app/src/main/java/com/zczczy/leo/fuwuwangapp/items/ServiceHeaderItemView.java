@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ServiceGoodsActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;

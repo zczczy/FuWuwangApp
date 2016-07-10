@@ -13,7 +13,6 @@ import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
-import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailInfoActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LotteryInfoRecordActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;

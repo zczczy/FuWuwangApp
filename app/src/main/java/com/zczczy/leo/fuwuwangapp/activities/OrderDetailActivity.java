@@ -16,11 +16,9 @@ import com.zczczy.leo.fuwuwangapp.items.PreOrderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.BuyCartInfoList;
-import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PayResult;
-import com.zczczy.leo.fuwuwangapp.model.UnionPay;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -128,7 +126,7 @@ public class OrderDetailActivity extends BaseActivity {
                 preOrderItemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        GoodsDetailInfoActivity_.intent(OrderDetailActivity.this).goodsId(orderDetailModel.GoodsInfoId).start();
+                        GoodsDetailActivity_.intent(OrderDetailActivity.this).goodsId(orderDetailModel.GoodsInfoId).start();
                     }
                 });
                 preOrderItemView.init(orderDetailModel);
