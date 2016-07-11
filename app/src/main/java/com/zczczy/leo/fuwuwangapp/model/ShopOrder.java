@@ -29,7 +29,7 @@ public class ShopOrder implements Serializable {
 
     public String BuyCardIds;
     public String StoreInfoId; //店铺id
-    public String StoreName; // 店铺名称
+    public String StoreInfoName; // 店铺名称
     public int MPaymentType;
     public int MorderStatus; //订单状态(0:待支付，1：已支付，2:已取消,3：已发货4:确认收货,5:交易完成)
     public int MReceiptAddressId;

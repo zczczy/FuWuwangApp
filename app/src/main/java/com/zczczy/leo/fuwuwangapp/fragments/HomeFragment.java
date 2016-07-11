@@ -21,6 +21,7 @@ import com.zczczy.leo.fuwuwangapp.activities.MainActivity;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
+import com.zczczy.leo.fuwuwangapp.dao.SearchHistory;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
@@ -188,7 +189,7 @@ public class HomeFragment extends BaseFragment {
 
     @Click
     void img_shangjia() {
-        AndroidTool.showToast(this, "11");
+        SearchActivity_.intent(this).isMerchant(true).start();
     }
 
     void setListener() {

@@ -141,8 +141,37 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
 
     @Click
     void btn_cancel_order() {
-
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        adb.setTitle("提示").setMessage("是否取消订单？").setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AndroidTool.showLoadDialog(context);
+                cancelOrderById();
+            }
+        }).setNegativeButton("否", null).setIcon(R.mipmap.logo).create().show();
     }
+
+    @Background
+    void cancelOrderById() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterCancelOrderById(myRestClient.cancelOrderById(_data.MOrderId));
+    }
+
+    @UiThread
+    void afterCancelOrderById(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
+        if (bm == null) {
+            AndroidTool.showToast(context, no_net);
+        } else if (!bm.Successful) {
+            AndroidTool.showToast(context, bm.Error);
+        } else {
+            baseUltimateRecyclerViewAdapter.getItems().remove(_data);
+            baseUltimateRecyclerViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+        }
+    }
+
 
     @Click
     void btn_logistics() {
@@ -182,31 +211,25 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
         }
     }
 
-    @Click
-    void btn_finished() {
-
-    }
-
-
     @Override
     protected void init(Object... objects) {
-        txt_store.setText(_data.StoreName);
+        txt_store.setText(_data.StoreInfoName);
         //设置商品总数
         txt_count.setText(String.format(text_count, _data.GoodsAllCount));
         //设置费用
-        if (_data.MOrderMoney > 0 && _data.GoodsAllLbCount > 0) {
+        if (_data.MOrderMoney + _data.MOrderDzb > 0 && _data.GoodsAllLbCount > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
             txt_plus.setVisibility(View.VISIBLE);
             txt_home_lb.setVisibility(VISIBLE);
             //设置商品总价
-            txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney));
+            txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney + _data.MOrderDzb));
             //设置龙币数
             txt_home_lb.setText(String.format(home_lb, _data.GoodsAllLbCount));
-        } else if (_data.MOrderMoney > 0) {
+        } else if (_data.MOrderMoney + _data.MOrderDzb > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
             txt_plus.setVisibility(View.GONE);
             txt_home_lb.setVisibility(View.GONE);
-            txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney));
+            txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney + _data.MOrderDzb));
         } else if (_data.GoodsAllLbCount > 0) {
             txt_rmb.setVisibility(View.GONE);
             txt_plus.setVisibility(View.GONE);
@@ -223,7 +246,7 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
         if (_data.MorderStatus == Constants.DUEPAYMENT) {
             txt_do_message.setVisibility(VISIBLE);
             txt_do_message.setText("等待买家付款");
-            btn_cancel_order.setVisibility(GONE);
+            btn_cancel_order.setVisibility(VISIBLE);
             btn_pay.setVisibility(VISIBLE);
             btn_logistics.setVisibility(GONE);
             btn_finish.setVisibility(GONE);

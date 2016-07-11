@@ -162,7 +162,7 @@ public class PreOrderActivity extends BaseActivity {
         } else if (bmj.Successful) {
             shopOrder = bmj.Data;
             setShipping(bmj.Data.MReceiptAddress);
-            txt_store.setText(bmj.Data.StoreName);
+            txt_store.setText(bmj.Data.StoreInfoName);
             storeId = bmj.Data.StoreInfoId;
             txt_express_charges.setText(Double.valueOf(bmj.Data.Postage) > 0 ? String.format(home_rmb, bmj.Data.Postage) : "包邮");
             postal = Double.valueOf(bmj.Data.Postage);
@@ -341,24 +341,13 @@ public class PreOrderActivity extends BaseActivity {
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("kbn", Constants.ANDROID);
-        if (isCart) {
-            shopOrder.TwoPass = password;
-            shopOrder.MOrderDzb = use_dian.isChecked() ? useDianZiBi : 0;
-            shopOrder.MPaymentType = rb_bao_pay.isChecked() ? 1 : (rb_wechat_pay.isChecked() ? 2 : 3);
-            Gson gson = new Gson();
-            Log.e("11111111111111111111", gson.toJson(shopOrder));
-            Log.e("22222222222222222222", pre.token().get());
-            Log.e("33333333333333333333", pre.shopToken().get());
-            afterPayOrder(myRestClient.createOrderInfo(shopOrder));
-        } else {
-//            map.put("GoodsInfoId", goodsInfoId);
-//            map.put("number", orderCount + "");
-//            map.put("MReceiptAddressId", MReceiptAddressId + "");
-//            map.put("DZB", use_dian.isChecked() ? useDianZiBi + "" : "0");
-//            map.put("MPaymentType", rb_bao_pay.isChecked() ? "1" : (rb_wechat_pay.isChecked() ? "2" : "3"));
-//            map.put("TwoPass", password);
-//            afterPayOrder(myRestClient.createGoodsOrderInfo(map));
-        }
+        shopOrder.TwoPass = password;
+        shopOrder.MOrderDzb = use_dian.isChecked() ? useDianZiBi : 0;
+        shopOrder.MPaymentType = rb_bao_pay.isChecked() ? 1 : (rb_wechat_pay.isChecked() ? 2 : 3);
+        Gson gson = new Gson();
+        Log.e("11111111111111111111111", gson.toJson(shopOrder));
+
+        afterPayOrder(myRestClient.createOrderInfo(shopOrder));
     }
 
     @UiThread

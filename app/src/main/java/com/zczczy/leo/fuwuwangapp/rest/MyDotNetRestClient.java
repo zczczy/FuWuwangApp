@@ -604,7 +604,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      */
     @Get("api/Shop/CreateTempGoodsOrderInfo?GoodsInfoId={GoodsInfoId}&number={number}&StoreInfoId={StoreInfoId}&GoodsAttributeId={GoodsAttributeId}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
-    BaseModelJson<ShopOrder> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number,@Path String StoreInfoId,@Path int GoodsAttributeId);
+    BaseModelJson<ShopOrder> createTempGoodsOrderInfo(@Path String GoodsInfoId, @Path int number, @Path String StoreInfoId, @Path int GoodsAttributeId);
 
     /**
      * 购物车生成临时订单信息
@@ -616,6 +616,16 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Shop/CreateTempOrderInfo?BuyCartInfoIds={BuyCartInfoIds}&StoreInfoId={StoreInfoId}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<ShopOrder> createTempOrderInfo(@Path String BuyCartInfoIds, @Path String StoreInfoId);
+
+    /**
+     * 根据订单ID取消订单
+     *
+     * @param id 根据订单ID
+     * @return
+     */
+    @Post("api/Shop/CancelOrderById/{id}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModel cancelOrderById(@Path String id);
 
     /**
      * 查询收货地址

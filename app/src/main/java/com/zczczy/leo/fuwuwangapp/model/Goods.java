@@ -64,7 +64,7 @@ public class Goods implements Serializable {
     public String GoodsImgSl;
     public String GoodsIsBy;
     public String GoodsTypeName;
-    public String StoreName;
+    public String StoreInfoName;
     public String PjNum;
     public String PJBfb;
     public String ISCommend;

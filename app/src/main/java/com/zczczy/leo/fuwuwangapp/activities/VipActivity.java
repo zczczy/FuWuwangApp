@@ -73,6 +73,8 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     @Bean
     MyErrorHandler myErrorHandler;
 
+    SendMessageToWX.Req req;
+
     //身份证扫描注册相关
     String fileName;
 
@@ -100,37 +102,29 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     }
 
     void share() {
+        if (req == null) {
+            WXWebpageObject webpage = new WXWebpageObject();
+            webpage.webpageUrl = "http://www.baidu.com";
+            WXMediaMessage msg = new WXMediaMessage(webpage);
+            msg.title = "测试";
+            msg.description = "测试描述";
+            Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.yule);
+            msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
+            req = new SendMessageToWX.Req();
+            req.transaction = buildTransaction("webpage");
+            req.message = msg;
+        }
 
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                WXWebpageObject webpage = new WXWebpageObject();
-                webpage.webpageUrl = "http://www.baidu.com";
-                WXMediaMessage msg = new WXMediaMessage(webpage);
-                msg.title = "测试";
-                msg.description = "测试描述";
-                Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.yule);
-                msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
-                SendMessageToWX.Req req = new SendMessageToWX.Req();
-                req.transaction = buildTransaction("webpage");
-                req.message = msg;
                 req.scene = SendMessageToWX.Req.WXSceneTimeline;
                 app.iWXApi.sendReq(req);
             }
-        }).setNeutralButton("分享给我的好友", new DialogInterface.OnClickListener() {
+        }).setNeutralButton("分享给好友", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                WXWebpageObject webpage = new WXWebpageObject();
-                webpage.webpageUrl = "http://www.baidu.com";
-                WXMediaMessage msg = new WXMediaMessage(webpage);
-                msg.title = "测试";
-                msg.description = "测试描述";
-                Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.yule);
-                msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
-                SendMessageToWX.Req req = new SendMessageToWX.Req();
-                req.transaction = buildTransaction("webpage");
-                req.message = msg;
                 req.scene = SendMessageToWX.Req.WXSceneSession;
                 app.iWXApi.sendReq(req);
             }

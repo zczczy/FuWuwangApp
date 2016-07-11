@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.squareup.otto.Subscribe;
@@ -27,6 +29,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 
 /**
  * Created by Leo on 2016/4/27.
@@ -42,6 +45,12 @@ public class CategoryFragment extends BaseFragment {
 
     @Bean
     FirstCategoryAdapter myAdapter;
+
+    @StringRes
+    String search_hint;
+
+    @ViewById
+    TextView txt_title_search;
 
     @Bean
     OttoBus bus;
@@ -62,6 +71,7 @@ public class CategoryFragment extends BaseFragment {
     @AfterViews
     void afterView() {
         recyclerView.setHasFixedSize(false);
+        txt_title_search.setHint(search_hint);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(myAdapter);

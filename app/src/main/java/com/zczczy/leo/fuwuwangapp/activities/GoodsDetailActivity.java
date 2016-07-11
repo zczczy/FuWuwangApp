@@ -211,6 +211,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                 //判断库存是否大于0
                 isCanBuy = Integer.valueOf(bmj.Data.GoodsStock) > 0;
                 goods_count.setText(isCanBuy ? bmj.Data.GoodsStock : "0");
+                txt_store_name.setText(bmj.Data.StoreInfoName);
                 goods_sell_count.setText(String.valueOf(bmj.Data.GoodsXl));
                 ll_goods_by.setVisibility(("1".equals(bmj.Data.GoodsType)) ? View.GONE : View.VISIBLE);
                 goods_by.setText(bmj.Data.GoodsIsBy);

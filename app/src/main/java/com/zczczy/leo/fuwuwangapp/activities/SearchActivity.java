@@ -47,10 +47,10 @@ public class SearchActivity extends BaseActivity {
     SearchHistoryDao searchHistoryDao;
 
     @Extra
-    boolean isService;
+    boolean isService, isMerchant;
 
     @StringRes
-    String search_service_hint;
+    String search_service_hint, search_merchant_hint;
 
     @ViewById
     EditText text_search;
@@ -72,6 +72,8 @@ public class SearchActivity extends BaseActivity {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
         if (isService) {
             text_search.setHint(search_service_hint);
+        } else if (isMerchant) {
+            text_search.setHint(search_merchant_hint);
         }
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
@@ -79,6 +81,7 @@ public class SearchActivity extends BaseActivity {
                 searchHistoryDao.update(obj);
                 if (isService) {
                     StoreSearchActivity_.intent(SearchActivity.this).searchName(obj.getSearchContent()).startForResult(1000);
+                } else if (isMerchant) {
                 } else {
                     CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
                 }
@@ -94,6 +97,7 @@ public class SearchActivity extends BaseActivity {
                     searchHistoryDao.insert(searchHistory);
                     if (isService) {
                         StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
+                    } else if (isMerchant) {
                     } else {
                         CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
                     }
@@ -111,6 +115,7 @@ public class SearchActivity extends BaseActivity {
             searchHistoryDao.insert(searchHistory);
             if (isService) {
                 StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
+            } else if (isMerchant) {
             } else {
                 CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
             }

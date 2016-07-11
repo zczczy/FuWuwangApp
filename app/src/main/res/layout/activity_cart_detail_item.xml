@@ -78,13 +78,15 @@
                     android:id="@+id/txt_cart_goods_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_rmb" />
+                    android:text="@string/home_rmb"
+                    android:textColor="@color/price_color" />
 
                 <TextView
                     android:id="@+id/txt_cart_goods_lb_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_lb" />
+                    android:text="@string/home_lb"
+                    android:textColor="@color/price_color" />
             </LinearLayout>
 
             <LinearLayout

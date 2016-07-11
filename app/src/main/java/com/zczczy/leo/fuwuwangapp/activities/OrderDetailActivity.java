@@ -116,9 +116,9 @@ public class OrderDetailActivity extends BaseActivity {
             tv_shipping.setText(String.format(txt_shipping, bmj.Data.ShrName));
             txt_phone.setText(bmj.Data.Lxdh);
             tv_shipping_address.setText(String.format(txt_shipping_address, bmj.Data.DetailAddress));
-            txt_store.setText(bmj.Data.StoreName);
+            txt_store.setText(bmj.Data.StoreInfoName);
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
-            txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
+            txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney + bmj.Data.MOrderDzb));
             txt_total_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
             int i = 0;
             for (final OrderDetailModel orderDetailModel : bmj.Data.OrderDetailList) {
@@ -155,7 +155,7 @@ public class OrderDetailActivity extends BaseActivity {
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
             if (bmj.Data.MorderStatus == Constants.DUEPAYMENT) {
-                btn_cancel_order.setVisibility(View.GONE);
+                btn_cancel_order.setVisibility(View.VISIBLE);
                 btn_pay.setVisibility(View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
@@ -164,7 +164,7 @@ public class OrderDetailActivity extends BaseActivity {
                 ll_should_pay.setVisibility(View.VISIBLE);
                 ll_paid.setVisibility(View.VISIBLE);
                 if (bmj.Data.MOrderDzb >= 0) {
-                    txt_should_pay_l_rmb.setText(String.format(home_rmb, (Math.round((bmj.Data.MOrderMoney - bmj.Data.MOrderDzb) * 100) / 100.0)));
+                    txt_should_pay_l_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
                     txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
                 }
                 rl_express_charges.setVisibility(View.GONE);
@@ -242,6 +242,41 @@ public class OrderDetailActivity extends BaseActivity {
             AndroidTool.showToast(this, bm.Error);
         } else {
             btn_finish.setVisibility(View.GONE);
+        }
+    }
+
+
+    @Click
+    void btn_cancel_order() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("提示").setMessage("是否取消订单？").setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AndroidTool.showLoadDialog(OrderDetailActivity.this);
+                cancelOrderById();
+            }
+        }).setNegativeButton("否", null).setIcon(R.mipmap.logo).create().show();
+    }
+
+    @Background
+    void cancelOrderById() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterCancelOrderById(myRestClient.cancelOrderById(orderId));
+    }
+
+    @UiThread
+    void afterCancelOrderById(BaseModel bm) {
+        AndroidTool.dismissLoadDialog();
+        if (bm == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!bm.Successful) {
+            AndroidTool.showToast(this, bm.Error);
+        } else {
+            btn_cancel_order.setVisibility(View.GONE);
+            btn_pay.setVisibility(View.GONE);
+            btn_canceled.setVisibility(View.VISIBLE);
         }
     }
 

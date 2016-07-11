@@ -98,7 +98,7 @@ public class MemberOrderActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<ShopOrder>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, ShopOrder obj, int position) {
-                OrderDetailActivity_.intent(MemberOrderActivity.this).orderId(obj.MOrderId).start();
+                OrderDetailActivity_.intent(MemberOrderActivity.this).orderId(obj.MOrderId).startForResult(1000);
             }
 
             @Override
