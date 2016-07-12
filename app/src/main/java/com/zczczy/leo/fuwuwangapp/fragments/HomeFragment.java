@@ -191,9 +191,9 @@ public class HomeFragment extends BaseFragment {
 
     @Click
     void img_shangjia() {
-//        SearchActivity_.intent(this).isMerchant(true).start();
-        String url = "mqqwpa://im/chat?chat_type=wpa&uin=261227869";
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        SearchActivity_.intent(this).isMerchant(true).start();
+//        String url = "mqqwpa://im/chat?chat_type=wpa&uin=261227869";
+//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
     void setListener() {
@@ -264,8 +264,6 @@ public class HomeFragment extends BaseFragment {
             public void onRefreshBegin(PtrFrameLayout frame) {
                 isRefresh = true;
                 pageIndex = 1;
-//                myBackgroundTask.getHomeBanner();
-//                myBackgroundTask.getAdvertByKbn();
                 afterLoadMore();
             }
         });

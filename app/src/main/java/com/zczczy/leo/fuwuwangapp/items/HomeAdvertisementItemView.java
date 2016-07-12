@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -83,7 +84,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
             img_winners_order.setVisibility(VISIBLE);
-            Glide.with(context).load(app.getLotteryConfig().AppLotteryImgUrl)
+            Glide.with(context).load(app.getLotteryConfig().AppLotteryImgUrl).skipMemoryCache(true)
                     .placeholder(R.drawable.home_winners_order)
                     .centerCrop()
                     .crossFade()
@@ -94,49 +95,51 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
 
         for (AdvertModel am : app.getAdvertModelList()) {
             if (!StringUtils.isEmpty(am.AdvertImg)) {
+                DrawableRequestBuilder<String> glide = Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().skipMemoryCache(true);
+
                 if (am.AdsenseTypeId == 3) {
                     ad_one.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_one)
+                    glide.error(R.drawable.home_ad_one)
                             .placeholder(R.drawable.home_ad_one)
                             .into(ad_one);
                 } else if (am.AdsenseTypeId == 4) {
                     ad_two.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_one)
+                    glide.error(R.drawable.home_ad_one)
                             .placeholder(R.drawable.home_ad_one)
                             .into(ad_two);
                 } else if (am.AdsenseTypeId == 5) {
                     ad_three.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_one)
+                    glide.error(R.drawable.home_ad_one)
                             .placeholder(R.drawable.home_ad_one)
                             .into(ad_three);
                 } else if (am.AdsenseTypeId == 6) {
                     ad_four.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_one)
+                    glide.error(R.drawable.home_ad_one)
                             .placeholder(R.drawable.home_ad_one)
                             .into(ad_four);
                 } else if (am.AdsenseTypeId == 7) {
                     ad_five.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_five)
+                    glide.error(R.drawable.home_ad_five)
                             .placeholder(R.drawable.home_ad_five)
                             .into(ad_five);
                 } else if (am.AdsenseTypeId == 8) {
                     ad_six.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_five)
+                    glide.error(R.drawable.home_ad_five)
                             .placeholder(R.drawable.home_ad_five)
                             .into(ad_six);
                 } else if (am.AdsenseTypeId == 9) {
                     ad_seven.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_five)
+                    glide.error(R.drawable.home_ad_five)
                             .placeholder(R.drawable.home_ad_five)
                             .into(ad_seven);
                 } else if (am.AdsenseTypeId == 10) {
                     ad_eight.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_ad_five)
+                    glide.error(R.drawable.home_ad_five)
                             .placeholder(R.drawable.home_ad_five)
                             .into(ad_eight);
                 } else if (am.AdsenseTypeId == 11) {
                     ad_nine.setContentDescription(am.JumpType + "," + am.InfoId);
-                    Glide.with(context).load(am.AdvertImg).centerCrop().crossFade().error(R.drawable.home_winners_order)
+                    glide.error(R.drawable.home_winners_order)
                             .placeholder(R.drawable.home_winners_order)
                             .into(ad_nine);
                 }
@@ -144,7 +147,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
         int i = 0;
         for (GoodsTypeModel gtm : app.getGoodsTypeModelList()) {
-            Glide.with(context).load(gtm.GoodsTypeIcon)
+            Glide.with(context).load(gtm.GoodsTypeIcon).skipMemoryCache(true)
                     .crossFade()
                     .centerCrop().into(imageViews.get(i));
             imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "");

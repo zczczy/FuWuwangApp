@@ -42,9 +42,7 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
 
     @Override
     protected void init(Object... objects) {
-
         int temp = DisplayUtil.dip2px(context, 177);
-
         if (DisplayUtil.getDensityDpi(context) >= 400 && DisplayUtil.getDensityDpi(context) < 480) {
             temp = DisplayUtil.dip2px(context, 177 * 480 / DisplayUtil.getDensityDpi(context));
         }
@@ -60,6 +58,7 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
             Glide.with(context).load(_data.GoodsImgSl)
                     .centerCrop()
                     .crossFade()
+                    .skipMemoryCache(true)
                     .placeholder(R.drawable.goods_default)
                     .error(R.drawable.goods_default)
                     .into(img_pic);

@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.zczczy.leo.fuwuwangapp.R;
@@ -292,7 +293,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         }
     }
 
-
     /**
      * 添加商品
      *
@@ -359,16 +359,24 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @Override
     public void onPause() {
-        super.onPause();
         sliderLayout.stopAutoCycle();
+        super.onPause();
+
+
+    }
+
+    @Override
+    public void finish() {
+        sliderLayout.stopAutoCycle();
+        super.finish();
     }
 
     @Override
     public void onResume() {
-        super.onResume();
         if (isStart && sliderLayout != null) {
             sliderLayout.startAutoCycle();
         }
+        super.onResume();
     }
 
     @Override

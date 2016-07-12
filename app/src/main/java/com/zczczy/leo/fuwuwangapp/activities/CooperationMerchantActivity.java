@@ -254,4 +254,10 @@ public class CooperationMerchantActivity extends BaseActivity {
             }
         }
     }
+
+    @Override
+    public void finish() {
+        bus.unregister(this);
+        super.finish();
+    }
 }

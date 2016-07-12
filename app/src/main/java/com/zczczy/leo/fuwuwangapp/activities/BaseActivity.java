@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 
@@ -83,6 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void finish() {
         closeInputMethod(this);
+        Glide.get(this).clearMemory();
         super.finish();
     }
 
