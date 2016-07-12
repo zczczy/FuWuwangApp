@@ -62,7 +62,10 @@ public class ShippingAddressActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
         myAdapter.getMoreData();
+        if (myAdapter.getItemCount() == 1) {
+            Intent intent = new Intent();
+            intent.putExtra("model", (MReceiptAddressModel) myAdapter.getItems().get(0));
+            setResult(1001, intent);
+        }
     }
-
-
 }
