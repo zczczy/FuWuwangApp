@@ -291,8 +291,28 @@ public class OrderDetailActivity extends BaseActivity {
         LogisticsInfoActivity_.intent(this).MOrderId(mAppOrder.MOrderId).start();
     }
 
-    @Click
-    void btn_pay() {
+
+    @Background
+    void getPaymentOrder() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterGetPaymentOrder(myRestClient.getPaymentOrder(mAppOrder.MOrderId));
+    }
+
+    @UiThread
+    void afterGetPaymentOrder(BaseModelJson<ShopOrder> result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!result.Successful) {
+            AndroidTool.showToast(this, result.Error);
+        } else {
+            pay(result.Data);
+        }
+    }
+
+    void pay(ShopOrder mAppOrder) {
         if ("2".equals(mAppOrder.DeverKbn)) {
             AndroidTool.showToast(this, "非当前手机下的订单，无法付款，请重新下单");
         } else {
@@ -323,6 +343,12 @@ public class OrderDetailActivity extends BaseActivity {
                     AndroidTool.showToast(this, "该订单已支付");
             }
         }
+    }
+
+    @Click
+    void btn_pay() {
+        AndroidTool.showLoadDialog(this);
+        getPaymentOrder();
     }
 
     @Subscribe

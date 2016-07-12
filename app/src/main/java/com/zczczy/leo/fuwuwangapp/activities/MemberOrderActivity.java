@@ -72,7 +72,6 @@ public class MemberOrderActivity extends BaseActivity {
         AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle(title);
         empty_view.setText(String.format(empty_order, title));
-        bus.register(this);
         ultimateRecyclerView.setHasFixedSize(false);
         linearLayoutManager = new LinearLayoutManager(this);
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
@@ -154,9 +153,14 @@ public class MemberOrderActivity extends BaseActivity {
     }
 
     @Override
-    public void finish() {
-        super.finish();
+    public void onPause() {
         bus.unregister(this);
+        super.onPause();
+    }
+
+    public void onResume() {
+        bus.register(this);
+        super.onResume();
     }
 
     @Subscribe

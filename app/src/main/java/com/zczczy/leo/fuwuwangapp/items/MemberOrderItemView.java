@@ -17,6 +17,7 @@ import com.zczczy.leo.fuwuwangapp.activities.OrderDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.UmspayActivity_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
+import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
@@ -172,14 +173,38 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
         }
     }
 
-
     @Click
     void btn_logistics() {
         LogisticsInfoActivity_.intent(context).MOrderId(_data.MOrderId).start();
     }
 
+    @Background
+    void getPaymentOrder() {
+        myRestClient.setHeader("Token", pre.token().get());
+        myRestClient.setHeader("ShopToken", pre.shopToken().get());
+        myRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterGetPaymentOrder(myRestClient.getPaymentOrder(_data.MOrderId));
+    }
+
+    @UiThread
+    void afterGetPaymentOrder(BaseModelJson<ShopOrder> result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            AndroidTool.showToast(context, no_net);
+        } else if (!result.Successful) {
+            AndroidTool.showToast(context, result.Error);
+        } else {
+            pay(result.Data);
+        }
+    }
+
     @Click
     void btn_pay() {
+        AndroidTool.showLoadDialog(context);
+        getPaymentOrder();
+    }
+
+    void pay(ShopOrder _data) {
         if ("2".equals(_data.DeverKbn)) {
             AndroidTool.showToast(context, "非当前手机下的订单，无法付款，请重新下单");
         } else {

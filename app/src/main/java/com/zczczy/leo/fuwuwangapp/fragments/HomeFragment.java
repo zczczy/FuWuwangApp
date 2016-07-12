@@ -1,6 +1,8 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -189,7 +191,9 @@ public class HomeFragment extends BaseFragment {
 
     @Click
     void img_shangjia() {
-        SearchActivity_.intent(this).isMerchant(true).start();
+//        SearchActivity_.intent(this).isMerchant(true).start();
+        String url = "mqqwpa://im/chat?chat_type=wpa&uin=261227869";
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
     void setListener() {

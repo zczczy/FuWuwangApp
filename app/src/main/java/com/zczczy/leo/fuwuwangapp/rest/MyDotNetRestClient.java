@@ -271,7 +271,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：订阅安全信使
-     * <p/>
+     * <p>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -284,7 +284,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：取消订阅安全信使
-     * <p/>
+     * <p>
      *
      * @param map SendCode  验证码
      *            UserName  用户名
@@ -296,7 +296,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：获取手机验证码
-     * <p/>
+     * <p>
      *
      * @param map SendType （0：提现，1：变更资料，2：订阅服务，3：取消订阅,4.转账）
      *            UserName  用户名
@@ -308,7 +308,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
 
     /**
      * 功能：验证验证码
-     * <p/>
+     * <p>
      *
      * @param username 用户名
      * @param code     验证码
@@ -321,7 +321,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     /**
      * SubscriptionExist
      * 功能：根据用户名验证查询是否订阅
-     * <p/>
+     * <p>
      *
      * @param UserName 用户名
      * @return String
@@ -626,6 +626,17 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Post("api/Shop/CancelOrderById/{id}")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModel cancelOrderById(@Path String id);
+
+    
+    /**
+     * 根据订单ID查询订单支付信息
+     *
+     * @param OrderId 根据订单ID
+     * @return
+     */
+    @Get("api/Shop/GetPaymentOrder?OrderId={OrderId}")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<ShopOrder> getPaymentOrder(@Path String OrderId);
 
     /**
      * 查询收货地址
