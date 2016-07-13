@@ -82,6 +82,7 @@ public class SearchActivity extends BaseActivity {
                 if (isService) {
                     StoreSearchActivity_.intent(SearchActivity.this).searchName(obj.getSearchContent()).startForResult(1000);
                 } else if (isMerchant) {
+                    MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
                 } else {
                     CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
                 }
@@ -98,6 +99,7 @@ public class SearchActivity extends BaseActivity {
                     if (isService) {
                         StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
                     } else if (isMerchant) {
+                        MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
                     } else {
                         CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
                     }
@@ -116,6 +118,7 @@ public class SearchActivity extends BaseActivity {
             if (isService) {
                 StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
             } else if (isMerchant) {
+                MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
             } else {
                 CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
             }

@@ -238,6 +238,7 @@
     <string name="txt_search">搜索</string>
     <string name="txt_major">主营：</string>
     <string name="txt_company_address">地址：</string>
+    <string name="txt_company_phone">联系电话：</string>
 
     <string name="city_choose">城市选择</string>
 

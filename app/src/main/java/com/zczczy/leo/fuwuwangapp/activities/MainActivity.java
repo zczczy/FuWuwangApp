@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     Drawable home_selector, mine_selector, category_selector, service_selector;
 //    Drawable home_selector, news_selector, mine_selector, category_selector, service_selector;
 
-//    Drawable[] drawables = new Drawable[5];
+    //    Drawable[] drawables = new Drawable[5];
     Drawable[] drawables = new Drawable[4];
 
     @StringRes
@@ -317,6 +317,7 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         pre.locationAddress().put(bdLocation.getCity());
+        pre.address().put(bdLocation.getCity());
         getCityCode();
     }
 

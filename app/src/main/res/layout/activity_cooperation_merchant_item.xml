@@ -6,7 +6,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
@@ -18,12 +18,14 @@
             android:id="@+id/txt_company_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="锦州市杭大电子公司"
+            android:text=""
             android:textColor="#000000"
             android:textSize="18sp" />
-    </LinearLayout>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -113,5 +115,4 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
 </LinearLayout>

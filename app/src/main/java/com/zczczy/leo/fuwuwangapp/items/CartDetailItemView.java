@@ -173,6 +173,8 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
         myRestClient.setHeader("Kbn", Constants.ANDROID);
         HashMap<String, String> map = new HashMap<>();
         map.put("GoodsInfoId", _data.GoodsInfoId);
+        map.put("SelCount", 1 + "");
+        map.put("GoodsAttributeId", _data.GoodsAttributeId + "");
         afterAddShoppingCart(myRestClient.addShoppingCart(map));
     }
 
@@ -183,6 +185,7 @@ public class CartDetailItemView extends ItemView<CartModel> implements QuantityV
             AndroidTool.showToast(context, "商品添加失败");
         } else if (!bm.Successful) {
             AndroidTool.showToast(context, bm.Error);
+            quantityView.setQuantity(_data.ProductCount);
         } else {
             _data.ProductCount++;
             cartActivity.setTotalMoney();

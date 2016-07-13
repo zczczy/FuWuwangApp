@@ -47,6 +47,8 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Leo on 2016/5/4.
  */
@@ -169,7 +171,7 @@ public class PreOrderActivity extends BaseActivity {
             txt_dian_balance.setText(String.format(dian_balance, bmj.Data.MaxDzb));
             balance = bmj.Data.MaxDzb;
             txt_sub_express_charges.setText(String.format(home_rmb, bmj.Data.Postage));
-            txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
+            txt_pay_total_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney + Double.valueOf(bmj.Data.Postage)));
             payYuan = bmj.Data.MOrderMoney;
             txt_total_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
             int i = 0;
@@ -180,7 +182,7 @@ public class PreOrderActivity extends BaseActivity {
             }
             sellerType = bmj.Data.SellerType;
             //设置商品总价（去除邮费）
-            yuan = bmj.Data.MOrderMoney - Double.valueOf(bmj.Data.Postage);
+            yuan = bmj.Data.MOrderMoney;
             //设置费用
             if (bmj.Data.MOrderMoney > 0 && bmj.Data.GoodsAllLbCount > 0) {
                 ll_lb.setVisibility(View.VISIBLE);
@@ -188,7 +190,7 @@ public class PreOrderActivity extends BaseActivity {
                 txt_rmb.setVisibility(View.VISIBLE);
                 txt_plus.setVisibility(View.VISIBLE);
                 //设置商品总价
-                txt_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney));
+                txt_rmb.setText(String.format(home_rmb, bmj.Data.MOrderMoney + Double.valueOf(bmj.Data.Postage)));
                 //设置龙币数
                 txt_home_lb.setText(String.format(home_lb, bmj.Data.GoodsAllLbCount));
             } else if (bmj.Data.MOrderMoney > 0) {
@@ -283,7 +285,7 @@ public class PreOrderActivity extends BaseActivity {
                     txt_dian_quantity.setText(String.valueOf(useDianZiBi));
                     //设置实际付款金额 yuan（商品总价）-useDianZiBi（用的电子币数量） + postal邮费
                     payYuan = (Math.round((yuan - useDianZiBi) * 100) / 100.0) + postal;
-                    txt_pay_total_rmb.setText(String.format(home_rmb, payYuan));
+                    txt_pay_total_rmb.setText(String.format(home_rmb, new BigDecimal(payYuan).setScale(2, BigDecimal.ROUND_HALF_UP)));
                     inputMethodManager.hideSoftInputFromWindow(et.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -344,9 +346,6 @@ public class PreOrderActivity extends BaseActivity {
         shopOrder.TwoPass = password;
         shopOrder.MOrderDzb = use_dian.isChecked() ? useDianZiBi : 0;
         shopOrder.MPaymentType = rb_bao_pay.isChecked() ? 1 : (rb_wechat_pay.isChecked() ? 2 : 3);
-        Gson gson = new Gson();
-        Log.e("11111111111111111111111", gson.toJson(shopOrder));
-
         afterPayOrder(myRestClient.createOrderInfo(shopOrder));
     }
 

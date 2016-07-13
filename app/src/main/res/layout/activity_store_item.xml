@@ -14,13 +14,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:padding="10dp">
 
         <ImageView
             android:id="@+id/img_store_pic"
-            android:layout_width="110dp"
-            android:layout_height="84dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:scaleType="centerCrop"
@@ -70,7 +70,6 @@
                     android:drawablePadding="5dp"
                     android:gravity="center"
                     android:lines="1"
-                    android:text="adfa"
                     android:textSize="16sp" />
 
                 <TextView
@@ -81,7 +80,6 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:lines="1"
-                    android:text="adfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfaadfa"
                     android:textColor="@color/sub_color" />
             </LinearLayout>
         </LinearLayout>

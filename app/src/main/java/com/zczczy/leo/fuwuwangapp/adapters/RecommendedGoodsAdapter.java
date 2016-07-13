@@ -27,6 +27,8 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.util.List;
+
 /**
  * Created by Leo on 2016/4/27.
  */
@@ -70,8 +72,13 @@ public class RecommendedGoodsAdapter extends BaseUltimateRecyclerViewAdapter<Reb
             case 2:
                 bmj = myRestClient.getGoodsInfoByCity(objects[1] == null ? "" : objects[1].toString(), pageIndex, pageSize);
                 break;
+            case 3:
+                bmj = new BaseModelJson<>();
+                bmj.Successful = true;
+                PagerResult<RebuiltRecommendedGoods> pagerResult = new PagerResult<>();
+                pagerResult.ListData = (List<RebuiltRecommendedGoods>) objects[1];
+                bmj.Data = pagerResult;
         }
-
         afterGetData(bmj);
     }
 

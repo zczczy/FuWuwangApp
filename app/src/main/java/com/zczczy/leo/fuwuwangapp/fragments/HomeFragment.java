@@ -65,9 +65,6 @@ public class HomeFragment extends BaseFragment {
     MyTitleBar myTitleBar;
 
     @Bean
-    MyErrorHandler myErrorHandler;
-
-    @Bean
     MyBackgroundTask myBackgroundTask;
 
     @Bean

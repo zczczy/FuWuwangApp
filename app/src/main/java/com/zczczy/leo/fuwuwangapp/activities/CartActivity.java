@@ -43,6 +43,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -259,7 +260,7 @@ public class CartActivity extends BaseActivity {
             d += list.get(i).rmbTotal;
             lb += list.get(i).lbTotal;
         }
-        txt_total_rmb.setText(String.format(he_ji, d));
+        txt_total_rmb.setText(String.format(he_ji, new BigDecimal(d).setScale(2, BigDecimal.ROUND_HALF_UP)));
         txt_total_lb.setText(String.format(home_lb, lb));
     }
 

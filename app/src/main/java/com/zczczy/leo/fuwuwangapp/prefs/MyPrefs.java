@@ -30,9 +30,9 @@ public interface MyPrefs {
 
     @DefaultString("")
     String cityId();
-//
-//    @DefaultString("全国")
-//    String address();
+
+    @DefaultString("")
+    String address();
 
     @DefaultString("3")
     String userType();

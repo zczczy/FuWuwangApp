@@ -2,7 +2,7 @@ package com.zczczy.leo.fuwuwangapp.items;
 
 import android.content.Context;
 import android.widget.ImageView;
-import android.widget.RatingBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -14,23 +14,22 @@ import org.androidannotations.annotations.ViewById;
 import org.springframework.util.StringUtils;
 
 /**
- * Created by Leo on 2016/5/10.
+ * @author Created by LuLeo on 2016/7/13.
+ *         you can contact me at :361769045@qq.com
+ * @since 2016/7/13.
  */
-@EViewGroup(R.layout.activity_store_item)
-public class StoreItemView extends ItemView<StoreDetailModel> {
+@EViewGroup(R.layout.activity_merchant_detail_store)
+public class MerchantStoreItemView extends ItemView<StoreDetailModel> {
 
     @ViewById
-    ImageView img_store_pic;
+    ImageView img_company_logo;
 
     @ViewById
-    TextView txt_store_name, txt_store_region, txt_store_describe;
-
-    @ViewById
-    RatingBar ratingBar;
+    TextView txt_store_name, txt_company_address, txt_company_phone;
 
     Context context;
 
-    public StoreItemView(Context context) {
+    public MerchantStoreItemView(Context context) {
         super(context);
         this.context = context;
     }
@@ -38,21 +37,13 @@ public class StoreItemView extends ItemView<StoreDetailModel> {
     @Override
     protected void init(Object... objects) {
         if (!StringUtils.isEmpty(_data.StoreImgSl)) {
-
-            Glide.with(context)
-                    .load(_data.StoreImgSl)
-                    .centerCrop()
-                    .crossFade()
-                    .placeholder(R.drawable.goods_default)
-                    .error(R.drawable.goods_default)
-                    .into(img_store_pic);
+            Glide.with(context).load(_data.StoreImgSl).crossFade().centerCrop().skipMemoryCache(true)
+                    .error(R.drawable.goods_default).placeholder(R.drawable.goods_default)
+                    .into(img_company_logo);
         }
-
         txt_store_name.setText(_data.StoreName);
-
-        txt_store_region.setText(_data.StreetName);
-
-        txt_store_describe.setText(_data.StoreDesc);
+        txt_company_address.setText(_data.StoreAddress);
+        txt_company_phone.setText(_data.LinkTel);
     }
 
     @Override

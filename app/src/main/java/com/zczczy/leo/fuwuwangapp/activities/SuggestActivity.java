@@ -109,9 +109,9 @@ public class SuggestActivity extends BaseActivity {
                 ll_confirm.isShown() ? confirm_pass : pass,
                 pre.token().get(),
                 "1",
+                edt_mobile_phone.getText().toString().trim(),
                 edt_realname.getText().toString().trim(),
                 edt_id_card.getText().toString().trim(),
-                edt_mobile_phone.getText().toString().trim(),
                 null);
         BaseModelJson<String> bmj = myRestClient.RegisterNew(fwwUser);
         showsuccess(bmj);

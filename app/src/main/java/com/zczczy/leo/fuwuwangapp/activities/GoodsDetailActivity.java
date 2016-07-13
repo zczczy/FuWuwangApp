@@ -220,11 +220,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                 goods_by.setText(bmj.Data.GoodsIsBy);
 
                 if ("0".equals(bmj.Data.GoodsReturnTicket)) {
-                    txt_rebate.setText(bmj.Data.TempDisp);
-                    txt_coupon.setSelected(true);
-                } else {
                     txt_coupon.setSelected(false);
                     txt_rebate.setText("");
+                } else {
+                    txt_rebate.setText(bmj.Data.TempDisp);
+                    txt_coupon.setSelected(true);
                 }
 
                 PlUrl = goodsId;

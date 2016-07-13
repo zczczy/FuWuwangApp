@@ -52,7 +52,17 @@ public class CooperationMerchantAdapter extends BaseUltimateRecyclerViewAdapter<
     @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
-        afterGetData(myRestClient.GetCompany((objects[0]).toString(), (objects[1]).toString(), pageIndex, pageSize));
+        BaseModelJson<PagerResult<CooperationMerchant>> bmj = null;
+        switch ((objects[0]).toString()) {
+            case "0":
+                bmj = myRestClient.GetCompany((objects[1]).toString(), (objects[2]).toString(), pageIndex, pageSize);
+                break;
+            case "1":
+                bmj = myRestClient.getShopCompany((objects[1]).toString(), (objects[2]).toString(), pageIndex, pageSize);
+                break;
+            default:
+        }
+        afterGetData(bmj);
     }
 
     @UiThread

@@ -45,4 +45,6 @@ public class StoreDetailModel implements Serializable {
     public String AreaName;
     public String StreetName;
     public String CheckUser;
+
+
 }

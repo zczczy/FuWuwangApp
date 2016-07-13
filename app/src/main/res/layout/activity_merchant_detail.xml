@@ -13,7 +13,7 @@
         android:background="@color/major_color"
         android:minHeight="50dp"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/txt_notice" />
+        app:mTitle="联盟商家详细" />
 
     <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
         android:id="@+id/ultimate_recycler_view"

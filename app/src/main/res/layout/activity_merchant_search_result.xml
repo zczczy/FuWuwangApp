@@ -13,7 +13,7 @@
         android:minHeight="50dp"
         app:mCustomView="@layout/category_search"
         app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mRightText="@string/search"
+        app:mRightText="全国"
         app:mRightTextMarginRight="15dp" />
 
     <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
