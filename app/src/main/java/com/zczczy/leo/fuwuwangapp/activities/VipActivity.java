@@ -27,6 +27,7 @@ import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
+import com.zczczy.leo.fuwuwangapp.tools.Constants;
 import com.zczczy.leo.fuwuwangapp.tools.ImageUtil;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
@@ -89,7 +90,6 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
 
     @AfterViews
     void afterView() {
-
         fileName = AndroidTool.BaseFilePath() + System.currentTimeMillis() + ".jpg";
         AndroidTool.showLoadDialog(this);
         getBind();
@@ -101,20 +101,46 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
         });
     }
 
-    void share() {
-        if (req == null) {
+    @Background
+    void preShare() {
+        newMyRestClient.setHeader("Token", pre.token().get());
+        newMyRestClient.setHeader("ShopToken", pre.shopToken().get());
+        newMyRestClient.setHeader("Kbn", Constants.ANDROID);
+        afterPreShare(newMyRestClient.preShare());
+    }
+
+    @UiThread
+    void afterPreShare(BaseModelJson<String> result) {
+        AndroidTool.dismissLoadDialog();
+        if (result == null) {
+            AndroidTool.showToast(this, no_net);
+        } else if (!result.Successful) {
+            CommonWebViewActivity_.intent(this).title("中国消费服务网").methodName(Constants.DETAILPAGE + "/GuideWeChat").start();
+        } else {
             WXWebpageObject webpage = new WXWebpageObject();
-            webpage.webpageUrl = "http://www.baidu.com";
+            webpage.webpageUrl = "http://zczc.86fuwuwang.com/WXContent/ShareInfo?id=" + result.Data;
             WXMediaMessage msg = new WXMediaMessage(webpage);
-            msg.title = "测试";
-            msg.description = "测试描述";
-            Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.yule);
+            msg.title = "中国消费服务网";
+            msg.description = "互联网新思路，消费增加储蓄，消费带来投资，消费积攒养老";
+            Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
             msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
             req = new SendMessageToWX.Req();
             req.transaction = buildTransaction("webpage");
             req.message = msg;
+            send();
         }
+    }
 
+    void share() {
+        if (req == null) {
+            AndroidTool.showLoadDialog(this);
+            preShare();
+        } else {
+            send();
+        }
+    }
+
+    void send() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
             @Override
@@ -129,7 +155,6 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
                 app.iWXApi.sendReq(req);
             }
         }).create().show();
-
     }
 
     @Subscribe

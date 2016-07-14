@@ -39,6 +39,7 @@ import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -247,14 +248,14 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
             txt_plus.setVisibility(View.VISIBLE);
             txt_home_lb.setVisibility(VISIBLE);
             //设置商品总价
-            txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney + _data.MOrderDzb));
+            txt_rmb.setText(String.format(home_rmb, new BigDecimal(_data.MOrderMoney + _data.MOrderDzb).setScale(2, BigDecimal.ROUND_HALF_UP)));
             //设置龙币数
             txt_home_lb.setText(String.format(home_lb, _data.GoodsAllLbCount));
         } else if (_data.MOrderMoney + _data.MOrderDzb > 0) {
             txt_rmb.setVisibility(View.VISIBLE);
             txt_plus.setVisibility(View.GONE);
             txt_home_lb.setVisibility(View.GONE);
-            txt_rmb.setText(String.format(home_rmb, _data.MOrderMoney + _data.MOrderDzb));
+            txt_rmb.setText(String.format(home_rmb, new BigDecimal(_data.MOrderMoney + _data.MOrderDzb).setScale(2, BigDecimal.ROUND_HALF_UP)));
         } else if (_data.GoodsAllLbCount > 0) {
             txt_rmb.setVisibility(View.GONE);
             txt_plus.setVisibility(View.GONE);

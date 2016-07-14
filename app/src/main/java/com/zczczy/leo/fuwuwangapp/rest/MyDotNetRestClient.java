@@ -910,4 +910,13 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetCompanyDetailById?CompanyId={CompanyId}")
     BaseModelJson<CooperationMerchant> getCompanyDetailById(@Path String CompanyId);
 
+    /**
+     * 查询会员OpenId
+     *
+     * @return
+     */
+    @Get("api/Member/PreShare")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<String> preShare();
+
 }
