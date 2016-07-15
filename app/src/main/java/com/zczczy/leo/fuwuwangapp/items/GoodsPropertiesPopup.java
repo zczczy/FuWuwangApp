@@ -153,6 +153,7 @@ public class GoodsPropertiesPopup extends LinearLayout {
                     if (Float.valueOf(g.GoodsAttributePrice) > 0 && Integer.valueOf(g.GoodsAttributeLbPrice) > 0) {
                         txt_rmb.setVisibility(View.VISIBLE);
                         txt_plus.setVisibility(View.VISIBLE);
+                        txt_home_lb.setVisibility(VISIBLE);
                         txt_rmb.setText(String.format(home_rmb, g.GoodsAttributePrice));
                         txt_home_lb.setText(String.format(home_lb, g.GoodsAttributeLbPrice));
                     } else if (Float.valueOf(g.GoodsAttributePrice) > 0) {

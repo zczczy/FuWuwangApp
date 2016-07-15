@@ -56,10 +56,14 @@ public class StoreInformationHeaderItemView extends ItemView<StoreDetailModel> {
             ;
             sliderLayout.addSlider(textSliderView);
         }
-        if (_data != null && _data.StoreImgList.size() > 1) {
-            sliderLayout.startAutoCycle();
-        } else {
+
+        if (_data == null || _data.StoreImgList.size() == 0) {
             sliderLayout.stopAutoCycle();
+            sliderLayout.setBackgroundResource(R.drawable.goods_detail_banner);
+        } else if (_data.StoreImgList.size() == 1) {
+            sliderLayout.stopAutoCycle();
+        } else {
+            sliderLayout.startAutoCycle();
         }
     }
 

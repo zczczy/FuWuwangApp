@@ -239,18 +239,6 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txt_more_review"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:padding="15dp"
-                android:text="@string/text_goods_more_review"
-                android:textColor="@color/sub_text_color" />
-
-            <include layout="@layout/horizontal_line" />
-
             <include
                 layout="@layout/horizontal_line"
                 android:layout_width="match_parent"

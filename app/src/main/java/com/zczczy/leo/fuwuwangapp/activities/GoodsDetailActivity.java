@@ -254,7 +254,12 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                             setOnSliderClickListener(this);
                     sliderLayout.addSlider(textSliderView);
                 }
-                if (bmj.Data.GoodsImgList == null || bmj.Data.GoodsImgList.size() <= 1) {
+                if (bmj.Data.GoodsImgList == null || bmj.Data.GoodsImgList.size() == 0) {
+                    isStart = false;
+                    sliderLayout.stopAutoCycle();
+                    sliderLayout.setBackgroundResource(R.drawable.goods_detail_banner);
+
+                } else if (bmj.Data.GoodsImgList.size() == 1) {
                     isStart = false;
                     sliderLayout.stopAutoCycle();
                 } else {
@@ -343,11 +348,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     @Click
     void ll_review() {
         GoodsCommentsActivity_.intent(this).goodsId(goodsId).start();
-    }
-
-    @Click
-    void txt_more_review() {
-        changeFragment(goodsId);
     }
 
     @Click

@@ -34,7 +34,6 @@ public class FirstServiceCategoryAdapter extends MyBaseAdapter<GoodsTypeModel> {
 
     private List<FirstServiceCategoryItemView> firstCategoryItemView = new ArrayList<>();
 
-
     @RestService
     MyDotNetRestClient myRestClient;
 

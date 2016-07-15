@@ -1,5 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -36,11 +38,19 @@ public class GoodsCommentsFragment extends BaseFragment {
     @FragmentArg
     String goodsId;
 
+    @ViewById
+    RecyclerView recycler_view;
+
     @Bean(DetailGoodsCommentsAdapter.class)
     BaseRecyclerViewAdapter myAdapter;
 
+    LinearLayoutManager linearLayoutManager;
+
     @AfterViews
     void afterView() {
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recycler_view.setLayoutManager(linearLayoutManager);
+        recycler_view.setAdapter(myAdapter);
         afterLoadMore();
     }
 

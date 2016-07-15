@@ -115,7 +115,7 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
         if (result == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!result.Successful) {
-            CommonWebViewActivity_.intent(this).title("中国消费服务网").methodName(Constants.DETAILPAGE + "/GuideWeChat").start();
+            CommonWebViewActivity_.intent(this).title("分享须知").methodName(Constants.DETAILPAGE + "/GuideWeChat").start();
         } else {
             WXWebpageObject webpage = new WXWebpageObject();
             webpage.webpageUrl = "http://zczc.86fuwuwang.com/WXContent/ShareInfo?id=" + result.Data;
@@ -142,6 +142,7 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
 
     void send() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setView(R.layout.share);
         adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

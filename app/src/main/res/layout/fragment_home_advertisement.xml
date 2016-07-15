@@ -17,20 +17,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@color/home_background"
+        android:layout_marginBottom="12dp"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:paddingTop="10dp">
-
-        <ImageView
-            android:id="@+id/img_winners_order"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="@color/home_background"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="fitCenter"
-            android:src="@drawable/home_winners_order" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,8 +37,8 @@
 
                 <ImageView
                     android:id="@+id/img_trendw"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_nv" />
 
                 <TextView
@@ -59,7 +49,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/trendw"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -72,8 +62,8 @@
 
                 <ImageView
                     android:id="@+id/img_trendm"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_nz" />
 
                 <TextView
@@ -84,7 +74,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/trendm"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -97,8 +87,8 @@
 
                 <ImageView
                     android:id="@+id/img_huazhuang"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_hz" />
 
                 <TextView
@@ -109,7 +99,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/huazhuang"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -122,8 +112,8 @@
 
                 <ImageView
                     android:id="@+id/img_digital"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_sm" />
 
                 <TextView
@@ -134,7 +124,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/digital"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -147,8 +137,8 @@
 
                 <ImageView
                     android:id="@+id/img_baby"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_my" />
 
                 <TextView
@@ -159,12 +149,11 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/baby"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,8 +170,8 @@
 
                 <ImageView
                     android:id="@+id/img_xxxb"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_xx" />
 
                 <TextView
@@ -193,7 +182,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/xxxb"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -205,8 +194,8 @@
 
                 <ImageView
                     android:id="@+id/img_life"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_jj" />
 
                 <TextView
@@ -217,7 +206,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/life"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -230,8 +219,8 @@
 
                 <ImageView
                     android:id="@+id/img_food"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_sp" />
 
                 <TextView
@@ -242,7 +231,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/home_service"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -255,8 +244,8 @@
 
                 <ImageView
                     android:id="@+id/img_healthcare"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_bj" />
 
                 <TextView
@@ -267,7 +256,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/healthcare"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
 
@@ -280,8 +269,8 @@
 
                 <ImageView
                     android:id="@+id/img_lbdh"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/home_lb" />
 
                 <TextView
@@ -292,10 +281,20 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/lbdh"
                     android:textColor="@color/home_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
+
+        <include layout="@layout/horizontal_line" />
+
+        <ImageView
+            android:id="@+id/img_winners_order"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_winners_order" />
 
     </LinearLayout>
 
@@ -418,7 +417,7 @@
         android:id="@+id/ad_nine"
         android:layout_width="match_parent"
         android:layout_height="78dp"
-        android:layout_margin="1.5dp"
+        android:layout_marginTop="11dp"
         android:background="@color/home_background"
         android:foreground="?android:attr/selectableItemBackground"
         android:scaleType="centerCrop"
