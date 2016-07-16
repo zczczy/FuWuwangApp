@@ -154,6 +154,7 @@ public class OrderDetailActivity extends BaseActivity {
                 temp = "不赠券+";
             }
             txt_coupon.setText(temp.substring(0, temp.lastIndexOf('+')));
+            ll_logistics.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
             if (bmj.Data.MorderStatus == Constants.DUEPAYMENT) {
                 btn_cancel_order.setVisibility(View.VISIBLE);
                 btn_pay.setVisibility(View.VISIBLE);
@@ -168,9 +169,11 @@ public class OrderDetailActivity extends BaseActivity {
                     txt_paid_rmb.setText(String.format(home_rmb, bmj.Data.MOrderDzb));
                 }
                 rl_express_charges.setVisibility(View.GONE);
+                ll_logistics.setVisibility(View.GONE);
             } else if (bmj.Data.MorderStatus == Constants.PAID) {
                 ll_take.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
-                btn_logistics.setVisibility(View.VISIBLE);
+                btn_logistics.setVisibility(View.GONE);
+                ll_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
@@ -179,6 +182,7 @@ public class OrderDetailActivity extends BaseActivity {
             } else if (bmj.Data.MorderStatus == Constants.CANCEL) {
                 btn_canceled.setVisibility(View.VISIBLE);
                 btn_logistics.setVisibility(View.GONE);
+                ll_logistics.setVisibility(View.GONE);
                 btn_finish.setVisibility(View.GONE);
                 btn_cancel_order.setVisibility(View.GONE);
                 btn_pay.setVisibility(View.GONE);
@@ -206,7 +210,6 @@ public class OrderDetailActivity extends BaseActivity {
                 ll_should_pay.setVisibility(View.GONE);
             }
             ll_shipping.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
-            ll_logistics.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
             rl_express_charges.setVisibility("1".equals(bmj.Data.GoodsType) ? View.GONE : View.VISIBLE);
         }
     }

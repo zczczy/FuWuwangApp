@@ -1,5 +1,7 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -137,16 +139,17 @@ public class MyAddressActivity extends BaseActivity implements BDLocationListene
 
         //在地图上添加Marker，并显示
         markersj = (Marker) mBaiduMap.addOverlay(option);
-
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
 
             @Override
             public boolean onMarkerClick(Marker arg0) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), "当前手机位置！", Toast.LENGTH_SHORT).show();
+                AndroidTool.showToast(MyAddressActivity.this, "当前手机位置！");
                 return false;
             }
         });
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("提示").setMessage("获取地理位置成功").setNegativeButton("确定", null).setIcon(R.mipmap.logo).create().show();
     }
 
     //保存按钮点击事件
@@ -156,7 +159,7 @@ public class MyAddressActivity extends BaseActivity implements BDLocationListene
             AndroidTool.showLoadDialog(this);
             savezuo();
         } else {
-            Toast.makeText(getApplicationContext(), "没获取到当前位置", Toast.LENGTH_SHORT).show();
+            AndroidTool.showToast(MyAddressActivity.this, "没获取到当前位置");
         }
     }
 
