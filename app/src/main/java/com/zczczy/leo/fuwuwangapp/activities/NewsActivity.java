@@ -21,7 +21,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             NoticeActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -31,7 +31,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             InformationActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -41,7 +41,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             FundActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -51,7 +51,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             CooperationMerchantActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -61,7 +61,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             ExperienceActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -71,7 +71,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             AgentActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -81,7 +81,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             ActivityActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -91,7 +91,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             BusinessInstituteActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 
@@ -101,7 +101,7 @@ public class NewsActivity extends BaseActivity {
         if (isNetworkAvailable(this)) {
             ServiceActivity_.intent(this).start();
         } else {
-            AndroidTool.showToast(this,no_net);
+            AndroidTool.showToast(this, no_net);
         }
     }
 

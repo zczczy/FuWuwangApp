@@ -115,7 +115,7 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
         if (result == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!result.Successful) {
-            CommonWebViewActivity_.intent(this).title("分享须知").methodName(Constants.DETAILPAGE + "/GuideWeChat").start();
+            CommonWebViewActivity_.intent(this).title("分享须知").methodName(Constants.DETAIL_PAGE_ACTION + Constants.GUIDE_WE_CHAT_METHOD).start();
         } else {
             WXWebpageObject webpage = new WXWebpageObject();
             webpage.webpageUrl = "http://zczc.86fuwuwang.com/WXContent/ShareInfo?id=" + result.Data;
@@ -309,7 +309,8 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
     @Click
     void ll_game_club() {
         if (isNetworkAvailable(this)) {
-            WebViewActivity_.intent(this).header("游戏中心").url("http://appapia.86fuwuwang.com/" + "DetailPage/GameDisp?kbn=2").start();
+//            WebViewActivity_.intent(this).header("游戏中心").url("http://appapia.86fuwuwang.com/" + "DetailPage/GameDisp?kbn=2").start();
+            CommonWebViewActivity_.intent(this).title("游戏中心").methodName(Constants.DETAIL_PAGE_ACTION + Constants.GAME_DISP_METHOD).start();
         } else {
             AndroidTool.showToast(this, no_net);
         }

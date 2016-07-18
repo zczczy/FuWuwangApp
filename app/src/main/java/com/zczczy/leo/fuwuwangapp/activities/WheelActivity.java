@@ -209,7 +209,7 @@ public class WheelActivity extends BaseActivity implements Runnable {
     @Click
     void txt_lottery_introduction() {
         CommonWebViewActivity_.intent(this).title(lottery_introduce)
-                .methodName(Constants.DETAILPAGE + Constants.LOTTERYDIST).start();
+                .methodName(Constants.DETAIL_PAGE_ACTION + Constants.LOTTERY_DIST).start();
     }
 
     @Override

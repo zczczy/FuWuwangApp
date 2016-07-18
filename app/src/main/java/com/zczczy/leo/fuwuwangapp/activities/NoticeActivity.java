@@ -93,7 +93,7 @@ public class NoticeActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Notice>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Notice notice, int position) {
-                WebViewActivity_.intent(NoticeActivity.this).header("公告详情").url(Constants.URL + "DetailPage/NoticeDetail/" + notice.getNoticeId()).start();
+                CommonWebViewActivity_.intent(NoticeActivity.this).title("公告详情").methodName(Constants.DETAIL_PAGE_ACTION + Constants.NOTICE_DETAIL_METHOD + notice.NoticeId).start();
             }
 
             @Override

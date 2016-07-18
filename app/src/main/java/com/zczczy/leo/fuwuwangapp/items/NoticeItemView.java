@@ -38,9 +38,9 @@ public class NoticeItemView extends ItemView<Notice> {
             Glide.with(context).load(_data.NimgUrl).centerCrop().crossFade()
                     .placeholder(R.drawable.goods_default).error(R.drawable.goods_default).into(img_nimg);
         }
-        txt_title.setText(_data.getTitle());
+        txt_title.setText(_data.Title);
 
-        txt_date.setText(_data.getDate());
+        txt_date.setText(_data.Date);
 
     }
 

@@ -33,7 +33,7 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  * Created by Leo on 2016/4/28.
  */
 @EActivity(R.layout.activity_notice)
-public class InformationActivity  extends BaseActivity {
+public class InformationActivity extends BaseActivity {
 
     @ViewById
     MyTitleBar myTitleBar;
@@ -94,7 +94,7 @@ public class InformationActivity  extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Information>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Information information, int position) {
-                WebViewActivity_.intent(InformationActivity.this).header("资讯详情").url(Constants.URL + "DetailPage/NewsDetail/" + information.getNoticeId()).start();
+                CommonWebViewActivity_.intent(InformationActivity.this).title("资讯详情").methodName(Constants.DETAIL_PAGE_ACTION + Constants.NEWS_DETAIL_METHOD + information.getNoticeId()).start();
             }
 
             @Override

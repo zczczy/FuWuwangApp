@@ -137,7 +137,7 @@ public class ExperienceActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Experience>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Experience obj, int position) {
-                WebViewActivity_.intent(ExperienceActivity.this).header("体验中心").url(Constants.URL + "/DetailPage/CompanyDetail/" + obj.getUserid()).start();
+                CommonWebViewActivity_.intent(ExperienceActivity.this).title("体验中心").methodName(Constants.DETAIL_PAGE_ACTION + Constants.AGENT_DETAIL_METHOD + obj.userid).start();
             }
 
             @Override

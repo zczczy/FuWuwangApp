@@ -55,9 +55,6 @@ public class Experience {
         this.imgurl = imgurl;
     }
 
-    public Integer getUserid() {
-        return userid;
-    }
 
     public void setUserid(Integer userid) {
         this.userid = userid;

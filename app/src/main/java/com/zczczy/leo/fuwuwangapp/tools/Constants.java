@@ -15,9 +15,17 @@ public class Constants {
 //    public static final String PAY_URL = "https://mpos.quanminfu.com:8018/umsFrontWebQmjf/umspay";
 //    public static final String URL = "http://appapia.86fuwuwang.com/";
 
-    public static final String LOTTERYDIST = "LotteryDist";
 
-    public static final String DETAILPAGE = "DetailPage/";
+    public static final String DETAIL_PAGE_ACTION = "DetailPage/";
+    public static final String LOTTERY_DIST = "LotteryDist";
+    public static final String NOTICE_DETAIL_METHOD = "NoticeDetail/";
+    public static final String NEWS_DETAIL_METHOD = "NewsDetail/";
+    public static final String FUNCTION_DETAIL_METHOD = "MtFuncDetail/";
+    public static final String AGENT_DETAIL_METHOD = "AgentBusinessDetail?userid=";
+    public static final String COMPANY_DETAIL_METHOD = "CompanyDetail/";
+    public static final String GUIDE_WE_CHAT_METHOD = "GuideWeChat/";
+    public static final String GAME_DISP_METHOD = "GameDisp?kbn=2";
+
 
     public static final Integer PAGE_COUNT = 10;
 

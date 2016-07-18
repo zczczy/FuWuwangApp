@@ -142,7 +142,7 @@ public class CooperationMerchantActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<CooperationMerchant>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, CooperationMerchant obj, int position) {
-                WebViewActivity_.intent(CooperationMerchantActivity.this).header("联盟商家详细").url(Constants.URL + "/DetailPage/CompanyDetail/" + obj.cp_id).start();
+                CommonWebViewActivity_.intent(CooperationMerchantActivity.this).title("联盟商家详细").methodName(Constants.DETAIL_PAGE_ACTION + Constants.COMPANY_DETAIL_METHOD + obj.cp_id).start();
             }
 
             @Override

@@ -28,7 +28,7 @@ public class CommonWebViewActivity extends BaseActivity {
     WebView web_common;
 
     @Extra
-    String title, methodName;
+    String title, actionName, methodName;
 
     WebSettings settings;
 
