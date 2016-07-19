@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.MemberOrderActivity;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -64,6 +65,11 @@ public class PreOrderItemView extends ItemView<OrderDetailModel> {
             txt_ticket.setText(String.format(text_ticket_no, _data.XfNo.replaceAll("([\\d]{4})", "$1 ")));
             txt_status.setText(_data.XfStatusDisp);
         } else {
+            txt_ticket.setVisibility(GONE);
+            txt_status.setVisibility(GONE);
+        }
+
+        if (context instanceof MemberOrderActivity) {
             txt_ticket.setVisibility(GONE);
             txt_status.setVisibility(GONE);
         }

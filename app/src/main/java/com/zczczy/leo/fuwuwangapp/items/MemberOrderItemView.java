@@ -80,7 +80,6 @@ public class MemberOrderItemView extends ItemView<ShopOrder> {
     @StringRes
     String no_net;
 
-
     Context context;
 
     MemberOrderActivity memberOrderActivity;

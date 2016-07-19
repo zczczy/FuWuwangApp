@@ -150,6 +150,22 @@ public class MerchantSearchResultActivity extends BaseActivity {
             }
         });
 
+        myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(1000);
+                finish();
+            }
+        });
+
+        myTitleBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
     }
 
     void afterLoadMore() {
@@ -234,10 +250,16 @@ public class MerchantSearchResultActivity extends BaseActivity {
         }
     }
 
+
+
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        super.onBackPressed();
+    }
+
     @Override
     public void finish() {
         bus.unregister(this);
-        setResult(RESULT_OK);
         super.finish();
     }
 }

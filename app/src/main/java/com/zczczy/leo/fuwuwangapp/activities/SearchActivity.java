@@ -135,7 +135,7 @@ public class SearchActivity extends BaseActivity {
 
     @OnActivityResult(value = 1000)
     void onResult(int resultCode) {
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK || resultCode == 1000) {
             myAdapter.getMoreData(0, 0);
         }
     }

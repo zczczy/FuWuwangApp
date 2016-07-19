@@ -50,8 +50,8 @@ public class CooperationMerchantItemView extends ItemView<CooperationMerchant> {
         }
 
         txt_company_name.setText(_data.cp_name_zh);
-        txt_major.setText("           " + _data.cp_type);
-        txt_company_address.setText("           " + _data.cp_address);
+        txt_major.setText(_data.cp_type);
+        txt_company_address.setText(_data.cp_address);
 
         if (!"".equals(_data.cp_pic) && _data.cp_pic != null && !_data.cp_pic.isEmpty()) {
             Glide.with(context).load(_data.cp_pic)

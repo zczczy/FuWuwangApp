@@ -16,10 +16,12 @@ import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.BaseActivity;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MainActivity;
+import com.zczczy.leo.fuwuwangapp.activities.MerchantSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
@@ -28,6 +30,7 @@ import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
+import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
@@ -40,6 +43,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
@@ -188,10 +192,18 @@ public class HomeFragment extends BaseFragment {
 
     @Click
     void img_shangjia() {
-        SearchActivity_.intent(this).isMerchant(true).start();
+        MerchantSearchResultActivity_.intent(this).searchContent("").startForResult(1000);
 //        String url = "mqqwpa://im/chat?chat_type=wpa&uin=261227869";
 //        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
+
+    @OnActivityResult(1000)
+    void onResult(int requestCode) {
+        if (requestCode == 1000) {
+            SearchActivity_.intent(this).isMerchant(true).start();
+        }
+    }
+
 
     void setListener() {
         myAdapter.setBindHeaderViewHolder(new BaseUltimateRecyclerViewAdapter.BindHeaderViewHolder() {
