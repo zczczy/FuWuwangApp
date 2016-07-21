@@ -293,8 +293,8 @@
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:scaleType="centerCrop"
-            android:src="@drawable/home_winners_order" />
+            android:scaleType="fitXY"
+            android:src="@drawable/tt" />
 
     </LinearLayout>
 

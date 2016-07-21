@@ -84,11 +84,13 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
         }
         if ("1".equals(app.getLotteryConfig().AppHomeIsShow)) {
             img_winners_order.setVisibility(VISIBLE);
-            Glide.with(context).load(app.getLotteryConfig().AppLotteryImgUrl).skipMemoryCache(true)
-                    .placeholder(R.drawable.home_winners_order)
-                    .centerCrop()
+            Glide.with(context).load(app.getLotteryConfig().AppLotteryImgUrl)
+                    .fitCenter()
                     .crossFade()
-                    .error(R.drawable.home_winners_order).into(img_winners_order);
+                    .skipMemoryCache(true)
+                    .error(R.drawable.home_winners_order)
+                    .placeholder(R.drawable.home_winners_order)
+                    .into(img_winners_order);
         } else {
             img_winners_order.setVisibility(GONE);
         }

@@ -76,6 +76,8 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
 
     SendMessageToWX.Req req;
 
+    AlertDialog ad = null;
+
     //身份证扫描注册相关
     String fileName;
 
@@ -142,8 +144,26 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
 
     void send() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
-        adb.setView(R.layout.share);
-        adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
+        View view = layoutInflater.inflate(R.layout.share, null);
+        adb.setView(view);
+        view.findViewById(R.id.img_friend);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                req.scene = SendMessageToWX.Req.WXSceneSession;
+                app.iWXApi.sendReq(req);
+                ad.dismiss();
+            }
+        });
+        view.findViewById(R.id.img_timeline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                req.scene = SendMessageToWX.Req.WXSceneTimeline;
+                app.iWXApi.sendReq(req);
+                ad.dismiss();
+            }
+        });
+        ad = adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 req.scene = SendMessageToWX.Req.WXSceneTimeline;
@@ -155,7 +175,8 @@ public class VipActivity extends BaseActivity implements EasyPermissions.Permiss
                 req.scene = SendMessageToWX.Req.WXSceneSession;
                 app.iWXApi.sendReq(req);
             }
-        }).create().show();
+        }).create();
+        ad.show();
     }
 
     @Subscribe
