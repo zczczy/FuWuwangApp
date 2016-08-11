@@ -16,6 +16,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.squareup.otto.Subscribe;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment_;
@@ -25,6 +29,7 @@ import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
 import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup;
 import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup_;
+import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
@@ -96,6 +101,11 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @ViewById
     SliderLayout sliderLayout;
+
+    @Bean
+    OttoBus bus;
+
+    SendMessageToWX.Req req;
 
     Goods goods;
 
@@ -270,6 +280,23 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         }
     }
 
+
+
+    @Subscribe
+    public void NotifyUI(PayResp resp) {
+        switch (resp.errCode) {
+            case BaseResp.ErrCode.ERR_OK:
+                AndroidTool.showToast(this, "分享成功");
+                break;
+            case BaseResp.ErrCode.ERR_COMM:
+                AndroidTool.showToast(this, "分享异常");
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                AndroidTool.showToast(this, "您取消了分享");
+                break;
+        }
+    }
+
     @Click
     void txt_add_cart() {
         if (!checkUserIsLogin()) {
@@ -361,12 +388,12 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     public void onPause() {
         sliderLayout.stopAutoCycle();
         super.onPause();
-
-
+        bus.unregister(this);
     }
 
     @Override
     public void finish() {
+        sliderLayout.removeAllSliders();
         sliderLayout.stopAutoCycle();
         super.finish();
     }
@@ -377,6 +404,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             sliderLayout.startAutoCycle();
         }
         super.onResume();
+        bus.register(this);
     }
 
     @Override

@@ -32,12 +32,11 @@ public class GlideSliderView extends BaseSliderView {
     }
 
     protected void bindEventAndShow(final View v, ImageView targetImageView) {
-        final BaseSliderView me = this;
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnSliderClickListener != null) {
-                    mOnSliderClickListener.onSliderClick(me);
+                    mOnSliderClickListener.onSliderClick(GlideSliderView.this);
                 }
             }
         });
@@ -46,7 +45,7 @@ public class GlideSliderView extends BaseSliderView {
             return;
 
         if (mLoadListener != null) {
-            mLoadListener.onStart(me);
+            mLoadListener.onStart(this);
         }
         RequestManager p = (mGlide != null) ? mGlide : Glide.with(mContext);
         DrawableTypeRequest rq = null;

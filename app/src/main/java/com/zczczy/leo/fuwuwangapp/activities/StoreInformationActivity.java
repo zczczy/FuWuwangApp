@@ -98,11 +98,20 @@ public class StoreInformationActivity extends BaseActivity {
         });
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         storeInformationHeaderItemView.stopAutoCycle();
     }
 
+    @Override
+    public void finish() {
+        storeInformationHeaderItemView.removeAllSliders();
+        storeInformationHeaderItemView.stopAutoCycle();
+        super.finish();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         storeInformationHeaderItemView.startAutoCycle();

@@ -71,6 +71,10 @@ public class StoreInformationHeaderItemView extends ItemView<StoreDetailModel> {
         sliderLayout.stopAutoCycle();
     }
 
+    public void removeAllSliders() {
+        sliderLayout.removeAllSliders();
+    }
+
     public void startAutoCycle() {
         if (_data != null && _data.StoreImgList.size() > 1) {
             sliderLayout.startAutoCycle();
