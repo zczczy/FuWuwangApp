@@ -70,6 +70,7 @@ public class Goods implements Serializable {
     public String ISCommend;
     public String TempDisp;
     public int GoodsXl; //销量
+    public String ShareGoodsLink;
     public int IsUsing;
     public String StaticHtmlUrl;
     public List<GoodsAttribute> GoodsAttributeList;

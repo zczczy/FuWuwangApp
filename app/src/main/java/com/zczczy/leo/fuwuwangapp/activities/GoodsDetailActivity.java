@@ -1,11 +1,14 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -13,12 +16,13 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.squareup.otto.Subscribe;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment;
@@ -55,7 +59,10 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 /**
@@ -98,6 +105,9 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     @ViewById
     LinearLayout ll_goods_by, ll_review;
+
+    @ViewById
+    ImageButton img_btn_share;
 
     @ViewById
     SliderLayout sliderLayout;
@@ -276,11 +286,42 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                     isStart = true;
                     sliderLayout.startAutoCycle();
                 }
+                if (StringUtils.isEmpty(bmj.Data.ShareGoodsLink) || bmj.Data.ShareGoodsLink.contains("#")) {
+                    img_btn_share.setVisibility(View.GONE);
+                } else {
+                    img_btn_share.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
 
+    @Click
+    void img_btn_share() {
+        if (req == null) {
+            WXWebpageObject webpage = new WXWebpageObject();
+            webpage.webpageUrl = goods.ShareGoodsLink;
+            WXMediaMessage msg = new WXMediaMessage(webpage);
+            msg.title = goods.GodosName;
+            msg.description = goods.TempDisp;
+            Bitmap thumb = null;
+            try {
+                thumb = BitmapFactory.decodeStream(new FileInputStream(goods.GoodsImgSl));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
+            req = new SendMessageToWX.Req();
+            req.transaction = buildTransaction("webpage");
+            req.message = msg;
 
+        } else {
+
+        }
+    }
+
+    private String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
 
     @Subscribe
     public void NotifyUI(PayResp resp) {
