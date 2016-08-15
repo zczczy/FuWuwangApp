@@ -16,10 +16,14 @@ public abstract class ItemView<T> extends LinearLayout implements ItemTouchHelpe
 
     protected BaseUltimateRecyclerViewAdapter<T> baseUltimateRecyclerViewAdapter;
 
-    protected  RecyclerView.ViewHolder viewHolder;
+    protected RecyclerView.ViewHolder viewHolder;
+
+    protected Context context;
+
 
     public ItemView(Context context) {
         super(context);
+        this.context = context;
     }
 
     public void init(T t, Object... objects) {
@@ -29,8 +33,8 @@ public abstract class ItemView<T> extends LinearLayout implements ItemTouchHelpe
 
     public void init(T t, BaseUltimateRecyclerViewAdapter<T> baseUltimateRecyclerViewAdapter, RecyclerView.ViewHolder viewHolder, Object... objects) {
         this._data = t;
-        this.baseUltimateRecyclerViewAdapter=baseUltimateRecyclerViewAdapter;
-        this.viewHolder=viewHolder;
+        this.baseUltimateRecyclerViewAdapter = baseUltimateRecyclerViewAdapter;
+        this.viewHolder = viewHolder;
         init(objects);
     }
 

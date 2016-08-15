@@ -24,6 +24,7 @@ import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
+import com.zczczy.leo.fuwuwangapp.model.OrderCountModel;
 import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
@@ -918,5 +919,15 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/Member/PreShare")
     @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
     BaseModelJson<String> preShare();
+
+
+    /**
+     * 查询会员OpenId
+     *
+     * @return
+     */
+    @Get("api/Shop/getUserOrderCount")
+    @RequiresHeader(value = {"Token", "ShopToken", "Kbn"})
+    BaseModelJson<OrderCountModel> getUserOrderCount();
 
 }

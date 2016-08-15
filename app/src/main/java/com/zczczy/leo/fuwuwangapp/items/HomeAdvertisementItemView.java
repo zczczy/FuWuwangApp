@@ -16,6 +16,7 @@ import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LotteryInfoRecordActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.WebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.NewBanner;
@@ -177,8 +178,12 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                 //1跳转到店铺页面  2跳转到商品页面
                 if ("1".equals(temp[0])) {
                     StoreInformationActivity_.intent(context).storeId(temp[1]).start();
-                } else {
+                } else if ("2".equals(temp[0])) {
                     GoodsDetailActivity_.intent(context).goodsId(temp[1]).start();
+                } else if ("3".equals(temp[0])) {
+                    CommonWebViewActivity_.intent(context).title("详情").methodName(temp[1]).start();
+                } else if ("2".equals(temp[0])) {
+//                    GoodsDetailActivity_.intent(context).goodsId(temp[1]).start();
                 }
             }
         }
@@ -216,6 +221,10 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                     GoodsDetailActivity_.intent(context).goodsId(bannerModel.LinkUrl).start();
                 } else if (bannerModel.LinkType == 2) {
                     CommonWebViewActivity_.intent(context).title(bannerModel.BannerName).methodName(bannerModel.LinkUrl).start();
+                } else if (bannerModel.LinkType == 3) {
+                    
+                } else if (bannerModel.LinkType == 4) {
+                    StoreInformationActivity_.intent(context).storeId(bannerModel.LinkUrl).start();
                 }
             }
         }

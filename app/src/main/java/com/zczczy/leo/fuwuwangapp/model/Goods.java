@@ -75,6 +75,8 @@ public class Goods implements Serializable {
     public String StaticHtmlUrl;
     public List<GoodsAttribute> GoodsAttributeList;
 
+    public List<Goods> RecommendedList;
+
     /**
      * GoodsImgId : 1
      * GoodsInfoId : sample string 2

@@ -265,7 +265,7 @@
                     android:text="@string/goods_detail" />
 
                 <RadioButton
-                    android:id="@+id/rb_good_review"
+                    android:id="@+id/rb_good_suggest"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -273,7 +273,7 @@
                     android:button="@null"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/text_goods_more_review" />
+                    android:text="@string/text_suggest_goods" />
             </RadioGroup>
 
             <fragment

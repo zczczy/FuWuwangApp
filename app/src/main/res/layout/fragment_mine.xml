@@ -13,77 +13,82 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/mine_bg"
+            android:layout_height="152dp"
+            android:background="@color/white"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-
-            <FrameLayout
-                android:layout_width="90dp"
-                android:layout_height="100dp">
-
-                <com.zczczy.leo.fuwuwangapp.viewgroup.CircleImageView
-                    android:id="@+id/img_avatar"
-                    android:layout_width="80dp"
-                    android:layout_height="90dp"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:src="@drawable/default_header"
-                    app:border_color="@color/white"
-                    app:border_width="1dp" />
-
-                <ImageView
-                    android:id="@+id/img_vip_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:src="@drawable/vipbg"
-                    android:visibility="invisible" />
-            </FrameLayout>
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:layout_height="152dp"
+                android:background="@drawable/mine_bg"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/txt_name"
+
+                <FrameLayout
+                    android:layout_width="72dp"
+                    android:layout_height="72dp">
+
+                    <com.zczczy.leo.fuwuwangapp.viewgroup.CircleImageView
+                        android:id="@+id/img_avatar"
+                        android:layout_width="61dp"
+                        android:layout_height="61dp"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:src="@drawable/default_header" />
+
+                    <ImageView
+                        android:id="@+id/img_vip_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:src="@drawable/vipbg"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:ellipsize="end"
-                    android:gravity="center_horizontal"
-                    android:lines="1"
-                    android:text="@string/text_login"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/text_login"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="horizontal">
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txt_address"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:gravity="center_horizontal"
-                    android:lines="1"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/txt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
-
-        <include layout="@layout/horizontal_line" />
 
         <RelativeLayout
             android:id="@+id/rl_whole"
@@ -114,63 +119,100 @@
 
         <include layout="@layout/horizontal_line" />
 
+        <include layout="@layout/horizontal_line" />
+
         <LinearLayout
             android:id="@+id/ll_color_control"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/common_shadow_selector"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:background="@color/white"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txt_waiting_order"
+            <cn.bingoogolapple.badgeview.BGABadgeLinearLayout
+                android:id="@+id/ll_waiting_order"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/tobepaid"
-                android:gravity="center_horizontal"
-                android:text="@string/text_no_pay" />
+                android:gravity="center"
+                android:padding="10dp"
+                app:badge_bgColor="@color/major_color">
 
+                <TextView
+                    android:id="@+id/txt_waiting_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/tobepaid"
+                    android:gravity="center_horizontal"
+                    android:text="@string/text_no_pay" />
+            </cn.bingoogolapple.badgeview.BGABadgeLinearLayout>
 
-            <TextView
-                android:id="@+id/txt_paid_order"
+            <cn.bingoogolapple.badgeview.BGABadgeLinearLayout
+                android:id="@+id/ll_paid_order"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/paid"
-                android:gravity="center_horizontal"
-                android:text="@string/text_paid" />
+                android:gravity="center"
+                android:padding="10dp"
+                app:badge_bgColor="@color/major_color">
 
+                <TextView
+                    android:id="@+id/txt_paid_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/tobepaid"
+                    android:gravity="center_horizontal"
+                    android:text="@string/text_paid" />
 
-            <TextView
-                android:id="@+id/txt_already_order"
+            </cn.bingoogolapple.badgeview.BGABadgeLinearLayout>
+
+            <cn.bingoogolapple.badgeview.BGABadgeLinearLayout
+                android:id="@+id/ll_already_order"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/yifahuo"
-                android:gravity="center_horizontal"
-                android:text="@string/text_send" />
+                android:gravity="center"
+                android:padding="10dp"
+                app:badge_bgColor="@color/major_color">
 
-            <TextView
-                android:id="@+id/txt_review"
+                <TextView
+                    android:id="@+id/txt_already_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/yifahuo"
+                    android:gravity="center_horizontal"
+                    android:text="@string/text_send" />
+
+            </cn.bingoogolapple.badgeview.BGABadgeLinearLayout>
+
+            <cn.bingoogolapple.badgeview.BGABadgeLinearLayout
+                android:id="@+id/ll_review"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/common_shadow_selector"
                 android:clickable="true"
-                android:drawablePadding="10dp"
-                android:drawableTop="@drawable/tobeevaluate"
-                android:gravity="center_horizontal"
-                android:text="@string/text_review" />
+                android:gravity="center"
+                android:padding="10dp"
+                app:badge_bgColor="@color/major_color">
+
+                <TextView
+                    android:id="@+id/txt_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableTop="@drawable/tobeevaluate"
+                    android:gravity="center_horizontal"
+                    android:text="@string/text_review" />
+            </cn.bingoogolapple.badgeview.BGABadgeLinearLayout>
 
 
         </LinearLayout>
@@ -184,48 +226,27 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:padding="15dp">
+            android:gravity="center_vertical"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:drawableLeft="@drawable/news"
+                android:drawableLeft="@drawable/mine_news"
                 android:drawablePadding="10dp"
+                android:gravity="center_vertical"
                 android:text="@string/news" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/next_icon" />
 
         </RelativeLayout>
-
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/rl_setting"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:background="@drawable/common_shadow_selector"-->
-        <!--android:clickable="true"-->
-        <!--android:padding="15dp">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="15dp"-->
-        <!--android:drawableLeft="@drawable/newset"-->
-        <!--android:drawablePadding="10dp"-->
-        <!--android:text="@string/text_setting" />-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:src="@drawable/next_icon" />-->
-
-        <!--</RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/rl_vip"
@@ -234,7 +255,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:padding="15dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
             android:visibility="gone">
 
             <TextView
@@ -243,13 +265,16 @@
                 android:layout_marginLeft="15dp"
                 android:drawableLeft="@drawable/vipcenter"
                 android:drawablePadding="10dp"
+                android:gravity="center_vertical"
                 android:text="@string/vip_area" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/next_icon" />
+
 
         </RelativeLayout>
 
@@ -260,7 +285,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/common_shadow_selector"
             android:clickable="true"
-            android:padding="15dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
             android:visibility="gone">
 
             <TextView
@@ -269,13 +295,16 @@
                 android:layout_marginLeft="15dp"
                 android:drawableLeft="@drawable/newset"
                 android:drawablePadding="10dp"
+                android:gravity="center_vertical"
                 android:text="修改密码" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/next_icon" />
+
 
         </RelativeLayout>
 
@@ -284,12 +313,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/register_color">
+            app:cardBackgroundColor="@color/major_color">
 
             <TextView
                 android:layout_width="wrap_content"

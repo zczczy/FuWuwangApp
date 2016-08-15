@@ -1,5 +1,6 @@
 package com.zczczy.leo.fuwuwangapp.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,13 +8,16 @@ import android.view.ViewGroup;
 import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;
 
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Leo on 2016/5/3.
  */
-
+@EBean
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
 
@@ -24,6 +28,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     private OnItemLongClickListener onItemLongClickListener;
 
     public abstract void getMoreData(Object... objects);
+
+    @RootContext
+    protected Context context;
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -27,429 +28,202 @@ import android.widget.TextView;
  * Created by Leo on 2015/3/9.
  */
 public class BadgeView extends TextView {
-    public static final int POSITION_TOP_LEFT = 1;
-    public static final int POSITION_TOP_RIGHT = 2;
-    public static final int POSITION_BOTTOM_LEFT = 3;
-    public static final int POSITION_BOTTOM_RIGHT = 4;
-    public static final int POSITION_CENTER = 5;
-
-    private static final int DEFAULT_MARGIN_DIP = 5;
-    private static final int DEFAULT_LR_PADDING_DIP = 5;
-    private static final int DEFAULT_CORNER_RADIUS_DIP = 8;
-    private static final int DEFAULT_POSITION = POSITION_TOP_RIGHT;
-    private static final int DEFAULT_BADGE_COLOR = Color.parseColor("#CCFF0000"); //Color.RED;
-    private static final int DEFAULT_TEXT_COLOR = Color.RED;
-
-    private static Animation fadeIn;
-    private static Animation fadeOut;
-
-    private Context context;
-    private View target;
-
-    private int badgePosition;
-    private int badgeMarginH;
-    private int badgeMarginV;
-    private int badgeColor;
-
-    private boolean isShown;
-
-    private ShapeDrawable badgeBg;
-
-    private int targetTabIndex;
+    private boolean mHideOnNull = true;
 
     public BadgeView(Context context) {
-        this(context, (AttributeSet) null, android.R.attr.textViewStyle);
+        this(context, null);
     }
 
     public BadgeView(Context context, AttributeSet attrs) {
         this(context, attrs, android.R.attr.textViewStyle);
     }
 
-    /**
-     * Constructor -
-     * <p/>
-     * create a new BadgeView instance attached to a target {@link View}.
-     *
-     * @param context context for this view.
-     * @param target  the View to attach the badge to.
-     */
-    public BadgeView(Context context, View target) {
-        this(context, null, android.R.attr.textViewStyle, target, 0);
-    }
-
-    /**
-     * Constructor -
-     * <p/>
-     * create a new BadgeView instance attached to a target {@link TabWidget}
-     * tab at a given index.
-     *
-     * @param context context for this view.
-     * @param target  the TabWidget to attach the badge to.
-     * @param index   the position of the tab within the target.
-     */
-    public BadgeView(Context context, TabWidget target, int index) {
-        this(context, null, android.R.attr.textViewStyle, target, index);
-    }
-
     public BadgeView(Context context, AttributeSet attrs, int defStyle) {
-        this(context, attrs, defStyle, null, 0);
-    }
-
-    public BadgeView(Context context, AttributeSet attrs, int defStyle, View target, int tabIndex) {
         super(context, attrs, defStyle);
-        init(context, target, tabIndex);
+
+        init();
     }
 
-    private void init(Context context, View target, int tabIndex) {
+    private void init() {
+        if (!(getLayoutParams() instanceof FrameLayout.LayoutParams)) {
+            FrameLayout.LayoutParams layoutParams =
+                    new FrameLayout.LayoutParams(
+                            android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                            android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                            Gravity.RIGHT | Gravity.TOP);
+            setLayoutParams(layoutParams);
+        }
 
-        this.context = context;
-        this.target = target;
-        this.targetTabIndex = tabIndex;
-
-        // apply defaults
-        badgePosition = DEFAULT_POSITION;
-        badgeMarginH = dipToPixels(DEFAULT_MARGIN_DIP);
-        badgeMarginV = badgeMarginH;
-        badgeColor = DEFAULT_BADGE_COLOR;
-
+        // set default font
+        setTextColor(Color.WHITE);
         setTypeface(Typeface.DEFAULT_BOLD);
-        int paddingPixels = dipToPixels(DEFAULT_LR_PADDING_DIP);
-        setPadding(paddingPixels, 0, paddingPixels, 0);
-        setTextColor(DEFAULT_TEXT_COLOR);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+        setPadding(dip2Px(5), dip2Px(1), dip2Px(5), dip2Px(1));
 
-        fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new DecelerateInterpolator());
-        fadeIn.setDuration(200);
+        // set default background
+        setBackground(9, Color.parseColor("#d3321b"));
 
-        fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setInterpolator(new AccelerateInterpolator());
-        fadeOut.setDuration(200);
+        setGravity(Gravity.CENTER);
 
-        isShown = false;
-
-        if (this.target != null) {
-            applyTo(this.target);
-        } else {
-            show();
-        }
-
+        // default values
+        setHideOnNull(true);
+        setBadgeCount(0);
     }
 
-    private void applyTo(View target) {
+    public void setBackground(int dipRadius, int badgeColor) {
+        int radius = dip2Px(dipRadius);
+        float[] radiusArray = new float[]{radius, radius, radius, radius, radius, radius, radius, radius};
 
-        LayoutParams lp = target.getLayoutParams();
-        ViewParent parent = target.getParent();
-        FrameLayout container = new FrameLayout(context);
-
-        if (target instanceof TabWidget) {
-
-            // set target to the relevant tab child container
-            target = ((TabWidget) target).getChildTabViewAt(targetTabIndex);
-            this.target = target;
-
-            ((ViewGroup) target).addView(container,
-                    new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
-            this.setVisibility(View.GONE);
-            container.addView(this);
-
-        } else {
-
-            // TODO verify that parent is indeed a ViewGroup
-            ViewGroup group = (ViewGroup) parent;
-            int index = group.indexOfChild(target);
-
-            group.removeView(target);
-            group.addView(container, index, lp);
-
-            container.addView(target);
-
-            this.setVisibility(View.GONE);
-            container.addView(this);
-
-            group.invalidate();
-
-        }
-
+        RoundRectShape roundRect = new RoundRectShape(radiusArray, null, null);
+        ShapeDrawable bgDrawable = new ShapeDrawable(roundRect);
+        bgDrawable.getPaint().setColor(badgeColor);
+        setBackground(bgDrawable);
     }
 
     /**
-     * Make the badge visible in the UI.
+     * @return Returns true if view is hidden on badge value 0 or null;
      */
-    public void show() {
-        show(false, null);
+    public boolean isHideOnNull() {
+        return mHideOnNull;
     }
 
     /**
-     * Make the badge visible in the UI.
+     * @param hideOnNull the hideOnNull to set
+     */
+    public void setHideOnNull(boolean hideOnNull) {
+        mHideOnNull = hideOnNull;
+        setText(getText());
+    }
+
+    /*
+     * (non-Javadoc)
      *
-     * @param animate flag to apply the default fade-in animation.
-     */
-    public void show(boolean animate) {
-        show(animate, fadeIn);
-    }
-
-    /**
-     * Make the badge visible in the UI.
-     *
-     * @param anim Animation to apply to the view when made visible.
-     */
-    public void show(Animation anim) {
-        show(true, anim);
-    }
-
-    /**
-     * Make the badge non-visible in the UI.
-     */
-    public void hide() {
-        hide(false, null);
-    }
-
-    /**
-     * Make the badge non-visible in the UI.
-     *
-     * @param animate flag to apply the default fade-out animation.
-     */
-    public void hide(boolean animate) {
-        hide(animate, fadeOut);
-    }
-
-    /**
-     * Make the badge non-visible in the UI.
-     *
-     * @param anim Animation to apply to the view when made non-visible.
-     */
-    public void hide(Animation anim) {
-        hide(true, anim);
-    }
-
-    /**
-     * Toggle the badge visibility in the UI.
-     */
-    public void toggle() {
-        toggle(false, null, null);
-    }
-
-    /**
-     * Toggle the badge visibility in the UI.
-     *
-     * @param animate flag to apply the default fade-in/out animation.
-     */
-    public void toggle(boolean animate) {
-        toggle(animate, fadeIn, fadeOut);
-    }
-
-    /**
-     * Toggle the badge visibility in the UI.
-     *
-     * @param animIn  Animation to apply to the view when made visible.
-     * @param animOut Animation to apply to the view when made non-visible.
-     */
-    public void toggle(Animation animIn, Animation animOut) {
-        toggle(true, animIn, animOut);
-    }
-
-    @SuppressLint("NewApi")
-    private void show(boolean animate, Animation anim) {
-        if (getBackground() == null) {
-            if (badgeBg == null) {
-                badgeBg = getDefaultBackground();
-            }
-            setBackground(badgeBg);
-
-        }
-        applyLayoutParams();
-
-        if (animate) {
-            this.startAnimation(anim);
-        }
-        this.setVisibility(View.VISIBLE);
-        isShown = true;
-    }
-
-    private void hide(boolean animate, Animation anim) {
-        this.setVisibility(View.GONE);
-        if (animate) {
-            this.startAnimation(anim);
-        }
-        isShown = false;
-    }
-
-    private void toggle(boolean animate, Animation animIn, Animation animOut) {
-        if (isShown) {
-            hide(animate && (animOut != null), animOut);
-        } else {
-            show(animate && (animIn != null), animIn);
-        }
-    }
-
-    /**
-     * Increment the numeric badge label. If the current badge label cannot be converted to
-     * an integer value, its label will be set to "0".
-     *
-     * @param offset the increment offset.
-     */
-    public int increment(int offset) {
-        CharSequence txt = getText();
-        int i;
-        if (txt != null) {
-            try {
-                i = Integer.parseInt(txt.toString());
-            } catch (NumberFormatException e) {
-                i = 0;
-            }
-        } else {
-            i = 0;
-        }
-        i = i + offset;
-        setText(String.valueOf(i));
-        return i;
-    }
-
-    /**
-     * Decrement the numeric badge label. If the current badge label cannot be converted to
-     * an integer value, its label will be set to "0".
-     *
-     * @param offset the decrement offset.
-     */
-    public int decrement(int offset) {
-        return increment(-offset);
-    }
-
-    private ShapeDrawable getDefaultBackground() {
-
-        int r = dipToPixels(DEFAULT_CORNER_RADIUS_DIP);
-        float[] outerR = new float[]{r, r, r, r, r, r, r, r};
-
-        RoundRectShape rr = new RoundRectShape(outerR, null, null);
-        ShapeDrawable drawable = new ShapeDrawable(rr);
-        drawable.getPaint().setColor(badgeColor);
-
-        return drawable;
-
-    }
-
-    private void applyLayoutParams() {
-
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
-        switch (badgePosition) {
-            case POSITION_TOP_LEFT:
-                lp.gravity = Gravity.LEFT | Gravity.TOP;
-                lp.setMargins(badgeMarginH, badgeMarginV, 0, 0);
-                break;
-            case POSITION_TOP_RIGHT:
-                lp.gravity = Gravity.RIGHT | Gravity.TOP;
-                lp.setMargins(0, badgeMarginV, badgeMarginH, 0);
-                break;
-            case POSITION_BOTTOM_LEFT:
-                lp.gravity = Gravity.LEFT | Gravity.BOTTOM;
-                lp.setMargins(badgeMarginH, 0, 0, badgeMarginV);
-                break;
-            case POSITION_BOTTOM_RIGHT:
-                lp.gravity = Gravity.RIGHT | Gravity.BOTTOM;
-                lp.setMargins(0, 0, badgeMarginH, badgeMarginV);
-                break;
-            case POSITION_CENTER:
-                lp.gravity = Gravity.CENTER;
-                lp.setMargins(0, 0, 0, 0);
-                break;
-            default:
-                break;
-        }
-
-        setLayoutParams(lp);
-
-    }
-
-    /**
-     * Returns the target View this badge has been attached to.
-     */
-    public View getTarget() {
-        return target;
-    }
-
-    /**
-     * Is this badge currently visible in the UI?
+     * @see android.widget.TextView#setText(java.lang.CharSequence, android.widget.TextView.BufferType)
      */
     @Override
-    public boolean isShown() {
-        return isShown;
+    public void setText(CharSequence text, BufferType type) {
+        if (isHideOnNull() && (text == null || text.toString().equalsIgnoreCase("0"))) {
+            setVisibility(View.GONE);
+        } else {
+            setVisibility(View.VISIBLE);
+        }
+        super.setText(text, type);
     }
 
-    /**
-     * Returns the positioning of this badge.
-     * <p/>
-     * one of POSITION_TOP_LEFT, POSITION_TOP_RIGHT, POSITION_BOTTOM_LEFT, POSITION_BOTTOM_RIGHT, POSTION_CENTER.
-     */
-    public int getBadgePosition() {
-        return badgePosition;
+    public void setBadgeCount(int count) {
+        setText(count==0?null:String.valueOf(count));
     }
 
-    /**
-     * Set the positioning of this badge.
+    public Integer getBadgeCount() {
+        if (getText() == null) {
+            return null;
+        }
+
+        String text = getText().toString();
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public void setBadgeGravity(int gravity) {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
+        params.gravity = gravity;
+        setLayoutParams(params);
+    }
+
+    public int getBadgeGravity() {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
+        return params.gravity;
+    }
+
+    public void setBadgeMargin(int dipMargin) {
+        setBadgeMargin(dipMargin, dipMargin, dipMargin, dipMargin);
+    }
+
+    public void setBadgeMargin(int leftDipMargin, int topDipMargin, int rightDipMargin, int bottomDipMargin) {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
+        params.leftMargin = dip2Px(leftDipMargin);
+        params.topMargin = dip2Px(topDipMargin);
+        params.rightMargin = dip2Px(rightDipMargin);
+        params.bottomMargin = dip2Px(bottomDipMargin);
+        setLayoutParams(params);
+    }
+
+    public int[] getBadgeMargin() {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
+        return new int[]{params.leftMargin, params.topMargin, params.rightMargin, params.bottomMargin};
+    }
+
+    public void incrementBadgeCount(int increment) {
+        Integer count = getBadgeCount();
+        if (count == null) {
+            setBadgeCount(increment);
+        } else {
+            setBadgeCount(increment + count);
+        }
+    }
+
+    public void decrementBadgeCount(int decrement) {
+        incrementBadgeCount(-decrement);
+    }
+
+    /*
+     * Attach the BadgeView to the TabWidget
      *
-     * @param layoutPosition one of POSITION_TOP_LEFT, POSITION_TOP_RIGHT, POSITION_BOTTOM_LEFT, POSITION_BOTTOM_RIGHT, POSTION_CENTER.
-     */
-    public void setBadgePosition(int layoutPosition) {
-        this.badgePosition = layoutPosition;
-    }
-
-    /**
-     * Returns the horizontal margin from the target View that is applied to this badge.
-     */
-    public int getHorizontalBadgeMargin() {
-        return badgeMarginH;
-    }
-
-    /**
-     * Returns the vertical margin from the target View that is applied to this badge.
-     */
-    public int getVerticalBadgeMargin() {
-        return badgeMarginV;
-    }
-
-    /**
-     * Set the horizontal/vertical margin from the target View that is applied to this badge.
+     * @param target the TabWidget to attach the BadgeView
      *
-     * @param badgeMargin the margin in pixels.
+     * @param tabIndex index of the tab
      */
-    public void setBadgeMargin(int badgeMargin) {
-        this.badgeMarginH = badgeMargin;
-        this.badgeMarginV = badgeMargin;
+    public void setTargetView(TabWidget target, int tabIndex) {
+        View tabView = target.getChildTabViewAt(tabIndex);
+        setTargetView(tabView);
     }
 
-    /**
-     * Set the horizontal/vertical margin from the target View that is applied to this badge.
+    /*
+     * Attach the BadgeView to the target view
      *
-     * @param horizontal margin in pixels.
-     * @param vertical   margin in pixels.
+     * @param target the view to attach the BadgeView
      */
-    public void setBadgeMargin(int horizontal, int vertical) {
-        this.badgeMarginH = horizontal;
-        this.badgeMarginV = vertical;
+    public void setTargetView(View target) {
+        if (getParent() != null) {
+            ((ViewGroup) getParent()).removeView(this);
+        }
+
+        if (target == null) {
+            return;
+        }
+
+        if (target.getParent() instanceof FrameLayout) {
+            ((FrameLayout) target.getParent()).addView(this);
+
+        } else if (target.getParent() instanceof ViewGroup) {
+            // use a new Framelayout container for adding badge
+            ViewGroup parentContainer = (ViewGroup) target.getParent();
+            int groupIndex = parentContainer.indexOfChild(target);
+            parentContainer.removeView(target);
+
+            FrameLayout badgeContainer = new FrameLayout(getContext());
+            ViewGroup.LayoutParams parentLayoutParams = target.getLayoutParams();
+
+            badgeContainer.setLayoutParams(parentLayoutParams);
+            target.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+            parentContainer.addView(badgeContainer, groupIndex, parentLayoutParams);
+            badgeContainer.addView(target);
+            badgeContainer.addView(this);
+        } else if (target.getParent() == null) {
+            Log.e(getClass().getSimpleName(), "ParentView is needed");
+        }
+
     }
 
-    /**
-     * Returns the color value of the badge background.
+    /*
+     * converts dip to px
      */
-    public int getBadgeBackgroundColor() {
-        return badgeColor;
-    }
-
-    /**
-     * Set the color value of the badge background.
-     *
-     * @param badgeColor the badge background color.
-     */
-    public void setBadgeBackgroundColor(int badgeColor) {
-        this.badgeColor = badgeColor;
-        badgeBg = getDefaultBackground();
-    }
-
-    private int dipToPixels(int dip) {
-        Resources r = getResources();
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, r.getDisplayMetrics());
-        return (int) px;
+    private int dip2Px(float dip) {
+        return (int) (dip * getContext().getResources().getDisplayMetrics().density + 0.5f);
     }
 }

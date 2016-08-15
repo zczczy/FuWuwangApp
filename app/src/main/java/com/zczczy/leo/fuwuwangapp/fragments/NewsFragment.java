@@ -19,10 +19,8 @@ import com.zczczy.leo.fuwuwangapp.activities.NoticeActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.ServiceActivity_;
 import com.zczczy.leo.fuwuwangapp.model.Banner;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.viewgroup.BadgeView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -33,7 +31,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.List;
@@ -63,8 +60,6 @@ public class NewsFragment extends BaseFragment implements BaseSliderView.OnSlide
     @Bean
     MyErrorHandler myErrorHandler;
 
-    static BadgeView badgeView = null;
-
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
@@ -72,24 +67,10 @@ public class NewsFragment extends BaseFragment implements BaseSliderView.OnSlide
 
     @AfterViews
     void afterView() {
-        badgeView = new BadgeView(getActivity(), ll_notice);
         if (isNetworkAvailable(getActivity())) {
             GetBanner();
         }
 
-    }
-
-    public static void OpenBadgeView() {
-        if (null != badgeView) {
-//            if ("2".equals(MyApplication.getRmsg())) {
-//                badgeView.show();
-//                badgeView.setBackgroundResource(R.mipmap.bageredpoint);
-//                badgeView.setVisibility(View.VISIBLE);
-//            } else {
-//                badgeView.setVisibility(View.GONE);
-//                badgeView.hide();
-//            }
-        }
     }
 
     //查询Banner
@@ -123,9 +104,6 @@ public class NewsFragment extends BaseFragment implements BaseSliderView.OnSlide
     @Click
     void txt_notice() {
         if (isNetworkAvailable(getActivity())) {
-            // 点击控件小红点消失
-//            MyApplication.setRmsg("1");
-            OpenBadgeView();
             NoticeActivity_.intent(this).start();
         } else {
             Toast.makeText(getActivity(), no_net, Toast.LENGTH_SHORT).show();

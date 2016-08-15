@@ -25,10 +25,10 @@ import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.modelpay.PayResp;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment;
-import com.zczczy.leo.fuwuwangapp.fragments.GoodsCommentsFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.GoodsFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsDetailFragment;
 import com.zczczy.leo.fuwuwangapp.fragments.GoodsDetailFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.GoodsFragment_;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView;
 import com.zczczy.leo.fuwuwangapp.items.GoodsCommentsItemView_;
 import com.zczczy.leo.fuwuwangapp.items.GoodsPropertiesPopup;
@@ -92,7 +92,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     MyDotNetRestClient myRestClient;
 
     @ViewById
-    RadioButton rb_good_detail, rb_good_review;
+    RadioButton rb_good_detail, rb_good_suggest;
 
     @Extra
     String goodsId;
@@ -127,7 +127,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
 
     GoodsDetailFragment goodsDetailFragment;
 
-    GoodsCommentsFragment goodsCommentsFragment;
+    GoodsFragment goodsCommentsFragment;
 
     PopupWindow popupWindow;
 
@@ -156,7 +156,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             }
         });
         getGoodsDetailById(goodsId);
-        getGoodsComments(goodsId);
     }
 
     @CheckedChange
@@ -168,10 +167,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
         }
     }
 
-    @Background
-    void getGoodsComments(String goodsId) {
-        afterGetGoodsComments(myRestClient.getGoodsCommentsByGoodsInfoId(goodsId, 1, 3));
-    }
 
     @UiThread
     void afterGetGoodsComments(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
@@ -203,7 +198,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             }
         } else {
             if (goodsCommentsFragment == null) {
-                goodsCommentsFragment = GoodsCommentsFragment_.builder().goodsId(parameter).build();
+                goodsCommentsFragment = GoodsFragment_.builder().goods(goods).build();
                 transaction.add(R.id.goods_detail_fragment, goodsCommentsFragment);
             } else {
                 transaction.show(goodsCommentsFragment);
