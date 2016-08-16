@@ -17,12 +17,10 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.liulishuo.magicprogresswidget.MagicProgressCircle;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.CategoryFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.HomeFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.MineFragment_;
-import com.zczczy.leo.fuwuwangapp.fragments.NewsFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.ServiceFragment_;
 import com.zczczy.leo.fuwuwangapp.model.Announcement;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -30,7 +28,6 @@ import com.zczczy.leo.fuwuwangapp.model.CityModel;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
-import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.service.LocationService;
@@ -41,7 +38,6 @@ import com.zczczy.leo.fuwuwangapp.views.AnimTextView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
@@ -50,7 +46,6 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.res.StringRes;
-import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.io.File;
@@ -140,6 +135,11 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
         getannouncement();
+//        AdInfo adInfo = new AdInfo();
+//        AdManager adManager = new AdManager(MainActivity.this, advList);
+//        adManager.setOverScreen(true)
+//                .setPageTransformer(new DepthPageTransformer());
+
     }
 
     protected void initTab() {

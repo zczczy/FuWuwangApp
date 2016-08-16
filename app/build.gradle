@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-def AAVersion = '4.0.0'
-
+def AAVersion = '4.1.0'
+def V7Version = '24.1.1'
 
 buildscript {
     repositories {
@@ -78,10 +78,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //http://docs.spring.io/spring-android/docs/
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:cardview-v7:24.1.1'
-    compile 'com.android.support:recyclerview-v7:24.1.1'
-    compile 'com.android.support:design:24.1.1'
+    compile "com.android.support:appcompat-v7:$V7Version"
+    compile "com.android.support:cardview-v7:$V7Version"
+    compile "com.android.support:recyclerview-v7:$V7Version"
+    compile "com.android.support:design:$V7Version"
     compile 'com.squareup.okhttp:okhttp:2.7.5'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
@@ -103,6 +103,9 @@ dependencies {
     compile 'cn.bingoogolapple:bga-zbar:1.0.7@aar'
     compile 'pub.devrel:easypermissions:0.1.5'
     compile 'cn.bingoogolapple:bga-badgeview:1.1.2@aar'
+
+
+    compile 'cn.yipianfengye.android:ad-library:1.0'
 
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"
