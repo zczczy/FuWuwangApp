@@ -1,13 +1,9 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.graphics.Paint;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
@@ -16,7 +12,6 @@ import com.zczczy.leo.fuwuwangapp.adapters.SearchHistoryAdapter;
 import com.zczczy.leo.fuwuwangapp.dao.SearchHistory;
 import com.zczczy.leo.fuwuwangapp.dao.SearchHistoryDao;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
-import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -32,16 +27,7 @@ import org.androidannotations.annotations.res.StringRes;
  * Created by leo on 2016/5/5.
  */
 @EActivity(R.layout.activity_search)
-public class SearchActivity extends BaseActivity {
-
-    @ViewById
-    MyTitleBar myTitleBar;
-
-    @ViewById
-    RecyclerView recyclerView;
-
-    @Bean(SearchHistoryAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
 
     @Bean
     SearchHistoryDao searchHistoryDao;
@@ -55,20 +41,18 @@ public class SearchActivity extends BaseActivity {
     @ViewById
     EditText text_search;
 
-    LinearLayoutManager linearLayoutManager;
-
     SearchHistory searchHistory;
 
-    Paint paint = new Paint();
+
+    @Bean
+    void setAdapter(SearchHistoryAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
+
 
     @AfterViews
     void afterView() {
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
         myAdapter.getMoreData(0, 0);
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
         if (isService) {
             text_search.setHint(search_service_hint);

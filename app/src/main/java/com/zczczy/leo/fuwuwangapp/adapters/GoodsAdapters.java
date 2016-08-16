@@ -34,34 +34,7 @@ import java.util.List;
 @EBean
 public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
 
-
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @App
-    MyApplication app;
-
-    @Pref
-    MyPrefs_ pre;
-
-    @Bean
-    OttoBus bus;
-
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    boolean isRefresh = false;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
-
     @Override
-    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         BaseModelJson<PagerResult<Goods>> bmj = null;
         this.isRefresh = isRefresh;
@@ -75,37 +48,18 @@ public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
                 break;
             case 1:
                 bmj = myRestClient.getGoodsByGoodsTypeId(
-                        Integer.valueOf(objects[1].toString()),
-                        objects[2] == null ? null : objects[2].toString(),
-                        objects[3] == null ? null : objects[3].toString(),
-                        Integer.valueOf(objects[4].toString()),
-                        objects[5].toString(),
+                        objects[1].toString(),
+                        objects[2].toString(),
+                        objects[3].toString(),
+                        objects[4].toString(),
+                        (objects[5] == null || "".equals(objects[5])) ? "0" : objects[5].toString(),
+                        (objects[6] == null || "".equals(objects[6])) ? "0" : objects[6].toString(),
                         pageIndex, pageSize);
                 break;
         }
-        afterGetData(bmj);
+        afterGetMoreData(bmj);
     }
 
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<Goods>> bmj) {
-        AndroidTool.dismissLoadDialog();
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
-    }
 
     @Override
     void onBindHeaderViewHolder(BaseUltimateViewHolder viewHolder) {

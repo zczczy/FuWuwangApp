@@ -5,11 +5,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.items.BaseViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;
+import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
+import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +41,27 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     @RootContext
     protected Context context;
+
+    @App
+    MyApplication app;
+
+    @Pref
+    MyPrefs_ pre;
+
+    @StringRes
+    String no_net;
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+    @RestService
+    MyDotNetRestClient myRestClient;
+
+    @AfterInject
+    void afterBaseInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+    }
+
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

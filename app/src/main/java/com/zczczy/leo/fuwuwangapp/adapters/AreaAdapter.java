@@ -29,22 +29,6 @@ import java.util.List;
 @EBean
 public class AreaAdapter extends BaseRecyclerViewAdapter<NewArea> {
 
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @Pref
-    MyPrefs_ pre;
-
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
 
     @Override
     @Background

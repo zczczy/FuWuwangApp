@@ -28,17 +28,6 @@ public class DetailGoodsCommentsAdapter extends BaseRecyclerViewAdapter<GoodsCom
     @Bean
     OttoBus bus;
 
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @AfterInject
-    void afterBaseInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
-
     @Override
     @Background
     public void getMoreData(Object... objects) {

@@ -17,6 +17,7 @@ import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CooperationMerchantAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.GoodsAdapters;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
@@ -47,25 +48,14 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  * Created by Leo on 2016/4/28.
  */
 @EActivity(R.layout.activity_cooperation_merchant)
-public class CooperationMerchantActivity extends BaseActivity {
+public class CooperationMerchantActivity extends BaseUltimateRecyclerViewActivity<CooperationMerchant> {
 
-    @ViewById
-    MyTitleBar myTitleBar;
 
     @ViewById
     EditText edt_search;
 
     @ViewById
     LinearLayout ll_search;
-
-    @ViewById
-    CustomUltimateRecyclerview ultimateRecyclerView;
-
-    @Bean(CooperationMerchantAdapter.class)
-    BaseUltimateRecyclerViewAdapter myAdapter;
-
-    @Bean
-    OttoBus bus;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -82,15 +72,10 @@ public class CooperationMerchantActivity extends BaseActivity {
     //服务器返回的城市名称
     String cityName;
 
-    LinearLayoutManager linearLayoutManager;
-
-    MaterialHeader materialHeader;
-
-    Paint paint = new Paint();
-
-    int pageIndex = 1;
-
-    boolean isRefresh = false;
+    @Bean
+    void setAdapter(CooperationMerchantAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
     @AfterInject
     void afterInject() {
@@ -154,47 +139,6 @@ public class CooperationMerchantActivity extends BaseActivity {
 
     void afterLoadMore() {
         myAdapter.getMoreData(pageIndex, 10, isRefresh, "0", edt_search.getText().toString(), cityCode);
-    }
-
-    void refreshingMaterial() {
-        materialHeader = new MaterialHeader(this);
-        int[] colors = getResources().getIntArray(R.array.google_colors);
-        materialHeader.setColorSchemeColors(colors);
-        materialHeader.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
-        materialHeader.setPadding(0, 15, 0, 10);
-        materialHeader.setPtrFrameLayout(ultimateRecyclerView.mPtrFrameLayout);
-        ultimateRecyclerView.mPtrFrameLayout.autoRefresh(false);
-        ultimateRecyclerView.mPtrFrameLayout.setHeaderView(materialHeader);
-        ultimateRecyclerView.mPtrFrameLayout.addPtrUIHandler(materialHeader);
-        ultimateRecyclerView.mPtrFrameLayout.setPtrHandler(new PtrHandler() {
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
-            }
-
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                isRefresh = true;
-                pageIndex = 1;
-                afterLoadMore();
-            }
-        });
-    }
-
-    @Subscribe
-    public void notifyUI(BaseModel bm) {
-        if (isRefresh) {
-            linearLayoutManager.scrollToPosition(0);
-            ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
-            isRefresh = false;
-            if (myAdapter.getItems().size() < myAdapter.getTotal()) {
-                ultimateRecyclerView.reenableLoadmore(layoutInflater.inflate(R.layout.custom_bottom_progressbar, null));
-            } else {
-                ultimateRecyclerView.disableLoadmore();
-            }
-        } else if (pageIndex == 1) {
-            linearLayoutManager.scrollToPosition(0);
-        }
     }
 
     /**

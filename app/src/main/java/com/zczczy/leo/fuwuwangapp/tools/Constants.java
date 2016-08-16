@@ -37,9 +37,11 @@ public class Constants {
 
     public static final String ASC = "asc"; //asc升序
     public static final String DESC = "desc"; //desc降序
-    public static final int DEFAULT_SORT = 0; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
-    public static final int PRICE_SORT = 1; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
-    public static final int COUNT_SORT = 2; //排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
+
+    public static final String PRICE_FILTER = "1"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
+    public static final String SELL_COUNT = "2"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_DESC = "3"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
+    public static final String PRICE_ASC = "4"; //1:筛选价格查询，2：销量降序，3：价格降序，4：价格升序
 
     public static final int STORE_GOODS = 0; // 店铺入口
     public static final int SEARCH_GOODS = 1; // 搜索入口

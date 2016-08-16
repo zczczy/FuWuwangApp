@@ -34,33 +34,9 @@ import java.util.List;
  */
 @EBean
 public class RecommendedGoodsAdapter extends BaseUltimateRecyclerViewAdapter<RebuiltRecommendedGoods> {
-    @App
-    MyApplication app;
 
-    @Pref
-    MyPrefs_ pre;
-
-    @Bean
-    OttoBus bus;
-
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    boolean isRefresh = false;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
 
     @Override
-    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bmj = null;
         this.isRefresh = isRefresh;
@@ -79,26 +55,7 @@ public class RecommendedGoodsAdapter extends BaseUltimateRecyclerViewAdapter<Reb
                 pagerResult.ListData = (List<RebuiltRecommendedGoods>) objects[1];
                 bmj.Data = pagerResult;
         }
-        afterGetData(bmj);
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bmj) {
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
+        afterGetMoreData(bmj);
     }
 
     @Override

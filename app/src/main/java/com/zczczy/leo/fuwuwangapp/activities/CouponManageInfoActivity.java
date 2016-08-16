@@ -35,7 +35,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
  * Created by Leo on 2016/4/29.
  */
 @EActivity(R.layout.activity_coupon_manager_info)
-public class CouponManageInfoActivity extends BaseActivity {
+public class CouponManageInfoActivity extends BaseUltimateRecyclerViewActivity<QueueCompanyDetail> {
 
     @ViewById
     TextView volume_txt, volume_personal, volume_bussiness, volume_duilie;
@@ -49,15 +49,11 @@ public class CouponManageInfoActivity extends BaseActivity {
     @RestService
     MyDotNetRestClient myRestClient;
 
-    @ViewById
-    CustomUltimateRecyclerview ultimateRecyclerView;
+    @Bean
+    void setAdapter(CouponManageInfoAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
-    @Bean(CouponManageInfoAdapter.class)
-    BaseUltimateRecyclerViewAdapter myAdapter;
-
-    LinearLayoutManager linearLayoutManager;
-
-    Paint paint = new Paint();
 
     @AfterInject
     void afterInject() {
@@ -66,19 +62,10 @@ public class CouponManageInfoActivity extends BaseActivity {
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
         volume_txt.setText(mianzhi);
         volume_duilie.setText(duilie);
         getHttp();
-        ultimateRecyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(this);
-        ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        ultimateRecyclerView.setAdapter(myAdapter);
-        myAdapter.getMoreData(0, 10, false, guize);
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
-
+        afterLoadMore();
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<QueueCompanyDetail>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, QueueCompanyDetail obj, int position) {
@@ -114,5 +101,10 @@ public class CouponManageInfoActivity extends BaseActivity {
                 volume_bussiness.setText(bmj.Data.getCntcom());
             }
         }
+    }
+
+    @Override
+    void afterLoadMore() {
+        myAdapter.getMoreData(0, 10, false, guize);
     }
 }

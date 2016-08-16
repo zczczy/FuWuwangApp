@@ -77,6 +77,9 @@ public class Goods implements Serializable {
 
     public List<Goods> RecommendedList;
 
+    public List<GoodsCommentsModel> GoodsCommentsList;
+
+
     /**
      * GoodsImgId : 1
      * GoodsInfoId : sample string 2

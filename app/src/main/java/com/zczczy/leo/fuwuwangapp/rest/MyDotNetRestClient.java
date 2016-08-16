@@ -587,14 +587,15 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param GoodsTypeId 商品分类id
      * @param GoodsType   是否是服务类商品(1:服务类，2：邮寄类)
      * @param GodosName   商品名称
-     * @param sort        排序（0 默认（推荐降序加时间升序/降序）,1 价格,2 销量）
-     * @param desc        asc升序 desc降序
+     * @param OB          1:综合排序，2：销量降序，3：价格降序，4：价格升序
+     * @param MinPrice    最小钱
+     * @param MaxPrice    最大钱
      * @param PageIndex   当前页
      * @param PageSize    条数
      * @return
      */
-    @Get("api/ShopContent/GetGoodsByGoodsTypeId?GoodsTypeId={GoodsTypeId}&GoodsType={GoodsType}&GodosName={GodosName}&sort={sort}&desc={desc}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<Goods>> getGoodsByGoodsTypeId(@Path int GoodsTypeId, @Path String GoodsType, @Path String GodosName, @Path int sort, @Path String desc, @Path int PageIndex, @Path int PageSize);
+    @Get("api/ShopContent/GetGoodsByGoodsTypeId?GoodsTypeId={GoodsTypeId}&GoodsType={GoodsType}&GodosName={GodosName}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Goods>> getGoodsByGoodsTypeId(@Path String GoodsTypeId, @Path String GoodsType, @Path String GodosName, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path int PageIndex, @Path int PageSize);
 
     /**
      * 单商品生成临时订单信息

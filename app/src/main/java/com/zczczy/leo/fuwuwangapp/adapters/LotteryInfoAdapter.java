@@ -30,62 +30,20 @@ import org.androidannotations.rest.spring.annotations.RestService;
 @EBean
 public class LotteryInfoAdapter extends BaseUltimateRecyclerViewAdapter<LotteryInfo> {
 
-    @RestService
-    MyDotNetRestClient myDotNetRestClient;
-
-    @Pref
-    MyPrefs_ pre;
-
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @Bean
-    OttoBus bus;
-
-    boolean isRefresh;
-
-    @AfterInject
-    void afterInject() {
-        myDotNetRestClient.setRestErrorHandler(myErrorHandler);
-    }
-
 
     @Override
-    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         BaseModelJson<PagerResult<LotteryInfo>> bmj = null;
         this.isRefresh = isRefresh;
         switch (Integer.valueOf(objects[0].toString())) {
             case 0:
-                bmj = myDotNetRestClient.getMyLotteryInfo(pre.username().get(), pageIndex, pageSize);
+                bmj = myRestClient.getMyLotteryInfo(pre.username().get(), pageIndex, pageSize);
                 break;
             case 1:
-                bmj = myDotNetRestClient.getAllLotteryInfo(pageIndex, pageSize);
+                bmj = myRestClient.getAllLotteryInfo(pageIndex, pageSize);
                 break;
         }
-        afterGetData(bmj);
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<LotteryInfo>> bmj) {
-        AndroidTool.dismissLoadDialog();
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
+        afterGetMoreData(bmj);
     }
 
 

@@ -25,17 +25,7 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/5/4.
  */
 @EActivity(R.layout.activity_province)
-public class AreaActivity extends BaseActivity {
-
-    @ViewById
-    MyTitleBar myTitleBar;
-
-
-    @ViewById
-    RecyclerView recyclerView;
-
-    @Bean(AreaAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+public class AreaActivity extends BaseRecyclerViewActivity<NewArea> {
 
     @Extra
     NewProvince province;
@@ -43,18 +33,14 @@ public class AreaActivity extends BaseActivity {
     @Extra
     NewCity city;
 
-    Paint paint = new Paint();
-
-    LinearLayoutManager linearLayoutManager;
+    @Bean
+    void setAdapter(AreaAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle("区域");
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<NewArea>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, NewArea obj, int position) {
@@ -65,9 +51,5 @@ public class AreaActivity extends BaseActivity {
                 finish();
             }
         });
-        myAdapter.getMoreData(city.CityId);
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
     }
 }

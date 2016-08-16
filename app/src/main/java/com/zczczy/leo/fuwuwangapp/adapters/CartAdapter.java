@@ -37,29 +37,9 @@ import java.util.List;
 @EBean
 public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
 
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @App
-    MyApplication app;
-
-    @Pref
-    MyPrefs_ pre;
-
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
 
     @RootContext
     CartActivity mCartActivity;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
-
 
     @Override
     @Background
@@ -97,7 +77,7 @@ public class CartAdapter extends BaseRecyclerViewAdapter<CartModel> {
                     cm.ProductCount = bb.ProductCount;
                     cm.StoreInfoId = aa.StoreInfoId;
                     cm.StoreName = aa.StoreName;
-                    cm.GoodsAttributeName=bb.GoodsAttributeName;
+                    cm.GoodsAttributeName = bb.GoodsAttributeName;
                     cm.UserInfoId = bb.UserInfoId;
                     cm.level = 1;
                     list.add(cm);

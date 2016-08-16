@@ -168,19 +168,6 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     }
 
 
-    @UiThread
-    void afterGetGoodsComments(BaseModelJson<PagerResult<GoodsCommentsModel>> bmj) {
-        if (bmj != null && bmj.Successful) {
-            for (GoodsCommentsModel gcm : bmj.Data.ListData) {
-                GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
-                goodsCommentsItemView.init(gcm);
-                ll_review.addView(goodsCommentsItemView);
-                ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
-            }
-        }
-
-    }
-
     void changeFragment(String parameter) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (goodsDetailFragment != null) {
@@ -285,6 +272,13 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
                     img_btn_share.setVisibility(View.GONE);
                 } else {
                     img_btn_share.setVisibility(View.VISIBLE);
+                }
+
+                for (GoodsCommentsModel gcm : bmj.Data.GoodsCommentsList) {
+                    GoodsCommentsItemView goodsCommentsItemView = GoodsCommentsItemView_.build(this);
+                    goodsCommentsItemView.init(gcm);
+                    ll_review.addView(goodsCommentsItemView);
+                    ll_review.addView(layoutInflater.inflate(R.layout.horizontal_line, null));
                 }
             }
         }

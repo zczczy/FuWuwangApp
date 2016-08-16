@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/radio_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/rb_sell_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/search_sell_count"
+        android:textColor="@color/common_order_text" />
+
+    <RadioButton
+        android:id="@+id/rb_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableEnd="@drawable/common_search_price"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/search_price"
+        android:textColor="@color/common_order_text" />
+
+    <RadioButton
+        android:id="@+id/rb_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableEnd="@drawable/common_search_filter"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/search_summary"
+        android:textColor="@color/common_order_text" />
+</RadioGroup>

@@ -30,28 +30,7 @@ import java.util.List;
 @EBean
 public class CouponManageInfoAdapter extends BaseUltimateRecyclerViewAdapter<QueueCompanyDetail> {
 
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @Pref
-    MyPrefs_ pre;
-
-    boolean isRefresh = false;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
-
-
     @Override
-    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
         String token = pre.token().get();

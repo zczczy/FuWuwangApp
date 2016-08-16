@@ -31,56 +31,14 @@ import org.androidannotations.rest.spring.annotations.RestService;
 @EBean
 public class MemberOrderAdapter extends BaseUltimateRecyclerViewAdapter<ShopOrder> {
 
-    @Bean
-    OttoBus bus;
-
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @Pref
-    MyPrefs_ pre;
-
-    boolean isRefresh = false;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
 
     @Override
-    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         this.isRefresh = isRefresh;
         myRestClient.setHeader("Token", pre.token().get());
         myRestClient.setHeader("ShopToken", pre.shopToken().get());
         myRestClient.setHeader("Kbn", Constants.ANDROID);
-        afterGetData(myRestClient.getAllOrderInfoList(pageIndex, pageSize, Integer.valueOf(objects[0].toString())));
-    }
-
-    @UiThread
-    void afterGetData(BaseModelJson<PagerResult<ShopOrder>> bmj) {
-        AndroidTool.dismissLoadDialog();
-        if (bmj == null) {
-            bmj = new BaseModelJson<>();
-//            AndroidTool.showToast(context, no_net);
-        } else if (bmj.Successful) {
-            if (isRefresh) {
-                clear();
-            }
-            setTotal(bmj.Data.RowCount);
-            if (bmj.Data.ListData.size() > 0) {
-                insertAll(bmj.Data.ListData, getItems().size());
-            }
-        } else {
-            AndroidTool.showToast(context, bmj.Error);
-        }
-        bus.post(bmj);
+        afterGetMoreData(myRestClient.getAllOrderInfoList(pageIndex, pageSize, Integer.valueOf(objects[0].toString())));
     }
 
     @Override

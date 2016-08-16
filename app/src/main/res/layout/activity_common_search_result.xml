@@ -16,47 +16,7 @@
         app:mRightText="@string/search"
         app:mRightTextMarginRight="15dp" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rb_others"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:drawableRight="@drawable/common_search_zong_he"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/search_summary"
-            android:textColor="@color/common_order_text" />
-
-        <RadioButton
-            android:id="@+id/rb_sell_count"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/search_sell_count"
-            android:textColor="@color/common_order_text" />
-
-        <RadioButton
-            android:id="@+id/rb_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableRight="@drawable/common_search_price"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/search_price"
-            android:textColor="@color/common_order_text" />
-    </RadioGroup>
+    <include layout="@layout/filter_condition" />
 
     <include layout="@layout/horizontal_line" />
 

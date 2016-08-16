@@ -30,29 +30,8 @@ import java.util.List;
 @EBean
 public class QueueSeeAdapter extends BaseUltimateRecyclerViewAdapter<YpdRecord> {
 
-    @StringRes
-    String no_net;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-
-    @Pref
-    MyPrefs_ pre;
-
-    boolean isRefresh = false;
-
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
 
     @Override
-    @Background
     public void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects) {
         String token = pre.token().get();
         myRestClient.setHeader("Token", token);

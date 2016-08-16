@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.zczczy.leo.fuwuwangapp.dao.SearchHistory;
 import com.zczczy.leo.fuwuwangapp.dao.SearchHistoryDao;
 import com.zczczy.leo.fuwuwangapp.items.SearchHistoryItemView_;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
@@ -32,6 +33,7 @@ public class SearchHistoryAdapter extends BaseRecyclerViewAdapter<SearchHistory>
 
     @UiThread
     void afterGetData(List<SearchHistory> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (getItemCount() > 0) {
             clear();
         }

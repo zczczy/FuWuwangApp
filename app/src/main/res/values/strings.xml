@@ -326,7 +326,10 @@
     <string name="text_add_cart">加入购物车</string>
     <string name="text_goods_buy">立即购买</string>
     <string name="text_in_store">进店逛逛</string>
-
+    <string name="text_reset">重置</string>
+    <string name="text_min_price">最低价</string>
+    <string name="text_max_price">最高价</string>
+    <string name="text_price_area">价格区间</string>
 
     <string name="txt_review">商品评论</string>
     <string name="txt_all_review">查看全部评论</string>
@@ -429,5 +432,8 @@
     <string name="text_bind_title">会员卡号：</string>
 
     <string name="text_exchange">兑换龙币</string>
+
+    <!--common-->
+    <string name="text_confirm">确定</string>
 
 </resources>

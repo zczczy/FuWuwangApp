@@ -72,4 +72,7 @@
 
 
     <color name="pop_pu_bg">#11000000</color>
+
+    <color name="main_font_color">#fa7a04</color>
+    <color name="title_bar_bg">#ea5504</color>
 </resources>

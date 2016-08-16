@@ -30,28 +30,8 @@ import java.util.List;
 @EBean
 public class FirstCategoryAdapter extends BaseRecyclerViewAdapter<GoodsTypeModel> {
 
-    @RestService
-    MyDotNetRestClient myRestClient;
-
-    @App
-    MyApplication app;
-
-    @Pref
-    MyPrefs_ pre;
-
-    @StringRes
-    String no_net;
-
     @Bean
     OttoBus bus;
-
-    @Bean
-    MyErrorHandler myErrorHandler;
-
-    @AfterInject
-    void afterInject() {
-        myRestClient.setRestErrorHandler(myErrorHandler);
-    }
 
     @Override
     @Background

@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.bumptech.glide.Glide;
@@ -97,6 +98,16 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (activity.getCurrentFocus() != null) {
                     inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
                 }
+            }
+        }
+    }
+
+    //隐藏软键盘
+    void closeInputMethod(View editText) {
+        /*隐藏软键盘*/
+        if (inputMethodManager != null) {
+            if (inputMethodManager.isActive()) {
+                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
             }
         }
     }

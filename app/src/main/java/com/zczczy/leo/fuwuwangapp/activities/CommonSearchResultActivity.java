@@ -1,26 +1,18 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.graphics.Paint;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
-import com.squareup.otto.Subscribe;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.GoodsAdapters;
-import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
-import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
+import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -30,28 +22,14 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
-import in.srain.cube.views.ptr.header.MaterialHeader;
-
 /**
  * Created by leo on 2016/5/6.
  */
 @EActivity(R.layout.activity_common_search_result)
-public class CommonSearchResultActivity extends BaseActivity {
-
-    @ViewById
-    CustomUltimateRecyclerview ultimateRecyclerView;
-
-    @Bean(GoodsAdapters.class)
-    BaseUltimateRecyclerViewAdapter myAdapter;
+public class CommonSearchResultActivity extends BaseUltimateRecyclerViewActivity<Goods> {
 
     @ViewById
     TextView empty_view;
-
-    @Bean
-    OttoBus bus;
 
     @Extra
     String searchContent;
@@ -66,36 +44,33 @@ public class CommonSearchResultActivity extends BaseActivity {
     boolean isStart;
 
     @ViewById
-    MyTitleBar myTitleBar;
+    RadioButton rb_price, rb_filter;
 
-    @ViewById
-    RadioButton rb_price;
+    String priceMin, priceMax;
+
+    View view;
+
+    EditText edt_min_price, edt_max_price;
+
+    PopupWindow popupWindow;
 
     @ViewById
     TextView txt_title_search;
 
-    LinearLayoutManager linearLayoutManager;
-
-    int pageIndex = 1;
-
-    MaterialHeader materialHeader;
-
-    Paint paint = new Paint();
-
-    boolean isRefresh;
-
     boolean isSelected;
 
-    int sort;
+    String orderBy = Constants.PRICE_FILTER;
 
-    String desc;
+
+    @Bean
+    void setAdapter(GoodsAdapters myAdapter) {
+        this.myAdapter = myAdapter;
+    }
+
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
         empty_view.setText(empty_search);
-        bus.register(this);
-        isSelected = true;
         txt_title_search.setText(searchContent);
         myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,37 +81,9 @@ public class CommonSearchResultActivity extends BaseActivity {
                 finish();
             }
         });
-        sort = Constants.DEFAULT_SORT;
-        desc = Constants.DESC;
-        ultimateRecyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(this);
-        ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        ultimateRecyclerView.setAdapter(myAdapter);
-        afterLoadMore();
-        ultimateRecyclerView.enableLoadmore();
-        myAdapter.setCustomLoadMoreView(R.layout.custom_bottom_progressbar);
-        ultimateRecyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
-            @Override
-            public void loadMore(int itemsCount, int maxLastVisiblePosition) {
-                if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(CommonSearchResultActivity.this, "没有更多的数据了！~");
-                    ultimateRecyclerView.disableLoadmore();
-                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
-                } else {
-                    pageIndex++;
-                    afterLoadMore();
-                }
-            }
-        });
-        ultimateRecyclerView.setCustomSwipeToRefresh();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
-        refreshingMaterial();
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
-//                GoodsDetailInfoActivity_.intent(CommonSearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
                 GoodsDetailActivity_.intent(CommonSearchResultActivity.this).goodsId(obj.GoodsInfoId).start();
             }
 
@@ -145,23 +92,22 @@ public class CommonSearchResultActivity extends BaseActivity {
 
             }
         });
+        isSelected = true;
     }
 
-    @CheckedChange
-    void rb_others(boolean isChecked) {
-        if (isChecked) {
-            sort = Constants.DEFAULT_SORT;
-            desc = Constants.DESC;
+    @Click
+    void rb_filter() {
+        if (rb_filter.isChecked()) {
+            orderBy = Constants.PRICE_FILTER;
             isRefresh = true;
-            afterLoadMore();
+            showProperties();
         }
     }
 
     @CheckedChange
     void rb_sell_count(boolean isChecked) {
         if (isChecked) {
-            sort = Constants.COUNT_SORT;
-            desc = Constants.DESC;
+            orderBy = Constants.SELL_COUNT;
             isRefresh = true;
             afterLoadMore();
         }
@@ -172,64 +118,60 @@ public class CommonSearchResultActivity extends BaseActivity {
         if (rb_price.isChecked() && isSelected) {
             isRefresh = true;
             isSelected = false;
-            rb_price.setSelected(isSelected);
-            sort = Constants.PRICE_SORT;
-            desc = Constants.ASC;
+            rb_price.setSelected(false);
+            orderBy = Constants.PRICE_ASC;
             afterLoadMore();
 
         } else if (rb_price.isChecked() && !isSelected) {
             isRefresh = true;
             isSelected = true;
-            rb_price.setSelected(isSelected);
-            sort = Constants.PRICE_SORT;
-            desc = Constants.DESC;
+            rb_price.setSelected(true);
+            orderBy = Constants.PRICE_DESC;
             afterLoadMore();
         }
     }
 
-    void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, Constants.SEARCH_GOODS, goodsTypeId, goodsType, searchContent, sort, desc);
-    }
-
-    void refreshingMaterial() {
-        materialHeader = new MaterialHeader(this);
-        int[] colors = getResources().getIntArray(R.array.google_colors);
-        materialHeader.setColorSchemeColors(colors);
-        materialHeader.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
-        materialHeader.setPadding(0, 15, 0, 10);
-        materialHeader.setPtrFrameLayout(ultimateRecyclerView.mPtrFrameLayout);
-        ultimateRecyclerView.mPtrFrameLayout.autoRefresh(false);
-        ultimateRecyclerView.mPtrFrameLayout.setHeaderView(materialHeader);
-        ultimateRecyclerView.mPtrFrameLayout.addPtrUIHandler(materialHeader);
-        ultimateRecyclerView.mPtrFrameLayout.setPtrHandler(new PtrHandler() {
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
-            }
-
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                isRefresh = true;
-                pageIndex = 1;
-                afterLoadMore();
-            }
-        });
-    }
-
-    @Subscribe
-    public void notifyUI(BaseModel bm) {
-        if (isRefresh) {
-            linearLayoutManager.scrollToPosition(0);
-            ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
-            isRefresh = false;
-            if (myAdapter.getItems().size() < myAdapter.getTotal()) {
-                ultimateRecyclerView.reenableLoadmore(layoutInflater.inflate(R.layout.custom_bottom_progressbar, null));
-            } else {
-                ultimateRecyclerView.disableLoadmore();
-            }
-        } else if (pageIndex == 1) {
-            linearLayoutManager.scrollToPosition(0);
+    void showProperties() {
+        if (popupWindow == null) {
+            view = layoutInflater.inflate(R.layout.filter_popup, null);
+            edt_min_price = (EditText) view.findViewById(R.id.edt_min_price);
+            edt_max_price = (EditText) view.findViewById(R.id.edt_max_price);
+            view.findViewById(R.id.txt_reset).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    edt_min_price.setText("");
+                    edt_max_price.setText("");
+                }
+            });
+            view.findViewById(R.id.txt_confirm).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    priceMin = edt_min_price.getText().toString();
+                    priceMax = edt_max_price.getText().toString();
+                    closeInputMethod(view);
+                    popupWindow.dismiss();
+                    afterLoadMore();
+                }
+            });
+//            popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+            popupWindow = new PopupWindow(view, DisplayUtil.dip2px(this, 220), DisplayUtil.dip2px(this, 110), true);
+//            //实例化一个ColorDrawable颜色为半透明
+//            ColorDrawable dw = new ColorDrawable(0xb0000000);
+//            //设置SelectPicPopupWindow弹出窗体的背景
+//            popupWindow.setBackgroundDrawable(dw);
+            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    closeInputMethod(view);
+                }
+            });
         }
+        popupWindow.showAsDropDown(rb_filter);
+    }
+
+
+    void afterLoadMore() {
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 1, "0", "2", searchContent, orderBy, priceMin, priceMax);
     }
 
     @Override

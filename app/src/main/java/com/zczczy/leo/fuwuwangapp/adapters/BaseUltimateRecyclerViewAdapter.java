@@ -16,12 +16,29 @@ import com.marshalchen.ultimaterecyclerview.animators.internal.ViewHelper;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerImpl;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeItemManagerInterface;
 import com.marshalchen.ultimaterecyclerview.swipe.SwipeLayout;
+import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.ItemView;
+import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
+import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.PagerResult;
+import com.zczczy.leo.fuwuwangapp.prefs.MyPrefs_;
+import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
+import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
+import com.zczczy.leo.fuwuwangapp.rest.MyRestClient;
+import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +69,33 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
 
     private BindHeaderViewHolder bindHeaderViewHolder;
 
+    @RestService
+    MyDotNetRestClient myRestClient;
+
+    @App
+    MyApplication app;
+
+    @Pref
+    MyPrefs_ pre;
+
+    @Bean
+    OttoBus bus;
+
+    @StringRes
+    String no_net;
+
+    @Bean
+    MyErrorHandler myErrorHandler;
+
+    boolean isRefresh;
+
     @RootContext
     Context context;
+
+    @AfterInject
+    void afterBaseInject() {
+        myRestClient.setRestErrorHandler(myErrorHandler);
+    }
 
     public int getAdapterItemCount() {
 
@@ -67,7 +109,29 @@ public abstract class BaseUltimateRecyclerViewAdapter<T> extends UltimateViewAda
      * @param pageSize
      * @param objects
      */
+    @Background
     public abstract void getMoreData(int pageIndex, int pageSize, boolean isRefresh, Object... objects);
+
+
+    @UiThread
+    protected void afterGetMoreData(BaseModelJson<PagerResult<T>> bmj) {
+        AndroidTool.dismissLoadDialog();
+        if (bmj == null) {
+            bmj = new BaseModelJson<>();
+        } else if (bmj.Successful) {
+            if (isRefresh) {
+                clear();
+            }
+            setTotal(bmj.Data.RowCount);
+            if (bmj.Data.ListData.size() > 0) {
+                insertAll(bmj.Data.ListData, getItems().size());
+            }
+        } else {
+            AndroidTool.showToast(context, bmj.Error);
+        }
+        bus.post(bmj);
+    }
+
 
     /**
      * @param viewHolder

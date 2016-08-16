@@ -53,17 +53,7 @@ import in.srain.cube.views.ptr.header.MaterialHeader;
  * Created by Leo on 2016/5/10.
  */
 @EActivity(R.layout.activity_service_goods)
-public class ServiceGoodsActivity extends BaseActivity implements PopupItemClickCallBack {
-
-
-    @ViewById
-    MyTitleBar myTitleBar;
-
-    @ViewById
-    CustomUltimateRecyclerview ultimateRecyclerView;
-
-    @Bean(StoreAdapter.class)
-    BaseUltimateRecyclerViewAdapter myAdapter;
+public class ServiceGoodsActivity extends BaseUltimateRecyclerViewActivity<StoreDetailModel> implements PopupItemClickCallBack {
 
     @ViewById
     TextView txt_area, txt_category;
@@ -73,9 +63,6 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
 
     @ViewById
     LinearLayout ll_area, ll_category, root;
-
-    @Bean
-    OttoBus bus;
 
     @DrawableRes
     Drawable popBackground;
@@ -95,15 +82,13 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
     @Extra
     String typeName;
 
-    LinearLayoutManager linearLayoutManager;
-
-    MaterialHeader materialHeader;
-
     PopupWindow areaPopWin, categoryPopWin;
 
-    int pageIndex = 1;
 
-    boolean isRefresh;
+    @Bean
+    void setAdapter(StoreAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
     @AfterInject
     void afterInject() {
@@ -112,39 +97,11 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
         txt_category.setText(typeName);
-        ultimateRecyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(this);
-        ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        ultimateRecyclerView.setAdapter(myAdapter);
-        ultimateRecyclerView.enableLoadmore();
-        myAdapter.setCustomLoadMoreView(R.layout.custom_bottom_progressbar);
-        afterLoadMore();
-        ultimateRecyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
-            @Override
-            public void loadMore(int itemsCount, int maxLastVisiblePosition) {
-                if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(ServiceGoodsActivity.this, "没有更多的数据了！~");
-                    ultimateRecyclerView.disableLoadmore();
-                    myAdapter.notifyItemRemoved(itemsCount > 0 ? itemsCount - 1 : 0);
-                } else {
-                    pageIndex++;
-                    afterLoadMore();
-                }
-            }
-        });
-        ultimateRecyclerView.setCustomSwipeToRefresh();
-        Paint paint = new Paint();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
-        refreshingMaterial();
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<StoreDetailModel>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, StoreDetailModel obj, int position) {
                 StoreInformationActivity_.intent(ServiceGoodsActivity.this).storeId(obj.StoreInfoId).start();
-
             }
 
             @Override
@@ -156,31 +113,6 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
             @Override
             public void onClick(View v) {
                 SearchActivity_.intent(ServiceGoodsActivity.this).isService(true).start();
-            }
-        });
-    }
-
-    void refreshingMaterial() {
-        materialHeader = new MaterialHeader(this);
-        int[] colors = getResources().getIntArray(R.array.google_colors);
-        materialHeader.setColorSchemeColors(colors);
-        materialHeader.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
-        materialHeader.setPadding(0, 15, 0, 10);
-        materialHeader.setPtrFrameLayout(ultimateRecyclerView.mPtrFrameLayout);
-        ultimateRecyclerView.mPtrFrameLayout.autoRefresh(false);
-        ultimateRecyclerView.mPtrFrameLayout.setHeaderView(materialHeader);
-        ultimateRecyclerView.mPtrFrameLayout.addPtrUIHandler(materialHeader);
-        ultimateRecyclerView.mPtrFrameLayout.setPtrHandler(new PtrHandler() {
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
-            }
-
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                isRefresh = true;
-                pageIndex = 1;
-                afterLoadMore();
             }
         });
     }
@@ -251,22 +183,6 @@ public class ServiceGoodsActivity extends BaseActivity implements PopupItemClick
         });
     }
 
-
-    @Subscribe
-    public void notifyUI(BaseModel bm) {
-        if (isRefresh) {
-            linearLayoutManager.scrollToPosition(0);
-            ultimateRecyclerView.mPtrFrameLayout.refreshComplete();
-            isRefresh = false;
-            if (myAdapter.getTotal() > 0 && myAdapter.getItems().size() < myAdapter.getTotal()) {
-                ultimateRecyclerView.reenableLoadmore(layoutInflater.inflate(R.layout.custom_bottom_progressbar, null));
-            } else {
-                ultimateRecyclerView.disableLoadmore();
-            }
-        } else if (pageIndex == 1) {
-            linearLayoutManager.scrollToPosition(0);
-        }
-    }
 
     @Override
     public void callBackCategory() {

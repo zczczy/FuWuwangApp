@@ -22,25 +22,15 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/5/4.
  */
 @EActivity(R.layout.activity_province)
-public class ProvinceActivity extends BaseActivity {
+public class ProvinceActivity extends BaseRecyclerViewActivity<NewProvince> {
 
-    @ViewById
-    RecyclerView recyclerView;
-
-    @Bean(ProvinceAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
-
-    LinearLayoutManager linearLayoutManager;
-
-    Paint paint = new Paint();
+    @Bean
+    void setAdapter(ProvinceAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<NewProvince>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, NewProvince obj, int position) {
@@ -48,9 +38,6 @@ public class ProvinceActivity extends BaseActivity {
             }
         });
         myAdapter.getMoreData();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
     }
 
     @OnActivityResult(1000)

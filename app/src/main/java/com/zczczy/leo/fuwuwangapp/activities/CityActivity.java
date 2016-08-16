@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.adapters.AreaAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.CityAdapter;
 import com.zczczy.leo.fuwuwangapp.model.NewCity;
@@ -25,32 +26,21 @@ import org.androidannotations.annotations.ViewById;
  * Created by Leo on 2016/5/4.
  */
 @EActivity(R.layout.activity_province)
-public class CityActivity extends BaseActivity {
-
-    @ViewById
-    MyTitleBar myTitleBar;
-
-    @ViewById
-    RecyclerView recyclerView;
-
-    @Bean(CityAdapter.class)
-    BaseRecyclerViewAdapter myAdapter;
+public class CityActivity extends BaseRecyclerViewActivity<NewCity> {
 
     @Extra
     NewProvince province;
 
-    Paint paint = new Paint();
+    @Bean
+    void setAdapter(CityAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
-    LinearLayoutManager linearLayoutManager;
 
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
         myTitleBar.setTitle("城市");
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(myAdapter);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<NewCity>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, NewCity obj, int position) {
@@ -58,9 +48,6 @@ public class CityActivity extends BaseActivity {
             }
         });
         myAdapter.getMoreData(province.ProvinceId);
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
     }
 
     @OnActivityResult(1000)

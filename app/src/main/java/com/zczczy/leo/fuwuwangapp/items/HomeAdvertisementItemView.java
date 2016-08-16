@@ -11,6 +11,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.zczczy.leo.fuwuwangapp.MyApplication;
 import com.zczczy.leo.fuwuwangapp.R;
+import com.zczczy.leo.fuwuwangapp.activities.CategoryActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
@@ -153,7 +154,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
             Glide.with(context).load(gtm.GoodsTypeIcon).skipMemoryCache(true)
                     .crossFade()
                     .centerCrop().into(imageViews.get(i));
-            imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "");
+            imageViews.get(i).setContentDescription(gtm.GoodsTypeId + "," + gtm.GoodsTypeName);
             textViews.get(i).setText(gtm.GoodsTypeName);
             i++;
             if (i == 10) {
@@ -183,7 +184,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                 } else if ("3".equals(temp[0])) {
                     CommonWebViewActivity_.intent(context).title("详情").methodName(temp[1]).start();
                 } else if ("2".equals(temp[0])) {
-//                    GoodsDetailActivity_.intent(context).goodsId(temp[1]).start();
+                    CategoryActivity_.intent(context).goodsTypeId(temp[1]).goodsType("2").title("详情").start();
                 }
             }
         }
@@ -192,7 +193,10 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
     @Click(value = {R.id.img_trendw, R.id.img_trendm, R.id.img_huazhuang, R.id.img_digital, R.id.img_baby, R.id.img_xxxb, R.id.img_life, R.id.img_food, R.id.img_healthcare, R.id.img_lbdh})
     void goodsTypeClick(ImageView view) {
         if (view.getContentDescription() != null) {
-            CommonSearchResultActivity_.intent(context).goodsTypeId(Integer.valueOf(view.getContentDescription().toString())).isStart(true).start();
+            String[] temp = view.getContentDescription().toString().split(",");
+            if (temp.length == 2) {
+                CategoryActivity_.intent(context).goodsTypeId(temp[0]).goodsType("2").title(temp[1]).start();
+            }
         }
     }
 
@@ -222,7 +226,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                 } else if (bannerModel.LinkType == 2) {
                     CommonWebViewActivity_.intent(context).title(bannerModel.BannerName).methodName(bannerModel.LinkUrl).start();
                 } else if (bannerModel.LinkType == 3) {
-                    
+
                 } else if (bannerModel.LinkType == 4) {
                     StoreInformationActivity_.intent(context).storeId(bannerModel.LinkUrl).start();
                 }
