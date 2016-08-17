@@ -400,7 +400,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     BaseModelJson<List<NewBanner>> getHomeBanner();
 
     /**
-     * 根据广告区分查询广告信息（1：首页广告，2：服务类页面广告）
+     * 根据广告区分查询广告信息（1：首页广告，2：服务类页面广告，21：首页弹出广告）
      *
      * @param kbn
      * @return

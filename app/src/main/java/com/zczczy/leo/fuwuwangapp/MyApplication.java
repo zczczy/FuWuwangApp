@@ -3,11 +3,14 @@ package com.zczczy.leo.fuwuwangapp;
 import android.app.Application;
 import android.app.Service;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.uuch.adlibrary.utils.DisplayUtil;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.GoodsTypeModel;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
@@ -50,6 +53,7 @@ public class MyApplication extends Application {
     private NewArea newRegion;
     private StreetInfo newStreet;
 
+    private List<AdvertModel> homePupAd;
 
     //首页广告
     private List<AdvertModel> advertModelList;
@@ -79,6 +83,7 @@ public class MyApplication extends Application {
         lotteryConfig = new LotteryConfig();
         serviceAdvertModelList = new ArrayList<>(9);
         serviceGoodsTypeModelList = new ArrayList<>(6);
+        homePupAd = new ArrayList<>();
 //        百度地图
         locationService = new LocationService(getApplicationContext());
         mVibrator = (Vibrator) getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
@@ -88,6 +93,16 @@ public class MyApplication extends Application {
         iWXApi.unregisterApp();
         iWXApi.registerApp(Constants.APP_ID);
         CrashReport.initCrashReport(getApplicationContext(), Constants.BUGLY_APP_ID, false);
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        DisplayUtil.density = dm.density;
+        DisplayUtil.densityDPI = dm.densityDpi;
+        DisplayUtil.screenWidthPx = dm.widthPixels;
+        DisplayUtil.screenhightPx = dm.heightPixels;
+        DisplayUtil.screenWidthDip = DisplayUtil.px2dip(getApplicationContext(), dm.widthPixels);
+        DisplayUtil.screenHightDip = DisplayUtil.px2dip(getApplicationContext(), dm.heightPixels);
+
+        Fresco.initialize(this);
     }
 
     public List<AdvertModel> getAdvertModelList() {
@@ -184,5 +199,13 @@ public class MyApplication extends Application {
 
     public void setServiceGoodsTypeModelList(List<GoodsTypeModel> serviceGoodsTypeModelList) {
         this.serviceGoodsTypeModelList = serviceGoodsTypeModelList;
+    }
+
+    public List<AdvertModel> getHomePupAd() {
+        return homePupAd;
+    }
+
+    public void setHomePupAd(List<AdvertModel> homePupAd) {
+        this.homePupAd = homePupAd;
     }
 }

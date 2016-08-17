@@ -104,6 +104,25 @@ public class MyBackgroundTask {
     }
 
     /**
+     * 21首页弹出广告
+     */
+    @Background
+    public void getHomePupAd() {
+        afterGetHomePupAd(myRestClient.getAdvertByKbn(Constants.HOME_PUP_AD));
+    }
+
+    @UiThread
+    void afterGetHomePupAd(BaseModelJson<List<AdvertModel>> bmj) {
+        if (bmj != null && bmj.Successful) {
+            app.setHomePupAd(bmj.Data);
+        } else {
+            bmj = new BaseModelJson<>();
+        }
+        bus.post(bmj);
+    }
+
+
+    /**
      * 获取首页中奖通知
      */
     @Background

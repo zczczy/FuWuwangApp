@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/common_white_bg"
     android:orientation="vertical"
     tools:context=".fragments.SecondCategoryGoodsFragment">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+
+    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
+        android:id="@+id/ultimate_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white" />
+        android:background="@color/main_tab_color"
+        app:recyclerviewEmptyView="@layout/empty_view" />
 </LinearLayout>

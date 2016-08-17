@@ -47,6 +47,7 @@ public class IndexActivity extends BaseActivity {
         myBackgroundTask.getHomeGoodsTypeList();
         myBackgroundTask.getServiceAd();
         myBackgroundTask.getServiceGoodsTypeList();
+        myBackgroundTask.getHomePupAd();
     }
 
     @Override
@@ -58,7 +59,7 @@ public class IndexActivity extends BaseActivity {
     @Subscribe
     public void notifyUI(BaseModel bm) {
         i++;
-        if (i == 6) {
+        if (i == 7) {
             getPersimmions();
         }
     }

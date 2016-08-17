@@ -15,14 +15,21 @@ import com.marshalchen.ultimaterecyclerview.ObservableScrollViewCallbacks;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
+import com.uuch.adlibrary.AdConstant;
+import com.uuch.adlibrary.AdManager;
+import com.uuch.adlibrary.bean.AdInfo;
+import com.uuch.adlibrary.transformer.DepthPageTransformer;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.BaseActivity;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.CategoryActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.MainActivity;
 import com.zczczy.leo.fuwuwangapp.activities.MerchantSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.dao.SearchHistory;
@@ -31,6 +38,7 @@ import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.Activity;
+import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
@@ -40,6 +48,7 @@ import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -47,6 +56,9 @@ import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -94,6 +106,8 @@ public class HomeFragment extends BaseFragment {
     HomeAdvertisementItemView itemView;
 
     int progress;
+
+    AdManager adManager;
 
     @AfterInject
     void afterInject() {
@@ -188,7 +202,51 @@ public class HomeFragment extends BaseFragment {
 //                return position == 0;
 //            }
 //        }).paint(paint).build());
+
+        setAd();
     }
+
+    @UiThread
+    void setAd() {
+        List<AdInfo> advList = new ArrayList<>();
+        for (AdvertModel am : app.getHomePupAd()) {
+            AdInfo adInfo = new AdInfo();
+            adInfo.setActivityImg(am.AdvertImg);
+            adInfo.setAdId(am.JumpType + "");
+            adInfo.setUrl(am.InfoId);
+            adInfo.setTitle(am.AdsenseTypeName);
+            advList.add(adInfo);
+        }
+        adManager = new AdManager(getActivity(), advList);
+        adManager.setOverScreen(true)
+                .setSpeed(1)
+                .setBounciness(5)
+                .setPageTransformer(new DepthPageTransformer())
+                .setOnImageClickListener(new AdManager.OnImageClickListener() {
+                    @Override
+                    public void onImageClick(View view, AdInfo advInfo) {
+                        //1跳转到店铺页面  2跳转到商品页面
+                        if ("1".equals(advInfo.getAdId())) {
+                            StoreInformationActivity_.intent(getActivity()).storeId(advInfo.getUrl()).start();
+                        } else if ("2".equals(advInfo.getAdId())) {
+                            GoodsDetailActivity_.intent(getActivity()).goodsId(advInfo.getUrl()).start();
+                        } else if ("3".equals(advInfo.getAdId())) {
+                            CommonWebViewActivity_.intent(getActivity()).title(advInfo.getTitle()).methodName(advInfo.getUrl()).start();
+                        } else if ("2".equals(advInfo.getAdId())) {
+                            CategoryActivity_.intent(getActivity()).goodsTypeId(advInfo.getUrl()).goodsType("2").title(advInfo.getTitle()).start();
+                        }
+                    }
+                })
+        ;
+        adManager.showAdDialog(AdConstant.ANIM_UP_TO_DOWN);
+        closeAd();
+    }
+
+    @UiThread(delay = 5000)
+    void closeAd() {
+        adManager.dismissAdDialog();
+    }
+
 
     @Click
     void img_shangjia() {

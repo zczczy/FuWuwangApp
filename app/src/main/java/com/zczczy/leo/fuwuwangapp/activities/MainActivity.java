@@ -17,11 +17,16 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.liulishuo.magicprogresswidget.MagicProgressCircle;
+import com.uuch.adlibrary.AdConstant;
+import com.uuch.adlibrary.AdManager;
+import com.uuch.adlibrary.bean.AdInfo;
+import com.uuch.adlibrary.transformer.DepthPageTransformer;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.fragments.CategoryFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.HomeFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.MineFragment_;
 import com.zczczy.leo.fuwuwangapp.fragments.ServiceFragment_;
+import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.Announcement;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CityModel;
@@ -54,6 +59,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -135,11 +141,6 @@ public class MainActivity extends BaseActivity implements BDLocationListener {
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
         getannouncement();
-//        AdInfo adInfo = new AdInfo();
-//        AdManager adManager = new AdManager(MainActivity.this, advList);
-//        adManager.setOverScreen(true)
-//                .setPageTransformer(new DepthPageTransformer());
-
     }
 
     protected void initTab() {

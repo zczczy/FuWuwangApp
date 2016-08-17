@@ -19,7 +19,7 @@ import org.androidannotations.annotations.FragmentArg;
  *         you can contact me at :361769045@qq.com
  * @since 2016/8/16.
  */
-@EFragment(R.layout.fragment_common_category)
+@EFragment(R.layout.fragment_second_category_goods)
 public class SecondCategoryGoodsFragment extends BaseUltimateRecyclerViewFragment<Goods> {
 
 

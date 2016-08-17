@@ -46,8 +46,9 @@ public class Constants {
     public static final int STORE_GOODS = 0; // 店铺入口
     public static final int SEARCH_GOODS = 1; // 搜索入口
 
-    public static final String NORMAL_CATEGORY = "1"; //(1邮寄类,2服务类)
-    public static final String SERVICE_CATEGORY = "2"; //(1邮寄类,2服务类)
+    public static final String NORMAL_CATEGORY = "1"; //(1邮寄类,2服务类,21首页弹出广告)
+    public static final String SERVICE_CATEGORY = "2"; //(1邮寄类,2服务类,21首页弹出广告)
+    public static final String HOME_PUP_AD = "21"; //(1邮寄类,2服务类,21首页弹出广告)
 
 
     public static final int DUEPAYMENT = 0; //0:待支付
