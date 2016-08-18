@@ -15,14 +15,81 @@
         android:layout_height="50dp"
         android:background="@color/major_color"
         android:minHeight="50dp"
-        app:mNavButtonIcon="@drawable/title_back_normal"
-        app:mTitle="@string/text_store" />
+        app:mCustomView="@layout/search"
+        app:mNavButtonIcon="@drawable/title_back_normal" />
 
-    <com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview
-        android:id="@+id/ultimate_recycler_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/common_white_bg"
-        app:recyclerviewEmptyView="@layout/empty_view"
-        app:theme="@style/AlertDialog.AppCompat.Light" />
+        android:layout_height="97dp">
+
+        <ImageView
+            android:id="@+id/img_index"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/store_index" />
+
+
+        <TextView
+            android:id="@+id/txt_store_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/pop_pu_bg"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:text="一楼太平鸟女装"
+            android:textColor="@color/white" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/store_rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="4.5" />
+
+    </FrameLayout>
+
+
+    <com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost
+        android:id="@+id/tab_host"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <!-- 调换framelayout和tabwidget的前后顺序可以分别实现tab的top和在底下的效果 -->
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/white" />
+
+            <!-- tabhost上面一条黑色分割 @drawable/line_shop -->
+            <View
+                android:id="@+id/view_2"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:clickable="false" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost>
 </LinearLayout>

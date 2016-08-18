@@ -20,9 +20,9 @@ import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.items.ServiceHeaderItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
 import com.zczczy.leo.fuwuwangapp.model.StreetInfo;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
@@ -155,9 +155,9 @@ public class ServiceFragment extends BaseFragment {
             }
         });
 
-        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
                 GoodsDetailActivity_.intent(ServiceFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 
@@ -236,7 +236,7 @@ public class ServiceFragment extends BaseFragment {
     }
 
     @Subscribe
-    public void notifyUI(BaseModelJson<PagerResult<RebuiltRecommendedGoods>> bm) {
+    public void notifyUI(BaseModelJson<PagerResult<Goods>> bm) {
         if (isRefresh) {
             gridLayoutManager.scrollToPosition(0);
             ultimateRecyclerView.mPtrFrameLayout.refreshComplete();

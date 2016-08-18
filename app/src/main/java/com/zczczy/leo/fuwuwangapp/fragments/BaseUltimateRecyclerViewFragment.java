@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
 import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
@@ -64,9 +65,8 @@ public abstract class BaseUltimateRecyclerViewFragment<T> extends BaseFragment {
     void afterRecyclerView() {
         AndroidTool.showLoadDialog(this);
         ultimateRecyclerView.setHasFixedSize(true);
-//        linearLayoutManager = new CustomLinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+        gridLayoutManager = new BasicGridLayoutManager(getActivity(), 2, OrientationHelper.VERTICAL, false, myAdapter);
         verticalItem();
         afterLoadMore();
         ultimateRecyclerView.enableLoadmore();

@@ -54,7 +54,9 @@ public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
                         objects[4].toString(),
                         (objects[5] == null || "".equals(objects[5])) ? "0" : objects[5].toString(),
                         (objects[6] == null || "".equals(objects[6])) ? "0" : objects[6].toString(),
-                        pageIndex, pageSize);
+                        pageIndex, pageSize,
+                        (objects[7] == null || "".equals(objects[7])) ? "" : objects[7].toString()
+                );
                 break;
         }
         afterGetMoreData(bmj);

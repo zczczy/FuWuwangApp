@@ -37,6 +37,7 @@ public class StoreDetailModel implements Serializable {
     public String StoreAddress;
     public String SearchKeyWordf;
     public int StorePX;
+    public String StoreIndexImg;
     public List<StoreImg> StoreImgList;
     public List<Goods> GoodsList;
 

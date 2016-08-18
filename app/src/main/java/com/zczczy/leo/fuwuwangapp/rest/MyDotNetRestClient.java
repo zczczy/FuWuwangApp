@@ -24,8 +24,6 @@ import com.zczczy.leo.fuwuwangapp.model.LogisticsInfo;
 import com.zczczy.leo.fuwuwangapp.model.Lottery;
 import com.zczczy.leo.fuwuwangapp.model.LotteryConfig;
 import com.zczczy.leo.fuwuwangapp.model.LotteryInfo;
-import com.zczczy.leo.fuwuwangapp.model.OrderCountModel;
-import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.MReceiptAddressModel;
 import com.zczczy.leo.fuwuwangapp.model.MemberInfo;
 import com.zczczy.leo.fuwuwangapp.model.NewArea;
@@ -34,6 +32,7 @@ import com.zczczy.leo.fuwuwangapp.model.NewCity;
 import com.zczczy.leo.fuwuwangapp.model.NewProvince;
 import com.zczczy.leo.fuwuwangapp.model.Notice;
 import com.zczczy.leo.fuwuwangapp.model.OpenAccount;
+import com.zczczy.leo.fuwuwangapp.model.OrderCountModel;
 import com.zczczy.leo.fuwuwangapp.model.OrderDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.PagerResult;
 import com.zczczy.leo.fuwuwangapp.model.ProvinceModel;
@@ -41,7 +40,7 @@ import com.zczczy.leo.fuwuwangapp.model.Purse;
 import com.zczczy.leo.fuwuwangapp.model.QueueCompanyDetail;
 import com.zczczy.leo.fuwuwangapp.model.QueueCount;
 import com.zczczy.leo.fuwuwangapp.model.QueueMDetailModel;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.model.ShopOrder;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.model.UpdateApp;
 import com.zczczy.leo.fuwuwangapp.model.UserBaseInfo;
@@ -416,7 +415,7 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @return
      */
     @Get("api/ShopContent/GetRecommendedGoods?PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getRecommendedGoods(@Path int PageIndex, @Path int PageSize);
+    BaseModelJson<PagerResult<Goods>> getRecommendedGoods(@Path int PageIndex, @Path int PageSize);
 
     /**
      * 查询用户购物车信息
@@ -547,6 +546,38 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
     @Get("api/ShopContent/GetGoodsInfo?StreetInfoId={StreetInfoId}&GoodsTypeId={GoodsTypeId}&PageIndex={PageIndex}&PageSize={PageSize}")
     BaseModelJson<PagerResult<Goods>> getGoodsInfo(@Path int StreetInfoId, @Path int GoodsTypeId, @Path int PageIndex, @Path int PageSize);
 
+
+    /**
+     * 查询店铺中的商品
+     *
+     * @param StoreInfoId 店铺id
+     * @param PageIndex   当前页
+     * @param PageSize    条数
+     * @return
+     */
+    @Get("api/ShopContent/GetStoreAllGoodsList?StoreInfoId={StoreInfoId}&PageIndex={PageIndex}&PageSize={PageSize}")
+    BaseModelJson<PagerResult<Goods>> getStoreAllGoodsList(@Path String StoreInfoId, @Path int PageIndex, @Path int PageSize);
+
+
+    /**
+     * 查询店铺中推荐的商品
+     *
+     * @param StoreInfoId 店铺id
+     * @return
+     */
+    @Get("api/ShopContent/GetStoreIsCommendGoodsList?StoreInfoId={StoreInfoId}")
+    BaseModelJson<List<Goods>> getStoreIsCommendGoodsList(@Path String StoreInfoId);
+
+    /**
+     * 查询店铺中上新的商品
+     *
+     * @param StoreInfoId 店铺id
+     * @return
+     */
+    @Get("api/ShopContent/GetStoreNewGoodsList?StoreInfoId={StoreInfoId}")
+    BaseModelJson<List<Goods>> getStoreNewGoodsList(@Path String StoreInfoId);
+
+
     /**
      * 根据 商业圈,商品类别 查询店铺
      *
@@ -569,10 +600,10 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param PageIndex 当前页号
      * @param PageSize  条数
      * @return
-     * @see RebuiltRecommendedGoods
+     * @see Goods
      */
     @Get("api/ShopContent/GetGoodsInfoByCity?CityId={CityId}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<RebuiltRecommendedGoods>> getGoodsInfoByCity(@Path String CityId, @Path int PageIndex, @Path int PageSize);
+    BaseModelJson<PagerResult<Goods>> getGoodsInfoByCity(@Path String CityId, @Path int PageIndex, @Path int PageSize);
 
     /**
      * 根据城市名称查询城市ID
@@ -594,8 +625,8 @@ public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport
      * @param PageSize    条数
      * @return
      */
-    @Get("api/ShopContent/GetGoodsByGoodsTypeId?GoodsTypeId={GoodsTypeId}&GoodsType={GoodsType}&GodosName={GodosName}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&PageIndex={PageIndex}&PageSize={PageSize}")
-    BaseModelJson<PagerResult<Goods>> getGoodsByGoodsTypeId(@Path String GoodsTypeId, @Path String GoodsType, @Path String GodosName, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path int PageIndex, @Path int PageSize);
+    @Get("api/ShopContent/GetGoodsByGoodsTypeId?GoodsTypeId={GoodsTypeId}&GoodsType={GoodsType}&GodosName={GodosName}&OB={OB}&MinPrice={MinPrice}&MaxPrice={MaxPrice}&PageIndex={PageIndex}&PageSize={PageSize}&StoreInfoId={StoreInfoId}")
+    BaseModelJson<PagerResult<Goods>> getGoodsByGoodsTypeId(@Path String GoodsTypeId, @Path String GoodsType, @Path String GodosName, @Path String OB, @Path String MinPrice, @Path String MaxPrice, @Path int PageIndex, @Path int PageSize, @Path String StoreInfoId);
 
     /**
      * 单商品生成临时订单信息

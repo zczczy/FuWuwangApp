@@ -38,7 +38,7 @@ public class CommonSearchResultActivity extends BaseUltimateRecyclerViewActivity
     int goodsTypeId;
 
     @Extra
-    String goodsType;
+    String goodsType, storeId;
 
     @Extra
     boolean isStart;
@@ -171,7 +171,7 @@ public class CommonSearchResultActivity extends BaseUltimateRecyclerViewActivity
 
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 1, "0", "2", searchContent, orderBy, priceMin, priceMax);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 1, "0", "2", searchContent, orderBy, priceMin, priceMax, storeId);
     }
 
     @Override

@@ -28,7 +28,9 @@ public class SecondCategoryGoodsAdapter extends BaseUltimateRecyclerViewAdapter<
                 objects[3].toString(),
                 (objects[4] == null || "".equals(objects[4])) ? "0" : objects[4].toString(),
                 (objects[5] == null || "".equals(objects[5])) ? "0" : objects[5].toString(),
-                pageIndex, pageSize)
+                pageIndex, pageSize,
+                (objects[6] == null || "".equals(objects[6])) ? "" : objects[6].toString()
+                )
         );
     }
 

@@ -25,15 +25,11 @@ import org.androidannotations.annotations.ViewById;
 @EViewGroup(R.layout.activity_store_information_header_item)
 public class StoreInformationHeaderItemView extends ItemView<StoreDetailModel> {
 
-
     @ViewById
     SliderLayout sliderLayout;
 
     @ViewById
-    TextView txt_store, txt_store_describe, txt_detail_address;
-
-    @ViewById
-    RatingBar ratingBar;
+    TextView txt_store_describe, txt_detail_address, txt_phone;
 
     Context context;
 
@@ -44,10 +40,9 @@ public class StoreInformationHeaderItemView extends ItemView<StoreDetailModel> {
 
     @Override
     protected void init(Object... objects) {
-        ratingBar.setRating(_data.StorePX);
-        txt_store.setText(_data.StoreName);
         txt_detail_address.setText(_data.StoreAddress);
         txt_store_describe.setText(_data.StoreDesc);
+        txt_phone.setText(_data.LinkTel);
         for (StoreImg nb : _data.StoreImgList) {
             GlideSliderView textSliderView = new GlideSliderView(context);
             textSliderView.image(nb.StoreImgUrl)

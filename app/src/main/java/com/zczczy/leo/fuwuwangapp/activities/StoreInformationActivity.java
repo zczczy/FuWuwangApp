@@ -1,26 +1,30 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
-import android.graphics.Paint;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TabHost;
+import android.widget.TabWidget;
+import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.FlexibleDividerDecoration;
-import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
-import com.zczczy.leo.fuwuwangapp.MyApplication;
+import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.GoodsAdapters;
-import com.zczczy.leo.fuwuwangapp.items.StoreInformationHeaderItemView;
-import com.zczczy.leo.fuwuwangapp.items.StoreInformationHeaderItemView_;
+import com.zczczy.leo.fuwuwangapp.fragments.CategoryFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.MineFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.ServiceFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.StoreAllGoodsFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.StoreHomeFragment_;
+import com.zczczy.leo.fuwuwangapp.fragments.StoreNewArrivalFragment_;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
-import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.model.StoreDetailModel;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
+import com.zczczy.leo.fuwuwangapp.viewgroup.FragmentTabHost;
+import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -30,7 +34,11 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.DrawableRes;
+import org.androidannotations.annotations.res.StringArrayRes;
+import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by Leo on 2016/5/5.
@@ -39,10 +47,10 @@ import org.androidannotations.rest.spring.annotations.RestService;
 public class StoreInformationActivity extends BaseActivity {
 
     @ViewById
-    CustomUltimateRecyclerview ultimateRecyclerView;
+    public FragmentTabHost tabHost;
 
-    @Bean(GoodsAdapters.class)
-    BaseUltimateRecyclerViewAdapter myAdapter;
+    @ViewById
+    MyTitleBar myTitleBar;
 
     @RestService
     MyDotNetRestClient myRestClient;
@@ -50,71 +58,57 @@ public class StoreInformationActivity extends BaseActivity {
     @Bean
     MyErrorHandler myErrorHandler;
 
+    @StringArrayRes
+    String[] storeTabTitle, storeTabTag;
+
+    @ViewById
+    ImageView img_index;
+
+    @ViewById
+    RatingBar ratingBar;
+
+    @ViewById(android.R.id.tabs)
+    TabWidget tabWidget;
+
+    @ViewById
+    TextView txt_store_name, txt_title_search;
+
+    Class[] classTab = {StoreHomeFragment_.class, StoreAllGoodsFragment_.class, StoreNewArrivalFragment_.class, MineFragment_.class};
+
+    @DrawableRes
+    Drawable store_home_selector, store_category_selector;
+
+    Drawable[] drawables = new Drawable[4];
+
     @Extra
     String storeId;
 
-    StoreInformationHeaderItemView storeInformationHeaderItemView;
+    @StringRes
+    String search_store_hint;
 
-    LinearLayoutManager linearLayoutManager;
-
-    int pageIndex = 1;
+    StoreDetailModel storeDetailModel;
 
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        drawables[0] = store_home_selector;
+        drawables[1] = store_home_selector;
+        drawables[2] = store_category_selector;
+        drawables[3] = store_category_selector;
     }
 
 
     @AfterViews
     void afterView() {
         AndroidTool.showLoadDialog(this);
-        ultimateRecyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(this);
-        ultimateRecyclerView.setAdapter(myAdapter);
-        ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        storeInformationHeaderItemView = StoreInformationHeaderItemView_.build(this);
-        ultimateRecyclerView.setNormalHeader(storeInformationHeaderItemView);
-        Paint paint = new Paint();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        paint.setAntiAlias(true);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+        txt_title_search.setText(search_store_hint);
+        myTitleBar.setCustomViewOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean shouldHideDivider(int position, RecyclerView parent) {
-                return position == 0;
-            }
-        }).paint(paint).build());
-        getStoreInfo();
-
-        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
-                GoodsDetailActivity_.intent(StoreInformationActivity.this).goodsId(obj.GoodsInfoId).start();
-            }
-
-            @Override
-            public void onHeaderClick(RecyclerView.ViewHolder viewHolder, int position) {
+            public void onClick(View view) {
+                SearchActivity_.intent(StoreInformationActivity.this).isStore(true).storeId(storeId).start();
             }
         });
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        storeInformationHeaderItemView.stopAutoCycle();
-    }
-
-    @Override
-    public void finish() {
-        storeInformationHeaderItemView.removeAllSliders();
-        storeInformationHeaderItemView.stopAutoCycle();
-        super.finish();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        storeInformationHeaderItemView.startAutoCycle();
+        getStoreInfo();
     }
 
     @Background
@@ -124,19 +118,60 @@ public class StoreInformationActivity extends BaseActivity {
 
     @UiThread
     void afterGetStoreInfo(BaseModelJson<StoreDetailModel> bmj) {
+        AndroidTool.dismissLoadDialog();
         if (bmj == null) {
             AndroidTool.showToast(this, no_net);
         } else if (!bmj.Successful) {
             AndroidTool.showToast(this, bmj.Error);
         } else {
             if (Constants.STORE_STATE_ACTIVITY.equals(bmj.Data.StoreStatus)) {
-                myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, false, 0, bmj.Data.GoodsList);
-                storeInformationHeaderItemView.init(bmj.Data);
+                storeDetailModel = bmj.Data;
+                if (!StringUtils.isEmpty(bmj.Data.StoreIndexImg)) {
+                    Glide.with(this).load(bmj.Data.StoreIndexImg)
+                            .asGif()
+                            .crossFade()
+                            .centerCrop()
+                            .error(R.drawable.store_index)
+                            .placeholder(R.drawable.store_index).into(img_index);
+                }
+                txt_store_name.setText(bmj.Data.StoreName);
+                ratingBar.setRating(bmj.Data.StorePX);
             } else {
                 AndroidTool.showToast(this, "该店铺已锁定");
                 finish();
             }
         }
+        initTab();
     }
+
+
+    protected void initTab() {
+        tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+        for (int i = 0; i < storeTabTag.length; i++) {
+            Bundle bundle = new Bundle();
+            bundle.putString("storeId", storeId);
+            bundle.putSerializable("storeDetailModel", storeDetailModel);
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(storeTabTag[i]);
+            tabSpec.setIndicator(buildIndicator(i));
+            tabHost.addTab(tabSpec, classTab[i], bundle);
+        }
+        tabHost.setCurrentTab(0);
+        tabWidget.getChildTabViewAt(3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AndroidTool.showToast(StoreInformationActivity.this, "111111111");
+            }
+        });
+    }
+
+    protected View buildIndicator(int position) {
+        View view = layoutInflater.inflate(R.layout.tab_indicator, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.icon_tab);
+        imageView.setImageDrawable(drawables[position]);
+        TextView textView = (TextView) view.findViewById(R.id.text_indicator);
+        textView.setText(storeTabTitle[position]);
+        return view;
+    }
+
 
 }

@@ -1,12 +1,9 @@
 package com.zczczy.leo.fuwuwangapp.fragments;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
@@ -20,7 +17,6 @@ import com.uuch.adlibrary.AdManager;
 import com.uuch.adlibrary.bean.AdInfo;
 import com.uuch.adlibrary.transformer.DepthPageTransformer;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.activities.BaseActivity;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CategoryActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
@@ -32,23 +28,18 @@ import com.zczczy.leo.fuwuwangapp.activities.SearchActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.StoreInformationActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
-import com.zczczy.leo.fuwuwangapp.dao.SearchHistory;
 import com.zczczy.leo.fuwuwangapp.items.BaseUltimateViewHolder;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView;
 import com.zczczy.leo.fuwuwangapp.items.HomeAdvertisementItemView_;
 import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.Activity;
 import com.zczczy.leo.fuwuwangapp.model.AdvertModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModel;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.rest.MyBackgroundTask;
-import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
-import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
 import com.zczczy.leo.fuwuwangapp.viewgroup.MyTitleBar;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -272,9 +263,9 @@ public class HomeFragment extends BaseFragment {
                 itemView.init(app.getAdvertModelList());
             }
         });
-        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
                 GoodsDetailActivity_.intent(HomeFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 

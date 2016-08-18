@@ -5,6 +5,7 @@
     <string name="search_hint">请输入商品名称&#8230;</string>
     <string name="search_service_hint">请输入店铺名称&#8230;</string>
     <string name="search_merchant_hint">请输入商家名称&#8230;</string>
+    <string name="search_store_hint">搜索店铺内商品&#8230;</string>
 
 
     <string name="home">首页</string>
@@ -12,6 +13,8 @@
     <string name="service">服务</string>
     <string name="news">资讯</string>
     <string name="mine">我的</string>
+    <string name="all_goods">全部商品</string>
+    <string name="new_arrival">上新</string>
 
     <string name="progress_de">%1$s\%</string>
 

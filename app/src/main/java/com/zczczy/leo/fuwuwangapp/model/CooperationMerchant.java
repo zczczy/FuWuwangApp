@@ -98,7 +98,7 @@ public class CooperationMerchant {
 
     public List<CooperationMerchantProduct> gscpList;
 
-    public List<RebuiltRecommendedGoods> GoodsList;
+    public List<Goods> GoodsList;
 
 
     /**

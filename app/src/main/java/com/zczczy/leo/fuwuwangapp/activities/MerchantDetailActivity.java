@@ -5,17 +5,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.marshalchen.ultimaterecyclerview.CustomUltimateRecyclerview;
 import com.marshalchen.ultimaterecyclerview.uiUtils.BasicGridLayoutManager;
-import com.squareup.otto.Subscribe;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
 import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.items.MerchantDetailHeaderView;
 import com.zczczy.leo.fuwuwangapp.items.MerchantDetailHeaderView_;
-import com.zczczy.leo.fuwuwangapp.listener.OttoBus;
-import com.zczczy.leo.fuwuwangapp.model.BaseModel;
 import com.zczczy.leo.fuwuwangapp.model.BaseModelJson;
 import com.zczczy.leo.fuwuwangapp.model.CooperationMerchant;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.rest.MyDotNetRestClient;
 import com.zczczy.leo.fuwuwangapp.rest.MyErrorHandler;
 import com.zczczy.leo.fuwuwangapp.tools.AndroidTool;
@@ -32,8 +29,6 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.List;
-
-import in.srain.cube.views.ptr.header.MaterialHeader;
 
 /**
  * @author Created by LuLeo on 2016/7/13.
@@ -62,8 +57,6 @@ public class MerchantDetailActivity extends BaseActivity {
     String companyId;
 
     BasicGridLayoutManager gridLayoutManager;
-
-    MaterialHeader materialHeader;
 
     MerchantDetailHeaderView merchantDetailHeaderView;
 
@@ -108,14 +101,14 @@ public class MerchantDetailActivity extends BaseActivity {
     }
 
 
-    void afterLoadMore(List<RebuiltRecommendedGoods> b) {
+    void afterLoadMore(List<Goods> b) {
         myAdapter.getMoreData(pageIndex, 10, isRefresh, 3, b);
     }
 
     void setListener() {
-        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<RebuiltRecommendedGoods>() {
+        myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, RebuiltRecommendedGoods obj, int position) {
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
                 GoodsDetailActivity_.intent(MerchantDetailActivity.this).goodsId(obj.GoodsInfoId).start();
             }
 

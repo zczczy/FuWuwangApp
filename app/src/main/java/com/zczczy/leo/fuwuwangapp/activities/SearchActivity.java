@@ -33,10 +33,13 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
     SearchHistoryDao searchHistoryDao;
 
     @Extra
-    boolean isService, isMerchant;
+    boolean isService, isMerchant, isStore;
+
+    @Extra
+    String storeId;
 
     @StringRes
-    String search_service_hint, search_merchant_hint;
+    String search_service_hint, search_merchant_hint, search_store_hint;
 
     @ViewById
     EditText text_search;
@@ -58,6 +61,8 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
             text_search.setHint(search_service_hint);
         } else if (isMerchant) {
             text_search.setHint(search_merchant_hint);
+        } else if (isStore) {
+            text_search.setHint(search_store_hint);
         }
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
@@ -68,7 +73,7 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
                 } else if (isMerchant) {
                     MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
                 } else {
-                    CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
+                    CommonSearchResultActivity_.intent(SearchActivity.this).storeId(storeId).searchContent(obj.getSearchContent()).startForResult(1000);
                 }
             }
         });
@@ -85,7 +90,7 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
                     } else if (isMerchant) {
                         MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
                     } else {
-                        CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                        CommonSearchResultActivity_.intent(SearchActivity.this).storeId(storeId).searchContent(text_search.getText().toString()).startForResult(1000);
                     }
                 }
             }
@@ -104,7 +109,7 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
             } else if (isMerchant) {
                 MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
             } else {
-                CommonSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                CommonSearchResultActivity_.intent(SearchActivity.this).storeId(storeId).searchContent(text_search.getText().toString()).startForResult(1000);
             }
         }
     }

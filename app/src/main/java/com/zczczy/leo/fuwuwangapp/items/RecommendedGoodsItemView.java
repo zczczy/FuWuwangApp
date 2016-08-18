@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zczczy.leo.fuwuwangapp.R;
-import com.zczczy.leo.fuwuwangapp.model.RebuiltRecommendedGoods;
+import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.tools.DisplayUtil;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -19,7 +19,7 @@ import org.springframework.util.StringUtils;
  * Created by Leo on 2016/4/27.
  */
 @EViewGroup(R.layout.fragment_home_item)
-public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> {
+public class RecommendedGoodsItemView extends ItemView<Goods> {
 
     @ViewById
     ImageView img_pic;
@@ -64,13 +64,13 @@ public class RecommendedGoodsItemView extends ItemView<RebuiltRecommendedGoods> 
                     .into(img_pic);
         }
         txt_product_name.setText(_data.GodosName);
-        if (_data.GoodsLBPrice > 0 && Double.valueOf(_data.GoodsPrice) > 0) {
+        if (Integer.valueOf(_data.GoodsLBPrice) > 0 && Double.valueOf(_data.GoodsPrice) > 0) {
             txt_rmb.setVisibility(VISIBLE);
             txt_plus.setVisibility(VISIBLE);
             txt_home_lb.setVisibility(VISIBLE);
             txt_rmb.setText(String.format(home_rmb, _data.GoodsPrice));
             txt_home_lb.setText(String.format(home_lb, _data.GoodsLBPrice));
-        } else if (_data.GoodsLBPrice > 0) {
+        } else if (Integer.valueOf(_data.GoodsLBPrice) > 0) {
             txt_rmb.setVisibility(GONE);
             txt_plus.setVisibility(GONE);
             txt_home_lb.setVisibility(VISIBLE);

@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.adapters.BaseUltimateRecyclerViewAdapter;
-import com.zczczy.leo.fuwuwangapp.adapters.SecondCategoryGoodsAdapter;
+import com.zczczy.leo.fuwuwangapp.adapters.RecommendedGoodsAdapter;
 import com.zczczy.leo.fuwuwangapp.model.Goods;
 import com.zczczy.leo.fuwuwangapp.tools.Constants;
 
@@ -15,27 +15,29 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 
 /**
- * @author Created by LuLeo on 2016/8/16.
+ * @author Created by LuLeo on 2016/8/18.
  *         you can contact me at :361769045@qq.com
- * @since 2016/8/16.
+ * @since 2016/8/18.
  */
-@EFragment(R.layout.fragment_second_category_goods)
-public class SecondCategoryGoodsFragment extends BaseUltimateRecyclerViewFragment<Goods> {
 
+@EFragment(R.layout.no_title_ultimate)
+public class StoreAllGoodsFragment extends BaseUltimateRecyclerViewFragment<Goods> {
 
     @FragmentArg
-    String GoodsTypeId, GoodsType, likeName, orderBy, priceMin, priceMax;
+    String storeId;
 
     @Bean
-    void setMyAdapter(SecondCategoryGoodsAdapter myAdapter) {
+    void setAdapter(RecommendedGoodsAdapter myAdapter) {
         this.myAdapter = myAdapter;
     }
 
     @AfterViews
     void afterView() {
+        horizontalItem();
         myAdapter.setOnItemClickListener(new BaseUltimateRecyclerViewAdapter.OnItemClickListener<Goods>() {
+            @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, Goods obj, int position) {
-                GoodsDetailActivity_.intent(SecondCategoryGoodsFragment.this).goodsId(obj.GoodsInfoId).start();
+                GoodsDetailActivity_.intent(StoreAllGoodsFragment.this).goodsId(obj.GoodsInfoId).start();
             }
 
             @Override
@@ -45,8 +47,9 @@ public class SecondCategoryGoodsFragment extends BaseUltimateRecyclerViewFragmen
         });
     }
 
+
     @Override
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, GoodsTypeId, GoodsType, likeName, orderBy, priceMin, priceMax, "");
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 4, storeId);
     }
 }

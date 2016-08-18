@@ -70,15 +70,21 @@
 
     <style name="ratingbar_style" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbar</item>
-        <item name="android:minHeight">32dp</item>
+        <item name="android:minHeight">16dp</item>
         <item name="android:maxHeight">32dp</item>
+    </style>
+
+    <style name="store_rating_bar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/store_rating_bar</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
     </style>
 
 
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/shopcart_selector</item>
         <item name="android:minHeight">16dp</item>
-        <item name="android:maxHeight">32dp</item>
+        <item name="android:maxHeight">16dp</item>
     </style>
 
 
