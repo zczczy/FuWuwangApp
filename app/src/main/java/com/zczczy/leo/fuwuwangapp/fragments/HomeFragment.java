@@ -19,6 +19,7 @@ import com.uuch.adlibrary.transformer.DepthPageTransformer;
 import com.zczczy.leo.fuwuwangapp.R;
 import com.zczczy.leo.fuwuwangapp.activities.CartActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CategoryActivity_;
+import com.zczczy.leo.fuwuwangapp.activities.CommonSearchResultActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.CommonWebViewActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.GoodsDetailActivity_;
 import com.zczczy.leo.fuwuwangapp.activities.LoginActivity_;
@@ -224,7 +225,8 @@ public class HomeFragment extends BaseFragment {
                         } else if ("3".equals(advInfo.getAdId())) {
                             CommonWebViewActivity_.intent(getActivity()).title(advInfo.getTitle()).methodName(advInfo.getUrl()).start();
                         } else if ("4".equals(advInfo.getAdId())) {
-                            CategoryActivity_.intent(getActivity()).goodsTypeId(advInfo.getUrl()).goodsType("2").title(advInfo.getTitle()).start();
+//                            CategoryActivity_.intent(getActivity()).goodsTypeId(advInfo.getUrl()).goodsType("2").title(advInfo.getTitle()).start();
+                            CommonSearchResultActivity_.intent(getActivity()).goodsTypeId(Integer.valueOf(advInfo.getUrl())).start();
                         }
                     }
                 })

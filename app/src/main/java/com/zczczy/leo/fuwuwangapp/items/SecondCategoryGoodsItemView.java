@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 /**
  * Created by Leo on 2016/5/5.
  */
-@EViewGroup(R.layout.common_goods_item)
+@EViewGroup(R.layout.second_category_goods_item)
 public class SecondCategoryGoodsItemView extends ItemView<Goods> {
 
     @ViewById

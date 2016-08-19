@@ -183,7 +183,7 @@ public class CartActivity extends BaseActivity {
     @Click
     void ll_checkout() {
         calc();
-        if (list.size() > 0) {
+        if (list.size() > 1) {
             BaseModelJson<List<CheckOutModel>> bmj = new BaseModelJson<>();
             bmj.Successful = true;
             bmj.Data = list;
@@ -200,6 +200,8 @@ public class CartActivity extends BaseActivity {
             } else {
                 popupWindow.showAtLocation(rl_root, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, ll_cart_jiesuan.getHeight() + 1);
             }
+        } else if (list.size() == 1) {
+            PreOrderActivity_.intent(this).isCart(true).BuyCartInfoIds(list.get(0).BuyCartInfoIds).StoreInfoId(list.get(0).StoreInfoId).start();
         } else {
             AndroidTool.showToast(this, cart_no_goods);
         }
