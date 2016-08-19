@@ -245,18 +245,18 @@ public class MineFragment extends BaseFragment {
                 ll_waiting_order.hiddenBadge();
             }
             if (result.Data.DshCount > 0) {
-                ll_paid_order.showTextBadge(result.Data.DshCount + "");
-                ll_paid_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
-                ll_paid_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(25);
-            } else {
-                ll_paid_order.hiddenBadge();
-            }
-            if (result.Data.YfkCount > 0) {
-                ll_already_order.showTextBadge(result.Data.YfkCount + "");
+                ll_already_order.showTextBadge(result.Data.DshCount + "");
                 ll_already_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
                 ll_already_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(25);
             } else {
                 ll_already_order.hiddenBadge();
+            }
+            if (result.Data.YfkCount > 0) {
+                ll_paid_order.showTextBadge(result.Data.YfkCount + "");
+                ll_paid_order.getBadgeViewHelper().setBadgeGravity(BGABadgeViewHelper.BadgeGravity.RightTop);
+                ll_paid_order.getBadgeViewHelper().setBadgeHorizontalMarginDp(25);
+            } else {
+                ll_paid_order.hiddenBadge();
             }
             if (result.Data.DpjCount > 0) {
                 ll_review.showTextBadge(result.Data.DpjCount + "");
