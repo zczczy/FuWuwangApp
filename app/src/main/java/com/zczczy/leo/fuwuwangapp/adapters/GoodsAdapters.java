@@ -50,7 +50,7 @@ public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
                 bmj = myRestClient.getGoodsByGoodsTypeId(
                         objects[1].toString(),
                         objects[2].toString(),
-                        objects[3].toString(),
+                        objects[3] == null ? "" : objects[3].toString(),
                         objects[4].toString(),
                         (objects[5] == null || "".equals(objects[5])) ? "0" : objects[5].toString(),
                         (objects[6] == null || "".equals(objects[6])) ? "0" : objects[6].toString(),
