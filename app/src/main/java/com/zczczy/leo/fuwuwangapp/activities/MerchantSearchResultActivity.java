@@ -58,6 +58,7 @@ public class MerchantSearchResultActivity extends BaseUltimateRecyclerViewActivi
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        isLoadData = false;
     }
 
 

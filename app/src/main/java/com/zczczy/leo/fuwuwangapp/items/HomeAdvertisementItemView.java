@@ -183,7 +183,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                     GoodsDetailActivity_.intent(context).goodsId(temp[1]).start();
                 } else if ("3".equals(temp[0])) {
                     CommonWebViewActivity_.intent(context).title("详情").methodName(temp[1]).start();
-                } else if ("2".equals(temp[0])) {
+                } else if ("4".equals(temp[0])) {
                     CategoryActivity_.intent(context).goodsTypeId(temp[1]).goodsType("2").title("详情").start();
                 }
             }
@@ -226,7 +226,7 @@ public class HomeAdvertisementItemView extends ItemView<List<AdvertModel>> imple
                 } else if (bannerModel.LinkType == 2) {
                     CommonWebViewActivity_.intent(context).title(bannerModel.BannerName).methodName(bannerModel.LinkUrl).start();
                 } else if (bannerModel.LinkType == 3) {
-
+                    CategoryActivity_.intent(context).goodsTypeId(bannerModel.LinkUrl).goodsType("2").title(bannerModel.BannerName).start();
                 } else if (bannerModel.LinkType == 4) {
                     StoreInformationActivity_.intent(context).storeId(bannerModel.LinkUrl).start();
                 }

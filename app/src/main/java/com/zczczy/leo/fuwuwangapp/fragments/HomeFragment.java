@@ -223,7 +223,7 @@ public class HomeFragment extends BaseFragment {
                             GoodsDetailActivity_.intent(getActivity()).goodsId(advInfo.getUrl()).start();
                         } else if ("3".equals(advInfo.getAdId())) {
                             CommonWebViewActivity_.intent(getActivity()).title(advInfo.getTitle()).methodName(advInfo.getUrl()).start();
-                        } else if ("2".equals(advInfo.getAdId())) {
+                        } else if ("4".equals(advInfo.getAdId())) {
                             CategoryActivity_.intent(getActivity()).goodsTypeId(advInfo.getUrl()).goodsType("2").title(advInfo.getTitle()).start();
                         }
                     }

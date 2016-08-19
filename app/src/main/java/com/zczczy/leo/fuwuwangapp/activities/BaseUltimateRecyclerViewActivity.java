@@ -57,7 +57,7 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
 
     Paint paint = new Paint();
 
-    boolean isRefresh;
+    boolean isRefresh, isLoadData = true;
 
     @AfterViews
     void afterRecyclerView() {
@@ -67,7 +67,9 @@ public abstract class BaseUltimateRecyclerViewActivity<T> extends BaseActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         gridLayoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         verticalItem();
-        afterLoadMore();
+        if (isLoadData) {
+            afterLoadMore();
+        }
         ultimateRecyclerView.enableLoadmore();
         myAdapter.setCustomLoadMoreView(R.layout.custom_bottom_progressbar);
         ultimateRecyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {

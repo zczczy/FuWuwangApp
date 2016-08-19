@@ -1,10 +1,12 @@
 package com.zczczy.leo.fuwuwangapp.activities;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.squareup.otto.Subscribe;
@@ -64,6 +67,7 @@ import org.springframework.util.StringUtils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author Created by LuLeo on 2016/7/4.
@@ -83,7 +87,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             goods_count, goods_sell_count, goods_by;
 
     @ViewById
-    ImageView txt_coupon;
+    ImageView txt_coupon, img_btn_share;
 
     @Bean
     MyErrorHandler myErrorHandler;
@@ -107,15 +111,14 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     LinearLayout ll_goods_by, ll_review;
 
     @ViewById
-    ImageButton img_btn_share;
-
-    @ViewById
     SliderLayout sliderLayout;
 
     @Bean
     OttoBus bus;
 
     SendMessageToWX.Req req;
+
+    AlertDialog ad = null;
 
     Goods goods;
 
@@ -285,6 +288,7 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
     }
 
     @Click
+    @Background
     void img_btn_share() {
         if (req == null) {
             WXWebpageObject webpage = new WXWebpageObject();
@@ -292,20 +296,61 @@ public class GoodsDetailActivity extends BaseActivity implements BaseSliderView.
             WXMediaMessage msg = new WXMediaMessage(webpage);
             msg.title = goods.GodosName;
             msg.description = goods.TempDisp;
-            Bitmap thumb = null;
             try {
-                thumb = BitmapFactory.decodeStream(new FileInputStream(goods.GoodsImgSl));
-            } catch (FileNotFoundException e) {
+                if (!StringUtils.isEmpty(goods.GoodsImgSl))
+                    msg.thumbData = Glide.with(this)
+                            .load(goods.GoodsImgSl)
+                            .asBitmap()
+                            .toBytes(Bitmap.CompressFormat.PNG, 100)
+                            .into(100, 100).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            msg.thumbData = AndroidTool.bmpToByteArray(thumb, true);
             req = new SendMessageToWX.Req();
             req.transaction = buildTransaction("webpage");
             req.message = msg;
-
-        } else {
-
         }
+        send();
+    }
+
+    @UiThread
+    void send() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        View view = layoutInflater.inflate(R.layout.share, null);
+        adb.setView(view);
+        view.findViewById(R.id.img_friend);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                req.scene = SendMessageToWX.Req.WXSceneSession;
+                app.iWXApi.sendReq(req);
+                ad.dismiss();
+            }
+        });
+        view.findViewById(R.id.img_timeline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                req.scene = SendMessageToWX.Req.WXSceneTimeline;
+                app.iWXApi.sendReq(req);
+                ad.dismiss();
+            }
+        });
+        ad = adb.setPositiveButton("分享到朋友圈", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                req.scene = SendMessageToWX.Req.WXSceneTimeline;
+                app.iWXApi.sendReq(req);
+            }
+        }).setNeutralButton("分享给好友", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                req.scene = SendMessageToWX.Req.WXSceneSession;
+                app.iWXApi.sendReq(req);
+            }
+        }).create();
+        ad.show();
     }
 
     private String buildTransaction(final String type) {

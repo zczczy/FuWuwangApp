@@ -76,7 +76,7 @@ public class StoreInformationActivity extends BaseActivity {
     Class[] classTab = {StoreHomeFragment_.class, StoreAllGoodsFragment_.class, StoreNewArrivalFragment_.class, MineFragment_.class};
 
     @DrawableRes
-    Drawable store_home_selector, store_category_selector;
+    Drawable store_home_selector, store_all_goods_selector, store_new_arrival_selector, store_category_selector;
 
     Drawable[] drawables = new Drawable[4];
 
@@ -92,8 +92,8 @@ public class StoreInformationActivity extends BaseActivity {
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
         drawables[0] = store_home_selector;
-        drawables[1] = store_home_selector;
-        drawables[2] = store_category_selector;
+        drawables[1] = store_all_goods_selector;
+        drawables[2] = store_new_arrival_selector;
         drawables[3] = store_category_selector;
     }
 

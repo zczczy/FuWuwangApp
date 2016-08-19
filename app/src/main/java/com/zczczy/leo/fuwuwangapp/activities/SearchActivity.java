@@ -39,13 +39,14 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
     String storeId;
 
     @StringRes
-    String search_service_hint, search_merchant_hint, search_store_hint;
+    String search_hint, search_service_hint, search_merchant_hint, search_store_hint;
 
     @ViewById
     EditText text_search;
 
     SearchHistory searchHistory;
 
+    boolean isStoreSearch;
 
     @Bean
     void setAdapter(SearchHistoryAdapter myAdapter) {
@@ -59,16 +60,23 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(0).paint(paint).build());
         if (isService) {
             text_search.setHint(search_service_hint);
+            myTitleBar.setRightText("店铺");
+            isStoreSearch = false;
         } else if (isMerchant) {
             text_search.setHint(search_merchant_hint);
         } else if (isStore) {
             text_search.setHint(search_store_hint);
+        } else {
+            text_search.setHint(search_hint);
+            myTitleBar.setRightText("商品");
+            isStoreSearch = true;
         }
+
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<SearchHistory>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, SearchHistory obj, int position) {
                 searchHistoryDao.update(obj);
-                if (isService) {
+                if ((isService || !isStoreSearch) && !isMerchant) {
                     StoreSearchActivity_.intent(SearchActivity.this).searchName(obj.getSearchContent()).startForResult(1000);
                 } else if (isMerchant) {
                     MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(obj.getSearchContent()).startForResult(1000);
@@ -80,17 +88,27 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
         myTitleBar.setRightTextOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!AndroidTool.checkIsNull(text_search)) {
-                    searchHistory = new SearchHistory();
-                    searchHistory.setSearchContent(text_search.getText().toString());
-                    searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
-                    searchHistoryDao.insert(searchHistory);
-                    if (isService) {
-                        StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
-                    } else if (isMerchant) {
-                        MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
-                    } else {
-                        CommonSearchResultActivity_.intent(SearchActivity.this).storeId(storeId).searchContent(text_search.getText().toString()).startForResult(1000);
+                if (!isService && !isMerchant && isStoreSearch) {
+                    text_search.setHint(search_service_hint);
+                    myTitleBar.setRightText("店铺");
+                    isStoreSearch = false;
+                } else if (!isService && !isMerchant && !isStoreSearch) {
+                    text_search.setHint(search_hint);
+                    myTitleBar.setRightText("商品");
+                    isStoreSearch = true;
+                } else {
+                    if (!AndroidTool.checkIsNull(text_search)) {
+                        searchHistory = new SearchHistory();
+                        searchHistory.setSearchContent(text_search.getText().toString());
+                        searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
+                        searchHistoryDao.insert(searchHistory);
+                        if ((isService || !isStoreSearch) && !isMerchant) {
+                            StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
+                        } else if (isMerchant) {
+                            MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);
+                        } else {
+                            CommonSearchResultActivity_.intent(SearchActivity.this).storeId(storeId).searchContent(text_search.getText().toString()).startForResult(1000);
+                        }
                     }
                 }
             }
@@ -104,7 +122,7 @@ public class SearchActivity extends BaseRecyclerViewActivity<SearchHistory> {
             searchHistory.setSearchContent(text_search.getText().toString());
             searchHistory.setSearchTime(String.valueOf(System.currentTimeMillis()));
             searchHistoryDao.insert(searchHistory);
-            if (isService) {
+            if ((isService || !isStoreSearch) && !isMerchant) {
                 StoreSearchActivity_.intent(SearchActivity.this).searchName(text_search.getText().toString()).startForResult(1000);
             } else if (isMerchant) {
                 MerchantSearchResultActivity_.intent(SearchActivity.this).searchContent(text_search.getText().toString()).startForResult(1000);

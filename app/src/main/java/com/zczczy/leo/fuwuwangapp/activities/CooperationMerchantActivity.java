@@ -80,38 +80,13 @@ public class CooperationMerchantActivity extends BaseUltimateRecyclerViewActivit
     @AfterInject
     void afterInject() {
         myRestClient.setRestErrorHandler(myErrorHandler);
+        isLoadData = false;
     }
 
     @AfterViews
     void afterView() {
-        AndroidTool.showLoadDialog(this);
         city = "北京";
-        bus.register(this);
-        ultimateRecyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(this);
-        ultimateRecyclerView.setLayoutManager(linearLayoutManager);
-        ultimateRecyclerView.setAdapter(myAdapter);
-        ultimateRecyclerView.enableLoadmore();
-        myAdapter.setCustomLoadMoreView(R.layout.custom_bottom_progressbar);
         getHttp();
-        ultimateRecyclerView.setOnLoadMoreListener(new UltimateRecyclerView.OnLoadMoreListener() {
-            @Override
-            public void loadMore(int itemsCount, int maxLastVisiblePosition) {
-                if (myAdapter.getItems().size() >= myAdapter.getTotal()) {
-                    AndroidTool.showToast(CooperationMerchantActivity.this, "没有更多的数据了！~");
-                    ultimateRecyclerView.disableLoadmore();
-                    myAdapter.notifyItemRemoved(maxLastVisiblePosition);
-                } else {
-                    pageIndex++;
-                    afterLoadMore();
-                }
-            }
-        });
-        ultimateRecyclerView.setCustomSwipeToRefresh();
-        paint.setStrokeWidth(1);
-        paint.setColor(line_color);
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).margin(35).paint(paint).build());
-        refreshingMaterial();
         setListener();
     }
 
