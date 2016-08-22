@@ -171,7 +171,7 @@ public class CommonSearchResultActivity extends BaseUltimateRecyclerViewActivity
 
 
     void afterLoadMore() {
-        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 1, "0", "2", searchContent, orderBy, priceMin, priceMax, storeId);
+        myAdapter.getMoreData(pageIndex, Constants.PAGE_COUNT, isRefresh, 1, goodsTypeId, "2", searchContent, orderBy, priceMin, priceMax, storeId);
     }
 
     @Override

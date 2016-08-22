@@ -25,7 +25,7 @@
 
         android:layout_weight="1"
         android:button="@null"
-        android:drawableEnd="@drawable/common_search_price"
+        android:drawableRight="@drawable/common_search_price"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/search_price"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:button="@null"
-        android:drawableEnd="@drawable/common_search_filter"
+        android:drawableRight="@drawable/common_search_filter"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/search_summary"

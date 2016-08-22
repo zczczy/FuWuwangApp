@@ -48,7 +48,7 @@ public class GoodsAdapters extends BaseUltimateRecyclerViewAdapter<Goods> {
                 break;
             case 1:
                 bmj = myRestClient.getGoodsByGoodsTypeId(
-                        objects[1].toString(),
+                        (objects[1] == null || "".equals(objects[1])) ? "0" : objects[1].toString(),
                         objects[2].toString(),
                         objects[3] == null ? "" : objects[3].toString(),
                         objects[4].toString(),

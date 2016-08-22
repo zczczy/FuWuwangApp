@@ -76,7 +76,7 @@ import java.util.Map;
  * http://218.61.203.50:8002/
  * http://appapib.86fuwuwang.com/
  */
-@Rest(rootUrl = "http://218.61.203.50:8002/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
+@Rest(rootUrl = "http://appapia.86fuwuwang.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},
         responseErrorHandler = MyResponseErrorHandlerBean.class)
 public interface MyDotNetRestClient extends RestClientRootUrl, RestClientSupport, RestClientHeaders, RestClientErrorHandling {

@@ -14,7 +14,7 @@
         android:drawableLeft="@drawable/title_search"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
-        android:hint="@string/search_hint"
+        android:hint="@string/search_hint_"
         android:ems="15"
         android:textColorHint="@color/white_color"
         android:textSize="13sp" />

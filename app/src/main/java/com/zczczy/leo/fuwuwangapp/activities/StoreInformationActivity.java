@@ -159,7 +159,7 @@ public class StoreInformationActivity extends BaseActivity {
         tabWidget.getChildTabViewAt(3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AndroidTool.showToast(StoreInformationActivity.this, "111111111");
+//                AndroidTool.showToast(StoreInformationActivity.this, "111111111");
             }
         });
     }
