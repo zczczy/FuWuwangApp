@@ -74,7 +74,7 @@ import java.util.Map;
 /**
  * Created by Leo on 2016/3/2.
  * http://218.61.203.50:8002/
- * http://appapib.86fuwuwang.com/
+ * http://appapia.86fuwuwang.com/
  */
 @Rest(rootUrl = "http://appapia.86fuwuwang.com/", requestFactory = MyOkHttpClientHttpRequestFactory.class, interceptors = {MyInterceptor.class},
         converters = {StringHttpMessageConverter.class, GsonHttpMessageConverter.class, FormHttpMessageConverter.class, ByteArrayHttpMessageConverter.class},

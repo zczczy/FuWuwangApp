@@ -61,6 +61,7 @@ public class StoreHomeFragment extends BaseUltimateRecyclerViewFragment<Goods> {
 
     @AfterViews
     void afterView() {
+        horizontalItem();
         storeInformationHeaderItemView = StoreInformationHeaderItemView_.build(getActivity());
         ultimateRecyclerView.setNormalHeader(storeInformationHeaderItemView);
         ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).margin(35).visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {

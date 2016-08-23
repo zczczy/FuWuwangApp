@@ -23,9 +23,6 @@ public class GoodsCommentsActivity extends BaseUltimateRecyclerViewActivity<Good
     @ViewById
     TextView emptyView;
 
-    @Bean
-    OttoBus bus;
-
     @Extra
     String goodsId;
 

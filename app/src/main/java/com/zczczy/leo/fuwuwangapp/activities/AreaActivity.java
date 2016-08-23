@@ -41,6 +41,7 @@ public class AreaActivity extends BaseRecyclerViewActivity<NewArea> {
     @AfterViews
     void afterView() {
         myTitleBar.setTitle("区域");
+        myAdapter.getMoreData(city.CityId);
         myAdapter.setOnItemClickListener(new BaseRecyclerViewAdapter.OnItemClickListener<NewArea>() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, NewArea obj, int position) {
@@ -52,4 +53,6 @@ public class AreaActivity extends BaseRecyclerViewActivity<NewArea> {
             }
         });
     }
+
+
 }
